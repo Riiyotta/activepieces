@@ -1,0 +1,5 @@
+/* Tailwind v4 preflight zeroes all padding; v3 keeps the UA 1px on td/th. Reset it at zero specificity
+   so the table's padding utilities still apply (SPEC_MARKETING §3.B). */
+:where(#compare) :where(td, th) {
+  padding: 0;
+}

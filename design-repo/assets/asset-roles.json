@@ -1,0 +1,407 @@
+{
+  "$description": "Closed assetRole vocabulary for every media slot in a PageSpec. Built from real usage sites in src/ (cited). Wired through schema/pagespec.schema.json (enum), tokens/llm/component-allowlist.json (assetRoles) and the example PageSpecs.",
+  "realCompanyNotice": "This design-repo describes a private study clone of activepieces.com, a real, live commercial site. Brand marks, customer logos (Bosch, SAP, Hilton, ...), testimonial people and avatars, review screenshots, case-study claims and marketing copy belong to Activepieces or to third parties. Do not publish this repository or its clone, and do not reproduce any of these in generated output.",
+  "generationPolicies": {
+    "reuse-exact-path": "May only reference the exact existing local file listed in `paths`; never redraw, recolor, crop or re-encode it; never introduce a new file for this role.",
+    "reuse-closed-set": "May reference any file in the role's closed `paths` list (exact strings); no new files may be added for this role by a generator.",
+    "data-bound-only": "May only be bound through a `data:` reference resolved from the clone's own JSON data at render time (e.g. data:pieces#slack). A generator must never emit a literal path, pick a logo/photo for an entity not in the dataset, or fabricate one.",
+    "placeholder-only": "Generated pages MUST use a `placeholder:` reference (rendered as a neutral grey block / initials). Real files exist in the clone only to reproduce the measured original; they must never be reused, regenerated, imitated or described in generated output.",
+    "may-generate-synthetic": "Synthetic, non-human, non-brand illustration. A generator may reuse the listed files or request a new synthetic asset (`generated:` ref) that depicts no real person, logo or trademark."
+  },
+  "pinnedPolicies": {
+    "customer.logo": "placeholder-only",
+    "case-study.logo": "placeholder-only",
+    "testimonial.avatar": "placeholder-only",
+    "review-platform.mark": "placeholder-only",
+    "author.photo": "placeholder-only"
+  },
+  "pinnedNote": "Roles carrying a real person's likeness or a third-party trademark are pinned: verify_all.py fails if their policy changes to ANY other value (including another valid enum member).",
+  "noRuntimeExternalRequests": {
+    "rule": "Every asset is local under public/ at its original path; media refs must never be http(s) URLs.",
+    "evidence": [
+      {
+        "file": "BUILD_CONVENTIONS.md",
+        "lines": "17",
+        "quote": "Never reference activepieces.com at runtime."
+      }
+    ]
+  },
+  "roles": {
+    "brand.wordmark": {
+      "policy": "reuse-exact-path",
+      "paths": [
+        "/brand/activepieces-wordmark.svg"
+      ],
+      "owner": "Activepieces (trademark)",
+      "evidence": [
+        {
+          "file": "src/components/Header.jsx",
+          "lines": "264",
+          "quote": "[mask-image:url(/brand/activepieces-wordmark.svg)]"
+        }
+      ],
+      "guidance": "Header chrome only (rendered by shell.header, never authored per page). Do not place the wordmark in generated content, do not alter it, and do not use it to imply endorsement outside this private study clone.",
+      "refRule": "^/[A-Za-z0-9._/-]+$ and must be in paths"
+    },
+    "brand.logomark": {
+      "policy": "reuse-exact-path",
+      "paths": [
+        "/brand/activepieces-logomark.svg"
+      ],
+      "owner": "Activepieces (trademark)",
+      "evidence": [
+        {
+          "file": "src/components/Header.jsx",
+          "lines": "265",
+          "quote": "[mask-image:url(/brand/activepieces-logomark.svg)]"
+        }
+      ],
+      "guidance": "Header chrome only; same restrictions as brand.wordmark.",
+      "refRule": "^/[A-Za-z0-9._/-]+$ and must be in paths"
+    },
+    "brand.mark": {
+      "policy": "reuse-exact-path",
+      "paths": [
+        "/brand/activepieces-mark.svg"
+      ],
+      "owner": "Activepieces (trademark)",
+      "evidence": [
+        {
+          "file": "src/components/FloatingCard.css",
+          "lines": "46",
+          "quote": "-webkit-mask-image: url(/brand/activepieces-mark.svg);"
+        }
+      ],
+      "guidance": "Floating card icon and governance brand tiles only, as a CSS mask. Never recolor outside the cited token, never redraw.",
+      "refRule": "^/[A-Za-z0-9._/-]+$ and must be in paths"
+    },
+    "brand.logo-full": {
+      "policy": "reuse-closed-set",
+      "paths": [
+        "/brand/activepieces-logo.svg",
+        "/assets/activepieces-logo.svg"
+      ],
+      "owner": "Activepieces (trademark)",
+      "evidence": [
+        {
+          "file": "src/components/AppMockup.jsx",
+          "lines": "92",
+          "quote": "[mask-image:url(/assets/activepieces-logo.svg)]"
+        }
+      ],
+      "guidance": "Dream beat 3, app mock sidebar and the /sales form header only.",
+      "refRule": "^/[A-Za-z0-9._/-]+$ and must be in paths"
+    },
+    "customer.logo": {
+      "policy": "placeholder-only",
+      "pinned": true,
+      "paths": [],
+      "owner": "Third-party trademarks (Bosch, SAP, Hilton, Dell Technologies, ... 24 companies)",
+      "evidence": [
+        {
+          "file": "src/components/Hero.jsx",
+          "lines": "33",
+          "quote": "const url = `url(/logos/customers/${file})`"
+        }
+      ],
+      "guidance": "NEVER reproduce real customer logos or name real customers in generated output. Marquees and rotating grids in generated pages use `placeholder:customer-logo` refs (neutral masks of equal aspect).",
+      "refRule": "^placeholder:[a-z0-9.-]+$"
+    },
+    "case-study.logo": {
+      "policy": "placeholder-only",
+      "pinned": true,
+      "paths": [],
+      "owner": "Third-party trademarks (case-study customers)",
+      "evidence": [
+        {
+          "file": "src/components/CaseFundingSocieties.jsx",
+          "lines": "18",
+          "quote": "src=\"/assets/funding-societies.webp\""
+        }
+      ],
+      "guidance": "Case-study logos are real companies. Generated case studies must use `placeholder:case-study-logo` and synthetic company names; never real claims or metrics attributed to a real company.",
+      "refRule": "^placeholder:[a-z0-9.-]+$"
+    },
+    "testimonial.avatar": {
+      "policy": "placeholder-only",
+      "pinned": true,
+      "paths": [],
+      "owner": "Real reviewers (personal likeness)",
+      "evidence": [
+        {
+          "file": "src/components/Testimonials.jsx",
+          "lines": "18",
+          "quote": "avatar: '/assets/trustpilot-kevinhu.webp',"
+        },
+        {
+          "file": "src/pages/Sales.jsx",
+          "lines": "79",
+          "quote": "src=\"/reviews/g2-giuseppec.webp\""
+        }
+      ],
+      "guidance": "Photos of real people. NEVER reuse, regenerate or imitate a real person's likeness. Use `placeholder:avatar-initials` (the component's real initials fallback).",
+      "refRule": "^placeholder:[a-z0-9.-]+$"
+    },
+    "review-platform.mark": {
+      "policy": "placeholder-only",
+      "pinned": true,
+      "paths": [],
+      "owner": "G2, Trustpilot, Reddit (trademarks)",
+      "evidence": [
+        {
+          "file": "src/components/Testimonials.jsx",
+          "lines": "8",
+          "quote": "g2: { src: '/assets/g2-logo.webp', alt: 'G2' },"
+        }
+      ],
+      "guidance": "Do not attribute synthetic quotes to a real review platform. Use `placeholder:review-source`.",
+      "refRule": "^placeholder:[a-z0-9.-]+$"
+    },
+    "author.photo": {
+      "policy": "placeholder-only",
+      "pinned": true,
+      "paths": [],
+      "owner": "Real blog authors (personal likeness)",
+      "evidence": [
+        {
+          "file": "src/pages/blog/BlogAuthor.jsx",
+          "lines": "34",
+          "quote": "src={author.photoLocal}"
+        }
+      ],
+      "guidance": "Existing author photos are bound from blog.json by the content templates themselves; a PageSpec never names an author photo. Generated pages must never create or attribute an article to a real author.",
+      "refRule": "^placeholder:[a-z0-9.-]+$"
+    },
+    "blog.cover": {
+      "policy": "data-bound-only",
+      "paths": [],
+      "owner": "Activepieces (editorial covers)",
+      "evidence": [
+        {
+          "file": "src/components/content/parts.jsx",
+          "lines": "24",
+          "quote": "src={cover.local}"
+        }
+      ],
+      "guidance": "Bound from blog.json cover.local only. No fabricated covers for posts that do not exist in the dataset.",
+      "refRule": "^data:[a-z-]+#[A-Za-z0-9._/-]+$"
+    },
+    "piece.logo": {
+      "policy": "data-bound-only",
+      "paths": [],
+      "owner": "Third-party app trademarks (Slack, Gmail, ...)",
+      "evidence": [
+        {
+          "file": "src/components/FeatureFlowDemo.jsx",
+          "lines": "225",
+          "quote": "src=\"/logos/pieces/webhook.svg\""
+        },
+        {
+          "file": "src/components/catalog/parts.jsx",
+          "lines": "45",
+          "quote": "function LogoTile({ logo }) {"
+        }
+      ],
+      "guidance": "Bound from pieces.json (catalog) or the fixed demo components. Never draw, recolor or invent an app logo; never show an app that is not in pieces.json.",
+      "refRule": "^data:[a-z-]+#[A-Za-z0-9._/-]+$"
+    },
+    "ai-client.logo": {
+      "policy": "data-bound-only",
+      "paths": [],
+      "owner": "Third-party trademarks (Claude, Cursor, ChatGPT, ...)",
+      "evidence": [
+        {
+          "file": "src/components/UseInAiDialog.jsx",
+          "lines": "34",
+          "quote": "logo: '/logos/clients/claude.svg',"
+        }
+      ],
+      "guidance": "Only via the fixed client list of the Use-in-your-AI dialog / MCP connect cards.",
+      "refRule": "^data:[a-z-]+#[A-Za-z0-9._/-]+$"
+    },
+    "oss-friend.logo": {
+      "policy": "data-bound-only",
+      "paths": [],
+      "owner": "Third-party OSS projects",
+      "evidence": [
+        {
+          "file": "src/data/ossFriends.js",
+          "lines": "2",
+          "quote": "// Logos were fetched once from img.logo.dev into /public/logos/oss-friends/."
+        }
+      ],
+      "guidance": "Bound from ossFriends.js only; local copies (no runtime logo.dev requests). On error the card shows the first-letter avatar.",
+      "refRule": "^data:[a-z-]+#[A-Za-z0-9._/-]+$"
+    },
+    "art.plate": {
+      "policy": "reuse-closed-set",
+      "owner": "Activepieces (commissioned art)",
+      "paths": [
+        "/assets/hero-base-2064.webp",
+        "/assets/hero-front-2064.webp",
+        "/hero/hero-base-1376.webp",
+        "/hero/hero-base-2752.webp",
+        "/hero/hero-front-1376.webp",
+        "/hero/hero-front-2752.webp"
+      ],
+      "evidence": [
+        {
+          "file": "src/components/Hero.jsx",
+          "lines": "61",
+          "quote": "srcSet=\"/hero/hero-base-1376.webp 1376w, /assets/hero-base-2064.webp 2064w"
+        }
+      ],
+      "guidance": "Homepage hero only. Do not generate look-alike plates.",
+      "refRule": "^/[A-Za-z0-9._/-]+$ and must be in paths"
+    },
+    "art.panel": {
+      "policy": "reuse-closed-set",
+      "owner": "Activepieces (commissioned art)",
+      "paths": [
+        "/panel/meadow.webp",
+        "/panel/clouds.webp",
+        "/panel/coast.webp",
+        "/rows/water.webp",
+        "/grid/iris.webp",
+        "/rows/embed-clouds.webp",
+        "/assets/meadow.webp",
+        "/assets/clouds.webp"
+      ],
+      "evidence": [
+        {
+          "file": "src/components/templates/TemplateHero.jsx",
+          "lines": "13",
+          "quote": "const art = `/panel/${stageBg}`"
+        },
+        {
+          "file": "src/components/BentoPlatformCard.jsx",
+          "lines": "17",
+          "quote": "backgroundImage: 'url(/rows/water.webp)'"
+        },
+        {
+          "file": "src/components/pricing/SplitRows.css",
+          "lines": "3",
+          "quote": "url(/rows/embed-clouds.webp)"
+        }
+      ],
+      "guidance": "Stage / bento / sales backgrounds. Closed set: meadow, clouds, coast, water, iris (+ embed-clouds for pricing rows).",
+      "refRule": "^/[A-Za-z0-9._/-]+$ and must be in paths"
+    },
+    "art.closing": {
+      "policy": "reuse-closed-set",
+      "owner": "Activepieces (commissioned art)",
+      "paths": [
+        "/closing/meadow-1376.webp",
+        "/closing/meadow-2064.webp",
+        "/assets/meadow-2064.webp"
+      ],
+      "evidence": [
+        {
+          "file": "src/components/Footer.jsx",
+          "lines": "91",
+          "quote": "srcSet=\"/closing/meadow-1376.webp 1376w, /assets/meadow-2064.webp 2064w\""
+        }
+      ],
+      "guidance": "Footer closing band only (rendered by shell.footer-closing).",
+      "refRule": "^/[A-Za-z0-9._/-]+$ and must be in paths"
+    },
+    "art.gov-hero": {
+      "policy": "reuse-closed-set",
+      "owner": "Activepieces (commissioned art)",
+      "paths": [
+        "/gov-hero/green-1600.webp",
+        "/gov-hero/green-2400.webp",
+        "/gov-hero/green-3200.webp"
+      ],
+      "evidence": [
+        {
+          "file": "src/components/governance/GovernanceHero.jsx",
+          "lines": "11",
+          "quote": "const SRCSET = [1600, 2400, 3200]"
+        }
+      ],
+      "guidance": "/ai-governance hero card only.",
+      "refRule": "^/[A-Za-z0-9._/-]+$ and must be in paths"
+    },
+    "mock.avatar": {
+      "policy": "may-generate-synthetic",
+      "owner": "Synthetic illustrations (bots, project seeds)",
+      "paths": [
+        "/avatars/bots/atlas.svg",
+        "/avatars/bots/beacon.svg",
+        "/avatars/bots/cinder.svg",
+        "/avatars/bots/ember.svg",
+        "/avatars/bots/dorian.svg",
+        "/assets/atlas.svg",
+        "/assets/beacon.svg",
+        "/assets/cinder.svg"
+      ],
+      "evidence": [
+        {
+          "file": "src/pages/blog/BlogArticle.jsx",
+          "lines": "345",
+          "quote": "src={`/avatars/bots/${b}.svg`}"
+        },
+        {
+          "file": "src/components/governance/GovernanceHero.jsx",
+          "lines": "100",
+          "quote": "src={`/avatars/projects/${seed}.svg`}"
+        },
+        {
+          "file": "src/components/AppMockup.jsx",
+          "lines": "20",
+          "quote": "avatar: 'atlas.svg',"
+        }
+      ],
+      "guidance": "Non-human generated avatars inside product mocks. New synthetic ones are allowed; they must not depict a real person or brand.",
+      "refRule": "^(/[A-Za-z0-9._/-]+|generated:[a-z0-9.-]+|placeholder:[a-z0-9.-]+)$"
+    },
+    "mock.brand-fictional": {
+      "policy": "may-generate-synthetic",
+      "owner": "Fictional brand used inside mocks (\"Calder\")",
+      "paths": [
+        "/logos/calder.svg"
+      ],
+      "evidence": [
+        {
+          "file": "src/components/embed/EmbedBento.jsx",
+          "lines": "84",
+          "quote": "<img src=\"/logos/calder.svg\""
+        }
+      ],
+      "guidance": "Fictional company in mocks. Synthetic replacements allowed; must not resemble a real company.",
+      "refRule": "^(/[A-Za-z0-9._/-]+|generated:[a-z0-9.-]+|placeholder:[a-z0-9.-]+)$"
+    },
+    "badge.backer": {
+      "policy": "reuse-exact-path",
+      "owner": "Y Combinator (trademark)",
+      "paths": [
+        "/logos/ycombinator.svg"
+      ],
+      "evidence": [
+        {
+          "file": "src/components/Footer.css",
+          "lines": "28",
+          "quote": "-webkit-mask-image: url(/logos/ycombinator.svg);"
+        }
+      ],
+      "guidance": "Footer bottom row only (rendered by shell.footer-closing). Never in authored content.",
+      "refRule": "^/[A-Za-z0-9._/-]+$ and must be in paths"
+    },
+    "icon.ui": {
+      "policy": "reuse-closed-set",
+      "owner": "Solar icon set (CC BY 4.0, 480 Design) and simple-icons brand glyphs",
+      "paths": [],
+      "pathsRule": "Iconify mask classes registered in src/icons.css (`i-solar:*`, `i-simple-icons:*`); files under /icons/<set>/. Reference by icon name, not path.",
+      "evidence": [
+        {
+          "file": "src/icons.css",
+          "lines": "2",
+          "quote": "* Usage: <span class=\"iconify i-solar:NAME size-4\" aria-hidden=\"true\" />"
+        }
+      ],
+      "guidance": "Use registered icon names only. simple-icons glyphs (github, x, linkedin) are third-party marks: only in their real positions (header menu GitHub item, share buttons).",
+      "refRule": "^/[A-Za-z0-9._/-]+$ and must be in paths"
+    }
+  }
+}

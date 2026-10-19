@@ -1,0 +1,897 @@
+{
+  "$description": "Color foundation. Original CSS is oklch; hex is the browser sRGB conversion used by the clone's Tailwind v3 config.",
+  "evidence": [
+    {
+      "file": "tailwind.config.cjs",
+      "lines": "67",
+      "quote": "// CLONE_SPEC 0.1 (hex = sRGB conversion of the oklch tokens)"
+    },
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "17",
+      "quote": "### 0.1 Colors"
+    }
+  ],
+  "opacityRule": {
+    "rule": "Tailwind `/NN` opacity modifiers are allowed on any color token (integer 0-100).",
+    "evidence": [
+      {
+        "file": "tailwind.config.cjs",
+        "lines": "12-14",
+        "quote": "// v4 accepts any integer opacity modifier"
+      }
+    ]
+  },
+  "tokens": {
+    "color": {
+      "ink": {
+        "50": {
+          "$type": "color",
+          "$value": "#f8fafc",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "71",
+              "quote": "50: '#f8fafc'"
+            }
+          ]
+        },
+        "100": {
+          "$type": "color",
+          "$value": "#f1f5f9",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "72",
+              "quote": "100: '#f1f5f9'"
+            }
+          ]
+        },
+        "150": {
+          "$type": "color",
+          "$value": "#eaedf0",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "73",
+              "quote": "150: '#eaedf0'"
+            }
+          ]
+        },
+        "200": {
+          "$type": "color",
+          "$value": "#e2e8f0",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "74",
+              "quote": "200: '#e2e8f0'"
+            }
+          ]
+        },
+        "300": {
+          "$type": "color",
+          "$value": "#cad5e2",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "75",
+              "quote": "300: '#cad5e2'"
+            }
+          ]
+        },
+        "400": {
+          "$type": "color",
+          "$value": "#90a1b9",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "76",
+              "quote": "400: '#90a1b9'"
+            }
+          ]
+        },
+        "500": {
+          "$type": "color",
+          "$value": "#62748e",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "77",
+              "quote": "500: '#62748e'"
+            }
+          ]
+        },
+        "600": {
+          "$type": "color",
+          "$value": "#45556c",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "78",
+              "quote": "600: '#45556c'"
+            }
+          ]
+        },
+        "700": {
+          "$type": "color",
+          "$value": "#314158",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "79",
+              "quote": "700: '#314158'"
+            }
+          ]
+        },
+        "800": {
+          "$type": "color",
+          "$value": "#1d293d",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "80",
+              "quote": "800: '#1d293d'"
+            }
+          ]
+        },
+        "900": {
+          "$type": "color",
+          "$value": "#0f172b",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "81",
+              "quote": "900: '#0f172b'"
+            }
+          ]
+        },
+        "950": {
+          "$type": "color",
+          "$value": "#020618",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "82",
+              "quote": "950: '#020618'"
+            }
+          ]
+        }
+      },
+      "primary": {
+        "50": {
+          "$type": "color",
+          "$value": "#f0f9ff",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "85",
+              "quote": "50: '#f0f9ff'"
+            }
+          ]
+        },
+        "100": {
+          "$type": "color",
+          "$value": "#dff2fe",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "86",
+              "quote": "100: '#dff2fe'"
+            }
+          ]
+        },
+        "200": {
+          "$type": "color",
+          "$value": "#b8e6fe",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "87",
+              "quote": "200: '#b8e6fe'"
+            }
+          ]
+        },
+        "300": {
+          "$type": "color",
+          "$value": "#74d4ff",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "88",
+              "quote": "300: '#74d4ff'"
+            }
+          ]
+        },
+        "400": {
+          "$type": "color",
+          "$value": "#00bcff",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "89",
+              "quote": "400: '#00bcff'"
+            }
+          ]
+        },
+        "500": {
+          "$type": "color",
+          "$value": "#00a6f4",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "90",
+              "quote": "500: '#00a6f4'"
+            }
+          ]
+        },
+        "600": {
+          "$type": "color",
+          "$value": "#0084d1",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "91",
+              "quote": "600: '#0084d1'"
+            }
+          ]
+        },
+        "700": {
+          "$type": "color",
+          "$value": "#0069a8",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "92",
+              "quote": "700: '#0069a8'"
+            }
+          ]
+        },
+        "800": {
+          "$type": "color",
+          "$value": "#00598a",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "93",
+              "quote": "800: '#00598a'"
+            }
+          ]
+        },
+        "900": {
+          "$type": "color",
+          "$value": "#024a70",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "94",
+              "quote": "900: '#024a70'"
+            }
+          ]
+        },
+        "950": {
+          "$type": "color",
+          "$value": "#052f4a",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "95",
+              "quote": "950: '#052f4a'"
+            }
+          ]
+        }
+      },
+      "accent-a": {
+        "50": {
+          "$type": "color",
+          "$value": "#ecfdf5",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "98",
+              "quote": "50: '#ecfdf5'"
+            }
+          ]
+        },
+        "100": {
+          "$type": "color",
+          "$value": "#d0fae5",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "98",
+              "quote": "100: '#d0fae5'"
+            }
+          ]
+        },
+        "200": {
+          "$type": "color",
+          "$value": "#a4f4cf",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "98",
+              "quote": "200: '#a4f4cf'"
+            }
+          ]
+        },
+        "300": {
+          "$type": "color",
+          "$value": "#5ee9b5",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "98",
+              "quote": "300: '#5ee9b5'"
+            }
+          ]
+        },
+        "400": {
+          "$type": "color",
+          "$value": "#00d492",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "98",
+              "quote": "400: '#00d492'"
+            }
+          ]
+        },
+        "500": {
+          "$type": "color",
+          "$value": "#00bc7d",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "99",
+              "quote": "500: '#00bc7d'"
+            }
+          ]
+        },
+        "600": {
+          "$type": "color",
+          "$value": "#009966",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "99",
+              "quote": "600: '#009966'"
+            }
+          ]
+        },
+        "700": {
+          "$type": "color",
+          "$value": "#007a55",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "99",
+              "quote": "700: '#007a55'"
+            }
+          ]
+        },
+        "800": {
+          "$type": "color",
+          "$value": "#006045",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "99",
+              "quote": "800: '#006045'"
+            }
+          ]
+        },
+        "950": {
+          "$type": "color",
+          "$value": "#002c22",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "99",
+              "quote": "950: '#002c22'"
+            }
+          ]
+        }
+      },
+      "accent-b": {
+        "50": {
+          "$type": "color",
+          "$value": "#fffbeb",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "102",
+              "quote": "50: '#fffbeb'"
+            }
+          ]
+        },
+        "100": {
+          "$type": "color",
+          "$value": "#fef3c6",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "102",
+              "quote": "100: '#fef3c6'"
+            }
+          ]
+        },
+        "200": {
+          "$type": "color",
+          "$value": "#fee685",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "102",
+              "quote": "200: '#fee685'"
+            }
+          ]
+        },
+        "300": {
+          "$type": "color",
+          "$value": "#ffd230",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "102",
+              "quote": "300: '#ffd230'"
+            }
+          ]
+        },
+        "400": {
+          "$type": "color",
+          "$value": "#ffb900",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "102",
+              "quote": "400: '#ffb900'"
+            }
+          ]
+        },
+        "500": {
+          "$type": "color",
+          "$value": "#fe9a00",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "103",
+              "quote": "500: '#fe9a00'"
+            }
+          ]
+        },
+        "600": {
+          "$type": "color",
+          "$value": "#e17100",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "103",
+              "quote": "600: '#e17100'"
+            }
+          ]
+        },
+        "700": {
+          "$type": "color",
+          "$value": "#bb4d00",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "103",
+              "quote": "700: '#bb4d00'"
+            }
+          ]
+        },
+        "800": {
+          "$type": "color",
+          "$value": "#973c00",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "103",
+              "quote": "800: '#973c00'"
+            }
+          ]
+        },
+        "900": {
+          "$type": "color",
+          "$value": "#7b3306",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "103",
+              "quote": "900: '#7b3306'"
+            }
+          ]
+        },
+        "950": {
+          "$type": "color",
+          "$value": "#461901",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "103",
+              "quote": "950: '#461901'"
+            }
+          ]
+        }
+      },
+      "accent-c": {
+        "50": {
+          "$type": "color",
+          "$value": "#fef2f2",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "106",
+              "quote": "50: '#fef2f2'"
+            }
+          ]
+        },
+        "200": {
+          "$type": "color",
+          "$value": "#ffc9c9",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "106",
+              "quote": "200: '#ffc9c9'"
+            }
+          ]
+        },
+        "300": {
+          "$type": "color",
+          "$value": "#ffa2a2",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "106",
+              "quote": "300: '#ffa2a2'"
+            }
+          ]
+        },
+        "400": {
+          "$type": "color",
+          "$value": "#ff6467",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "106",
+              "quote": "400: '#ff6467'"
+            }
+          ]
+        },
+        "500": {
+          "$type": "color",
+          "$value": "#fb2c36",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "106",
+              "quote": "500: '#fb2c36'"
+            }
+          ]
+        },
+        "600": {
+          "$type": "color",
+          "$value": "#e7000b",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "107",
+              "quote": "600: '#e7000b'"
+            }
+          ]
+        },
+        "700": {
+          "$type": "color",
+          "$value": "#c10007",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "107",
+              "quote": "700: '#c10007'"
+            }
+          ]
+        },
+        "800": {
+          "$type": "color",
+          "$value": "#9f0712",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "107",
+              "quote": "800: '#9f0712'"
+            }
+          ]
+        },
+        "900": {
+          "$type": "color",
+          "$value": "#82181a",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "107",
+              "quote": "900: '#82181a'"
+            }
+          ]
+        }
+      },
+      "accent-d": {
+        "50": {
+          "$type": "color",
+          "$value": "#f5f3ff",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "110",
+              "quote": "50: '#f5f3ff'"
+            }
+          ]
+        },
+        "100": {
+          "$type": "color",
+          "$value": "#ede9fe",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "110",
+              "quote": "100: '#ede9fe'"
+            }
+          ]
+        },
+        "200": {
+          "$type": "color",
+          "$value": "#ddd6ff",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "110",
+              "quote": "200: '#ddd6ff'"
+            }
+          ]
+        },
+        "300": {
+          "$type": "color",
+          "$value": "#c4b4ff",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "110",
+              "quote": "300: '#c4b4ff'"
+            }
+          ]
+        },
+        "400": {
+          "$type": "color",
+          "$value": "#a684ff",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "110",
+              "quote": "400: '#a684ff'"
+            }
+          ]
+        },
+        "500": {
+          "$type": "color",
+          "$value": "#8e51ff",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "111",
+              "quote": "500: '#8e51ff'"
+            }
+          ]
+        },
+        "600": {
+          "$type": "color",
+          "$value": "#7f22fe",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "111",
+              "quote": "600: '#7f22fe'"
+            }
+          ]
+        },
+        "800": {
+          "$type": "color",
+          "$value": "#5d0ec0",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "111",
+              "quote": "800: '#5d0ec0'"
+            }
+          ]
+        },
+        "900": {
+          "$type": "color",
+          "$value": "#4d179a",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "111",
+              "quote": "900: '#4d179a'"
+            }
+          ]
+        },
+        "950": {
+          "$type": "color",
+          "$value": "#2f0d68",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "111",
+              "quote": "950: '#2f0d68'"
+            }
+          ]
+        }
+      },
+      "soft": {
+        "violet-soft": {
+          "$type": "color",
+          "$value": "#f2edfe",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "113",
+              "quote": "'violet-soft': '#f2edfe'"
+            }
+          ]
+        },
+        "azure-soft": {
+          "$type": "color",
+          "$value": "#d4f8fe",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "114",
+              "quote": "'azure-soft': '#d4f8fe'"
+            }
+          ]
+        },
+        "azure-bold": {
+          "$type": "color",
+          "$value": "#196f7c",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "115",
+              "quote": "'azure-bold': '#196f7c'"
+            }
+          ]
+        },
+        "teal-soft": {
+          "$type": "color",
+          "$value": "#c5fef0",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "116",
+              "quote": "'teal-soft': '#c5fef0'"
+            }
+          ]
+        },
+        "lime-soft": {
+          "$type": "color",
+          "$value": "#ebf9b8",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "117",
+              "quote": "'lime-soft': '#ebf9b8'"
+            }
+          ]
+        },
+        "lime-bold": {
+          "$type": "color",
+          "$value": "#616e19",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "118",
+              "quote": "'lime-bold': '#616e19'"
+            }
+          ]
+        }
+      },
+      "white": {
+        "$type": "color",
+        "$value": "#ffffff",
+        "evidence": [
+          {
+            "file": "tailwind.config.cjs",
+            "lines": "69",
+            "quote": "white: '#ffffff'"
+          }
+        ]
+      },
+      "cast": {
+        "06": {
+          "$type": "color",
+          "$value": "rgba(2, 6, 24, .06)",
+          "evidence": [
+            {
+              "file": "src/index.css",
+              "lines": "328",
+              "quote": "--cast-06: rgba(2, 6, 24, .06)"
+            }
+          ]
+        },
+        "08": {
+          "$type": "color",
+          "$value": "rgba(2, 6, 24, .08)",
+          "evidence": [
+            {
+              "file": "src/index.css",
+              "lines": "329",
+              "quote": "--cast-08: rgba(2, 6, 24, .08)"
+            }
+          ]
+        },
+        "10": {
+          "$type": "color",
+          "$value": "rgba(2, 6, 24, .10)",
+          "evidence": [
+            {
+              "file": "src/index.css",
+              "lines": "330",
+              "quote": "--cast-10: rgba(2, 6, 24, .10)"
+            }
+          ]
+        },
+        "20": {
+          "$type": "color",
+          "$value": "rgba(2, 6, 24, .20)",
+          "evidence": [
+            {
+              "file": "src/index.css",
+              "lines": "331",
+              "quote": "--cast-20: rgba(2, 6, 24, .20)"
+            }
+          ]
+        }
+      },
+      "mock-only": {
+        "traffic-red": {
+          "$type": "color",
+          "$value": "#ff5f57",
+          "evidence": [
+            {
+              "file": "CLONE_SPEC.md",
+              "lines": "41",
+              "quote": "#ff5f57 / #febc2e / #28c840"
+            }
+          ],
+          "usage": "demo window chrome only"
+        },
+        "traffic-amber": {
+          "$type": "color",
+          "$value": "#febc2e",
+          "evidence": [
+            {
+              "file": "CLONE_SPEC.md",
+              "lines": "41",
+              "quote": "#ff5f57 / #febc2e / #28c840"
+            }
+          ],
+          "usage": "demo window chrome only"
+        },
+        "traffic-green": {
+          "$type": "color",
+          "$value": "#28c840",
+          "evidence": [
+            {
+              "file": "CLONE_SPEC.md",
+              "lines": "41",
+              "quote": "#ff5f57 / #febc2e / #28c840"
+            }
+          ],
+          "usage": "demo window chrome only"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,167 @@
+{
+  "id": "hero.catalog-index",
+  "layer": "section",
+  "category": "hero",
+  "purpose": "Catalog hero: /pieces 3D logo scatter (>=72rem) + cluster, /mcp connect cards, or left-aligned category hero.",
+  "implementedBy": [
+    "src/components/catalog/heroes.jsx",
+    "src/components/catalog/catalog.css"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_CATALOG.md",
+      "lines": "233",
+      "quote": "### 4.1 Hero variants"
+    }
+  ],
+  "variants": {
+    "pieces-scatter": {
+      "description": "/pieces: centered H1 72/72, 12-drop scatter at >=72rem, 8-tile cluster below.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CATALOG.md",
+          "lines": "234",
+          "quote": "**A. `/pieces` pieces-hero** (`hero-stage relative isolate overflow-hidden`):"
+        }
+      ]
+    },
+    "mcp-connect": {
+      "description": "/mcp: feature list + McpConnect client cards, no CTA buttons.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CATALOG.md",
+          "lines": "270",
+          "quote": "**B. `/mcp` mcp-hero** uses the same stage technique with the mcp CSS"
+        }
+      ]
+    },
+    "category": {
+      "description": "/pieces|mcp/category/:key: left-aligned '<count> <label> integrations.' hero, no art.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CATALOG.md",
+          "lines": "293",
+          "quote": "**C. Category pages** (`product-hero` without art, highlights or logos). There is no scatter."
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "h1",
+      "lede",
+      "kind"
+    ],
+    "properties": {
+      "h1": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 10
+      },
+      "lede": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 30
+      },
+      "kind": {
+        "enum": [
+          "pieces",
+          "mcp"
+        ]
+      },
+      "featureList": {
+        "type": "array",
+        "minItems": 4,
+        "maxItems": 4,
+        "items": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 4
+        }
+      }
+    }
+  },
+  "media": {
+    "slots": {
+      "scatterLogos": {
+        "roles": [
+          "piece.logo"
+        ],
+        "maxItems": 12,
+        "required": false
+      },
+      "clientLogos": {
+        "roles": [
+          "ai-client.logo"
+        ],
+        "maxItems": 12,
+        "required": false
+      }
+    }
+  },
+  "constraints": {
+    "onePerPage": true,
+    "mustFollow": "shell.header"
+  },
+  "variantRules": {
+    "mcp-connect": {
+      "requiredContent": [
+        "featureList"
+      ],
+      "contentEquals": {
+        "kind": "mcp"
+      }
+    },
+    "pieces-scatter": {
+      "forbiddenContent": [
+        "featureList"
+      ],
+      "contentEquals": {
+        "kind": "pieces"
+      }
+    },
+    "category": {
+      "forbiddenContent": [
+        "featureList"
+      ]
+    }
+  },
+  "motion": {
+    "allowedPatterns": [
+      "hero-line-template",
+      "catalog-scatter-throw",
+      "mcp-card-in"
+    ],
+    "requiredPatterns": [
+      "hero-line-template"
+    ],
+    "variantRequiredPatterns": {
+      "pieces-scatter": [
+        "catalog-scatter-throw"
+      ],
+      "mcp-connect": [
+        "mcp-card-in"
+      ]
+    },
+    "reducedMotionFallback": "static-end-state"
+  },
+  "responsive": {
+    "evidence": [
+      {
+        "file": "specs/SPEC_CATALOG.md",
+        "lines": "235",
+        "quote": "- Column `.hero-col relative mx-auto flex flex-col items-center justify-center px-5 pt-28 pb-24 text-center md:px-6 md:pt-32`."
+      }
+    ],
+    "changes": {
+      "base": "cluster shown, no scatter",
+      "md": "min-height calc(100svh - 84px)",
+      "lg": "H1 72/72",
+      "catalog-scatter": "scatter shown, cluster hidden"
+    }
+  },
+  "accessibility": [],
+  "notes": []
+}

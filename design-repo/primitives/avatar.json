@@ -1,0 +1,27 @@
+{
+  "id": "primitive.avatar",
+  "layer": "primitive",
+  "purpose": "Round 40px image or initials-on-tint fallback.",
+  "implementedBy": [
+    "src/components/Testimonials.jsx"
+  ],
+  "props": {
+    "assetRole": {
+      "enum": [
+        "testimonial.avatar",
+        "author.photo",
+        "mock.avatar"
+      ]
+    }
+  },
+  "rules": [
+    "Generated pages use the initials fallback (placeholder-only roles)."
+  ],
+  "evidence": [
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "766",
+      "quote": "- Avatar 40px round, `object-cover ring-1 ring-ink-950/10`. Initials fallback: 14px/600 ink-900 on a tint"
+    }
+  ]
+}

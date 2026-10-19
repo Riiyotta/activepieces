@@ -1,0 +1,127 @@
+{
+  "id": "governance.hero",
+  "layer": "section",
+  "category": "hero",
+  "purpose": "Image-card hero (green art), centered primary-950 H1, brand CTA, scaled 1280x720 platform shot, sticky bottom logo bar.",
+  "implementedBy": [
+    "src/components/governance/GovernanceHero.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_MARKETING.md",
+      "lines": "532",
+      "quote": "### 5.A Governance hero"
+    }
+  ],
+  "variants": {
+    "default": {
+      "description": "Single variant.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_MARKETING.md",
+          "lines": "535",
+          "quote": "- Card `relative isolate aspect-[3/2] max-h-[calc(100svh-var(--spacing-chrome)-var(--gut))]"
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "h1",
+      "lede",
+      "cta"
+    ],
+    "properties": {
+      "h1": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 6
+      },
+      "lede": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 30
+      },
+      "cta": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "label",
+          "href"
+        ],
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 4
+          },
+          "href": {
+            "type": "string",
+            "pattern": "^(/[A-Za-z0-9._~%/?=&#-]*|https://(cloud\\.activepieces\\.com|github\\.com/activepieces|www\\.activepieces\\.com|trust\\.activepieces\\.com)(/[A-Za-z0-9._~%/?=&#-]*)?)$",
+            "x-example": "/sales?ap_cta=example"
+          }
+        }
+      }
+    }
+  },
+  "media": {
+    "slots": {
+      "heroArt": {
+        "roles": [
+          "art.gov-hero"
+        ],
+        "maxItems": 1,
+        "required": true
+      },
+      "projectAvatars": {
+        "roles": [
+          "mock.avatar"
+        ],
+        "maxItems": 6,
+        "required": false
+      },
+      "rotatingLogos": {
+        "roles": [
+          "customer.logo"
+        ],
+        "maxItems": 24,
+        "required": false
+      }
+    }
+  },
+  "constraints": {
+    "onePerPage": true,
+    "mustFollow": "shell.header"
+  },
+  "variantRules": {},
+  "motion": {
+    "allowedPatterns": [
+      "sticky-bar-border",
+      "logo-rotate-set"
+    ],
+    "requiredPatterns": [
+      "logo-rotate-set"
+    ],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "static-first-set"
+  },
+  "responsive": {
+    "evidence": [
+      {
+        "file": "specs/SPEC_MARKETING.md",
+        "lines": "533",
+        "quote": "- Wrapper `pb-16 md:pb-20 [--gut:.75rem] md:[--gut:1.25rem] lg:[--gut:1.75rem]`."
+      }
+    ],
+    "changes": {
+      "base": "gut .75rem, card min-h 32rem",
+      "sm": "card min-h 36rem",
+      "md": "gut 1.25rem",
+      "lg": "gut 1.75rem"
+    }
+  },
+  "accessibility": [],
+  "notes": []
+}

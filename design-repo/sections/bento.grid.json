@@ -1,0 +1,242 @@
+{
+  "id": "bento.grid",
+  "layer": "section",
+  "category": "bento",
+  "purpose": "Sentient H2 over a 24-column grid of static bento cards (spans 9/12/15; each row sums to 24), each with an art preset and a mock body.",
+  "implementedBy": [
+    "src/components/BentoPlatformCard.jsx",
+    "src/components/BentoPlatform.jsx",
+    "src/components/BentoSecond.jsx",
+    "src/components/templates/TemplateBento.jsx",
+    "src/components/embed/EmbedBento.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "698",
+      "quote": "## H / L. Bento grids"
+    },
+    {
+      "file": "specs/SPEC_PRODUCT_SOLUTIONS.md",
+      "lines": "314",
+      "quote": "## 6. Bento grid (shared; reuse `BentoSection` / `BentoCard`)"
+    }
+  ],
+  "variants": {
+    "home-platform": {
+      "description": "Homepage H: 8 cards, H2 max-w-xl.",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "725",
+          "quote": "- **H cells** (span of 24 · bg · position · mode):"
+        }
+      ]
+    },
+    "home-workspace": {
+      "description": "Homepage L: 4 cards of span 12.",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "739",
+          "quote": "- **L cells**:"
+        }
+      ]
+    },
+    "product": {
+      "description": "Product pages: 8 cards, spans 12/12, 9/15, 15/9, 12/12; H2 full width.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_PRODUCT_SOLUTIONS.md",
+          "lines": "27",
+          "quote": "- **Bento grid.** 8 cards in spans 12/12, 9/15, 15/9, 12/12 on product pages."
+        }
+      ]
+    },
+    "solution": {
+      "description": "Solution pages: 6 cards, spans 12/12, 9/15, 15/9.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_PRODUCT_SOLUTIONS.md",
+          "lines": "27",
+          "quote": "6 cards in spans 12/12, 9/15, 15/9 on solution pages."
+        }
+      ]
+    },
+    "embed": {
+      "description": "/embed 'What the SDK gives you.': 8 cells.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_MARKETING.md",
+          "lines": "718",
+          "quote": "### 6.B Bento \"What the SDK gives you.\""
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "h2",
+      "cards"
+    ],
+    "properties": {
+      "h2": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 14
+      },
+      "cards": {
+        "type": "array",
+        "minItems": 4,
+        "maxItems": 8,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "title",
+            "desc",
+            "span",
+            "art",
+            "bgPosition",
+            "mock"
+          ],
+          "properties": {
+            "title": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 5
+            },
+            "desc": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 14
+            },
+            "span": {
+              "enum": [
+                9,
+                12,
+                15
+              ]
+            },
+            "art": {
+              "enum": [
+                "meadow",
+                "clouds",
+                "water",
+                "iris"
+              ]
+            },
+            "bgPosition": {
+              "type": "string",
+              "pattern": "^[0-9]{1,3}% [0-9]{1,3}%$",
+              "x-example": "50% 62%"
+            },
+            "mock": {
+              "enum": [
+                "triggerTypes",
+                "testStepStripe",
+                "codeSendQuote",
+                "routerTable",
+                "runResume",
+                "mcpServer",
+                "versionHistory",
+                "chatLimits",
+                "terminalCompose",
+                "sendMessageConfig",
+                "aiProviders",
+                "approvalRefund",
+                "refundForm",
+                "chatThreadBerlin",
+                "chatShareSettings",
+                "chatFile",
+                "projectMembers",
+                "typedFields",
+                "customersTable",
+                "tablesPieceOps",
+                "tableTriggers",
+                "home:projects",
+                "home:accessControl",
+                "home:secretManagers",
+                "home:auditLogs",
+                "home:aiProviders",
+                "home:analytics",
+                "home:deploymentOptions",
+                "home:chat",
+                "home:knowledgeBase",
+                "embed:signIn",
+                "embed:builder",
+                "embed:accounts",
+                "embed:hideUi",
+                "embed:domainFont",
+                "embed:appsList",
+                "embed:limits",
+                "embed:readyForAi"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "media": {
+    "slots": {}
+  },
+  "constraints": {
+    "maxPerPage": 2,
+    "spansRowSum": 24
+  },
+  "variantRules": {
+    "home-platform": {
+      "itemCount": {
+        "cards": 8
+      }
+    },
+    "home-workspace": {
+      "itemCount": {
+        "cards": 4
+      }
+    },
+    "product": {
+      "itemCount": {
+        "cards": 8
+      }
+    },
+    "solution": {
+      "itemCount": {
+        "cards": 6
+      }
+    },
+    "embed": {
+      "itemCount": {
+        "cards": 8
+      }
+    }
+  },
+  "motion": {
+    "allowedPatterns": [
+      "none"
+    ],
+    "requiredPatterns": [],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "not-applicable"
+  },
+  "responsive": {
+    "evidence": [
+      {
+        "file": "CLONE_SPEC.md",
+        "lines": "704",
+        "quote": "- Grid: `grid grid-cols-1 gap-4`; md: `grid-cols-24 gap-5` (20px), i.e. 24 equal columns."
+      }
+    ],
+    "changes": {
+      "base": "single column, cards 470 tall, gap 16",
+      "md": "24-column grid, cards 500 tall, gap 20; body 15px / 1.428571"
+    }
+  },
+  "accessibility": [],
+  "notes": [
+    "Mock bodies are a fixed library (SPEC_PRODUCT_SOLUTIONS §6.2) plus homepage/embed inline mocks; a mock's text is identical wherever it appears, even when it does not match the card title."
+  ]
+}

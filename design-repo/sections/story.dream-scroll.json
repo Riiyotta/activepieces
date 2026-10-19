@@ -1,0 +1,113 @@
+{
+  "id": "story.dream-scroll",
+  "layer": "section",
+  "category": "story",
+  "purpose": "Signature sticky scroll story: 3 beat texts, 7 flying app windows and a wire diagram scrubbed by scroll (>=1024) or a one-shot 2.4s tween (<=1023).",
+  "implementedBy": [
+    "src/components/Dream.jsx",
+    "src/components/DreamWindows.jsx",
+    "src/components/Dream.css"
+  ],
+  "evidence": [
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "437",
+      "quote": "## C. Dream section: sticky, scroll-scrubbed story (the signature motion)"
+    }
+  ],
+  "variants": {
+    "default": {
+      "description": "Single variant.",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "469",
+          "quote": "| 0 | \"Your team already works with AI.\" (word-split) | — (fully in) | [0.70, 0.95] |"
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "beat1",
+      "beat2",
+      "beat3"
+    ],
+    "properties": {
+      "beat1": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 8
+      },
+      "beat2": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 12
+      },
+      "beat3": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 6
+      }
+    }
+  },
+  "media": {
+    "slots": {
+      "beatMark": {
+        "roles": [
+          "brand.logo-full"
+        ],
+        "maxItems": 1,
+        "required": false
+      },
+      "nodeLogos": {
+        "roles": [
+          "ai-client.logo",
+          "piece.logo"
+        ],
+        "maxItems": 9,
+        "required": false
+      }
+    }
+  },
+  "constraints": {
+    "onePerPage": true,
+    "homeRouteOnly": true,
+    "scrollStage": true
+  },
+  "variantRules": {},
+  "motion": {
+    "allowedPatterns": [
+      "dream-scroll-scrub",
+      "dream-time-tween"
+    ],
+    "requiredPatterns": [
+      "dream-scroll-scrub",
+      "dream-time-tween"
+    ],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "static-end-state"
+  },
+  "responsive": {
+    "evidence": [
+      {
+        "file": "CLONE_SPEC.md",
+        "lines": "446",
+        "quote": "- ≥1024: `420svh` (measured 3780 at 900px tall, 3360 at 800)."
+      },
+      {
+        "file": "CLONE_SPEC.md",
+        "lines": "457",
+        "quote": "**Mobile/tablet (≤1023px)**: no windows are rendered, only beat #3 is shown"
+      }
+    ],
+    "changes": {
+      "base": "100svh, only beat 3 + 5 nodes, time-based tween",
+      "lg": "420svh sticky stage, scroll-scrubbed windows/beats/wires"
+    }
+  },
+  "accessibility": [],
+  "notes": []
+}

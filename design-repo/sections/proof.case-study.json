@@ -1,0 +1,160 @@
+{
+  "id": "proof.case-study",
+  "layer": "section",
+  "category": "proof",
+  "purpose": "Centered customer case study: logo, Sentient 500 blockquote with emphasized middle phrase, person caption, 3 stats with v4 divide.",
+  "implementedBy": [
+    "src/components/CaseFundingSocieties.jsx",
+    "src/components/CaseAlan.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "569",
+      "quote": "## D / J. Case-study sections (Funding Societies, Alan)"
+    },
+    {
+      "file": "specs/SPEC_PRODUCT_SOLUTIONS.md",
+      "lines": "394",
+      "quote": "## 9. Case study (solutions only; reuse `CaseFundingSocieties` / `CaseAlan` unchanged)"
+    }
+  ],
+  "variants": {
+    "case-a": {
+      "description": "Rendered by CaseFundingSocieties.jsx (webp logo 739x242).",
+      "evidence": [
+        {
+          "file": "src/components/CaseFundingSocieties.jsx",
+          "lines": "18",
+          "quote": "src=\"/assets/funding-societies.webp\""
+        }
+      ],
+      "implementedBy": [
+        "src/components/CaseFundingSocieties.jsx"
+      ]
+    },
+    "case-b": {
+      "description": "Rendered by CaseAlan.jsx (svg logo 261x72).",
+      "evidence": [
+        {
+          "file": "src/components/CaseAlan.jsx",
+          "lines": "24",
+          "quote": "alan-stats-divide"
+        }
+      ],
+      "implementedBy": [
+        "src/components/CaseAlan.jsx"
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "quoteLead",
+      "quoteEmphasis",
+      "name",
+      "role",
+      "stats"
+    ],
+    "properties": {
+      "quoteLead": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 12
+      },
+      "quoteEmphasis": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 14
+      },
+      "quoteTail": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 12
+      },
+      "name": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 4
+      },
+      "role": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 10
+      },
+      "meta": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 10
+      },
+      "stats": {
+        "type": "array",
+        "minItems": 3,
+        "maxItems": 3,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "value",
+            "label"
+          ],
+          "properties": {
+            "value": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 2
+            },
+            "label": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 6
+            }
+          }
+        }
+      }
+    }
+  },
+  "media": {
+    "slots": {
+      "logo": {
+        "roles": [
+          "case-study.logo"
+        ],
+        "maxItems": 1,
+        "required": true
+      }
+    }
+  },
+  "constraints": {
+    "maxPerPage": 2
+  },
+  "variantRules": {},
+  "motion": {
+    "allowedPatterns": [
+      "none"
+    ],
+    "requiredPatterns": [],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "not-applicable"
+  },
+  "responsive": {
+    "evidence": [
+      {
+        "file": "CLONE_SPEC.md",
+        "lines": "582",
+        "quote": "- Stats: `mt-12 grid grid-cols-1 gap-8 border-t border-ink-950/10 pt-12`; from sm: `grid-cols-3 gap-0 divide-x divide-ink-950/10`; cells `sm:px-10`."
+      }
+    ],
+    "changes": {
+      "base": "stats stacked; quote 24/32",
+      "sm": "stats 3 columns with v4 divide (border-right on all but last)",
+      "md": "stat value 48/48",
+      "xl": "quote 41/44.75 (clamp)"
+    }
+  },
+  "accessibility": [],
+  "notes": [
+    "Copy, people and metrics are real third-party claims: generated instances must be synthetic (rules/content-policy.json)."
+  ]
+}

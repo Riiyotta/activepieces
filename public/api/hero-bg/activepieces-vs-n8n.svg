@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900"><rect width="1600" height="900" fill="#1c0d1a"/><defs><linearGradient id="hdadg0" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#ffb02e"/><stop offset="1" stop-color="#ff3d8a"/></linearGradient><linearGradient id="hdadg1" x1="0" y1="1" x2="1" y2="0">
+    <stop offset="0" stop-color="#ff7a59"/><stop offset="1" stop-color="#c13b8e"/></linearGradient><linearGradient id="hdadg2" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#ffd27a"/><stop offset="1" stop-color="#ff7a59"/></linearGradient><filter id="hdadb" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="26"/></filter></defs>
+  <g filter="url(#hdadb)"><path d="M 661 950 C 1004 570, 1127 766, 1170 401 S 1568 109, 1680 60" fill="none" stroke="url(#hdadg0)" stroke-width="120" opacity="0.85"/><path d="M 899 980 C 1182 668, 1207 811, 1425 530 S 1600 215, 1700 220" fill="none" stroke="url(#hdadg1)" stroke-width="70" opacity="0.6"/><path d="M 1151 1000 C 1370 820, 1420 860, 1560 640" fill="none" stroke="url(#hdadg2)" stroke-width="40" opacity="0.5"/></g></svg>

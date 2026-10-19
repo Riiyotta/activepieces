@@ -1,0 +1,235 @@
+/* Shared CSS for the /product/* and /solutions/* templates (SPEC_PRODUCT_SOLUTIONS).
+ * Everything is scoped under .tpl-* classes so nothing here can alter the homepage. */
+
+/* ---- Hero entrance (§3.1, product-hero CSS). Own class + keyframe name: the global
+ * `html.js .hero-line` in index.css is the homepage variant and must not change. */
+html.js .tpl-line {
+  animation: tpl-hero-line .64s var(--ease-smooth) calc(var(--i) * 70ms) both;
+}
+@keyframes tpl-hero-line {
+  0% {
+    opacity: 0;
+    filter: blur(4px);
+    translate: 0 12px;
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    translate: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html.js .tpl-line {
+    animation: none;
+  }
+}
+
+/* ---- Hero stage (§3 item 4) */
+.tpl-hero .stage::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -5;
+  pointer-events: none;
+  background: radial-gradient(ellipse 62% 62% at 50% 50%, rgba(2, 6, 24, .08) 0, transparent 72%);
+}
+/* v4 `saturate-75` (not in the v3 scale) */
+.tpl-hero .tpl-stage-art {
+  filter: saturate(75%);
+}
+/* entry.css `.visual-pad` / `.visual-stage` (global on the original). Scoped to the visuals built here
+ * (.tpl-visual); the reused homepage demos keep their own scoped copies (incl. .stage-clip 22rem < 40rem). */
+.tpl-hero .tpl-visual.visual-pad {
+  width: 100%;
+  padding: 2.5rem 1.5rem;
+}
+@media (min-width: 40rem) {
+  .tpl-hero .tpl-visual.visual-pad {
+    padding: 3rem;
+  }
+}
+.tpl-hero .tpl-visual .visual-stage {
+  border-radius: 1rem;
+  width: 100%;
+  max-width: 34rem;
+  height: 28rem;
+  box-shadow: var(--shadow-lift);
+  background-color: #fff;
+  margin-inline: auto;
+  position: relative;
+}
+
+/* ---- Product columns (§5.1): v4 `md:divide-x md:divide-ink-950/10` = border-inline-end on
+ * every child but the last (v3 would put border-left on 2 and 3, shifting their text 1px). */
+@media (min-width: 768px) {
+  .tpl-cols-divide > :not(:last-child) {
+    border-right-width: 1px;
+    border-color: rgb(2 6 24 / .1);
+  }
+}
+
+/* ---- Rotating customer logos (§5.2, rotating-logos CSS: Vue <Transition name="logo-fade">) */
+.tpl-logo {
+  transition: opacity .3s, transform .3s;
+  transition-delay: var(--stagger, 0s);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+.tpl-logo.logo-fade-out,
+.tpl-logo.logo-fade-from {
+  opacity: 0;
+  transform: scale(.94);
+}
+@media (prefers-reduced-motion: reduce) {
+  .tpl-logo {
+    transition: none;
+  }
+}
+
+/* ---- Bento mock code tokens (§6.2; entry.css values). .code-fn/.code-str/.code-text are also
+ * defined globally by BentoPlatformCard.css with the same colours. */
+.tpl-page .code-key {
+  color: #007a55; /* accent-a-700 */
+}
+.tpl-page .code-fn {
+  color: var(--color-primary-800);
+}
+.tpl-page .code-str {
+  color: var(--color-accent-b-700);
+}
+.tpl-page .code-text {
+  color: var(--color-ink-800);
+}
+.tpl-page .code-dim {
+  color: var(--color-ink-600);
+}
+
+/* ---- Demo cursors with a name tag (§4.3 shared use-cursor-cast CSS). The cursor body reuses the
+ * homepage `.demo-cursor` rules from demo/useCursorCast.css; the tag is new. */
+.tpl-demo .cursor-tag {
+  position: absolute;
+  top: 18px;
+  left: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  border-top-left-radius: 1px;
+  background: var(--cursor-fill);
+  color: #fff;
+  white-space: nowrap;
+  font-size: .66rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+/* Typing carets (§4.3 .cell-caret, §4.4 .msg-caret) */
+.tpl-demo .cell-caret {
+  display: inline-block;
+  vertical-align: middle;
+  background: var(--color-ink-500);
+  width: 1.5px;
+  height: .9rem;
+  margin-left: 1px;
+  animation: blink 1s step-end infinite;
+}
+.tpl-demo .msg-caret {
+  display: inline-block;
+  vertical-align: middle;
+  background: var(--color-ink-500);
+  width: 1.5px;
+  height: 1rem;
+  margin-left: 1px;
+  animation: blink 1s step-end infinite;
+}
+
+/* Tables stage dropdown (§4.3): enter .26s/.36s spring, leave .17s/.2s */
+.tpl-demo .tpl-dropdown {
+  transition: opacity .26s, transform .36s cubic-bezier(.16, 1, .3, 1);
+}
+.tpl-demo .tpl-dropdown.is-from {
+  opacity: 0;
+  transform: translateY(-6px) scale(.96);
+}
+.tpl-demo .tpl-dropdown.is-leave {
+  opacity: 0;
+  transform: translateY(-4px) scale(.98);
+  transition: opacity .17s, transform .2s cubic-bezier(.4, 0, .9, .4);
+}
+
+/* Chat (§4.4, chat.tM1Wlkej.css) */
+.tpl-demo .thread {
+  -webkit-mask-image: linear-gradient(#0000, #000 24px);
+  mask-image: linear-gradient(#0000, #000 24px);
+}
+.tpl-demo .share-pop {
+  transform-origin: 100% 0;
+  transition: opacity .26s, transform .36s cubic-bezier(.16, 1, .3, 1);
+}
+.tpl-demo .share-pop.is-from {
+  opacity: 0;
+  transform: translateY(-8px) scale(.94);
+}
+.tpl-demo .share-pop.is-leave {
+  opacity: 0;
+  transform: translateY(-5px) scale(.97);
+  transition: opacity .17s, transform .2s cubic-bezier(.4, 0, .9, .4);
+}
+.tpl-demo .chip-in {
+  animation: tpl-chip-in .42s cubic-bezier(.16, 1, .3, 1) both;
+}
+@keyframes tpl-chip-in {
+  0% {
+    opacity: 0;
+    transform: translateY(6px) scale(.94);
+  }
+}
+/* <TransitionGroup name="rise">: enter opacity .48s + translateY(10px) .52s spring; leave opacity .3s */
+.tpl-demo .rise-enter {
+  animation: tpl-rise-op .48s both, tpl-rise-y .52s cubic-bezier(.16, 1, .3, 1) both;
+}
+@keyframes tpl-rise-op {
+  0% {
+    opacity: 0;
+  }
+}
+@keyframes tpl-rise-y {
+  0% {
+    transform: translateY(10px);
+  }
+}
+.tpl-demo .rise-leave {
+  transition: opacity .3s;
+  opacity: 0;
+  position: absolute;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tpl-demo .cell-caret,
+  .tpl-demo .msg-caret,
+  .tpl-demo .chip-in,
+  .tpl-demo .rise-enter {
+    animation: none;
+  }
+  .tpl-demo .tpl-dropdown,
+  .tpl-demo .share-pop {
+    transition: none;
+  }
+}
+
+/* ---- v4 `divide-y`: the original draws the divider as border-bottom on every child but the
+ * last (v3 draws border-top on every child but the first, which shifts each row by 1px). */
+.tpl-divide-y > :not(:last-child) {
+  border-top-width: 0;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(2 6 24 / 0.1);
+}
+.tpl-divide-y.tpl-divide-8 > :not(:last-child) {
+  border-bottom-color: rgb(2 6 24 / 0.08);
+}

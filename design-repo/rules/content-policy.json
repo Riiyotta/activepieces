@@ -1,0 +1,478 @@
+{
+  "$description": "Content/licensing policy for generated PageSpecs. Enforced by schema/semantic_validate.py rules REAL_ENTITY_DENYLIST, REAL_COPY_VERBATIM, NO_STORED_BODIES and OUTBOUND_LINK_HOSTS.",
+  "realCompany": {
+    "statement": "activepieces.com is a real, live commercial site. This design-repo and the clone it describes are a private study artefact. Do not publish either, do not make the repository public, and do not deploy generated pages publicly.",
+    "evidence": [
+      {
+        "file": "CLONE_SPEC.md",
+        "lines": "1",
+        "quote": "Source: https://www.activepieces.com/"
+      }
+    ]
+  },
+  "generatedContentRules": [
+    "Use synthetic copy shaped to each field's maxWords budget; never reproduce Activepieces' proprietary marketing copy verbatim (fingerprints below).",
+    "Never name real customers, real reviewers, real case-study people or real blog authors; never attribute quotes, metrics or claims to them.",
+    "Never reproduce real logos or photos of real people: media slots for those roles take placeholder: refs (assets/asset-roles.json pinnedPolicies).",
+    "Short UI labels (button and link labels such as 'Start building', 'Talk to sales') are interface strings and may be reused."
+  ],
+  "storedBodies": {
+    "rule": "Blog, resource and legal BODIES are deliberately not stored (metadata only). Each page renders a placeholder body that exercises the prose styles plus a 'Read the full ... on activepieces.com' link. PageSpecs for these templates have no body field (bodyMode const 'placeholder'); generators must not fabricate bodies, least of all attributed to real authors.",
+    "evidence": [
+      {
+        "file": "specs/SPEC_CONTENT.md",
+        "lines": "12",
+        "quote": "**Content policy.** The clone stores **metadata only**"
+      },
+      {
+        "file": "src/pages/blog/BlogArticle.jsx",
+        "lines": "195",
+        "quote": "<ReadFullLink href={post.url}>Read the full article on activepieces.com</ReadFullLink>"
+      }
+    ]
+  },
+  "noRuntimeExternalRequests": {
+    "rule": "All assets are local under public/ at their original paths. The only external URLs are outbound navigation links. The only runtime fetch is the local /data/pieces/<slug>.json. The /sales form never submits.",
+    "evidence": [
+      {
+        "file": "BUILD_CONVENTIONS.md",
+        "lines": "17",
+        "quote": "Never reference activepieces.com at runtime."
+      },
+      {
+        "file": "src/components/catalog/lib.js",
+        "lines": "309",
+        "quote": "const p = fetch(`/data/pieces/${slug}.json`)"
+      },
+      {
+        "file": "specs/SPEC_MARKETING.md",
+        "lines": "200",
+        "quote": "- The clone does **not** submit."
+      }
+    ]
+  },
+  "outboundHostAllowlist": [
+    "cloud.activepieces.com",
+    "github.com/activepieces",
+    "www.activepieces.com",
+    "trust.activepieces.com"
+  ],
+  "outboundHostEvidence": [
+    {
+      "file": "specs/SPEC_PRODUCT_SOLUTIONS.md",
+      "lines": "84",
+      "quote": "href `https://cloud.activepieces.com/sign-up?ap_cta=<ctaKey>&ref=<encoded route>`"
+    },
+    {
+      "file": "specs/SPEC_MARKETING.md",
+      "lines": "403",
+      "quote": "→ `https://trust.activepieces.com` (243×48)."
+    }
+  ],
+  "uiLabelAllowlist": [
+    "Start building",
+    "Talk to sales",
+    "Get started",
+    "Read the docs",
+    "Talk to us",
+    "Read the source",
+    "View all pieces",
+    "Browse all integrations"
+  ],
+  "realEntityDenylist": {
+    "customers": [
+      "Bosch",
+      "Alan",
+      "SAP",
+      "Tryg",
+      "Funding Societies",
+      "Carrefour",
+      "Corgi",
+      "Hilton",
+      "Lumen",
+      "Pipefy",
+      "Dell Technologies",
+      "Dell",
+      "ZeroFox",
+      "Decathlon",
+      "Merkle",
+      "Orange",
+      "EXL",
+      "Concentrix",
+      "Odoo",
+      "Keller Williams",
+      "HackerOne",
+      "Shopee",
+      "ITV",
+      "MoneyGram",
+      "Capgemini"
+    ],
+    "people": [
+      "Shawn Lim",
+      "Guillaume Durand",
+      "Kevin Hu",
+      "Christian D.",
+      "Vikranth K.",
+      "Mark D.",
+      "Rida",
+      "CaptainJamie",
+      "Giuseppe",
+      "Dennis Klappe",
+      "Patrick F."
+    ],
+    "platformsAndTrademarks": [
+      "G2",
+      "Trustpilot",
+      "Reddit",
+      "Y Combinator",
+      "Zapier"
+    ],
+    "blogAuthors": [
+      "Abdallah Alwarawreh",
+      "Abdul-rahman Al-Hussien",
+      "Ahmad Hassan",
+      "Aisha Okoye",
+      "Alex Kim",
+      "Amit Patel",
+      "Anas Albarghouthy",
+      "Ashraf Samhouri",
+      "Baptiste Roussel",
+      "Ben Kowalczyk",
+      "Benjamin Torres",
+      "Bethany Morrison",
+      "Bram Vissenaekens",
+      "Bridget Okonjo-Hale",
+      "Carlos Mendoza",
+      "Carmen Rodriguez",
+      "Casimir Dranoff",
+      "Daniel Okafor",
+      "Dario Espinoza-Blum",
+      "David Okafor",
+      "Desmond Achebe",
+      "Desmond Attah-Cole",
+      "Dilnoza Yusupova",
+      "Doreen Achterberg",
+      "Dr. Rebecca Chang",
+      "Dries Coetzer",
+      "Elena Kowalski",
+      "Emeka Vantongeren",
+      "Emmanuel Osei-Bonsu",
+      "Ethan Blackwood",
+      "Fatima Benali",
+      "Femi Adegoke",
+      "Frans Delport",
+      "Gabriela Santos",
+      "Ginikachukwu Nwibe",
+      "Grace Muthoni Kariuki",
+      "Greta Almqvist",
+      "Grzegorz Sobczak",
+      "Gustavo Peixoto",
+      "Halvor Kristiansen",
+      "Hazem Adel",
+      "Helga Brandvold",
+      "Henrik Larsson",
+      "Iben Skovgaard",
+      "Indira Mehta",
+      "Ines Kovač",
+      "Ingeborg Rasmussen",
+      "Ingrid Haugen",
+      "Ingrid Kovarová",
+      "Isabella Ricci",
+      "Ivan Petković",
+      "James Okafor",
+      "Jennifer Park",
+      "Jordan Gray",
+      "Kofi Mensah",
+      "Kwame Asante",
+      "Leah Goldberg",
+      "Leila Okonkwo",
+      "Lin Rodriguez",
+      "Mabel Obadoni",
+      "Marco Andersson",
+      "Marcus Thompson",
+      "Margit Solheim",
+      "Marielos Chévez",
+      "Marisa Villaverde",
+      "Marisol Peña Contreras",
+      "Maya Chen",
+      "Mohammad AbuAboud",
+      "Mohammed Bakari",
+      "Nadia Petersen",
+      "Nalani Reeves",
+      "Nico Fernandez",
+      "Oliver Johansson",
+      "Osei Tetteh",
+      "Ossian Kettunen",
+      "Percival Adjei-Boateng",
+      "Petra Vlk",
+      "Petronella Swanepoel",
+      "Priscilla Nakabuye",
+      "Rachel Nguyen",
+      "Raj Patel",
+      "Rashid Patel",
+      "Renuka Bhattacharya",
+      "Samuel Ochieng",
+      "Su-Jin Bae",
+      "Tessa Bergmann",
+      "Thea Johannsen",
+      "Tomás Lindberg",
+      "Wendell Achterberg",
+      "Winston Bracewell",
+      "Wren Castellano",
+      "Yasmin Chowdhury",
+      "Yeva Marchenko",
+      "Zara Al-Hassan"
+    ],
+    "matching": "case-sensitive, whole-word; applied to every string in node.content and meta"
+  },
+  "realEntityEvidence": [
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "370",
+      "quote": "| bosch | 1.016749 | 0.000567 |"
+    },
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "769",
+      "quote": "- Order: Kevin Hu (Trustpilot), Christian D. (G2), Vikranth K. (G2, initials)"
+    },
+    {
+      "file": "src/data/blog.json",
+      "lines": "1",
+      "quote": "\"authors\":"
+    }
+  ],
+  "realCopyFingerprints": [
+    {
+      "text": "AI Agents with enterprise control",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "310",
+          "quote": "- **H1** \"AI Agents with enterprise control\":"
+        }
+      ]
+    },
+    {
+      "text": "Chat, agents, flows, tables, and 760+ apps in one workspace, so your whole team works with AI in the tools they already use.",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "315",
+          "quote": "- **Subhead** `p.hero-line` (`--i:1`): \"Chat, agents, flows, tables, and 760+ apps"
+        }
+      ]
+    },
+    {
+      "text": "Your team already works with AI.",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "469",
+          "quote": "| 0 | \"Your team already works with AI.\" (word-split)"
+        }
+      ]
+    },
+    {
+      "text": "Nobody's tracking what they access, cost, or do.",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "470",
+          "quote": "| 1 | \"Nobody's tracking what they access, cost, or do.\""
+        }
+      ]
+    },
+    {
+      "text": "Your first flow can ship this afternoon.",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "600",
+          "quote": "  - E: \"Your first flow can ship this afternoon.\""
+        }
+      ]
+    },
+    {
+      "text": "Roll it out without losing control.",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "601",
+          "quote": "  - I: \"Roll it out without losing control.\""
+        }
+      ]
+    },
+    {
+      "text": "Agents that get the job done",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "621",
+          "quote": "  - F: \"Agents that get the job done\""
+        }
+      ]
+    },
+    {
+      "text": "Simple by default. Deep on demand.",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "622",
+          "quote": "  - G: \"Simple by default. Deep on demand.\""
+        }
+      ]
+    },
+    {
+      "text": "Everything you need to run this for the whole company.",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "702",
+          "quote": "  - H: \"Everything you need to run this for the whole company.\""
+        }
+      ]
+    },
+    {
+      "text": "One workspace your team and your agents share.",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "703",
+          "quote": "  - L: \"One workspace your team and your agents share.\""
+        }
+      ]
+    },
+    {
+      "text": "Here's how it's going for the teams building with us.",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "283",
+          "quote": "| M | Testimonials \"Here's how it's going for the teams building with us.\""
+        }
+      ]
+    },
+    {
+      "text": "Put your first automation to work.",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "793",
+          "quote": "    - H2 \"Put your first automation to work.\""
+        }
+      ]
+    },
+    {
+      "text": "Activepieces was instrumental in helping us become an AI-first organization.",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "577",
+          "quote": "Copy: “Activepieces was instrumental in **helping us become an AI-first organization.**"
+        }
+      ]
+    },
+    {
+      "text": "Serious security for serious agents.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_MARKETING.md",
+          "lines": "400",
+          "quote": "    - H1 \"Serious security for serious agents.\""
+        }
+      ]
+    },
+    {
+      "text": "Move fast, break nothing.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_MARKETING.md",
+          "lines": "538",
+          "quote": "    - H1 \"Move fast, break nothing.\""
+        }
+      ]
+    },
+    {
+      "text": "Put a flow builder inside your product.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_MARKETING.md",
+          "lines": "707",
+          "quote": "  - title \"Put a flow builder inside your product.\""
+        }
+      ]
+    },
+    {
+      "text": "Our open-source friends",
+      "evidence": [
+        {
+          "file": "specs/SPEC_MARKETING.md",
+          "lines": "796",
+          "quote": "  - H1 \"Our open-source friends\""
+        }
+      ]
+    },
+    {
+      "text": "Put your AI to work",
+      "evidence": [
+        {
+          "file": "specs/SPEC_MARKETING.md",
+          "lines": "171",
+          "quote": "    - H1 \"Put your AI to work\""
+        }
+      ]
+    },
+    {
+      "text": "A path for every team at your company to build with AI.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_MARKETING.md",
+          "lines": "224",
+          "quote": "\"A path for every team at your company to build with AI.\""
+        }
+      ]
+    },
+    {
+      "text": "Automate the apps you already use.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CATALOG.md",
+          "lines": "236",
+          "quote": "- h1 \"Automate the apps you already use.\""
+        }
+      ]
+    },
+    {
+      "text": "One MCP server for all of Activepieces.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CATALOG.md",
+          "lines": "274",
+          "quote": "- h1 \"One MCP server for all of Activepieces.\""
+        }
+      ]
+    },
+    {
+      "text": "Stop redoing the same work every week",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CONTENT.md",
+          "lines": "560",
+          "quote": "\"Stop redoing the same work every week\""
+        }
+      ]
+    },
+    {
+      "text": "The Activepieces blog",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CONTENT.md",
+          "lines": "267",
+          "quote": "- Title: \"The Activepieces blog\"."
+        }
+      ]
+    }
+  ],
+  "fingerprintMatching": "normalized (lowercase, punctuation stripped, whitespace collapsed); a content string that equals or contains a fingerprint is rejected"
+}

@@ -1,0 +1,18 @@
+{
+  "id": "component.post-card",
+  "layer": "component",
+  "purpose": "Blog listing card: cover frame (hover scale 1.02) + meta.",
+  "composes": [
+    "hero-cover"
+  ],
+  "implementedBy": [
+    "src/components/content/parts.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_CONTENT.md",
+      "lines": "130",
+      "quote": "### 1.4 Post card (`post-card`): listing grids and \"Keep reading\""
+    }
+  ]
+}

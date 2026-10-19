@@ -1,0 +1,17 @@
+{
+  "id": "component.demo-cursor",
+  "layer": "component",
+  "purpose": "Scripted fake cursor (glyph + click ring) driven by useCursorCast; travel easing ease-travel.",
+  "composes": [],
+  "implementedBy": [
+    "src/components/demo/useCursorCast.js",
+    "src/components/demo/useCursorCast.css"
+  ],
+  "evidence": [
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "652",
+      "quote": "### Fake cursor (shared by F and G)"
+    }
+  ]
+}

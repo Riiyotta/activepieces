@@ -1,0 +1,16 @@
+{
+  "id": "component.pagination",
+  "layer": "component",
+  "purpose": "Blog pagination nav (page 1 = base path, page n = base/n or /blog/page/n).",
+  "composes": [],
+  "implementedBy": [
+    "src/components/content/parts.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_CONTENT.md",
+      "lines": "153",
+      "quote": "### 1.6 Pagination (`nav[aria-label=Pagination]`, wrapped in `div.mt-12.flex.justify-center`)"
+    }
+  ]
+}

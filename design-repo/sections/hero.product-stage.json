@@ -1,0 +1,232 @@
+{
+  "id": "hero.product-stage",
+  "layer": "section",
+  "category": "hero",
+  "purpose": "Left-aligned template hero: Sentient H1 (not animated), lede, Start building (solid) + Talk to sales, art stage with a demo or static mock, then 3 columns or a rotating logo grid.",
+  "implementedBy": [
+    "src/components/templates/TemplateHero.jsx",
+    "src/components/templates/Template.css",
+    "src/components/embed/EmbedHero.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_PRODUCT_SOLUTIONS.md",
+      "lines": "61",
+      "quote": "## 3. Hero (shared by both templates)"
+    },
+    {
+      "file": "specs/SPEC_MARKETING.md",
+      "lines": "119",
+      "quote": "### 1.5 `ProductHero` (NEW; /embed)"
+    }
+  ],
+  "variants": {
+    "product-columns": {
+      "description": "/product/*: animated demo + 3 h2 columns (md:px-8).",
+      "evidence": [
+        {
+          "file": "specs/SPEC_PRODUCT_SOLUTIONS.md",
+          "lines": "267",
+          "quote": "### 5.1 Product: 3 columns"
+        }
+      ]
+    },
+    "solution-logos": {
+      "description": "/solutions/*: static per-page mock + 6-up rotating customer logos.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_PRODUCT_SOLUTIONS.md",
+          "lines": "280",
+          "quote": "### 5.2 Solution: rotating customer logos"
+        }
+      ]
+    },
+    "embed-highlights": {
+      "description": "/embed: flow demo on coast art + 3 highlights.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_MARKETING.md",
+          "lines": "712",
+          "quote": "- **Visual = the homepage flow-canvas demo (`Dc0touRn.js`), i.e. `FeatureFlowDemo`.**"
+        }
+      ],
+      "implementedBy": [
+        "src/components/embed/EmbedHero.jsx"
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "h1",
+      "lede",
+      "ctaKey",
+      "primaryLabel",
+      "secondaryLabel",
+      "stageArt",
+      "visual"
+    ],
+    "properties": {
+      "h1": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 12
+      },
+      "lede": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 40
+      },
+      "ctaKey": {
+        "type": "string",
+        "pattern": "^[a-z][a-z_]*$",
+        "x-example": "example_hero"
+      },
+      "primaryLabel": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 3
+      },
+      "secondaryLabel": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 4
+      },
+      "stageArt": {
+        "enum": [
+          "meadow",
+          "clouds",
+          "coast"
+        ]
+      },
+      "visual": {
+        "enum": [
+          "flow-demo",
+          "agents-demo",
+          "tables-demo",
+          "chat-demo",
+          "solution-mock"
+        ]
+      },
+      "columns": {
+        "type": "array",
+        "minItems": 3,
+        "maxItems": 3,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "title",
+            "body"
+          ],
+          "properties": {
+            "title": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 8
+            },
+            "body": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 26
+            }
+          }
+        }
+      }
+    }
+  },
+  "media": {
+    "slots": {
+      "stageArt": {
+        "roles": [
+          "art.panel"
+        ],
+        "maxItems": 1,
+        "required": true
+      },
+      "rotatingLogos": {
+        "roles": [
+          "customer.logo"
+        ],
+        "maxItems": 24,
+        "required": false
+      },
+      "mockLogos": {
+        "roles": [
+          "piece.logo"
+        ],
+        "maxItems": 8,
+        "required": false
+      }
+    }
+  },
+  "constraints": {
+    "onePerPage": true,
+    "mustFollow": "shell.header"
+  },
+  "variantRules": {
+    "product-columns": {
+      "requiredContent": [
+        "columns"
+      ]
+    },
+    "embed-highlights": {
+      "requiredContent": [
+        "columns"
+      ]
+    },
+    "solution-logos": {
+      "forbiddenContent": [
+        "columns"
+      ]
+    }
+  },
+  "motion": {
+    "allowedPatterns": [
+      "hero-line-template",
+      "demo-loop-agents",
+      "demo-loop-flow",
+      "demo-loop-tables",
+      "demo-loop-chat",
+      "logo-rotate-set"
+    ],
+    "requiredPatterns": [
+      "hero-line-template"
+    ],
+    "variantRequiredPatterns": {
+      "solution-logos": [
+        "logo-rotate-set"
+      ],
+      "embed-highlights": [
+        "demo-loop-flow"
+      ]
+    },
+    "reducedMotionFallback": "static-end-state"
+  },
+  "responsive": {
+    "evidence": [
+      {
+        "file": "specs/SPEC_PRODUCT_SOLUTIONS.md",
+        "lines": "67",
+        "quote": "| padding T/B | 128 / 128 | 128 / 128 | 112 / 96 |"
+      },
+      {
+        "file": "specs/SPEC_PRODUCT_SOLUTIONS.md",
+        "lines": "287",
+        "quote": "| 390 | 2 × 159, gap 32; 3 rows, height 179.2 |"
+      }
+    ],
+    "changes": {
+      "base": "H1 48/48; stage 350 wide; columns stacked; logos 2 per row",
+      "sm": "logos 3 per row; stage padding 48",
+      "md": "H1 60/60; columns 3 with v4 divide (.tpl-cols-divide)",
+      "lg": "logos 6 per row"
+    }
+  },
+  "accessibility": [],
+  "notes": [
+    "Entrance uses the TEMPLATE hero-line (.64s, i*70ms, 4px blur, 12px rise) via scoped .tpl-line/.embed-line, never the homepage .hero-line.",
+    "Hero 'Start building' is SOLID (ink-950), not brand blue."
+  ]
+}

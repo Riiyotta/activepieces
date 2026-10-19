@@ -1,0 +1,326 @@
+{
+  "$description": "Curated view of every referenceable token path, keyed by namespace (= the top-level keys of the real token files). Generators reference these paths, never raw values.",
+  "version": "1.0.0",
+  "namespaces": {
+    "breakpoint": {
+      "layer": "00-foundation",
+      "paths": [
+        "breakpoint.2xl",
+        "breakpoint.article-wide",
+        "breakpoint.catalog-scatter",
+        "breakpoint.lg",
+        "breakpoint.md",
+        "breakpoint.models-grid-pin",
+        "breakpoint.sm",
+        "breakpoint.xl",
+        "breakpoint.xs"
+      ]
+    },
+    "color": {
+      "layer": "00-foundation",
+      "paths": [
+        "color.accent-a.100",
+        "color.accent-a.200",
+        "color.accent-a.300",
+        "color.accent-a.400",
+        "color.accent-a.50",
+        "color.accent-a.500",
+        "color.accent-a.600",
+        "color.accent-a.700",
+        "color.accent-a.800",
+        "color.accent-a.950",
+        "color.accent-b.100",
+        "color.accent-b.200",
+        "color.accent-b.300",
+        "color.accent-b.400",
+        "color.accent-b.50",
+        "color.accent-b.500",
+        "color.accent-b.600",
+        "color.accent-b.700",
+        "color.accent-b.800",
+        "color.accent-b.900",
+        "color.accent-b.950",
+        "color.accent-c.200",
+        "color.accent-c.300",
+        "color.accent-c.400",
+        "color.accent-c.50",
+        "color.accent-c.500",
+        "color.accent-c.600",
+        "color.accent-c.700",
+        "color.accent-c.800",
+        "color.accent-c.900",
+        "color.accent-d.100",
+        "color.accent-d.200",
+        "color.accent-d.300",
+        "color.accent-d.400",
+        "color.accent-d.50",
+        "color.accent-d.500",
+        "color.accent-d.600",
+        "color.accent-d.800",
+        "color.accent-d.900",
+        "color.accent-d.950",
+        "color.cast.06",
+        "color.cast.08",
+        "color.cast.10",
+        "color.cast.20",
+        "color.ink.100",
+        "color.ink.150",
+        "color.ink.200",
+        "color.ink.300",
+        "color.ink.400",
+        "color.ink.50",
+        "color.ink.500",
+        "color.ink.600",
+        "color.ink.700",
+        "color.ink.800",
+        "color.ink.900",
+        "color.ink.950",
+        "color.mock-only.traffic-amber",
+        "color.mock-only.traffic-green",
+        "color.mock-only.traffic-red",
+        "color.primary.100",
+        "color.primary.200",
+        "color.primary.300",
+        "color.primary.400",
+        "color.primary.50",
+        "color.primary.500",
+        "color.primary.600",
+        "color.primary.700",
+        "color.primary.800",
+        "color.primary.900",
+        "color.primary.950",
+        "color.soft.azure-bold",
+        "color.soft.azure-soft",
+        "color.soft.lime-bold",
+        "color.soft.lime-soft",
+        "color.soft.teal-soft",
+        "color.soft.violet-soft",
+        "color.white"
+      ]
+    },
+    "shadow": {
+      "layer": "00-foundation",
+      "paths": [
+        "shadow.edge",
+        "shadow.edge-hover",
+        "shadow.hero-frame",
+        "shadow.lift",
+        "shadow.over",
+        "shadow.sm",
+        "shadow.xs"
+      ]
+    },
+    "iconSize": {
+      "layer": "00-foundation",
+      "paths": [
+        "iconSize.12",
+        "iconSize.14",
+        "iconSize.3",
+        "iconSize.3.5",
+        "iconSize.4",
+        "iconSize.5",
+        "iconSize.5.5",
+        "iconSize.6",
+        "iconSize.7"
+      ]
+    },
+    "easing": {
+      "layer": "00-foundation",
+      "paths": [
+        "easing.ease",
+        "easing.ease-back-out",
+        "easing.ease-in-out",
+        "easing.ease-out",
+        "easing.ease-smooth",
+        "easing.ease-spring",
+        "easing.ease-throw",
+        "easing.ease-travel",
+        "easing.js-formula",
+        "easing.linear",
+        "easing.none"
+      ]
+    },
+    "duration": {
+      "layer": "00-foundation",
+      "paths": [
+        "duration.button",
+        "duration.default"
+      ]
+    },
+    "radius": {
+      "layer": "00-foundation",
+      "paths": [
+        "radius.2xl",
+        "radius.3xl",
+        "radius.4xl",
+        "radius.floating-card",
+        "radius.full",
+        "radius.icon-tile",
+        "radius.lg",
+        "radius.md",
+        "radius.none",
+        "radius.sm",
+        "radius.xl"
+      ]
+    },
+    "spacing": {
+      "layer": "00-foundation",
+      "paths": [
+        "spacing.band-y-base",
+        "spacing.band-y-md",
+        "spacing.chrome",
+        "spacing.gutter-base",
+        "spacing.gutter-lg",
+        "spacing.gutter-md",
+        "spacing.section-y-base",
+        "spacing.section-y-md",
+        "spacing.unit"
+      ]
+    },
+    "font": {
+      "layer": "00-foundation",
+      "paths": [
+        "font.family.display",
+        "font.family.mono",
+        "font.family.sans",
+        "font.lineHeight.display",
+        "font.size.2xl",
+        "font.size.3xl",
+        "font.size.4xl",
+        "font.size.5xl",
+        "font.size.6xl",
+        "font.size.7xl",
+        "font.size.base",
+        "font.size.lg",
+        "font.size.sm",
+        "font.size.xl",
+        "font.size.xs",
+        "font.sizeCustom.13px",
+        "font.sizeCustom.15px",
+        "font.sizeCustom.17px",
+        "font.sizeCustom.28px",
+        "font.tracking.tight",
+        "font.weight.bold",
+        "font.weight.medium",
+        "font.weight.regular",
+        "font.weight.semibold",
+        "font.body",
+        "font.heading",
+        "font.mock-code"
+      ]
+    },
+    "zIndex": {
+      "layer": "00-foundation",
+      "paths": [
+        "zIndex.10",
+        "zIndex.100",
+        "zIndex.120",
+        "zIndex.130",
+        "zIndex.40",
+        "zIndex.60",
+        "zIndex.65",
+        "zIndex.70"
+      ]
+    },
+    "text": {
+      "layer": "10-semantic",
+      "paths": [
+        "text.body",
+        "text.code-dim",
+        "text.code-fn",
+        "text.code-key",
+        "text.code-str",
+        "text.code-text",
+        "text.error",
+        "text.heading",
+        "text.hero-on-art",
+        "text.link-accent",
+        "text.muted",
+        "text.on-dark",
+        "text.on-dark-muted",
+        "text.strong",
+        "text.subtle"
+      ]
+    },
+    "surface": {
+      "layer": "10-semantic",
+      "paths": [
+        "surface.brand-action",
+        "surface.brand-action-hover",
+        "surface.dark-hero",
+        "surface.floating-accent",
+        "surface.hero-sky",
+        "surface.muted",
+        "surface.page",
+        "surface.solid-action",
+        "surface.solid-action-hover",
+        "surface.subtle"
+      ]
+    },
+    "border": {
+      "layer": "10-semantic",
+      "paths": [
+        "border.default",
+        "border.hairline"
+      ]
+    },
+    "focus": {
+      "layer": "10-semantic",
+      "paths": [
+        "focus.ring"
+      ]
+    },
+    "elevation": {
+      "layer": "10-semantic",
+      "paths": [
+        "elevation.card",
+        "elevation.card-hover",
+        "elevation.overlay",
+        "elevation.stage"
+      ]
+    },
+    "button": {
+      "layer": "20-component",
+      "paths": [
+        "button.easing",
+        "button.radius",
+        "button.size.lg",
+        "button.size.md",
+        "button.size.sm",
+        "button.size.xl",
+        "button.transition",
+        "button.variant.brand",
+        "button.variant.glass",
+        "button.variant.light",
+        "button.variant.quiet-light",
+        "button.variant.secondary",
+        "button.variant.solid"
+      ]
+    },
+    "card": {
+      "layer": "20-component",
+      "paths": [
+        "card.bento-height-base",
+        "card.bento-height-md",
+        "card.radius",
+        "card.radius-cta",
+        "card.radius-stage",
+        "card.shadow",
+        "card.shadow-hover"
+      ]
+    },
+    "layout": {
+      "layer": "30-layout",
+      "paths": [
+        "layout.band-y",
+        "layout.bento-columns",
+        "layout.container",
+        "layout.container-faq",
+        "layout.gutter",
+        "layout.header-height",
+        "layout.section-y",
+        "layout.template-hero-pt"
+      ]
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "id": "primitive.logo-mask",
+  "layer": "primitive",
+  "purpose": "span[role=img] painted with bg-<ink> through mask-image:url(logo); used for every monochrome logo (customer marquees, rotating grids, header wordmark).",
+  "implementedBy": [
+    "src/components/Hero.jsx",
+    "src/components/templates/LogoRotator.jsx",
+    "src/components/pricing/RotatingLogos.jsx"
+  ],
+  "props": {
+    "assetRole": {
+      "enum": [
+        "brand.wordmark",
+        "brand.logomark",
+        "brand.mark",
+        "brand.logo-full",
+        "customer.logo",
+        "badge.backer"
+      ]
+    },
+    "ariaLabel": {
+      "type": "string"
+    }
+  },
+  "rules": [
+    "mask-size contain, mask-position center, no-repeat; color comes from a bg-ink-* token."
+  ],
+  "evidence": [
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "361",
+      "quote": "- Each logo is a `<span role=\"img\" aria-label=\"…\">`:"
+    },
+    {
+      "file": "specs/SPEC_PRODUCT_SOLUTIONS.md",
+      "lines": "290",
+      "quote": "- **Logo:** `span[role=img][aria-label=<name>].block w-full bg-ink-600"
+    }
+  ]
+}

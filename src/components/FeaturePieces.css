@@ -1,0 +1,80 @@
+/* K. "760+ open-source pieces" (CLONE_SPEC §F/G/K + "K visual: pieces mosaic").
+ * Ported from pages.CaRGUvqN.css (.stage / .visual-pad / .mosaic* scoped data-v-75b999d0); class names
+ * prefixed with `pieces-` so they cannot collide with the F/G builders' .stage / .visual-pad. */
+
+.pieces-stage::after {
+  content: '';
+  z-index: -5;
+  pointer-events: none;
+  background: radial-gradient(ellipse 62% 62% at 50% 50%, rgba(2, 6, 24, .08) 0, transparent 72%);
+  position: absolute;
+  inset: 0;
+}
+
+.pieces-pad {
+  width: 100%;
+  padding: 2.5rem 1.5rem;
+}
+@media (min-width: 640px) {
+  .pieces-pad {
+    padding: 3rem;
+  }
+}
+
+.pieces-mosaic-outer {
+  width: 100%;
+  container-type: inline-size;
+}
+.pieces-mosaic {
+  --gap: calc(var(--tile) * .16);
+  grid-auto-rows: var(--tile);
+  gap: var(--gap);
+  justify-content: center;
+  display: grid;
+}
+.pieces-cell {
+  width: var(--tile);
+  height: var(--tile);
+}
+.pieces-cell.on {
+  padding: calc(var(--tile) * .16);
+  border-radius: calc(var(--tile) * .24);
+  background: linear-gradient(155deg, var(--color-ink-50) 0, #fff 100%);
+  border: 1px solid rgba(2, 6, 24, .10);
+  animation: pieces-mosaic-pop .5s var(--ease-smooth) both;
+  animation-delay: calc(var(--i, 0) * 6ms);
+  place-items: center;
+  display: grid;
+  overflow: hidden;
+}
+.pieces-cell.on img {
+  object-fit: contain;
+  filter: saturate(1.2);
+  width: 100%;
+  height: 100%;
+  transition: opacity .38s;
+  display: block;
+}
+.pieces-cell.on.swapping img {
+  opacity: 0;
+}
+
+@keyframes pieces-mosaic-pop {
+  0% {
+    opacity: 0;
+    transform: scale(.72);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pieces-cell.on {
+    animation: none;
+  }
+  .pieces-cell.on img {
+    transition: none;
+  }
+}

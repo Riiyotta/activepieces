@@ -1,0 +1,69 @@
+{
+  "id": "system.external-redirect",
+  "layer": "section",
+  "category": "system",
+  "purpose": "Navigation hand-off for paths the original serves from a separate app (/docs/*): window.location.replace to https://www.activepieces.com + same path, with a fallback link. Not a runtime asset request.",
+  "implementedBy": [
+    "src/pages/ExternalRedirect.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "src/pages/ExternalRedirect.jsx",
+      "lines": "11",
+      "quote": "window.location.replace(target)"
+    },
+    {
+      "file": "src/App.jsx",
+      "lines": "51",
+      "quote": "<Route path=\"/docs/*\" element={<ExternalRedirect />} />"
+    }
+  ],
+  "variants": {
+    "default": {
+      "description": "Single variant.",
+      "evidence": [
+        {
+          "file": "src/pages/ExternalRedirect.jsx",
+          "lines": "6",
+          "quote": "export default function ExternalRedirect({ origin = 'https://www.activepieces.com' }) {"
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "targetOrigin"
+    ],
+    "properties": {
+      "targetOrigin": {
+        "const": "https://www.activepieces.com"
+      }
+    }
+  },
+  "media": {
+    "slots": {}
+  },
+  "constraints": {
+    "onePerPage": true,
+    "mustFollow": "shell.header"
+  },
+  "variantRules": {},
+  "motion": {
+    "allowedPatterns": [
+      "none"
+    ],
+    "requiredPatterns": [],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "not-applicable"
+  },
+  "responsive": {
+    "evidence": [],
+    "changes": {}
+  },
+  "accessibility": [],
+  "notes": [
+    "The docs themselves are not cloned; never generate docs content."
+  ]
+}

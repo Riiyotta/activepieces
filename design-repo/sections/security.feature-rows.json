@@ -1,0 +1,139 @@
+{
+  "id": "security.feature-rows",
+  "layer": "section",
+  "category": "security",
+  "purpose": "Scrollytelling rows (left) with a sticky tone-shifting SecurityStage (right, lg) over a glyph-field background.",
+  "implementedBy": [
+    "src/components/security/FeatureRows.jsx",
+    "src/components/security/StageVisuals.jsx",
+    "src/components/security/GlyphField.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_MARKETING.md",
+      "lines": "417",
+      "quote": "### 4.B Feature rows (`feature-rows`)"
+    }
+  ],
+  "variants": {
+    "default": {
+      "description": "Single variant.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_MARKETING.md",
+          "lines": "436",
+          "quote": "- Rows (tone → visual):"
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "rows"
+    ],
+    "properties": {
+      "rows": {
+        "type": "array",
+        "minItems": 3,
+        "maxItems": 3,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "h2",
+            "tone",
+            "visual",
+            "points"
+          ],
+          "properties": {
+            "h2": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 8
+            },
+            "tone": {
+              "enum": [
+                "accent-a",
+                "accent-d",
+                "accent-b"
+              ]
+            },
+            "visual": {
+              "enum": [
+                "deployment",
+                "credential",
+                "isolation"
+              ]
+            },
+            "points": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "icon",
+                  "title",
+                  "body"
+                ],
+                "properties": {
+                  "icon": {
+                    "type": "string",
+                    "pattern": "^solar:[a-z0-9-]+$",
+                    "x-example": "solar:shield-check-bold"
+                  },
+                  "title": {
+                    "type": "string",
+                    "minLength": 1,
+                    "x-maxWords": 8
+                  },
+                  "body": {
+                    "type": "string",
+                    "minLength": 1,
+                    "x-maxWords": 30
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "media": {
+    "slots": {}
+  },
+  "constraints": {
+    "onePerPage": true,
+    "scrollStage": true
+  },
+  "variantRules": {},
+  "motion": {
+    "allowedPatterns": [
+      "security-stage-swap"
+    ],
+    "requiredPatterns": [
+      "security-stage-swap"
+    ],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "static-end-state"
+  },
+  "responsive": {
+    "evidence": [
+      {
+        "file": "specs/SPEC_MARKETING.md",
+        "lines": "424",
+        "quote": "  - Below lg only, the row's own stage follows inline: `SecurityStage` with `mt-8 lg:hidden`."
+      }
+    ],
+    "changes": {
+      "base": "each row followed by its own inline stage",
+      "lg": "45% rows / 55% sticky stage at top-24"
+    }
+  },
+  "accessibility": [],
+  "notes": []
+}

@@ -1,0 +1,17 @@
+{
+  "id": "component.edge-card",
+  "layer": "component",
+  "purpose": "White rounded-2xl card with the shadow-edge hairline ring; the base of most cards.",
+  "composes": [],
+  "implementedBy": [
+    "src/components/Faq.jsx",
+    "src/components/catalog/parts.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "52",
+      "quote": "This is the hairline-ring card style used almost everywhere."
+    }
+  ]
+}

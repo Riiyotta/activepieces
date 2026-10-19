@@ -1,0 +1,14 @@
+/* J. Case study, Alan (CLONE_SPEC §D/J). Blockquote type from the original
+ * text-[clamp(1.5rem,3.125vw_+_1px,2.5625rem)]/[calc(0.75em_+_14px)] (kept here to avoid v3 arbitrary-value ambiguity). */
+.case-alan-quote {
+  font-size: clamp(1.5rem, 3.125vw + 1px, 2.5625rem);
+  line-height: calc(.75em + 14px);
+}
+
+/* Tailwind v4 divide-x semantics (right border on all but the last child); v3's left-border rule shifts columns 1px. */
+@media (min-width: 640px) {
+  .alan-stats-divide > :not(:last-child) {
+    border-right-width: 1px;
+    border-color: rgb(2 6 24 / .1);
+  }
+}

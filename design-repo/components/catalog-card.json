@@ -1,0 +1,19 @@
+{
+  "id": "component.catalog-card",
+  "layer": "component",
+  "purpose": "Linked card with logo tile row, title, 2-line description, tag/meta footer.",
+  "composes": [
+    "edge-card",
+    "logo-mask"
+  ],
+  "implementedBy": [
+    "src/components/catalog/parts.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_CATALOG.md",
+      "lines": "148",
+      "quote": "### 3.1 `CatalogCard` (catalog-card)"
+    }
+  ]
+}

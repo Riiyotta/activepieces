@@ -1,0 +1,12 @@
+/* Embed / Enterprise rows background (SPEC_MARKETING §3.A). The two cards show one continuous picture. */
+.split-bg {
+  background-image: linear-gradient(to right bottom, #fff 35%, #0000), url(/rows/embed-clouds.webp);
+  background-repeat: no-repeat, no-repeat;
+  background-size: 100% 100%, 200% auto;
+}
+.split-bg--left {
+  background-position: 50% center, 0 100%;
+}
+.split-bg--right {
+  background-position: 50% center, 100% 100%;
+}

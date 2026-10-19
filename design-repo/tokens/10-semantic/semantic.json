@@ -1,0 +1,437 @@
+{
+  "$description": "Semantic roles. Values are references to foundation token paths ({namespace.path}); themes/light.json resolves them.",
+  "tokens": {
+    "text": {
+      "heading": {
+        "$type": "color",
+        "$value": "{color.ink.900}",
+        "usage": "all display headings",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "32",
+            "quote": "| ink-900 | #0f172b (headings) |"
+          }
+        ]
+      },
+      "body": {
+        "$type": "color",
+        "$value": "{color.ink.600}",
+        "usage": "default body text",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "29",
+            "quote": "| ink-600 | #45556c (body text default) |"
+          }
+        ]
+      },
+      "strong": {
+        "$type": "color",
+        "$value": "{color.ink.950}",
+        "usage": "labels, button text on light",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "33",
+            "quote": "| ink-950 | #020618 (solid buttons) |"
+          }
+        ]
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "{color.ink.500}",
+        "usage": "meta, column headings",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "203",
+            "quote": "Column heading: `px-3 pb-2`, 11px"
+          }
+        ]
+      },
+      "subtle": {
+        "$type": "color",
+        "$value": "{color.ink.400}",
+        "usage": "placeholders, idle icons",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "630",
+            "quote": "Placeholder \"Give the agent a task…\" in ink-400."
+          }
+        ]
+      },
+      "hero-on-art": {
+        "$type": "color",
+        "$value": "{color.primary.950}",
+        "usage": "home hero H1, closing H2, header on art",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "31",
+            "quote": "| primary-950 | #052f4a (hero/closing H1) |"
+          }
+        ]
+      },
+      "link-accent": {
+        "$type": "color",
+        "$value": "{color.primary.800}",
+        "usage": "prose links, kicker",
+        "evidence": [
+          {
+            "file": "specs/SPEC_CONTENT.md",
+            "lines": "768",
+            "quote": "| a | — | — | 500 | #00598a | — | underline |"
+          }
+        ]
+      },
+      "on-dark": {
+        "$type": "color",
+        "$value": "{color.white}",
+        "usage": "security hero H1",
+        "evidence": [
+          {
+            "file": "specs/SPEC_MARKETING.md",
+            "lines": "400",
+            "quote": "font-bold text-balance text-white`. 60px"
+          }
+        ]
+      },
+      "on-dark-muted": {
+        "$type": "color",
+        "$value": "{color.ink.300}",
+        "usage": "security hero lede",
+        "evidence": [
+          {
+            "file": "specs/SPEC_MARKETING.md",
+            "lines": "401",
+            "quote": "p `mt-4 max-w-xl text-xl text-pretty text-ink-300`"
+          }
+        ]
+      },
+      "error": {
+        "$type": "color",
+        "$value": "{color.accent-c.700}",
+        "usage": "sales form error",
+        "evidence": [
+          {
+            "file": "specs/SPEC_MARKETING.md",
+            "lines": "55",
+            "quote": "accent-c-700 #c10007 (form error)"
+          }
+        ]
+      },
+      "code-key": {
+        "$type": "color",
+        "$value": "{color.accent-a.700}",
+        "usage": "mock code keys",
+        "evidence": [
+          {
+            "file": "specs/SPEC_PRODUCT_SOLUTIONS.md",
+            "lines": "372",
+            "quote": "`.code-key{color:accent-a-700 #007a55}`"
+          }
+        ]
+      },
+      "code-fn": {
+        "$type": "color",
+        "$value": "{color.primary.800}",
+        "usage": "mock code functions",
+        "evidence": [
+          {
+            "file": "specs/SPEC_PRODUCT_SOLUTIONS.md",
+            "lines": "372",
+            "quote": "`.code-fn{color:primary-800 #00598a}`"
+          }
+        ]
+      },
+      "code-str": {
+        "$type": "color",
+        "$value": "{color.accent-b.700}",
+        "usage": "mock code strings",
+        "evidence": [
+          {
+            "file": "specs/SPEC_PRODUCT_SOLUTIONS.md",
+            "lines": "372",
+            "quote": "`.code-str{color:accent-b-700 #bb4d00}`"
+          }
+        ]
+      },
+      "code-text": {
+        "$type": "color",
+        "$value": "{color.ink.800}",
+        "usage": "mock code base",
+        "evidence": [
+          {
+            "file": "specs/SPEC_PRODUCT_SOLUTIONS.md",
+            "lines": "372",
+            "quote": "`.code-text{color:ink-800 #1d293d}`"
+          }
+        ]
+      },
+      "code-dim": {
+        "$type": "color",
+        "$value": "{color.ink.600}",
+        "usage": "mock code dim",
+        "evidence": [
+          {
+            "file": "specs/SPEC_PRODUCT_SOLUTIONS.md",
+            "lines": "372",
+            "quote": "`.code-dim{color:ink-600 #45556c}`"
+          }
+        ]
+      }
+    },
+    "surface": {
+      "page": {
+        "$type": "color",
+        "$value": "{color.white}",
+        "usage": "page background",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "84",
+            "quote": "Root wrapper: `min-h-screen overflow-x-clip bg-white"
+          }
+        ]
+      },
+      "subtle": {
+        "$type": "color",
+        "$value": "{color.ink.50}",
+        "usage": "secondary button, sidebar",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "133",
+            "quote": "- **secondary**: bg ink-50 #f8fafc"
+          }
+        ]
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "{color.ink.100}",
+        "usage": "icon band ground",
+        "evidence": [
+          {
+            "file": "specs/SPEC_MARKETING.md",
+            "lines": "78",
+            "quote": ".ground{background-color:var(--color-ink-100)"
+          }
+        ]
+      },
+      "brand-action": {
+        "$type": "color",
+        "$value": "{color.primary.700}",
+        "usage": "brand button",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "131",
+            "quote": "- **brand**: bg primary-700 #0069a8"
+          }
+        ]
+      },
+      "brand-action-hover": {
+        "$type": "color",
+        "$value": "{color.primary.800}",
+        "usage": "brand button hover",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "131",
+            "quote": "hover bg primary-800 #00598a"
+          }
+        ]
+      },
+      "solid-action": {
+        "$type": "color",
+        "$value": "{color.ink.950}",
+        "usage": "solid button",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "132",
+            "quote": "- **solid**: bg ink-950 #020618"
+          }
+        ]
+      },
+      "solid-action-hover": {
+        "$type": "color",
+        "$value": "{color.ink.900}",
+        "usage": "solid button hover",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "132",
+            "quote": "hover bg ink-900 #0f172b"
+          }
+        ]
+      },
+      "hero-sky": {
+        "$type": "color",
+        "$value": "{color.primary.400}",
+        "usage": "home hero stage before plates load",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "25",
+            "quote": "| primary-400 | #00bcff (hero sky bg) |"
+          }
+        ]
+      },
+      "dark-hero": {
+        "$type": "color",
+        "$value": "{color.primary.950}",
+        "usage": "security hero",
+        "evidence": [
+          {
+            "file": "specs/SPEC_MARKETING.md",
+            "lines": "391",
+            "quote": "### 4.A Hero (`section.relative.isolate.overflow-hidden.bg-primary-950`, #052f4a)"
+          }
+        ]
+      },
+      "floating-accent": {
+        "$type": "color",
+        "$value": "{color.accent-d.600}",
+        "usage": "floating card mark",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "831",
+            "quote": "mask of `/brand/activepieces-mark.svg` in accent-d-600 #7f22fe"
+          }
+        ]
+      }
+    },
+    "border": {
+      "hairline": {
+        "$type": "color",
+        "$value": "{color.cast.10}",
+        "usage": "dividers, card rings (ink-950/10)",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "43",
+            "quote": "`ink-950/10` = `rgba(2,6,24,.10)`"
+          }
+        ]
+      },
+      "default": {
+        "$type": "color",
+        "$value": "{color.ink.200}",
+        "usage": "mock chrome borders",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "414",
+            "quote": "`border-r border-ink-200`"
+          }
+        ]
+      }
+    },
+    "focus": {
+      "ring": {
+        "$type": "color",
+        "$value": "{color.primary.700}",
+        "usage": "focus-visible outline on light",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "135",
+            "quote": "- Focus: `outline 2px offset 2px primary-700`"
+          }
+        ]
+      }
+    },
+    "font": {
+      "heading": {
+        "$type": "fontFamily",
+        "$value": "{font.family.display}",
+        "usage": "every heading, Sentient 700",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "81",
+            "quote": "Weight 700 for every heading"
+          }
+        ]
+      },
+      "body": {
+        "$type": "fontFamily",
+        "$value": "{font.family.sans}",
+        "usage": "body copy",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "84",
+            "quote": "which gives Inter 400, 16px/24px, color #45556c."
+          }
+        ]
+      },
+      "mock-code": {
+        "$type": "fontFamily",
+        "$value": "{font.family.mono}",
+        "usage": "mock code only",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "82",
+            "quote": "Used only inside bento mockups."
+          }
+        ]
+      }
+    },
+    "elevation": {
+      "card": {
+        "$type": "shadow",
+        "$value": "{shadow.edge}",
+        "usage": "cards",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "52",
+            "quote": "This is the hairline-ring card style used almost everywhere."
+          }
+        ]
+      },
+      "card-hover": {
+        "$type": "shadow",
+        "$value": "{shadow.edge-hover}",
+        "usage": "linked cards on hover",
+        "evidence": [
+          {
+            "file": "specs/SPEC_CATALOG.md",
+            "lines": "149",
+            "quote": "hover:shadow-edge-hover` plus the focus ring."
+          }
+        ]
+      },
+      "stage": {
+        "$type": "shadow",
+        "$value": "{shadow.lift}",
+        "usage": "demo stages",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "610",
+            "quote": "- Stage: `.stage relative isolate overflow-hidden rounded-4xl (32px) shadow-lift`"
+          }
+        ]
+      },
+      "overlay": {
+        "$type": "shadow",
+        "$value": "{shadow.over}",
+        "usage": "dialogs, tooltips",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "838",
+            "quote": "`box-shadow: var(--shadow-over)`"
+          }
+        ]
+      }
+    }
+  }
+}

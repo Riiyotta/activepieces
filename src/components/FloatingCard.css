@@ -1,0 +1,62 @@
+/* P. Section-specific CSS for FloatingCard (co-located; do not put this in index.css). */
+
+/* Enter: 300ms ease-smooth from translate-y-3 (12px) + opacity 0. Leave: 200ms (CLONE_SPEC §P). */
+.floating-card {
+  transition-property: opacity, transform, visibility;
+  transition-duration: 300ms;
+  transition-timing-function: var(--ease-smooth);
+}
+.floating-card[data-state='closed'] {
+  opacity: 0;
+  transform: translateY(.75rem);
+  visibility: hidden;
+  pointer-events: none;
+  transition-duration: 200ms;
+}
+
+/* Shadow: cast-08 hairline + accent-d-900 (#4d179a) glow at 22% / 32% on hover. */
+.ap-card {
+  box-shadow: 0 1px 2px -1px var(--cast-08), 0 12px 28px -12px rgba(77, 23, 154, .22);
+}
+.ap-card:hover {
+  box-shadow: 0 1px 2px -1px var(--cast-08), 0 20px 40px -14px rgba(77, 23, 154, .32);
+}
+
+/* Gradient border ring. */
+.ap-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, #a684ff, #ff6467 55%, #ddd6ff);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: .45;
+  transition: opacity .3s;
+  pointer-events: none;
+}
+.ap-card:hover::before {
+  opacity: 1;
+}
+
+.ap-card-mark {
+  -webkit-mask-image: url(/brand/activepieces-mark.svg);
+  mask-image: url(/brand/activepieces-mark.svg);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floating-card,
+  .floating-card[data-state='closed'],
+  .ap-card::before {
+    transition: none;
+  }
+}

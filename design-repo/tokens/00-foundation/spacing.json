@@ -1,0 +1,126 @@
+{
+  "$description": "v4-like spacing: any N in 0.5 steps from 0 to 200 maps to N x 0.25rem (generated in tailwind.config.cjs).",
+  "evidence": [
+    {
+      "file": "tailwind.config.cjs",
+      "lines": "3-9",
+      "quote": "// Tailwind v4 spacing: every N maps to N * 0.25rem"
+    },
+    {
+      "file": "BUILD_CONVENTIONS.md",
+      "lines": "8",
+      "quote": "Spacing scale is v4-like"
+    }
+  ],
+  "scaleRule": {
+    "unit": "0.25rem",
+    "min": 0,
+    "max": 200,
+    "step": 0.5,
+    "formula": "N * 0.25rem"
+  },
+  "tokens": {
+    "spacing": {
+      "unit": {
+        "$type": "dimension",
+        "$value": "0.25rem",
+        "evidence": [
+          {
+            "file": "src/index.css",
+            "lines": "293",
+            "quote": "--spacing: .25rem;"
+          }
+        ]
+      },
+      "chrome": {
+        "$type": "dimension",
+        "$value": "5.25rem",
+        "evidence": [
+          {
+            "file": "src/index.css",
+            "lines": "294",
+            "quote": "--spacing-chrome: 5.25rem;"
+          }
+        ],
+        "usage": "fixed header height (84px); pt-chrome on /ai-governance"
+      },
+      "gutter-base": {
+        "$type": "dimension",
+        "$value": "1.25rem",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "116",
+            "quote": "Gutters: px-5 (20) / md:px-6 (24) / lg:px-8 (32)."
+          }
+        ]
+      },
+      "gutter-md": {
+        "$type": "dimension",
+        "$value": "1.5rem",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "116",
+            "quote": "Gutters: px-5 (20) / md:px-6 (24) / lg:px-8 (32)."
+          }
+        ]
+      },
+      "gutter-lg": {
+        "$type": "dimension",
+        "$value": "2rem",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "116",
+            "quote": "Gutters: px-5 (20) / md:px-6 (24) / lg:px-8 (32)."
+          }
+        ]
+      },
+      "section-y-base": {
+        "$type": "dimension",
+        "$value": "6rem",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "571",
+            "quote": "- Section: `max-w-7xl px-5 py-24 md:px-6 md:py-32 lg:px-8`."
+          }
+        ]
+      },
+      "section-y-md": {
+        "$type": "dimension",
+        "$value": "8rem",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "571",
+            "quote": "- Section: `max-w-7xl px-5 py-24 md:px-6 md:py-32 lg:px-8`."
+          }
+        ]
+      },
+      "band-y-base": {
+        "$type": "dimension",
+        "$value": "3rem",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "591",
+            "quote": "- Section: `max-w-7xl px-5 py-12 md:px-6 md:py-16 lg:px-8`."
+          }
+        ]
+      },
+      "band-y-md": {
+        "$type": "dimension",
+        "$value": "4rem",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "591",
+            "quote": "- Section: `max-w-7xl px-5 py-12 md:px-6 md:py-16 lg:px-8`."
+          }
+        ]
+      }
+    }
+  }
+}

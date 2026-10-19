@@ -1,0 +1,35 @@
+{
+  "$description": "What is enforced vs. convention for token usage.",
+  "version": "1.0.0",
+  "resolutionOrder": [
+    "00-foundation",
+    "themes/light (single theme)",
+    "10-semantic",
+    "20-component",
+    "30-layout"
+  ],
+  "rawValueRestrictions": {
+    "color": "Reference semantic roles (text.*, surface.*, border.*, focus.*) or foundation color paths; raw hex only inside color.mock-only demo chrome.",
+    "font": "Use font.family.* via semantic font.heading/body/mock-code; sizes from font.size / font.sizeCustom only.",
+    "radius": "radius.* scale only (v4 scale); radius.floating-card and radius.icon-tile are component-scoped.",
+    "spacing": "N x spacing.unit (N in 0..200 step .5); section rhythm via layout.section-y / band-y.",
+    "shadow": "shadow.* via elevation.* roles; never ad-hoc box-shadows.",
+    "easing": "easing.* tokens only; motion values must come from the motion pattern registry.",
+    "duration": "duration.* tokens or a registry pattern's durationMs.",
+    "breakpoint": "breakpoint.* only (xs/sm/md/lg/xl/2xl + 3 component-scoped conditions).",
+    "iconSize": "iconSize.* only.",
+    "zIndex": "zIndex.* registered values only."
+  },
+  "enforcement": {
+    "machineChecked": [
+      "token-catalog namespaces == real token file keys (verify_all TOKEN_CATALOG_KEYS)",
+      "rawValueRestrictions keys are real catalog namespaces (verify_all TOKEN_CATALOG_KEYS)",
+      "semantic references resolve to foundation tokens and themes/light.json equals the recomputed resolution (verify_all TOKEN_REFERENCES)",
+      "motion values in a PageSpec equal the registry (semantic_validate MOTION_VALUES_PINNED)"
+    ],
+    "convention": [
+      "Implementation code follows rules/tailwind-v3-v4.json; nothing in this repo lints JSX/CSS."
+    ]
+  },
+  "overrides": "PageSpecs carry NO per-instance style/token override field: styling is owned by section/component contracts, so there is nothing token-related to validate or mutate at the PageSpec layer (MASTER-GUIDE 3.21). Token drift is guarded at the catalog/policy layer instead."
+}

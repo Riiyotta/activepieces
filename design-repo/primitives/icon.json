@@ -1,0 +1,34 @@
+{
+  "id": "primitive.icon",
+  "layer": "primitive",
+  "purpose": "Iconify mask icon (<span class=\"iconify i-solar:NAME\">), sized with size-* and colored with text-*.",
+  "implementedBy": [
+    "src/components/ui/Icon.jsx",
+    "src/icons.css"
+  ],
+  "props": {
+    "name": {
+      "type": "string",
+      "pattern": "^(solar|simple-icons):[a-z0-9-]+$"
+    }
+  },
+  "tokens": [
+    "iconSize.*"
+  ],
+  "rules": [
+    "Only names registered in src/icons.css render; adding one means saving the SVG under public/icons/<set>/ and appending a mask rule.",
+    "Always aria-hidden."
+  ],
+  "evidence": [
+    {
+      "file": "src/components/ui/Icon.jsx",
+      "lines": "4",
+      "quote": "return <span className={`iconify i-${name} ${className}`} aria-hidden=\"true\" {...rest} />"
+    },
+    {
+      "file": "BUILD_CONVENTIONS.md",
+      "lines": "12",
+      "quote": "- Icons: `<Icon name=\"solar:check-circle-linear\" className=\"size-4\" />`"
+    }
+  ]
+}

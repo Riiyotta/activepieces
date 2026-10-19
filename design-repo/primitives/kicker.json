@@ -1,0 +1,18 @@
+{
+  "id": "primitive.kicker",
+  "layer": "primitive",
+  "purpose": "Small uppercase eyebrow above a heading (capability lists, fact labels, menu column headings).",
+  "implementedBy": [
+    "src/components/catalog/parts.jsx"
+  ],
+  "rules": [
+    "text-xs font-semibold tracking-wide uppercase text-ink-600 (12/16)."
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_CATALOG.md",
+      "lines": "168",
+      "quote": "- kicker `p.text-xs.font-semibold.tracking-wide.text-ink-600.uppercase`"
+    }
+  ]
+}

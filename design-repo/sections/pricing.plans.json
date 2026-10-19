@@ -1,0 +1,230 @@
+{
+  "id": "pricing.plans",
+  "layer": "section",
+  "category": "pricing",
+  "purpose": "Pricing hero + Monthly/Annual clip-path toggle + 4 plan cards with tooltips + Embed/Enterprise split rows + rotating logos.",
+  "implementedBy": [
+    "src/pages/Pricing.jsx",
+    "src/components/pricing/PlanCards.jsx",
+    "src/components/pricing/BillingToggle.jsx",
+    "src/components/pricing/SplitRows.jsx",
+    "src/components/pricing/RotatingLogos.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_MARKETING.md",
+      "lines": "220",
+      "quote": "### 3.A Plans"
+    }
+  ],
+  "variants": {
+    "default": {
+      "description": "Single variant.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_MARKETING.md",
+          "lines": "239",
+          "quote": "- **Plan cards** grid `grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4`."
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "h1",
+      "lede",
+      "plans",
+      "rows"
+    ],
+    "properties": {
+      "h1": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 3
+      },
+      "lede": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 16
+      },
+      "plans": {
+        "type": "array",
+        "minItems": 4,
+        "maxItems": 4,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "name",
+            "audience",
+            "priceMonthly",
+            "priceAnnual",
+            "sub",
+            "ctaLabel",
+            "listLabel",
+            "items"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 2
+            },
+            "audience": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 5
+            },
+            "priceMonthly": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 1
+            },
+            "priceAnnual": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 1
+            },
+            "sub": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 8
+            },
+            "ctaLabel": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 3
+            },
+            "listLabel": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 5
+            },
+            "items": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 8,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "label",
+                  "tip"
+                ],
+                "properties": {
+                  "label": {
+                    "type": "string",
+                    "minLength": 1,
+                    "x-maxWords": 6
+                  },
+                  "tip": {
+                    "type": "string",
+                    "minLength": 1,
+                    "x-maxWords": 40
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "rows": {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 2,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "title",
+            "price",
+            "body",
+            "proofs"
+          ],
+          "properties": {
+            "title": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 3
+            },
+            "price": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 5
+            },
+            "body": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 26
+            },
+            "proofs": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 5,
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 4
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "media": {
+    "slots": {
+      "rowArt": {
+        "roles": [
+          "art.panel"
+        ],
+        "maxItems": 1,
+        "required": false
+      },
+      "rotatingLogos": {
+        "roles": [
+          "customer.logo"
+        ],
+        "maxItems": 24,
+        "required": false
+      }
+    }
+  },
+  "constraints": {
+    "onePerPage": true,
+    "mustFollow": "shell.header"
+  },
+  "variantRules": {},
+  "motion": {
+    "allowedPatterns": [
+      "billing-toggle-clip",
+      "animated-number",
+      "infotip-fade",
+      "logo-rotate-set"
+    ],
+    "requiredPatterns": [
+      "billing-toggle-clip",
+      "logo-rotate-set"
+    ],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "static-end-state"
+  },
+  "responsive": {
+    "evidence": [
+      {
+        "file": "specs/SPEC_MARKETING.md",
+        "lines": "239",
+        "quote": "- **Plan cards** grid `grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4`."
+      }
+    ],
+    "changes": {
+      "base": "1 column",
+      "md": "2 columns",
+      "xl": "4 columns"
+    }
+  },
+  "accessibility": [],
+  "notes": []
+}

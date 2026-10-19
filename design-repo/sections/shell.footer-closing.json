@@ -1,0 +1,174 @@
+{
+  "id": "shell.footer-closing",
+  "layer": "section",
+  "category": "shell",
+  "purpose": "Footer with per-page closing CTA (H2 + lede + 2 buttons + reassurance) over the meadow art, then the 5-column links card.",
+  "implementedBy": [
+    "src/components/Footer.jsx",
+    "src/components/PageMetaContext.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "783",
+      "quote": "## O. Footer (`footer.closing`)"
+    },
+    {
+      "file": "src/components/PageMetaContext.jsx",
+      "lines": "16",
+      "quote": "export function usePageClosing(closing) {"
+    },
+    {
+      "file": "specs/SPEC_MARKETING.md",
+      "lines": "36",
+      "quote": "### 0.2 Footer closing CTA is per-page (Footer needs props)"
+    }
+  ],
+  "variants": {
+    "default": {
+      "description": "Default buttons Start building (brand) / Talk to sales (secondary) and Free to start / No credit card / Open source.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_MARKETING.md",
+          "lines": "38",
+          "quote": "Defaults: primary \"Start building\" (cloud sign-up, brand), secondary \"Talk to sales\" (`/sales`, secondary)"
+        }
+      ]
+    },
+    "custom-buttons": {
+      "description": "Page overrides buttons and/or reassurance (/security, /oss-friends).",
+      "evidence": [
+        {
+          "file": "specs/SPEC_MARKETING.md",
+          "lines": "43",
+          "quote": "| /security | Questions from your security team? |"
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "h2",
+      "lede"
+    ],
+    "properties": {
+      "h2": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 10
+      },
+      "lede": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 30
+      },
+      "primary": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "label",
+          "href"
+        ],
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 4
+          },
+          "href": {
+            "type": "string",
+            "pattern": "^(/[A-Za-z0-9._~%/?=&#-]*|https://(cloud\\.activepieces\\.com|github\\.com/activepieces|www\\.activepieces\\.com|trust\\.activepieces\\.com)(/[A-Za-z0-9._~%/?=&#-]*)?)$",
+            "x-example": "/sales?ap_cta=example"
+          }
+        }
+      },
+      "secondary": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "label",
+          "href"
+        ],
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 4
+          },
+          "href": {
+            "type": "string",
+            "pattern": "^(/[A-Za-z0-9._~%/?=&#-]*|https://(cloud\\.activepieces\\.com|github\\.com/activepieces|www\\.activepieces\\.com|trust\\.activepieces\\.com)(/[A-Za-z0-9._~%/?=&#-]*)?)$",
+            "x-example": "/sales?ap_cta=example"
+          }
+        }
+      },
+      "reassurance": {
+        "type": "array",
+        "minItems": 3,
+        "maxItems": 3,
+        "items": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 5
+        }
+      }
+    }
+  },
+  "media": {
+    "slots": {}
+  },
+  "constraints": {
+    "onePerPage": true,
+    "mustPrecede": [
+      "shell.floating-card"
+    ]
+  },
+  "variantRules": {
+    "default": {
+      "forbiddenContent": [
+        "primary",
+        "secondary",
+        "reassurance"
+      ]
+    },
+    "custom-buttons": {
+      "requiredAnyContent": [
+        "primary",
+        "secondary",
+        "reassurance"
+      ]
+    }
+  },
+  "motion": {
+    "allowedPatterns": [
+      "none"
+    ],
+    "requiredPatterns": [],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "not-applicable"
+  },
+  "responsive": {
+    "evidence": [
+      {
+        "file": "CLONE_SPEC.md",
+        "lines": "787",
+        "quote": "- **Meadow image** (md+ only; hidden <768):"
+      },
+      {
+        "file": "CLONE_SPEC.md",
+        "lines": "799",
+        "quote": "  - Grid: `grid-cols-2 gap-x-8 gap-y-10`, sm 3 columns, lg 5 columns."
+      }
+    ],
+    "changes": {
+      "base": "meadow art hidden; links 2 columns",
+      "sm": "links 3 columns",
+      "md": "meadow art shown",
+      "lg": "links 5 columns"
+    }
+  },
+  "accessibility": [],
+  "notes": []
+}

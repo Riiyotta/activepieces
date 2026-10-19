@@ -1,0 +1,86 @@
+{
+  "id": "media.app-shot",
+  "layer": "section",
+  "category": "media",
+  "purpose": "Static app mockup card (Agents screen) overlapping the hero by -292px (md -308px), faded into white at the bottom.",
+  "implementedBy": [
+    "src/components/AppMockup.jsx",
+    "src/components/AppMockup.css"
+  ],
+  "evidence": [
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "397",
+      "quote": "## B. Hero shot (app mockup card)"
+    }
+  ],
+  "variants": {
+    "default": {
+      "description": "Single variant.",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "412",
+          "quote": "- Content (static, not animated; markup in the saved HTML"
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [],
+    "properties": {}
+  },
+  "media": {
+    "slots": {
+      "agentAvatars": {
+        "roles": [
+          "mock.avatar"
+        ],
+        "maxItems": 3,
+        "required": false
+      },
+      "toolLogos": {
+        "roles": [
+          "piece.logo"
+        ],
+        "maxItems": 12,
+        "required": false
+      }
+    }
+  },
+  "constraints": {
+    "onePerPage": true,
+    "homeRouteOnly": true,
+    "mustFollow": "hero.home-stage"
+  },
+  "variantRules": {},
+  "motion": {
+    "allowedPatterns": [
+      "hero-line-home"
+    ],
+    "requiredPatterns": [
+      "hero-line-home"
+    ],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "static-end-state"
+  },
+  "responsive": {
+    "evidence": [
+      {
+        "file": "CLONE_SPEC.md",
+        "lines": "401",
+        "quote": "  - `pointer-events-none aspect-[2/3] w-full overflow-hidden rounded-2xl bg-white`; `sm:aspect-[4/3]`; `lg:aspect-[2/1] lg:rounded-3xl`."
+      }
+    ],
+    "changes": {
+      "base": "aspect 2/3, sidebar hidden",
+      "sm": "aspect 4/3",
+      "md": "sidebar shown (w208)",
+      "lg": "aspect 2/1, radius 24"
+    }
+  },
+  "accessibility": [],
+  "notes": []
+}

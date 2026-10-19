@@ -1,0 +1,61 @@
+{
+  "id": "system.not-found",
+  "layer": "section",
+  "category": "system",
+  "purpose": "Catch-all 404 'Page not built yet' inside the Layout shell (also rendered by templates for unknown slugs).",
+  "implementedBy": [
+    "src/pages/NotFound.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "src/pages/NotFound.jsx",
+      "lines": "5",
+      "quote": "Page not built yet"
+    },
+    {
+      "file": "src/App.jsx",
+      "lines": "53",
+      "quote": "<Route path=\"*\" element={<NotFound />} />"
+    }
+  ],
+  "variants": {
+    "default": {
+      "description": "Single variant.",
+      "evidence": [
+        {
+          "file": "src/pages/NotFound.jsx",
+          "lines": "5",
+          "quote": "Page not built yet"
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [],
+    "properties": {}
+  },
+  "media": {
+    "slots": {}
+  },
+  "constraints": {
+    "onePerPage": true,
+    "mustFollow": "shell.header"
+  },
+  "variantRules": {},
+  "motion": {
+    "allowedPatterns": [
+      "none"
+    ],
+    "requiredPatterns": [],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "not-applicable"
+  },
+  "responsive": {
+    "evidence": [],
+    "changes": {}
+  },
+  "accessibility": [],
+  "notes": []
+}

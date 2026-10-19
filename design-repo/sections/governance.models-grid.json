@@ -1,0 +1,117 @@
+{
+  "id": "governance.models-grid",
+  "layer": "section",
+  "category": "governance",
+  "purpose": "Scroll-scrubbed tier cards + model tiles converging into a band (pinned only at >=80rem x 48rem; static grid otherwise).",
+  "implementedBy": [
+    "src/components/governance/ModelsGrid.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_MARKETING.md",
+      "lines": "555",
+      "quote": "### 5.B Models grid (`models-grid`)"
+    }
+  ],
+  "variants": {
+    "default": {
+      "description": "Single variant.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_MARKETING.md",
+          "lines": "557",
+          "quote": "- **Pinned mode**:"
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "cards",
+      "statement"
+    ],
+    "properties": {
+      "cards": {
+        "type": "array",
+        "minItems": 5,
+        "maxItems": 5,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "icon",
+            "term",
+            "benefit"
+          ],
+          "properties": {
+            "icon": {
+              "type": "string",
+              "pattern": "^solar:[a-z0-9-]+$",
+              "x-example": "solar:shield-check-bold"
+            },
+            "term": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 8
+            },
+            "benefit": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 24
+            }
+          }
+        }
+      },
+      "statement": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 12
+      }
+    }
+  },
+  "media": {
+    "slots": {
+      "modelLogos": {
+        "roles": [
+          "piece.logo"
+        ],
+        "maxItems": 8,
+        "required": false
+      }
+    }
+  },
+  "constraints": {
+    "onePerPage": true,
+    "scrollStage": true
+  },
+  "variantRules": {},
+  "motion": {
+    "allowedPatterns": [
+      "models-grid-scrub"
+    ],
+    "requiredPatterns": [
+      "models-grid-scrub"
+    ],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "static-end-state"
+  },
+  "responsive": {
+    "evidence": [
+      {
+        "file": "specs/SPEC_MARKETING.md",
+        "lines": "604",
+        "quote": "- **Static mode** (<1280 or <768 tall; measured at 768 and 390):"
+      }
+    ],
+    "changes": {
+      "base": "static grid, tiers 1 column",
+      "sm": "tiers 2 columns",
+      "lg": "tiers 3 columns",
+      "xl": "pinned scrub when viewport height >= 768"
+    }
+  },
+  "accessibility": [],
+  "notes": []
+}

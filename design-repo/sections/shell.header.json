@@ -1,0 +1,91 @@
+{
+  "id": "shell.header",
+  "layer": "section",
+  "category": "shell",
+  "purpose": "Fixed floating 'island' header with mega-menu dropdowns; identical on every Layout route. Not authored per page (menu data is fixed).",
+  "implementedBy": [
+    "src/components/Header.jsx",
+    "src/components/Header.css"
+  ],
+  "evidence": [
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "140",
+      "quote": "## 1. Header (fixed, floating \"island\")"
+    },
+    {
+      "file": "src/components/Layout.jsx",
+      "lines": "32",
+      "quote": "<Header heroArt={isHome} />"
+    }
+  ],
+  "variants": {
+    "on-art": {
+      "description": "Transparent-on-hero-art state (island white/62, primary-950 nav) while scrollY <= 32 on the homepage only.",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "168",
+          "quote": "**\"On art\" state.** When `scrollY ≤ 32`, no menu is open and the page is the home page (`heroArt`)"
+        }
+      ]
+    },
+    "default": {
+      "description": "Normal state on every non-home route (island white/68, ink-900 nav).",
+      "evidence": [
+        {
+          "file": "specs/SPEC_PRODUCT_SOLUTIONS.md",
+          "lines": "51",
+          "quote": "The header is the same component as on the homepage, but in the state it uses when it is not over hero art"
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [],
+    "properties": {}
+  },
+  "media": {
+    "slots": {}
+  },
+  "constraints": {
+    "onePerPage": true,
+    "mustBeFirst": true
+  },
+  "variantRules": {},
+  "motion": {
+    "allowedPatterns": [
+      "header-nav-in",
+      "header-hide-show",
+      "header-dropdown",
+      "mobile-sheet"
+    ],
+    "requiredPatterns": [
+      "header-nav-in",
+      "header-hide-show"
+    ],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "static-end-state"
+  },
+  "responsive": {
+    "evidence": [
+      {
+        "file": "CLONE_SPEC.md",
+        "lines": "113",
+        "quote": "| `lg` | 1024 | desktop nav (3-column grid), burger hidden;"
+      }
+    ],
+    "changes": {
+      "base": "burger + mobile sheet inside the island; logo h16 (h20 from 360px)",
+      "lg": "3-column grid nav with Product/Solutions/Enterprise dropdowns, Pricing, Docs; burger hidden",
+      "xl": "right-side gap 8->12"
+    }
+  },
+  "accessibility": [
+    "Skip link to #main-content precedes it (Layout).",
+    "Esc closes dropdowns."
+  ],
+  "notes": []
+}

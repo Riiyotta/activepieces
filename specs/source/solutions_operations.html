@@ -1,0 +1,534 @@
+<!-- Source: https://www.activepieces.com/solutions/operations (SSR HTML, cleaned: svg bodies/comments/data-v removed). Reference for hero visual + bento mocks. -->
+<!-- HERO VISUAL -->
+<div aria-hidden="true" class="visual-pad">
+<div class="visual-stage flex flex-col overflow-hidden">
+<div class="flex shrink-0 items-baseline gap-3 px-6 py-5">
+<span class="text-[15px] font-semibold text-ink-950">Runs</span>
+<span class="ml-auto text-[12px] text-ink-500 tabular-nums">1,284 today, 3 failed</span>
+</div>
+<div class="grid grid-cols-[minmax(0,1fr)_4.5rem] items-center gap-4 px-6 sm:grid-cols-[minmax(0,1fr)_5.5rem_4.5rem] shrink-0 border-y border-ink-950/10 py-3">
+<span class="text-[11px] font-medium tracking-wide text-ink-500 uppercase">Flow</span>
+<span class="hidden text-[11px] font-medium tracking-wide text-ink-500 uppercase sm:block"> Started </span>
+<span class="text-right text-[11px] font-medium tracking-wide text-ink-500 uppercase"> Took </span>
+</div>
+<div class="flex flex-1 flex-col divide-y divide-ink-950/10">
+<div class="grid grid-cols-[minmax(0,1fr)_4.5rem] items-center gap-4 px-6 sm:grid-cols-[minmax(0,1fr)_5.5rem_4.5rem] flex-1">
+<span class="flex min-w-0 items-center gap-3">
+<span class="bg-accent-a-500 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="truncate text-[14px] text-ink-900">Order #4482 handoff</span>
+</span>
+<span class="hidden text-[13px] text-ink-500 tabular-nums sm:block">09:41</span>
+<span class="text-right text-[13px] text-ink-700 tabular-nums">1.84s</span>
+</div>
+<div class="grid grid-cols-[minmax(0,1fr)_4.5rem] items-center gap-4 px-6 sm:grid-cols-[minmax(0,1fr)_5.5rem_4.5rem] flex-1">
+<span class="flex min-w-0 items-center gap-3">
+<span class="bg-accent-b-500 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="truncate text-[14px] text-ink-900">Restock the warehouse queue</span>
+</span>
+<span class="hidden text-[13px] text-ink-500 tabular-nums sm:block">09:40</span>
+<span class="text-right text-[13px] text-ink-700 tabular-nums">4.12s</span>
+</div>
+<div class="grid grid-cols-[minmax(0,1fr)_4.5rem] items-center gap-4 px-6 sm:grid-cols-[minmax(0,1fr)_5.5rem_4.5rem] flex-1">
+<span class="flex min-w-0 items-center gap-3">
+<span class="bg-accent-a-500 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="truncate text-[14px] text-ink-900">Carrier webhook</span>
+</span>
+<span class="hidden text-[13px] text-ink-500 tabular-nums sm:block">09:38</span>
+<span class="text-right text-[13px] text-ink-700 tabular-nums">0.62s</span>
+</div>
+<div class="grid grid-cols-[minmax(0,1fr)_4.5rem] items-center gap-4 px-6 sm:grid-cols-[minmax(0,1fr)_5.5rem_4.5rem] flex-1">
+<span class="flex min-w-0 items-center gap-3">
+<span class="bg-accent-c-300 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="truncate text-[14px] text-ink-900">Refund #2210</span>
+</span>
+<span class="hidden text-[13px] text-ink-500 tabular-nums sm:block">09:35</span>
+<span class="text-right text-[13px] text-ink-700 tabular-nums">2.07s</span>
+</div>
+<div class="grid grid-cols-[minmax(0,1fr)_4.5rem] items-center gap-4 px-6 sm:grid-cols-[minmax(0,1fr)_5.5rem_4.5rem] flex-1">
+<span class="flex min-w-0 items-center gap-3">
+<span class="bg-accent-a-500 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="truncate text-[14px] text-ink-900">Nightly stock sync</span>
+</span>
+<span class="hidden text-[13px] text-ink-500 tabular-nums sm:block">09:30</span>
+<span class="text-right text-[13px] text-ink-700 tabular-nums">38.4s</span>
+</div>
+<div class="grid grid-cols-[minmax(0,1fr)_4.5rem] items-center gap-4 px-6 sm:grid-cols-[minmax(0,1fr)_5.5rem_4.5rem] flex-1">
+<span class="flex min-w-0 items-center gap-3">
+<span class="bg-accent-a-500 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="truncate text-[14px] text-ink-900">Supplier price import</span>
+</span>
+<span class="hidden text-[13px] text-ink-500 tabular-nums sm:block">09:28</span>
+<span class="text-right text-[13px] text-ink-700 tabular-nums">6.90s</span>
+</div>
+</div>
+</div>
+</div>
+<!-- GRID -->
+<section class="mx-auto w-full max-w-7xl px-5 py-24 md:px-6 md:py-32 lg:px-8" data-section="operations-grid">
+<div class="flex flex-col gap-5 md:gap-8">
+<div class="pt-1">
+<h2 class="font-display text-3xl font-bold text-balance text-ink-900 md:text-4xl">What sits between one tool and the next.</h2>
+</div>
+<div class="grid w-full grid-cols-1 gap-4 md:grid-cols-24 md:gap-5">
+<article class="group flex h-[470px] w-full flex-col overflow-hidden rounded-2xl bg-white shadow-edge md:h-[500px] md:col-span-12">
+<div class="flex flex-col gap-1 px-5 pt-6 pb-5">
+<h3 class="flex items-center gap-1.5 text-lg font-medium text-ink-900 md:text-xl">Systems in Sync </h3>
+<p class="text-sm text-ink-600 md:text-[15px]">Keep two tools matching each other without a nightly script.</p>
+</div>
+<div class="flex-1 overflow-hidden">
+<div aria-hidden="true" class="pointer-events-none relative isolate size-full overflow-hidden select-none bg-primary-100">
+<div class="absolute bg-no-repeat" style="background-image:url(/panel/clouds.webp);background-size:cover;background-position:50% 26%;inset:-1rem;opacity:0.62;filter:saturate(0.78) brightness(1.06) contrast(0.96);">
+</div>
+<div class="absolute top-6 left-5 -right-12 -bottom-12 md:top-9 md:left-9 md:-right-28 md:-bottom-20">
+<div class="overflow-hidden rounded-xl border border-ink-950/10 bg-ink-50 ring-1 ring-ink-950/10 h-full">
+<div class="flex items-baseline gap-3 py-5 pr-36 pl-8">
+<span class="text-[18px] font-semibold text-ink-950">Customers</span>
+<span class="ml-auto shrink-0 text-[14px] text-ink-500 tabular-nums">1,284 rows</span>
+</div>
+<div class="divide-y divide-ink-950/8 border-t border-ink-950/8">
+<div class="grid grid-cols-[minmax(0,1fr)_7rem_5rem] items-center gap-4 pr-36 pl-8 py-5">
+<span class="truncate text-[16px] text-ink-900">Verano Coffee</span>
+<span class="flex items-center gap-2.5 text-[15px] text-ink-600">
+<span class="bg-accent-a-500 size-2 shrink-0 rounded-full">
+</span> Active</span>
+<span class="text-right text-[16px] text-ink-900 tabular-nums">$6,400</span>
+</div>
+<div class="grid grid-cols-[minmax(0,1fr)_7rem_5rem] items-center gap-4 pr-36 pl-8 py-5">
+<span class="truncate text-[16px] text-ink-900">Piera</span>
+<span class="flex items-center gap-2.5 text-[15px] text-ink-600">
+<span class="bg-accent-b-500 size-2 shrink-0 rounded-full">
+</span> Trial</span>
+<span class="text-right text-[16px] text-ink-900 tabular-nums">$2,800</span>
+</div>
+<div class="grid grid-cols-[minmax(0,1fr)_7rem_5rem] items-center gap-4 pr-36 pl-8 py-5">
+<span class="truncate text-[16px] text-ink-900">Wren Labs</span>
+<span class="flex items-center gap-2.5 text-[15px] text-ink-600">
+<span class="bg-accent-a-500 size-2 shrink-0 rounded-full">
+</span> Active</span>
+<span class="text-right text-[16px] text-ink-900 tabular-nums">$5,100</span>
+</div>
+<div class="grid grid-cols-[minmax(0,1fr)_7rem_5rem] items-center gap-4 pr-36 pl-8 py-5">
+<span class="truncate text-[16px] text-ink-900">Northaven</span>
+<span class="flex items-center gap-2.5 text-[15px] text-ink-600">
+<span class="bg-accent-a-500 size-2 shrink-0 rounded-full">
+</span> Active</span>
+<span class="text-right text-[16px] text-ink-900 tabular-nums">$9,750</span>
+</div>
+<div class="grid grid-cols-[minmax(0,1fr)_7rem_5rem] items-center gap-4 pr-36 pl-8 py-5">
+<span class="truncate text-[16px] text-ink-900">Halcyon Press</span>
+<span class="flex items-center gap-2.5 text-[15px] text-ink-600">
+<span class="bg-accent-b-500 size-2 shrink-0 rounded-full">
+</span> Trial</span>
+<span class="text-right text-[16px] text-ink-900 tabular-nums">$1,900</span>
+</div>
+<div class="grid grid-cols-[minmax(0,1fr)_7rem_5rem] items-center gap-4 pr-36 pl-8 py-5">
+<span class="truncate text-[16px] text-ink-900">Linden Freight</span>
+<span class="flex items-center gap-2.5 text-[15px] text-ink-600">
+<span class="bg-accent-a-500 size-2 shrink-0 rounded-full">
+</span> Active</span>
+<span class="text-right text-[16px] text-ink-900 tabular-nums">$8,300</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="group flex h-[470px] w-full flex-col overflow-hidden rounded-2xl bg-white shadow-edge md:h-[500px] md:col-span-12">
+<div class="flex flex-col gap-1 px-5 pt-6 pb-5">
+<h3 class="flex items-center gap-1.5 text-lg font-medium text-ink-900 md:text-xl">Weekly Reporting </h3>
+<p class="text-sm text-ink-600 md:text-[15px]">The weekly numbers are gathered and sent out on a schedule.</p>
+</div>
+<div class="flex-1 overflow-hidden">
+<div aria-hidden="true" class="pointer-events-none relative isolate size-full overflow-hidden select-none bg-accent-a-100">
+<div class="absolute bg-no-repeat" style="background-image:url(/panel/meadow.webp);background-size:cover;background-position:50% 62%;inset:-1rem;opacity:0.7;filter:saturate(0.72) brightness(1.04) contrast(0.98);">
+</div>
+<div class="absolute top-6 right-5 left-5 -bottom-12 md:top-9 md:right-9 md:left-9 md:-bottom-20">
+<div class="overflow-hidden rounded-xl border border-ink-950/10 bg-ink-50 ring-1 ring-ink-950/10 h-full">
+<div class="flex items-baseline gap-3 px-6 py-5">
+<span class="text-[15px] font-semibold text-ink-950">Marketing project</span>
+<span class="text-[12px] text-ink-500 tabular-nums">6 members</span>
+</div>
+<div class="divide-y divide-ink-950/10 border-t border-ink-950/10">
+<div class="flex items-center gap-3.5 px-6 py-4">
+<span class="bg-primary-200 size-8 shrink-0 rounded-full">
+</span>
+<span class="truncate text-[14px] text-ink-900">Dana Rowe</span>
+<span class="ml-auto flex shrink-0 items-center gap-1.5 text-[13px] text-ink-600">Admin <span aria-hidden="true" class="iconify i-solar:alt-arrow-down-linear size-3.5 text-ink-950/30" style="">
+</span>
+</span>
+</div>
+<div class="flex items-center gap-3.5 px-6 py-4">
+<span class="bg-accent-a-200 size-8 shrink-0 rounded-full">
+</span>
+<span class="truncate text-[14px] text-ink-900">Sam Okafor</span>
+<span class="ml-auto flex shrink-0 items-center gap-1.5 text-[13px] text-ink-600">Editor <span aria-hidden="true" class="iconify i-solar:alt-arrow-down-linear size-3.5 text-ink-950/30" style="">
+</span>
+</span>
+</div>
+<div class="flex items-center gap-3.5 px-6 py-4">
+<span class="bg-accent-b-200 size-8 shrink-0 rounded-full">
+</span>
+<span class="truncate text-[14px] text-ink-900">Ines Kaur</span>
+<span class="ml-auto flex shrink-0 items-center gap-1.5 text-[13px] text-ink-600">Viewer <span aria-hidden="true" class="iconify i-solar:alt-arrow-down-linear size-3.5 text-ink-950/30" style="">
+</span>
+</span>
+</div>
+<div class="flex items-center gap-3.5 px-6 py-4">
+<span class="bg-accent-c-200 size-8 shrink-0 rounded-full">
+</span>
+<span class="truncate text-[14px] text-ink-900">Milo Tran</span>
+<span class="ml-auto flex shrink-0 items-center gap-1.5 text-[13px] text-ink-600">Viewer <span aria-hidden="true" class="iconify i-solar:alt-arrow-down-linear size-3.5 text-ink-950/30" style="">
+</span>
+</span>
+</div>
+<div class="flex items-center gap-3.5 px-6 py-4">
+<span class="bg-ink-200 size-8 shrink-0 rounded-full">
+</span>
+<span class="truncate text-[14px] text-ink-900">Ari Bloom</span>
+<span class="ml-auto flex shrink-0 items-center gap-1.5 text-[13px] text-ink-600">Editor <span aria-hidden="true" class="iconify i-solar:alt-arrow-down-linear size-3.5 text-ink-950/30" style="">
+</span>
+</span>
+</div>
+<div class="flex items-center gap-3.5 px-6 py-4">
+<span class="bg-ink-200 size-8 shrink-0 rounded-full">
+</span>
+<span class="truncate text-[14px] text-ink-900">Noor Haddad</span>
+<span class="ml-auto flex shrink-0 items-center gap-1.5 text-[13px] text-ink-600">Viewer <span aria-hidden="true" class="iconify i-solar:alt-arrow-down-linear size-3.5 text-ink-950/30" style="">
+</span>
+</span>
+</div>
+</div>
+</div>
+<div class="absolute top-[38%] right-10 w-[36%] max-w-[170px] min-w-[140px]">
+<div class="flex flex-col rounded-xl bg-ink-50 p-1.5 ring-1 ring-ink-950/10">
+<span class="text-ink-700 flex items-center gap-2 rounded-lg px-3 py-2 text-[13px]">Admin </span>
+<span class="bg-ink-900/5 text-ink-950 flex items-center gap-2 rounded-lg px-3 py-2 text-[13px]">Editor <span aria-hidden="true" class="iconify i-solar:check-circle-linear ml-auto size-3.5 text-accent-a-700" style="">
+</span>
+</span>
+<span class="text-ink-700 flex items-center gap-2 rounded-lg px-3 py-2 text-[13px]">Viewer </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="group flex h-[470px] w-full flex-col overflow-hidden rounded-2xl bg-white shadow-edge md:h-[500px] md:col-span-9">
+<div class="flex flex-col gap-1 px-5 pt-6 pb-5">
+<h3 class="flex items-center gap-1.5 text-lg font-medium text-ink-900 md:text-xl">Queue Tracking </h3>
+<p class="text-sm text-ink-600 md:text-[15px]">Track where each handoff stands, in tables.</p>
+</div>
+<div class="flex-1 overflow-hidden">
+<div aria-hidden="true" class="pointer-events-none relative isolate size-full overflow-hidden select-none bg-primary-200">
+<div class="absolute bg-no-repeat" style="background-image:url(/rows/water.webp);background-size:cover;background-position:50% 16%;inset:-1rem;opacity:0.55;filter:saturate(0.7) brightness(1.05) contrast(0.96);">
+</div>
+<div class="absolute inset-0 grid place-items-center px-5 md:px-9">
+<div class="relative w-full max-w-[330px]">
+<div class="overflow-hidden rounded-xl border border-ink-950/10 bg-ink-50 ring-1 ring-ink-950/10">
+<div class="flex items-baseline gap-3 px-6 pt-6 pb-4">
+<span class="text-[18px] font-semibold text-ink-950">MCP server</span>
+<span class="ml-auto flex shrink-0 items-center gap-2 text-[14px] text-ink-500">
+<span class="size-1.5 rounded-full bg-accent-a-500">
+</span> Live </span>
+</div>
+<div class="flex items-center gap-4 bg-ink-900/4 px-6 py-3.5">
+<span class="flex size-8 shrink-0 items-center justify-center">
+<span aria-hidden="true" class="iconify i-solar:link-minimalistic-2-linear size-5 text-ink-950/30" style="">
+</span>
+</span>
+<span class="min-w-0 flex-1 truncate font-mono text-[15px] text-ink-600"> mcp.activepieces.com/v1 </span>
+</div>
+<div class="flex flex-col px-6 pt-3 pb-6">
+<div class="flex items-center gap-4 py-3">
+<span class="flex size-8 shrink-0 items-center justify-center">
+<img alt="" aria-hidden="true" class="size-6" decoding="async" height="24" loading="lazy" src="/logos/pieces/stripe.svg" width="24"/>
+</span>
+<span class="min-w-0 flex-1 truncate font-mono text-[15px] text-ink-900">create_invoice</span>
+</div>
+<div class="flex items-center gap-4 py-3">
+<span class="flex size-8 shrink-0 items-center justify-center">
+<img alt="" aria-hidden="true" class="size-6" decoding="async" height="24" loading="lazy" src="/logos/pieces/hubspot.svg" width="24"/>
+</span>
+<span class="min-w-0 flex-1 truncate font-mono text-[15px] text-ink-900">find_customer</span>
+</div>
+<div class="flex items-center gap-4 py-3">
+<span class="flex size-8 shrink-0 items-center justify-center">
+<img alt="" aria-hidden="true" class="size-6" decoding="async" height="24" loading="lazy" src="/logos/pieces/slack.svg" width="24"/>
+</span>
+<span class="min-w-0 flex-1 truncate font-mono text-[15px] text-ink-900">post_message</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="group flex h-[470px] w-full flex-col overflow-hidden rounded-2xl bg-white shadow-edge md:h-[500px] md:col-span-15">
+<div class="flex flex-col gap-1 px-5 pt-6 pb-5">
+<h3 class="flex items-center gap-1.5 text-lg font-medium text-ink-900 md:text-xl">Runs That Resume </h3>
+<p class="text-sm text-ink-600 md:text-[15px]">A crash or a deploy picks up from the last finished step.</p>
+</div>
+<div class="flex-1 overflow-hidden">
+<div aria-hidden="true" class="pointer-events-none relative isolate size-full overflow-hidden select-none bg-primary-200">
+<div class="absolute bg-no-repeat" style="background-image:url(/rows/water.webp);background-size:cover;background-position:50% 30%;inset:-1rem;opacity:0.55;filter:saturate(0.7) brightness(1.05) contrast(0.96);">
+</div>
+<div class="absolute top-6 right-5 left-5 -bottom-12 md:top-9 md:right-9 md:left-9 md:-bottom-20">
+<div class="overflow-hidden rounded-xl border border-ink-950/10 bg-ink-50 ring-1 ring-ink-950/10">
+<div class="flex items-baseline gap-3 px-6 py-5">
+<span class="text-[15px] font-semibold text-ink-950">Route the run</span>
+<span class="ml-auto text-[12px] text-ink-500">First match</span>
+</div>
+<div class="divide-y divide-ink-950/10 border-t border-ink-950/10">
+<div class="flex items-center gap-4 px-6 py-4">
+<span class="bg-accent-a-500 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="w-28 shrink-0 truncate text-[14px] text-ink-900">Enterprise</span>
+<span class="min-w-0 flex-1 truncate text-[13px] text-ink-500">seats &gt; 200</span>
+<span class="hidden shrink-0 items-center gap-2.5 sm:flex">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/slack.svg" width="20"/>
+<span class="truncate text-[13px] text-ink-700">Alert the account owner</span>
+</span>
+</div>
+<div class="flex items-center gap-4 px-6 py-4">
+<span class="bg-accent-a-500 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="w-28 shrink-0 truncate text-[14px] text-ink-900">Business</span>
+<span class="min-w-0 flex-1 truncate text-[13px] text-ink-500">seats &gt; 50</span>
+<span class="hidden shrink-0 items-center gap-2.5 sm:flex">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/hubspot.svg" width="20"/>
+<span class="truncate text-[13px] text-ink-700">Queue a check-in</span>
+</span>
+</div>
+<div class="flex items-center gap-4 px-6 py-4">
+<span class="bg-accent-a-500 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="w-28 shrink-0 truncate text-[14px] text-ink-900">Trialing</span>
+<span class="min-w-0 flex-1 truncate text-[13px] text-ink-500">trial ends in 3</span>
+<span class="hidden shrink-0 items-center gap-2.5 sm:flex">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/calendly.svg" width="20"/>
+<span class="truncate text-[13px] text-ink-700">Book an onboarding call</span>
+</span>
+</div>
+<div class="flex items-center gap-4 px-6 py-4">
+<span class="bg-accent-a-500 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="w-28 shrink-0 truncate text-[14px] text-ink-900">Churn risk</span>
+<span class="min-w-0 flex-1 truncate text-[13px] text-ink-500">usage down 40%</span>
+<span class="hidden shrink-0 items-center gap-2.5 sm:flex">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/linear.svg" width="20"/>
+<span class="truncate text-[13px] text-ink-700">Open a save task</span>
+</span>
+</div>
+<div class="flex items-center gap-4 px-6 py-4">
+<span class="bg-accent-a-500 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="w-28 shrink-0 truncate text-[14px] text-ink-900">Self-serve</span>
+<span class="min-w-0 flex-1 truncate text-[13px] text-ink-500">plan is Free</span>
+<span class="hidden shrink-0 items-center gap-2.5 sm:flex">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/gmail.svg" width="20"/>
+<span class="truncate text-[13px] text-ink-700">Send the upgrade nudge</span>
+</span>
+</div>
+<div class="flex items-center gap-4 px-6 py-4">
+<span class="bg-accent-a-500 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="w-28 shrink-0 truncate text-[14px] text-ink-900">Past due</span>
+<span class="min-w-0 flex-1 truncate text-[13px] text-ink-500">invoice unpaid</span>
+<span class="hidden shrink-0 items-center gap-2.5 sm:flex">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/stripe.svg" width="20"/>
+<span class="truncate text-[13px] text-ink-700">Retry the charge</span>
+</span>
+</div>
+<div class="flex items-center gap-4 px-6 py-4">
+<span class="bg-ink-300 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="w-28 shrink-0 truncate text-[14px] text-ink-900">Otherwise</span>
+<span class="min-w-0 flex-1 truncate text-[13px] text-ink-500">nothing matched</span>
+<span class="hidden shrink-0 items-center gap-2.5 sm:flex">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/google-sheets.svg" width="20"/>
+<span class="truncate text-[13px] text-ink-700">Log it and carry on</span>
+</span>
+</div>
+<div class="flex items-center gap-4 px-6 py-4">
+<span aria-hidden="true" class="iconify i-solar:undo-left-linear size-4 shrink-0 text-ink-400" style="">
+</span>
+<span class="text-[14px] text-ink-900">Loop on items</span>
+<span class="ml-auto text-[13px] text-ink-500">Repeats every step above</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="group flex h-[470px] w-full flex-col overflow-hidden rounded-2xl bg-white shadow-edge md:h-[500px] md:col-span-15">
+<div class="flex flex-col gap-1 px-5 pt-6 pb-5">
+<h3 class="flex items-center gap-1.5 text-lg font-medium text-ink-900 md:text-xl">Reusable Steps </h3>
+<p class="text-sm text-ink-600 md:text-[15px]">Build a set of steps once and call it from any automation.</p>
+</div>
+<div class="flex-1 overflow-hidden">
+<div aria-hidden="true" class="pointer-events-none relative isolate size-full overflow-hidden select-none bg-primary-100">
+<div class="absolute bg-no-repeat" style="background-image:url(/panel/clouds.webp);background-size:cover;background-position:50% 58%;inset:-1rem;opacity:0.62;filter:saturate(0.78) brightness(1.06) contrast(0.96);">
+</div>
+<div class="absolute top-6 right-5 left-5 -bottom-12 md:top-9 md:right-9 md:left-9 md:-bottom-20">
+<div class="overflow-hidden rounded-xl border border-ink-950/10 bg-ink-50 ring-1 ring-ink-950/10">
+<div class="flex items-baseline gap-3 px-6 py-5">
+<span class="text-[15px] font-semibold text-ink-950">Accounts</span>
+<span class="ml-auto text-[12px] text-ink-500">3 triggers armed</span>
+</div>
+<div class="divide-y divide-ink-950/10 border-t border-ink-950/10">
+<div class="flex items-center gap-4 px-6 py-4">
+<span class="bg-accent-a-500 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="w-32 shrink-0 truncate text-[14px] text-ink-900">Record created</span>
+<span class="min-w-0 flex-1 truncate text-[13px] text-ink-500">Northaven</span>
+<span class="flex shrink-0 items-center gap-2.5">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/gmail.svg" width="20"/>
+<span class="truncate text-[13px] text-ink-700">Send the welcome pack</span>
+</span>
+</div>
+<div class="flex items-center gap-4 px-6 py-4">
+<span class="bg-accent-b-500 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="w-32 shrink-0 truncate text-[14px] text-ink-900">Record updated</span>
+<span class="min-w-0 flex-1 truncate text-[13px] text-ink-500">Piera</span>
+<span class="flex shrink-0 items-center gap-2.5">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/slack.svg" width="20"/>
+<span class="truncate text-[13px] text-ink-700">Post to #revenue</span>
+</span>
+</div>
+<div class="flex items-center gap-4 px-6 py-4">
+<span class="bg-accent-a-500 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="w-32 shrink-0 truncate text-[14px] text-ink-900">Record created</span>
+<span class="min-w-0 flex-1 truncate text-[13px] text-ink-500">Wren Labs</span>
+<span class="flex shrink-0 items-center gap-2.5">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/hubspot.svg" width="20"/>
+<span class="truncate text-[13px] text-ink-700">Create the CRM company</span>
+</span>
+</div>
+<div class="flex items-center gap-4 px-6 py-4">
+<span class="bg-accent-b-500 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="w-32 shrink-0 truncate text-[14px] text-ink-900">Record updated</span>
+<span class="min-w-0 flex-1 truncate text-[13px] text-ink-500">Verano Coffee</span>
+<span class="flex shrink-0 items-center gap-2.5">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/google-sheets.svg" width="20"/>
+<span class="truncate text-[13px] text-ink-700">Sync the renewal date</span>
+</span>
+</div>
+<div class="flex items-center gap-4 px-6 py-4">
+<span class="bg-accent-c-200 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="w-32 shrink-0 truncate text-[14px] text-ink-900">Record deleted</span>
+<span class="min-w-0 flex-1 truncate text-[13px] text-ink-500">Linden Freight</span>
+<span class="flex shrink-0 items-center gap-2.5">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/notion.svg" width="20"/>
+<span class="truncate text-[13px] text-ink-700">Archive the account</span>
+</span>
+</div>
+<div class="flex items-center gap-4 px-6 py-4">
+<span class="bg-accent-b-500 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="w-32 shrink-0 truncate text-[14px] text-ink-900">Record updated</span>
+<span class="min-w-0 flex-1 truncate text-[13px] text-ink-500">Halcyon Press</span>
+<span class="flex shrink-0 items-center gap-2.5">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/stripe.svg" width="20"/>
+<span class="truncate text-[13px] text-ink-700">Retry the invoice</span>
+</span>
+</div>
+<div class="flex items-center gap-4 px-6 py-4">
+<span class="bg-accent-a-500 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="w-32 shrink-0 truncate text-[14px] text-ink-900">Record created</span>
+<span class="min-w-0 flex-1 truncate text-[13px] text-ink-500">Marlow &amp; Co</span>
+<span class="flex shrink-0 items-center gap-2.5">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/linear.svg" width="20"/>
+<span class="truncate text-[13px] text-ink-700">Open an onboarding task</span>
+</span>
+</div>
+<div class="flex items-center gap-4 px-6 py-4">
+<span class="bg-accent-b-500 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="w-32 shrink-0 truncate text-[14px] text-ink-900">Record updated</span>
+<span class="min-w-0 flex-1 truncate text-[13px] text-ink-500">Piera</span>
+<span class="flex shrink-0 items-center gap-2.5">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/slack.svg" width="20"/>
+<span class="truncate text-[13px] text-ink-700">Notify the owner</span>
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="group flex h-[470px] w-full flex-col overflow-hidden rounded-2xl bg-white shadow-edge md:h-[500px] md:col-span-9">
+<div class="flex flex-col gap-1 px-5 pt-6 pb-5">
+<h3 class="flex items-center gap-1.5 text-lg font-medium text-ink-900 md:text-xl">Reporting Tools </h3>
+<p class="text-sm text-ink-600 md:text-[15px]">Pull numbers from your warehouse and dashboards.</p>
+</div>
+<div class="flex-1 overflow-hidden">
+<div aria-hidden="true" class="pointer-events-none relative isolate size-full overflow-hidden select-none bg-ink-100">
+<div class="absolute bg-no-repeat" style="background-image:url(/grid/iris.webp);background-size:230%;background-position:50% 100%;inset:-1rem;opacity:0.48;filter:saturate(0.62) brightness(1.08) contrast(0.94) blur(3px);">
+</div>
+<div class="absolute inset-x-5 inset-y-0 flex items-center md:inset-x-9">
+<div class="relative w-full">
+<div class="overflow-hidden rounded-xl border border-ink-950/10 bg-ink-50 ring-1 ring-ink-950/10">
+<div class="relative flex shrink-0 items-center gap-2 border-b border-ink-950/10 px-5 py-3.5">
+<span class="bg-ink-950/10 size-2.5 rounded-full">
+</span>
+<span class="bg-ink-950/10 size-2.5 rounded-full">
+</span>
+<span class="bg-ink-950/10 size-2.5 rounded-full">
+</span>
+<span class="pointer-events-none absolute inset-x-0 text-center font-mono text-[12px] text-ink-500">send-quote.ts</span>
+</div>
+<div class="flex flex-col px-5 py-5">
+<p class="font-mono text-[13px] whitespace-pre code-text" style="padding-left:0rem;">
+<span class="code-key">export const</span>
+<span class=""> quote = </span>
+<span class="code-fn">createAction</span>
+<span class="">({</span>
+</p>
+<p class="font-mono text-[13px] whitespace-pre code-text" style="padding-left:0.9rem;">
+<span class="">name: </span>
+<span class="code-str">'send_quote'</span>
+<span class="">,</span>
+</p>
+<p class="font-mono text-[13px] whitespace-pre code-text" style="padding-left:0.9rem;">
+<span class="">props: { amount, email },</span>
+</p>
+<p class="font-mono text-[13px] whitespace-pre code-text" style="padding-left:0.9rem;">
+<span class="code-key">async </span>
+<span class="code-fn">run</span>
+<span class="">(ctx) {</span>
+</p>
+<p class="font-mono text-[13px] whitespace-pre code-text" style="padding-left:1.8rem;">
+<span class="code-key">return </span>
+<span class="code-fn">billing</span>
+<span class="">.send(ctx)</span>
+</p>
+<p class="font-mono text-[13px] whitespace-pre code-text" style="padding-left:0.9rem;">
+<span class="">},</span>
+</p>
+<p class="font-mono text-[13px] whitespace-pre code-text" style="padding-left:0rem;">
+<span class="">})</span>
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</div>
+</div>
+</section>

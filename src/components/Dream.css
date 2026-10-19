@@ -1,0 +1,138 @@
+/* C. Dream section (CLONE_SPEC §C). Values copied from the original scoped CSS
+ * (data-v-689f896d stage, data-v-006920dd wire). The wire's generic class names
+ * (.card/.mark/.text/.chip/.chips) were Vue-scoped in the original; here they are
+ * scoped under .dream-wire instead. */
+
+.dream-stage { height: 420svh; }
+@media (max-width: 1023px) {
+  .dream-stage { height: 100svh; }
+}
+
+.dream-beat {
+  will-change: transform, opacity, filter;
+  font-size: min(5vw, 5rem);
+  line-height: 1.08;
+}
+.dream-mark {
+  -o-object-fit: contain;
+  object-fit: contain;
+  width: 56%;
+  height: auto;
+  margin: 0 auto 1.4rem;
+  display: block;
+}
+.dream-beat-scrim {
+  z-index: 3;
+  pointer-events: none;
+  background: radial-gradient(40% 21%, #fff, #fff 58%, #fffffff8 63%, #ffffffe4 68%, #ffffffc8 73%, #ffffff9e 78%, #ffffff70 83%, #ffffff42 88%, #ffffff1c 93%, #fff0);
+  position: absolute;
+  inset: 0;
+}
+@media (max-width: 1023px) {
+  .dream-beat-scrim {
+    background: radial-gradient(62% 19%, #fff, #fff 58%, #fffffff8 63%, #ffffffe4 68%, #ffffffc8 73%, #ffffff9e 78%, #ffffff70 83%, #ffffff42 88%, #ffffff1c 93%, #fff0);
+  }
+}
+.dream-window {
+  aspect-ratio: 16 / 11;
+  will-change: transform, opacity;
+  width: max(400px, 44vw);
+  position: absolute;
+}
+.dream-word {
+  white-space: pre;
+  will-change: transform, opacity, filter;
+  display: inline-block;
+}
+@media (max-width: 767px) {
+  .dream-beat { font-size: min(9.5vw, 3rem); }
+  .dream-mark { margin-bottom: .9rem; }
+}
+
+/* C.4 wire diagram */
+.dream-wire {
+  inset: calc(var(--spacing-chrome) + 2.75rem) 0 2.5rem;
+  z-index: 2;
+  position: absolute;
+}
+.dream-wire-svg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+}
+.dream-wire-path {
+  stroke: var(--color-ink-300);
+  stroke-width: 1.5px;
+  stroke-linecap: round;
+  fill: none;
+}
+.dream-wire-path.is-accent { stroke: var(--color-primary-300); }
+.dream-wire-dot { fill: var(--color-ink-900); }
+.dream-node {
+  will-change: transform, opacity;
+  position: absolute;
+}
+.dream-wire .card {
+  white-space: nowrap;
+  border: 1px solid var(--color-ink-200);
+  background: #fff;
+  border-radius: .9rem;
+  align-items: center;
+  gap: .65rem;
+  padding: .7rem 1.05rem;
+  display: flex;
+  box-shadow: 0 1px 2px #1018280d;
+}
+.dream-wire .mark {
+  -o-object-fit: contain;
+  object-fit: contain;
+  flex-shrink: 0;
+  width: 1.45rem;
+  height: 1.45rem;
+}
+.dream-wire .text {
+  color: var(--color-ink-800);
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1;
+}
+.dream-wire .chip,
+.dream-wire .chips {
+  align-items: center;
+  display: flex;
+}
+.dream-wire .chip {
+  border: 1px solid var(--color-ink-200);
+  background: #fff;
+  border-radius: 999px;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  box-shadow: 0 1px 2px #1018280d;
+}
+.dream-wire .chip + .chip { margin-left: -.55rem; }
+.dream-wire .chip img {
+  -o-object-fit: contain;
+  object-fit: contain;
+  width: 1.4rem;
+  height: 1.4rem;
+}
+@media (max-width: 1023px) {
+  .dream-wire { inset: calc(var(--spacing-chrome) + 2.5rem) 0 1.5rem; }
+  .dream-wire .card { border-radius: .75rem; gap: .5rem; padding: .55rem .8rem; }
+  .dream-wire .mark { width: 1.2rem; height: 1.2rem; }
+  .dream-wire .text { font-size: .9rem; }
+  .dream-wire .chip { width: 2.5rem; height: 2.5rem; }
+  .dream-wire .chip + .chip { margin-left: -.45rem; }
+  .dream-wire .chip img { width: 1.15rem; height: 1.15rem; }
+}
+@media (max-width: 767px) {
+  .dream-wire .card { border-radius: .65rem; gap: .4rem; padding: .45rem .65rem; }
+  .dream-wire .mark { width: 1rem; height: 1rem; }
+  .dream-wire .text { font-size: .75rem; }
+  .dream-wire .chip { width: 2rem; height: 2rem; }
+  .dream-wire .chip + .chip { margin-left: -.35rem; }
+  .dream-wire .chip img { width: .95rem; height: .95rem; }
+}

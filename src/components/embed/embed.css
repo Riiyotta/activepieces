@@ -1,0 +1,46 @@
+/* /embed scoped CSS (product-hero.C5pKbCTC.css; SPEC_MARKETING §1.5/§6). */
+
+/* product-hero stage vignette */
+.embed-hero .stage::after {
+  content: '';
+  z-index: -5;
+  pointer-events: none;
+  background: radial-gradient(ellipse 62% 62% at 50% 50%, color-mix(in oklab, var(--color-ink-950), transparent 92%) 0, transparent 72%);
+  position: absolute;
+  inset: 0;
+}
+/* v4 `saturate-75` (not in the v3 scale) */
+.embed-hero .embed-stage-art {
+  filter: saturate(75%);
+}
+
+/* Bento code tokens (SPEC_MARKETING §0.3). .code-fn/.code-str/.code-text are global (BentoPlatformCard.css);
+ * .code-key/.code-dim exist only scoped to .tpl-page (product builder), so they are scoped here too. */
+[data-section='embed-grid'] .code-key {
+  color: #007a55; /* accent-a-700 */
+}
+[data-section='embed-grid'] .code-dim {
+  color: var(--color-ink-600);
+}
+
+/* Hero entrance — same timing as the other product heroes (.64s, --i × 70ms, 4px blur, 12px rise). */
+@keyframes embed-hero-line {
+  0% {
+    opacity: 0;
+    filter: blur(4px);
+    translate: 0 12px;
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    translate: 0;
+  }
+}
+html.js .embed-line {
+  animation: embed-hero-line .64s var(--ease-smooth) calc(var(--i, 0) * 70ms) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  html.js .embed-line {
+    animation: none;
+  }
+}

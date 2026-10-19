@@ -1,0 +1,20 @@
+{
+  "id": "component.rotating-logo-grid",
+  "layer": "component",
+  "purpose": "6-cell masked logo grid that swaps sets (3.5s set swap; /sales 1.4s random-cell variant).",
+  "composes": [
+    "logo-mask"
+  ],
+  "implementedBy": [
+    "src/components/templates/LogoRotator.jsx",
+    "src/components/pricing/RotatingLogos.jsx",
+    "src/components/sales/SalesLogoGrid.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_MARKETING.md",
+      "lines": "90",
+      "quote": "### 1.4 `RotatingLogos` (NEW; /pricing under the plans, /ai-governance in the sticky hero bar; /sales uses a variant, see §2)"
+    }
+  ]
+}

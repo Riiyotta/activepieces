@@ -1,0 +1,90 @@
+/* G. Section-specific CSS for FeatureFlow (co-located; do not put this in index.css).
+ * Stage + visual shell (CLONE_SPEC §F/G/K): pages.CaRGUvqN.css `.stage:after`, entry.css `.visual-pad` / `.visual-stage`.
+ * Scoped to the section so it can't collide with other builders' copies. */
+[data-section='builder'] .stage::after {
+  content: '';
+  z-index: -5;
+  pointer-events: none;
+  background: radial-gradient(ellipse 62% 62% at 50% 50%, rgba(2, 6, 24, .08) 0, transparent 72%);
+  position: absolute;
+  inset: 0;
+}
+/* v4 `saturate-75` (not in the v3 scale) */
+[data-section='builder'] .stage-art {
+  filter: saturate(75%);
+}
+[data-section='builder'] .visual-pad {
+  width: 100%;
+  padding: 2.5rem 1.5rem;
+}
+@media (min-width: 640px) {
+  [data-section='builder'] .visual-pad {
+    padding: 3rem;
+  }
+}
+[data-section='builder'] .visual-stage {
+  border-radius: 1rem;
+  width: 100%;
+  max-width: 34rem;
+  height: 28rem;
+  box-shadow: var(--shadow-lift);
+  background-color: #fff;
+  margin-inline: auto;
+  position: relative;
+}
+
+/* flow-canvas.CFm6NIe1.css (`drop` and `chip` transitions are driven by WAAPI in FeatureFlowDemo.jsx) */
+[data-section='builder'] .stage-clip {
+  overflow: hidden;
+}
+[data-section='builder'] .scene {
+  transform: scale(var(--scene-scale, 1));
+  transform-origin: 50%;
+}
+@media (max-width: 639.98px) {
+  [data-section='builder'] .stage-clip {
+    height: 22rem;
+  }
+  [data-section='builder'] .scene {
+    --scene-scale: .72;
+  }
+}
+@media (max-width: 383.98px) {
+  [data-section='builder'] .scene {
+    --scene-scale: .6;
+  }
+}
+[data-section='builder'] .dot-grid {
+  background-image: radial-gradient(var(--color-ink-300) 1px, transparent 1px);
+  opacity: .6;
+  background-size: 10px 10px;
+  -webkit-mask-image: radial-gradient(82% 82%, #000 40%, #0000);
+  mask-image: radial-gradient(82% 82%, #000 40%, #0000);
+}
+[data-section='builder'] .config {
+  transform-origin: top;
+  will-change: transform, opacity;
+}
+[data-section='builder'] .msg-caret {
+  vertical-align: middle;
+  background: var(--color-ink-500);
+  width: 1.5px;
+  height: 1rem;
+  margin-left: 1px;
+  animation: 1s step-end infinite blink;
+  display: inline-block;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-section='builder'] .msg-caret {
+    animation: none;
+  }
+}
+
+/* v4 `md:divide-x md:divide-ink-950/10`: border-inline-end on every child but the last
+ * (v3 puts border-left on every child but the first, shifting columns 2-3 content by 1px). */
+@media (min-width: 768px) {
+  [data-section='builder'] .cols-divide > :not(:last-child) {
+    border-right-width: 1px;
+    border-color: rgb(2 6 24 / .1);
+  }
+}

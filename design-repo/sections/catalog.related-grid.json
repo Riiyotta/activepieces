@@ -1,0 +1,147 @@
+{
+  "id": "catalog.related-grid",
+  "layer": "section",
+  "category": "catalog",
+  "purpose": "H2 + right link over up to 6 CatalogCards (pairings, related, pair 'More ways to automate X').",
+  "implementedBy": [
+    "src/components/catalog/parts.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_CATALOG.md",
+      "lines": "178",
+      "quote": "### 3.3 `RelatedGrid` (related, pairings, pair \"More ways…\")"
+    }
+  ],
+  "variants": {
+    "pairings": {
+      "description": "Popular <name> pairings (pieces only, when pairable).",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CATALOG.md",
+          "lines": "533",
+          "quote": "### 5.7 Pairings (pieces only, `pairable` true)"
+        }
+      ]
+    },
+    "related": {
+      "description": "More <category> integrations / apps on the same server.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CATALOG.md",
+          "lines": "541",
+          "quote": "### 5.8 Related"
+        }
+      ]
+    },
+    "pair-source": {
+      "description": "Pair page: more ways to automate A (excluding B).",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CATALOG.md",
+          "lines": "598",
+          "quote": "- `recipe-related-source`:"
+        }
+      ]
+    },
+    "pair-target": {
+      "description": "Pair page: more ways to automate B (excluding A).",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CATALOG.md",
+          "lines": "602",
+          "quote": "- `recipe-related-target`: the same, using B's recipes excluding a."
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "kind",
+      "subject"
+    ],
+    "properties": {
+      "kind": {
+        "enum": [
+          "pieces",
+          "mcp"
+        ]
+      },
+      "subject": {
+        "type": "string",
+        "pattern": "^data:pieces#[a-z0-9-]+$",
+        "x-example": "data:pieces#slack"
+      },
+      "exclude": {
+        "type": "string",
+        "pattern": "^data:pieces#[a-z0-9-]+$",
+        "x-example": "data:pieces#slack"
+      }
+    }
+  },
+  "media": {
+    "slots": {}
+  },
+  "constraints": {
+    "maxPerPage": 2
+  },
+  "variantRules": {
+    "pairings": {
+      "contentEquals": {
+        "kind": "pieces"
+      },
+      "forbiddenContent": [
+        "exclude"
+      ]
+    },
+    "related": {
+      "forbiddenContent": [
+        "exclude"
+      ]
+    },
+    "pair-source": {
+      "requiredContent": [
+        "exclude"
+      ],
+      "contentEquals": {
+        "kind": "pieces"
+      }
+    },
+    "pair-target": {
+      "requiredContent": [
+        "exclude"
+      ],
+      "contentEquals": {
+        "kind": "pieces"
+      }
+    }
+  },
+  "motion": {
+    "allowedPatterns": [
+      "card-hover-shadow"
+    ],
+    "requiredPatterns": [
+      "card-hover-shadow"
+    ],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "static-end-state"
+  },
+  "responsive": {
+    "evidence": [
+      {
+        "file": "specs/SPEC_CATALOG.md",
+        "lines": "183",
+        "quote": "- Grid `grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3` of CatalogCards. Maximum 6."
+      }
+    ],
+    "changes": {
+      "base": "1 column",
+      "sm": "2 columns",
+      "lg": "3 columns"
+    }
+  },
+  "accessibility": [],
+  "notes": []
+}

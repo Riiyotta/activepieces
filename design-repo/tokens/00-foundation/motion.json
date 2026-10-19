@@ -1,0 +1,875 @@
+{
+  "$description": "Motion foundation: easing + duration tokens and the closed registry of motion PATTERNS actually present in the clone. PageSpec motion entries must reproduce a pattern's registry values exactly (semantic_validate.py pins them).",
+  "evidence": [
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "848",
+      "quote": "## R. Motion summary (checklist)"
+    },
+    {
+      "file": "specs/SPEC_PRODUCT_SOLUTIONS.md",
+      "lines": "438",
+      "quote": "## 13. Motion checklist"
+    },
+    {
+      "file": "specs/SPEC_CATALOG.md",
+      "lines": "607",
+      "quote": "## 7. Motion summary"
+    },
+    {
+      "file": "specs/SPEC_CONTENT.md",
+      "lines": "794",
+      "quote": "## 10. Motion summary (content templates)"
+    }
+  ],
+  "globalRules": [
+    {
+      "rule": "No scroll-reveal fade-ins on ordinary sections; only the listed IntersectionObservers exist.",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "873",
+          "quote": "- No scroll-reveal fade-ins on the ordinary sections."
+        }
+      ]
+    },
+    {
+      "rule": "Every pattern is disabled or reduced under prefers-reduced-motion.",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "875",
+          "quote": "- The JS checks `prefers-reduced-motion` and disables all of the motion above."
+        }
+      ]
+    },
+    {
+      "rule": "Homepage hero lines (.76s, .38s + i*90ms, 5px blur, 14px rise) and template hero lines (.64s, i*70ms, 4px blur, 12px rise) are different patterns; template heroes must use scoped classes, never the global .hero-line.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_PRODUCT_SOLUTIONS.md",
+          "lines": "117",
+          "quote": "**Important:** the project's global `html.js .hero-line` in `index.css` is the *homepage* version"
+        }
+      ]
+    }
+  ],
+  "reducedMotionFallbacks": {
+    "static-end-state": "Animation disabled under prefers-reduced-motion; render the final/settled state.",
+    "static-first-set": "Rotation/marquee stopped under prefers-reduced-motion; render the first set/frame.",
+    "not-applicable": "No motion to reduce."
+  },
+  "enums": {
+    "trigger": [
+      "click",
+      "continuous",
+      "hover",
+      "hover-focus",
+      "intersection",
+      "intersection-loop",
+      "interval",
+      "load",
+      "mount",
+      "none",
+      "scroll-direction",
+      "scroll-linked",
+      "scroll-threshold"
+    ],
+    "durationMs": [
+      0,
+      50,
+      100,
+      160,
+      200,
+      220,
+      240,
+      300,
+      340,
+      380,
+      420,
+      480,
+      500,
+      620,
+      640,
+      700,
+      720,
+      760,
+      820,
+      900,
+      2400,
+      5000,
+      82800
+    ],
+    "easing": [
+      "ease",
+      "ease-back-out",
+      "ease-in-out",
+      "ease-out",
+      "ease-smooth",
+      "ease-spring",
+      "ease-throw",
+      "ease-travel",
+      "js-formula",
+      "linear",
+      "none"
+    ]
+  },
+  "patterns": {
+    "none": {
+      "trigger": "none",
+      "durationMs": 0,
+      "easing": "none",
+      "reducedMotionFallback": "not-applicable",
+      "note": "Static section: no entrance, no scroll reveal.",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "871-873",
+          "quote": "Measured to be absent:"
+        }
+      ]
+    },
+    "header-nav-in": {
+      "trigger": "mount",
+      "durationMs": 620,
+      "easing": "ease-smooth",
+      "delayMs": 240,
+      "reducedMotionFallback": "static-end-state",
+      "note": "nav-row fades down 8px once on mount",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "190",
+          "quote": "Then `.nav-row.is-ready` runs `nav-in .62s var(--ease-smooth) .24s both`"
+        }
+      ]
+    },
+    "header-hide-show": {
+      "trigger": "scroll-direction",
+      "durationMs": 300,
+      "easing": "ease-smooth",
+      "reducedMotionFallback": "static-end-state",
+      "note": "hide when scrolling down past 160px (+4px hysteresis), show on any upward scroll",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "187",
+          "quote": "- Both animate 300ms with ease-smooth."
+        }
+      ]
+    },
+    "header-dropdown": {
+      "trigger": "hover-focus",
+      "durationMs": 300,
+      "easing": "ease-smooth",
+      "reducedMotionFallback": "static-end-state",
+      "note": "island grows; panel-in 180ms; close delay 180ms",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "198",
+          "quote": "Transition: `height 300ms var(--ease-smooth)`"
+        }
+      ]
+    },
+    "mobile-sheet": {
+      "trigger": "click",
+      "durationMs": 220,
+      "easing": "ease-smooth",
+      "reducedMotionFallback": "static-end-state",
+      "note": "",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "254",
+          "quote": "Enter/leave: `opacity .18s ease, translate .22s var(--ease-smooth)`"
+        }
+      ]
+    },
+    "hero-plate-fade": {
+      "trigger": "load",
+      "durationMs": 820,
+      "easing": "ease-smooth",
+      "staggerMs": 90,
+      "reducedMotionFallback": "static-end-state",
+      "note": "base plate 0ms, front plate 90ms",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "337",
+          "quote": ".plate { animation: plate-in .82s var(--ease-smooth)"
+        }
+      ]
+    },
+    "hero-line-home": {
+      "trigger": "load",
+      "durationMs": 760,
+      "easing": "ease-smooth",
+      "delayMs": 380,
+      "staggerMs": 90,
+      "reducedMotionFallback": "static-end-state",
+      "note": "HOMEPAGE ONLY: blur 5px, rise 14px, i=1..4",
+      "evidence": [
+        {
+          "file": "src/index.css",
+          "lines": "381",
+          "quote": "animation: hero-line .76s var(--ease-smooth) calc(.38s + var(--i) * 90ms) both;"
+        }
+      ]
+    },
+    "marquee-drift": {
+      "trigger": "continuous",
+      "durationMs": 82800,
+      "easing": "linear",
+      "reducedMotionFallback": "static-first-set",
+      "note": "72s below 768px (factor 1 vs 1.15)",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "359",
+          "quote": "Measured ≥768: logo-h 41.4px, gap 73.6px, duration **82.8s**"
+        }
+      ]
+    },
+    "ai-cta-sheen": {
+      "trigger": "hover",
+      "durationMs": 900,
+      "easing": "ease-smooth",
+      "reducedMotionFallback": "static-end-state",
+      "note": "logos fan out .42s with n*40ms",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "328",
+          "quote": "On `:hover::before { translate: 110%; transition: translate .9s var(--ease-smooth) }`"
+        }
+      ]
+    },
+    "dream-scroll-scrub": {
+      "trigger": "scroll-linked",
+      "durationMs": 0,
+      "easing": "js-formula",
+      "reducedMotionFallback": "static-end-state",
+      "note": ">=1024px: 420svh sticky stage, lerp .16 per frame",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "451",
+          "quote": "raw P   = clamp(-section.getBoundingClientRect().top / innerHeight, -0.8, 3.2)"
+        }
+      ]
+    },
+    "dream-time-tween": {
+      "trigger": "intersection",
+      "durationMs": 2400,
+      "easing": "js-formula",
+      "reducedMotionFallback": "static-end-state",
+      "note": "<=1023px: easeOutCubic from z=1.96 to 2.95",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "458",
+          "quote": "- An `IntersectionObserver(threshold .35)` fires once and starts a 2400ms tween"
+        }
+      ]
+    },
+    "demo-loop-agents": {
+      "trigger": "intersection-loop",
+      "durationMs": 720,
+      "easing": "ease-travel",
+      "reducedMotionFallback": "static-end-state",
+      "note": "starts at >=30% visible; messages .52s ease-spring; 9s idle after user takeover",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "645",
+          "quote": "2. Cursor moves to the composer (travel 720ms)"
+        }
+      ]
+    },
+    "demo-loop-flow": {
+      "trigger": "intersection-loop",
+      "durationMs": 500,
+      "easing": "ease-travel",
+      "reducedMotionFallback": "static-end-state",
+      "note": "",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "673",
+          "quote": "- **Timeline** (cursor travel 500ms):"
+        }
+      ]
+    },
+    "demo-loop-tables": {
+      "trigger": "intersection-loop",
+      "durationMs": 620,
+      "easing": "ease-travel",
+      "reducedMotionFallback": "static-end-state",
+      "note": "3 tagged cursors",
+      "evidence": [
+        {
+          "file": "specs/SPEC_PRODUCT_SOLUTIONS.md",
+          "lines": "146",
+          "quote": "- **Three cursors** (homepage cursor component, `--travel: 620ms`)"
+        }
+      ]
+    },
+    "demo-loop-chat": {
+      "trigger": "intersection-loop",
+      "durationMs": 700,
+      "easing": "ease-travel",
+      "reducedMotionFallback": "static-end-state",
+      "note": "",
+      "evidence": [
+        {
+          "file": "specs/SPEC_PRODUCT_SOLUTIONS.md",
+          "lines": "216",
+          "quote": "- **One cursor**: fill ink-950, ring ink-400, `--travel: 700ms`, no tag."
+        }
+      ]
+    },
+    "mosaic-pop": {
+      "trigger": "mount",
+      "durationMs": 500,
+      "easing": "ease-smooth",
+      "staggerMs": 6,
+      "reducedMotionFallback": "static-end-state",
+      "note": "",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "693",
+          "quote": "- Mount pop: `.5s var(--ease-smooth)`, delay `--i * 6ms`"
+        }
+      ]
+    },
+    "mosaic-swap": {
+      "trigger": "interval",
+      "durationMs": 380,
+      "easing": "ease",
+      "intervalMs": 820,
+      "reducedMotionFallback": "static-first-set",
+      "note": "",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "696",
+          "quote": "- Logo swap loop: every **820ms** pick a random lit cell"
+        }
+      ]
+    },
+    "faq-accordion": {
+      "trigger": "click",
+      "durationMs": 200,
+      "easing": "ease-out",
+      "reducedMotionFallback": "static-end-state",
+      "note": "first item open, one open at a time, + icon rotates 45deg",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "780",
+          "quote": "Collapse animates height from 0 to scrollHeight plus opacity 0→1, `transition: all 200ms ease-out`"
+        }
+      ]
+    },
+    "faq-instant-toggle": {
+      "trigger": "click",
+      "durationMs": 200,
+      "easing": "ease",
+      "reducedMotionFallback": "static-end-state",
+      "note": "resources FAQ: panel toggles instantly; only the icon animates",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CONTENT.md",
+          "lines": "808",
+          "quote": "| FAQ | click | `+` icon rotate-45 | 200ms | — | panel toggles instantly (display) |"
+        }
+      ]
+    },
+    "logo-rotate-set": {
+      "trigger": "interval",
+      "durationMs": 300,
+      "easing": "ease",
+      "staggerMs": 40,
+      "intervalMs": 3500,
+      "reducedMotionFallback": "static-first-set",
+      "note": "4 sets of 6, out-in logo-fade scale .94",
+      "evidence": [
+        {
+          "file": "specs/SPEC_MARKETING.md",
+          "lines": "111",
+          "quote": "- **Motion**: every **3500ms** (`setInterval`, skipped under prefers-reduced-motion)"
+        }
+      ]
+    },
+    "logo-rotate-random": {
+      "trigger": "interval",
+      "durationMs": 160,
+      "easing": "ease-out",
+      "intervalMs": 1400,
+      "reducedMotionFallback": "static-first-set",
+      "note": "/sales only",
+      "evidence": [
+        {
+          "file": "specs/SPEC_MARKETING.md",
+          "lines": "181",
+          "quote": "- **Motion differs from §1.4**: every **1400ms**, pick a random cell"
+        }
+      ]
+    },
+    "card-hover-shadow": {
+      "trigger": "hover",
+      "durationMs": 200,
+      "easing": "ease-out",
+      "reducedMotionFallback": "static-end-state",
+      "note": "",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CATALOG.md",
+          "lines": "149",
+          "quote": "`<a>`: `group flex h-full flex-col gap-5 rounded-2xl bg-white p-6 shadow-edge transition-shadow duration-200 ease-out hover:shadow-edge-hover`"
+        }
+      ]
+    },
+    "card-hover-border": {
+      "trigger": "hover",
+      "durationMs": 200,
+      "easing": "ease-in-out",
+      "reducedMotionFallback": "static-end-state",
+      "note": "Tailwind default transition easing",
+      "evidence": [
+        {
+          "file": "specs/SPEC_MARKETING.md",
+          "lines": "799",
+          "quote": "transition-colors duration-200 outline-none hover:border-ink-950/20"
+        }
+      ]
+    },
+    "cover-hover-scale": {
+      "trigger": "hover",
+      "durationMs": 500,
+      "easing": "ease-smooth",
+      "reducedMotionFallback": "static-end-state",
+      "note": "",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CONTENT.md",
+          "lines": "797",
+          "quote": "| Card cover frame | hover on card (`group`) | scale 1 → 1.02 (featured 1.01) | 500ms | `.22,1,.36,1` | — |"
+        }
+      ]
+    },
+    "floating-card-enter": {
+      "trigger": "scroll-threshold",
+      "durationMs": 300,
+      "easing": "ease-smooth",
+      "reducedMotionFallback": "static-end-state",
+      "note": "shown once scrollY > 100",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "818",
+          "quote": "- Enter: `transition 300ms var(--ease-smooth)` from `translate-y-3 opacity-0`. Leave: 200ms."
+        }
+      ]
+    },
+    "dialog-open": {
+      "trigger": "click",
+      "durationMs": 240,
+      "easing": "ease-smooth",
+      "reducedMotionFallback": "static-end-state",
+      "note": "resets to the first client (Claude) on reopen",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "840",
+          "quote": "- Open: opacity .2s ease-out plus translate .24s ease-smooth"
+        }
+      ]
+    },
+    "hero-line-template": {
+      "trigger": "load",
+      "durationMs": 640,
+      "easing": "ease-smooth",
+      "staggerMs": 70,
+      "reducedMotionFallback": "static-end-state",
+      "note": "NON-HOME heroes: blur 4px, rise 12px, delay i*70ms; scoped classes .tpl-line / .cat-hero .hero-line / .embed-line / .res-hero-line",
+      "evidence": [
+        {
+          "file": "src/components/templates/Template.css",
+          "lines": "7",
+          "quote": "animation: tpl-hero-line .64s var(--ease-smooth) calc(var(--i) * 70ms) both;"
+        }
+      ]
+    },
+    "catalog-scatter-throw": {
+      "trigger": "load",
+      "durationMs": 340,
+      "easing": "ease-throw",
+      "staggerMs": 14,
+      "reducedMotionFallback": "static-end-state",
+      "note": "then infinite sail/tumble float",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CATALOG.md",
+          "lines": "612",
+          "quote": "| `.drop` (scatter, ≥1152 px) | load | `throw-out` `calc(.34s + t*.22s)`"
+        }
+      ]
+    },
+    "mcp-card-in": {
+      "trigger": "load",
+      "durationMs": 480,
+      "easing": "ease-smooth",
+      "delayMs": 260,
+      "staggerMs": 45,
+      "reducedMotionFallback": "static-end-state",
+      "note": "",
+      "evidence": [
+        {
+          "file": "src/components/catalog/catalog.css",
+          "lines": "296",
+          "quote": "animation: mcp-card-in .48s var(--ease-smooth) calc(.26s + var(--i) * 45ms) both;"
+        }
+      ]
+    },
+    "security-cipher-wall": {
+      "trigger": "continuous",
+      "durationMs": 50,
+      "easing": "js-formula",
+      "reducedMotionFallback": "static-end-state",
+      "note": "2D canvas ASCII wall + rotating 3D lock; pauses off-screen",
+      "evidence": [
+        {
+          "file": "specs/SPEC_MARKETING.md",
+          "lines": "511",
+          "quote": "- The frame is throttled to **50ms**."
+        }
+      ]
+    },
+    "security-stage-swap": {
+      "trigger": "intersection",
+      "durationMs": 500,
+      "easing": "ease-smooth",
+      "reducedMotionFallback": "static-end-state",
+      "note": "rootMargin -45% picks the active row",
+      "evidence": [
+        {
+          "file": "specs/SPEC_MARKETING.md",
+          "lines": "428",
+          "quote": "- enter `transition duration-500 ease-smooth`"
+        }
+      ]
+    },
+    "models-grid-scrub": {
+      "trigger": "scroll-linked",
+      "durationMs": 0,
+      "easing": "js-formula",
+      "reducedMotionFallback": "static-end-state",
+      "note": "pinned only at >=80rem x 48rem",
+      "evidence": [
+        {
+          "file": "specs/SPEC_MARKETING.md",
+          "lines": "562",
+          "quote": "- Progress `x = clamp(-section.top / (section.offsetHeight − innerHeight), 0, 1)`"
+        }
+      ]
+    },
+    "rollout-deck-pin": {
+      "trigger": "scroll-linked",
+      "durationMs": 380,
+      "easing": "ease-smooth",
+      "reducedMotionFallback": "static-end-state",
+      "note": "pinned at >=1024px",
+      "evidence": [
+        {
+          "file": "specs/SPEC_MARKETING.md",
+          "lines": "622",
+          "quote": ".slot{flex:1 1 0;min-width:0;transition:flex-grow .38s cubic-bezier(.22,1,.36,1)}"
+        }
+      ]
+    },
+    "sticky-bar-border": {
+      "trigger": "intersection",
+      "durationMs": 200,
+      "easing": "ease-out",
+      "reducedMotionFallback": "static-end-state",
+      "note": "",
+      "evidence": [
+        {
+          "file": "specs/SPEC_MARKETING.md",
+          "lines": "551",
+          "quote": "- **Sticky logo bar**: `sticky bottom-0 z-10 mt-8 border-t bg-white py-5 transition-colors duration-200 ease-out`."
+        }
+      ]
+    },
+    "billing-toggle-clip": {
+      "trigger": "click",
+      "durationMs": 200,
+      "easing": "ease-smooth",
+      "reducedMotionFallback": "static-end-state",
+      "note": "",
+      "evidence": [
+        {
+          "file": "specs/SPEC_MARKETING.md",
+          "lines": "237",
+          "quote": "- Measured on click: clip-path 200ms `cubic-bezier(.22,1,.36,1)`; label color 200ms."
+        }
+      ]
+    },
+    "animated-number": {
+      "trigger": "click",
+      "durationMs": 420,
+      "easing": "js-formula",
+      "reducedMotionFallback": "static-end-state",
+      "note": "",
+      "evidence": [
+        {
+          "file": "specs/SPEC_MARKETING.md",
+          "lines": "249",
+          "quote": "they count from the old to the new value over **420ms** with ease `1-(1-t)^5`"
+        }
+      ]
+    },
+    "infotip-fade": {
+      "trigger": "hover-focus",
+      "durationMs": 200,
+      "easing": "ease-out",
+      "reducedMotionFallback": "static-end-state",
+      "note": "close delay 90ms",
+      "evidence": [
+        {
+          "file": "specs/SPEC_MARKETING.md",
+          "lines": "148",
+          "quote": "- Fade: `transition-opacity duration-200 ease-out`, from and to `opacity-0`, on both enter and leave."
+        }
+      ]
+    },
+    "reading-progress": {
+      "trigger": "scroll-linked",
+      "durationMs": 100,
+      "easing": "ease-out",
+      "reducedMotionFallback": "static-end-state",
+      "note": "",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CONTENT.md",
+          "lines": "802",
+          "quote": "| Reading progress | scroll | scaleX | 100ms | `0,0,.2,1` | — |"
+        }
+      ]
+    },
+    "toc-scrollspy": {
+      "trigger": "intersection",
+      "durationMs": 0,
+      "easing": "none",
+      "reducedMotionFallback": "static-end-state",
+      "note": "",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CONTENT.md",
+          "lines": "803",
+          "quote": "| TOC | IntersectionObserver | active link | instant |"
+        }
+      ]
+    },
+    "signup-card-bots": {
+      "trigger": "continuous",
+      "durationMs": 5000,
+      "easing": "ease-back-out",
+      "staggerMs": 900,
+      "reducedMotionFallback": "static-end-state",
+      "note": "",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CONTENT.md",
+          "lines": "806",
+          "quote": "| Right-rail CTA | — | bots peek, infinite | 5s | `.34,1.56,.64,1` |"
+        }
+      ]
+    },
+    "legal-toggle": {
+      "trigger": "click",
+      "durationMs": 200,
+      "easing": "ease-in-out",
+      "reducedMotionFallback": "static-end-state",
+      "note": "",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CONTENT.md",
+          "lines": "809",
+          "quote": "| Legal \"Contents\" and section toggles | click | chevron rotate | 200ms |"
+        }
+      ]
+    },
+    "az-index-open": {
+      "trigger": "click",
+      "durationMs": 200,
+      "easing": "ease-smooth",
+      "reducedMotionFallback": "static-end-state",
+      "note": "",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CATALOG.md",
+          "lines": "619",
+          "quote": "| A–Z list | open | `az-in` .2 s smooth. |"
+        }
+      ]
+    }
+  },
+  "tokens": {
+    "easing": {
+      "ease-smooth": {
+        "$type": "cubicBezier",
+        "$value": "cubic-bezier(.22, 1, .36, 1)",
+        "evidence": [
+          {
+            "file": "tailwind.config.cjs",
+            "lines": "140",
+            "quote": "smooth: 'cubic-bezier(.22, 1, .36, 1)'"
+          },
+          {
+            "file": "src/index.css",
+            "lines": "289",
+            "quote": "--ease-smooth: cubic-bezier(.22, 1, .36, 1);"
+          }
+        ]
+      },
+      "ease-spring": {
+        "$type": "cubicBezier",
+        "$value": "cubic-bezier(.16, 1, .3, 1)",
+        "evidence": [
+          {
+            "file": "tailwind.config.cjs",
+            "lines": "143",
+            "quote": "spring: 'cubic-bezier(.16, 1, .3, 1)'"
+          }
+        ]
+      },
+      "ease-travel": {
+        "$type": "cubicBezier",
+        "$value": "cubic-bezier(.5, .02, .2, 1)",
+        "evidence": [
+          {
+            "file": "tailwind.config.cjs",
+            "lines": "144",
+            "quote": "travel: 'cubic-bezier(.5, .02, .2, 1)'"
+          }
+        ]
+      },
+      "ease-out": {
+        "$type": "cubicBezier",
+        "$value": "cubic-bezier(0, 0, .2, 1)",
+        "evidence": [
+          {
+            "file": "tailwind.config.cjs",
+            "lines": "141",
+            "quote": "out: 'cubic-bezier(0, 0, .2, 1)'"
+          }
+        ]
+      },
+      "ease-in-out": {
+        "$type": "cubicBezier",
+        "$value": "cubic-bezier(.4, 0, .2, 1)",
+        "evidence": [
+          {
+            "file": "tailwind.config.cjs",
+            "lines": "142",
+            "quote": "'in-out': 'cubic-bezier(.4, 0, .2, 1)'"
+          }
+        ]
+      },
+      "linear": {
+        "$type": "cubicBezier",
+        "$value": "linear",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "360",
+            "quote": "animation: drift var(--drift-duration) linear infinite"
+          }
+        ]
+      },
+      "ease": {
+        "$type": "cubicBezier",
+        "$value": "ease",
+        "evidence": [
+          {
+            "file": "specs/SPEC_MARKETING.md",
+            "lines": "117",
+            "quote": "Easing is the CSS default `ease`."
+          }
+        ]
+      },
+      "ease-throw": {
+        "$type": "cubicBezier",
+        "$value": "cubic-bezier(.1, .88, .18, 1)",
+        "evidence": [
+          {
+            "file": "specs/SPEC_CATALOG.md",
+            "lines": "612",
+            "quote": "`cubic-bezier(.1,.88,.18,1)`"
+          }
+        ]
+      },
+      "ease-back-out": {
+        "$type": "cubicBezier",
+        "$value": "cubic-bezier(.34, 1.56, .64, 1)",
+        "evidence": [
+          {
+            "file": "specs/SPEC_CONTENT.md",
+            "lines": "806",
+            "quote": "| 5s | `.34,1.56,.64,1` |"
+          }
+        ]
+      },
+      "js-formula": {
+        "$type": "cubicBezier",
+        "$value": "JS-computed per cited formula (lerp / smoothstep / easeOutCubic / easeOutQuint)",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "452",
+            "quote": "smooth z: each rAF  z += (P - z) * 0.16"
+          }
+        ]
+      },
+      "none": {
+        "$type": "cubicBezier",
+        "$value": "none (no animation)",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "873",
+            "quote": "No scroll-reveal fade-ins on the ordinary sections."
+          }
+        ]
+      }
+    },
+    "duration": {
+      "default": {
+        "$type": "duration",
+        "$value": "150ms",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "77",
+            "quote": "- Default transition duration: 150ms"
+          }
+        ]
+      },
+      "button": {
+        "$type": "duration",
+        "$value": "200ms",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "119",
+            "quote": "transition-[background-color,color,box-shadow,transform] duration-200 ease-out"
+          }
+        ]
+      }
+    }
+  }
+}

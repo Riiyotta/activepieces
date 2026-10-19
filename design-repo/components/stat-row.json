@@ -1,0 +1,21 @@
+{
+  "id": "component.stat-row",
+  "layer": "component",
+  "purpose": "dl/grid of 3-5 stats with v4 divide-x semantics (border on all but the LAST child).",
+  "composes": [],
+  "implementedBy": [
+    "src/components/CaseFundingSocieties.jsx",
+    "src/components/CaseAlan.jsx",
+    "src/components/Testimonials.jsx"
+  ],
+  "rules": [
+    "Use the explicit .stats-divide / .alan-stats-divide / .testi-stats-divide classes, never v3 divide-x (see rules/tailwind-v3-v4.json TW-DIVIDE)."
+  ],
+  "evidence": [
+    {
+      "file": "src/components/CaseFundingSocieties.css",
+      "lines": "13",
+      "quote": ".stats-divide > :not(:last-child) {"
+    }
+  ]
+}

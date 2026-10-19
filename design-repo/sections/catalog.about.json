@@ -1,0 +1,91 @@
+{
+  "id": "catalog.about",
+  "layer": "section",
+  "category": "catalog",
+  "purpose": "'About the <name> integration|MCP server' prose block (template copy).",
+  "implementedBy": [
+    "src/pages/DetailPage.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_CATALOG.md",
+      "lines": "502",
+      "quote": "### 5.2 About"
+    }
+  ],
+  "variants": {
+    "piece": {
+      "description": "pieces",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CATALOG.md",
+          "lines": "505",
+          "quote": "  - pieces: \"About the {name} integration\""
+        }
+      ]
+    },
+    "mcp": {
+      "description": "mcp",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CATALOG.md",
+          "lines": "506",
+          "quote": "  - mcp: \"About the {name} MCP server\""
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "kind",
+      "subject"
+    ],
+    "properties": {
+      "kind": {
+        "enum": [
+          "pieces",
+          "mcp"
+        ]
+      },
+      "subject": {
+        "type": "string",
+        "pattern": "^data:pieces#[a-z0-9-]+$",
+        "x-example": "data:pieces#slack"
+      }
+    }
+  },
+  "media": {
+    "slots": {}
+  },
+  "constraints": {
+    "onePerPage": true
+  },
+  "variantRules": {
+    "piece": {
+      "contentEquals": {
+        "kind": "pieces"
+      }
+    },
+    "mcp": {
+      "contentEquals": {
+        "kind": "mcp"
+      }
+    }
+  },
+  "motion": {
+    "allowedPatterns": [
+      "none"
+    ],
+    "requiredPatterns": [],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "not-applicable"
+  },
+  "responsive": {
+    "evidence": [],
+    "changes": {}
+  },
+  "accessibility": [],
+  "notes": []
+}

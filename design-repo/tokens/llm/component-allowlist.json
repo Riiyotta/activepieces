@@ -1,0 +1,827 @@
+{
+  "$description": "Closed list of what a generator may instantiate. Parity with the contract files and the schema is machine-checked by extraction/verify_all.py (ALLOWLIST_PARITY).",
+  "version": "1.0.0",
+  "primitives": [
+    "primitive.avatar",
+    "primitive.button",
+    "primitive.form-field",
+    "primitive.icon",
+    "primitive.kicker",
+    "primitive.logo-mask",
+    "primitive.pill",
+    "primitive.text-link-arrow"
+  ],
+  "components": [
+    "component.bento-card",
+    "component.breadcrumb",
+    "component.catalog-card",
+    "component.demo-cursor",
+    "component.edge-card",
+    "component.faq-item",
+    "component.hero-cover",
+    "component.icon-band-card",
+    "component.info-tip",
+    "component.inline-cta-card",
+    "component.pagination",
+    "component.plan-card",
+    "component.post-card",
+    "component.resource-card",
+    "component.rotating-logo-grid",
+    "component.share-buttons",
+    "component.stat-row",
+    "component.testimonial-card",
+    "component.toc-rail",
+    "component.visual-stage"
+  ],
+  "sections": {
+    "band.icon-cards": {
+      "variants": [
+        "gradient",
+        "solid"
+      ],
+      "contentFields": [
+        "cards",
+        "h2"
+      ],
+      "mediaSlots": [],
+      "motionPatterns": [
+        "none"
+      ]
+    },
+    "bento.grid": {
+      "variants": [
+        "embed",
+        "home-platform",
+        "home-workspace",
+        "product",
+        "solution"
+      ],
+      "contentFields": [
+        "cards",
+        "h2"
+      ],
+      "mediaSlots": [],
+      "motionPatterns": [
+        "none"
+      ]
+    },
+    "catalog.about": {
+      "variants": [
+        "mcp",
+        "piece"
+      ],
+      "contentFields": [
+        "kind",
+        "subject"
+      ],
+      "mediaSlots": [],
+      "motionPatterns": [
+        "none"
+      ]
+    },
+    "catalog.az-index": {
+      "variants": [
+        "default"
+      ],
+      "contentFields": [
+        "h2",
+        "kind"
+      ],
+      "mediaSlots": [],
+      "motionPatterns": [
+        "az-index-open"
+      ]
+    },
+    "catalog.browser": {
+      "variants": [
+        "no-facets",
+        "with-facets"
+      ],
+      "contentFields": [
+        "dataSource",
+        "kind"
+      ],
+      "mediaSlots": [
+        "pieceLogos"
+      ],
+      "motionPatterns": [
+        "card-hover-shadow"
+      ]
+    },
+    "catalog.capability-list": {
+      "variants": [
+        "actions",
+        "ideas",
+        "tools",
+        "triggers"
+      ],
+      "contentFields": [
+        "kind",
+        "subject",
+        "subjectB"
+      ],
+      "mediaSlots": [],
+      "motionPatterns": [
+        "none"
+      ]
+    },
+    "catalog.categories": {
+      "variants": [
+        "default"
+      ],
+      "contentFields": [
+        "h2",
+        "kind"
+      ],
+      "mediaSlots": [],
+      "motionPatterns": [
+        "card-hover-shadow"
+      ]
+    },
+    "catalog.guides": {
+      "variants": [
+        "default"
+      ],
+      "contentFields": [
+        "kind",
+        "subject"
+      ],
+      "mediaSlots": [],
+      "motionPatterns": [
+        "card-hover-shadow"
+      ]
+    },
+    "catalog.related-grid": {
+      "variants": [
+        "pair-source",
+        "pair-target",
+        "pairings",
+        "related"
+      ],
+      "contentFields": [
+        "exclude",
+        "kind",
+        "subject"
+      ],
+      "mediaSlots": [],
+      "motionPatterns": [
+        "card-hover-shadow"
+      ]
+    },
+    "content.article": {
+      "variants": [
+        "default"
+      ],
+      "contentFields": [
+        "bodyMode",
+        "post"
+      ],
+      "mediaSlots": [
+        "bots",
+        "cover"
+      ],
+      "motionPatterns": [
+        "cover-hover-scale",
+        "reading-progress",
+        "signup-card-bots",
+        "toc-scrollspy"
+      ]
+    },
+    "content.blog-listing": {
+      "variants": [
+        "author",
+        "category",
+        "index-first",
+        "index-page"
+      ],
+      "contentFields": [
+        "dataSource",
+        "filterSlug",
+        "page"
+      ],
+      "mediaSlots": [
+        "authorPhoto",
+        "covers"
+      ],
+      "motionPatterns": [
+        "cover-hover-scale"
+      ]
+    },
+    "content.legal": {
+      "variants": [
+        "privacy",
+        "terms"
+      ],
+      "contentFields": [
+        "bodyMode",
+        "doc"
+      ],
+      "mediaSlots": [],
+      "motionPatterns": [
+        "legal-toggle"
+      ]
+    },
+    "content.resource-cards": {
+      "variants": [
+        "category-listing",
+        "hub-categories"
+      ],
+      "contentFields": [
+        "dataSource",
+        "h2",
+        "type"
+      ],
+      "mediaSlots": [],
+      "motionPatterns": [
+        "card-hover-shadow"
+      ]
+    },
+    "content.resource-detail": {
+      "variants": [
+        "default"
+      ],
+      "contentFields": [
+        "bodyMode",
+        "item"
+      ],
+      "mediaSlots": [],
+      "motionPatterns": [
+        "toc-scrollspy"
+      ]
+    },
+    "content.resource-related": {
+      "variants": [
+        "apps",
+        "keep-exploring",
+        "related"
+      ],
+      "contentFields": [
+        "dataSource",
+        "type"
+      ],
+      "mediaSlots": [],
+      "motionPatterns": [
+        "card-hover-shadow"
+      ]
+    },
+    "cta.band": {
+      "variants": [
+        "catalog-inline",
+        "home"
+      ],
+      "contentFields": [
+        "body",
+        "h2",
+        "primaryHref",
+        "primaryLabel",
+        "secondaryLabel"
+      ],
+      "mediaSlots": [],
+      "motionPatterns": [
+        "none"
+      ]
+    },
+    "directory.oss-friends": {
+      "variants": [
+        "default"
+      ],
+      "contentFields": [
+        "dataSource",
+        "h1",
+        "lede"
+      ],
+      "mediaSlots": [
+        "friendLogos"
+      ],
+      "motionPatterns": [
+        "card-hover-border"
+      ]
+    },
+    "faq.accordion": {
+      "variants": [
+        "default",
+        "resource"
+      ],
+      "contentFields": [
+        "h2",
+        "items"
+      ],
+      "mediaSlots": [],
+      "motionPatterns": [
+        "faq-accordion",
+        "faq-instant-toggle"
+      ]
+    },
+    "feature.demo-split": {
+      "variants": [
+        "agents-demo",
+        "flow-demo",
+        "pieces-mosaic"
+      ],
+      "contentFields": [
+        "columns",
+        "h2",
+        "lede",
+        "link"
+      ],
+      "mediaSlots": [
+        "mosaicLogos",
+        "stageArt"
+      ],
+      "motionPatterns": [
+        "demo-loop-agents",
+        "demo-loop-flow",
+        "mosaic-pop",
+        "mosaic-swap"
+      ]
+    },
+    "governance.hero": {
+      "variants": [
+        "default"
+      ],
+      "contentFields": [
+        "cta",
+        "h1",
+        "lede"
+      ],
+      "mediaSlots": [
+        "heroArt",
+        "projectAvatars",
+        "rotatingLogos"
+      ],
+      "motionPatterns": [
+        "logo-rotate-set",
+        "sticky-bar-border"
+      ]
+    },
+    "governance.models-grid": {
+      "variants": [
+        "default"
+      ],
+      "contentFields": [
+        "cards",
+        "statement"
+      ],
+      "mediaSlots": [
+        "modelLogos"
+      ],
+      "motionPatterns": [
+        "models-grid-scrub"
+      ]
+    },
+    "governance.rollout-deck": {
+      "variants": [
+        "default"
+      ],
+      "contentFields": [
+        "h2",
+        "slots"
+      ],
+      "mediaSlots": [],
+      "motionPatterns": [
+        "rollout-deck-pin"
+      ]
+    },
+    "hero.catalog-detail": {
+      "variants": [
+        "mcp",
+        "pair",
+        "piece"
+      ],
+      "contentFields": [
+        "kind",
+        "subject",
+        "subjectB"
+      ],
+      "mediaSlots": [
+        "logos"
+      ],
+      "motionPatterns": [
+        "none"
+      ]
+    },
+    "hero.catalog-index": {
+      "variants": [
+        "category",
+        "mcp-connect",
+        "pieces-scatter"
+      ],
+      "contentFields": [
+        "featureList",
+        "h1",
+        "kind",
+        "lede"
+      ],
+      "mediaSlots": [
+        "clientLogos",
+        "scatterLogos"
+      ],
+      "motionPatterns": [
+        "catalog-scatter-throw",
+        "hero-line-template",
+        "mcp-card-in"
+      ]
+    },
+    "hero.home-stage": {
+      "variants": [
+        "default"
+      ],
+      "contentFields": [
+        "aiCtaLabel",
+        "h1",
+        "note",
+        "secondaryCta",
+        "subhead"
+      ],
+      "mediaSlots": [
+        "aiCtaLogos",
+        "marqueeLogos",
+        "plates"
+      ],
+      "motionPatterns": [
+        "ai-cta-sheen",
+        "hero-line-home",
+        "hero-plate-fade",
+        "marquee-drift"
+      ]
+    },
+    "hero.product-stage": {
+      "variants": [
+        "embed-highlights",
+        "product-columns",
+        "solution-logos"
+      ],
+      "contentFields": [
+        "columns",
+        "ctaKey",
+        "h1",
+        "lede",
+        "primaryLabel",
+        "secondaryLabel",
+        "stageArt",
+        "visual"
+      ],
+      "mediaSlots": [
+        "mockLogos",
+        "rotatingLogos",
+        "stageArt"
+      ],
+      "motionPatterns": [
+        "demo-loop-agents",
+        "demo-loop-chat",
+        "demo-loop-flow",
+        "demo-loop-tables",
+        "hero-line-template",
+        "logo-rotate-set"
+      ]
+    },
+    "hero.resources": {
+      "variants": [
+        "category",
+        "hub"
+      ],
+      "contentFields": [
+        "h1",
+        "lede",
+        "type"
+      ],
+      "mediaSlots": [],
+      "motionPatterns": [
+        "hero-line-template"
+      ]
+    },
+    "media.app-shot": {
+      "variants": [
+        "default"
+      ],
+      "contentFields": [],
+      "mediaSlots": [
+        "agentAvatars",
+        "toolLogos"
+      ],
+      "motionPatterns": [
+        "hero-line-home"
+      ]
+    },
+    "overlay.use-in-ai-dialog": {
+      "variants": [
+        "default"
+      ],
+      "contentFields": [],
+      "mediaSlots": [
+        "clientLogos"
+      ],
+      "motionPatterns": [
+        "dialog-open"
+      ]
+    },
+    "pricing.compare": {
+      "variants": [
+        "default"
+      ],
+      "contentFields": [
+        "groups",
+        "h2"
+      ],
+      "mediaSlots": [],
+      "motionPatterns": [
+        "infotip-fade"
+      ]
+    },
+    "pricing.plans": {
+      "variants": [
+        "default"
+      ],
+      "contentFields": [
+        "h1",
+        "lede",
+        "plans",
+        "rows"
+      ],
+      "mediaSlots": [
+        "rotatingLogos",
+        "rowArt"
+      ],
+      "motionPatterns": [
+        "animated-number",
+        "billing-toggle-clip",
+        "infotip-fade",
+        "logo-rotate-set"
+      ]
+    },
+    "proof.case-study": {
+      "variants": [
+        "case-a",
+        "case-b"
+      ],
+      "contentFields": [
+        "meta",
+        "name",
+        "quoteEmphasis",
+        "quoteLead",
+        "quoteTail",
+        "role",
+        "stats"
+      ],
+      "mediaSlots": [
+        "logo"
+      ],
+      "motionPatterns": [
+        "none"
+      ]
+    },
+    "proof.testimonials": {
+      "variants": [
+        "default"
+      ],
+      "contentFields": [
+        "cards",
+        "h2",
+        "stats"
+      ],
+      "mediaSlots": [
+        "avatars",
+        "platformMarks"
+      ],
+      "motionPatterns": [
+        "none"
+      ]
+    },
+    "sales.split": {
+      "variants": [
+        "default"
+      ],
+      "contentFields": [
+        "bullets",
+        "h1",
+        "lede",
+        "quote",
+        "quoteBy",
+        "submitBehavior"
+      ],
+      "mediaSlots": [
+        "background",
+        "formLogo",
+        "logos",
+        "quoteAvatar"
+      ],
+      "motionPatterns": [
+        "logo-rotate-random"
+      ]
+    },
+    "security.feature-rows": {
+      "variants": [
+        "default"
+      ],
+      "contentFields": [
+        "rows"
+      ],
+      "mediaSlots": [],
+      "motionPatterns": [
+        "security-stage-swap"
+      ]
+    },
+    "security.hero-cipher": {
+      "variants": [
+        "default"
+      ],
+      "contentFields": [
+        "facts",
+        "h1",
+        "lede",
+        "primary",
+        "secondary"
+      ],
+      "mediaSlots": [],
+      "motionPatterns": [
+        "security-cipher-wall"
+      ]
+    },
+    "shell.floating-card": {
+      "variants": [
+        "default"
+      ],
+      "contentFields": [],
+      "mediaSlots": [
+        "mark"
+      ],
+      "motionPatterns": [
+        "floating-card-enter"
+      ]
+    },
+    "shell.footer-closing": {
+      "variants": [
+        "custom-buttons",
+        "default"
+      ],
+      "contentFields": [
+        "h2",
+        "lede",
+        "primary",
+        "reassurance",
+        "secondary"
+      ],
+      "mediaSlots": [],
+      "motionPatterns": [
+        "none"
+      ]
+    },
+    "shell.header": {
+      "variants": [
+        "default",
+        "on-art"
+      ],
+      "contentFields": [],
+      "mediaSlots": [],
+      "motionPatterns": [
+        "header-dropdown",
+        "header-hide-show",
+        "header-nav-in",
+        "mobile-sheet"
+      ]
+    },
+    "story.dream-scroll": {
+      "variants": [
+        "default"
+      ],
+      "contentFields": [
+        "beat1",
+        "beat2",
+        "beat3"
+      ],
+      "mediaSlots": [
+        "beatMark",
+        "nodeLogos"
+      ],
+      "motionPatterns": [
+        "dream-scroll-scrub",
+        "dream-time-tween"
+      ]
+    },
+    "system.external-redirect": {
+      "variants": [
+        "default"
+      ],
+      "contentFields": [
+        "targetOrigin"
+      ],
+      "mediaSlots": [],
+      "motionPatterns": [
+        "none"
+      ]
+    },
+    "system.not-found": {
+      "variants": [
+        "default"
+      ],
+      "contentFields": [],
+      "mediaSlots": [],
+      "motionPatterns": [
+        "none"
+      ]
+    }
+  },
+  "templates": [
+    "template.ai-governance",
+    "template.blog-article",
+    "template.blog-listing",
+    "template.catalog-category",
+    "template.catalog-detail",
+    "template.catalog-index",
+    "template.catalog-pair",
+    "template.embed",
+    "template.external-redirect",
+    "template.home",
+    "template.legal",
+    "template.not-found",
+    "template.oss-friends",
+    "template.pricing",
+    "template.product",
+    "template.resource-category",
+    "template.resource-detail",
+    "template.resources-hub",
+    "template.sales",
+    "template.security",
+    "template.solution"
+  ],
+  "nodeProperties": [
+    "id",
+    "section",
+    "variant",
+    "content",
+    "media",
+    "motion"
+  ],
+  "assetRoles": [
+    "ai-client.logo",
+    "art.closing",
+    "art.gov-hero",
+    "art.panel",
+    "art.plate",
+    "author.photo",
+    "badge.backer",
+    "blog.cover",
+    "brand.logo-full",
+    "brand.logomark",
+    "brand.mark",
+    "brand.wordmark",
+    "case-study.logo",
+    "customer.logo",
+    "icon.ui",
+    "mock.avatar",
+    "mock.brand-fictional",
+    "oss-friend.logo",
+    "piece.logo",
+    "review-platform.mark",
+    "testimonial.avatar"
+  ],
+  "motionPatterns": [
+    "ai-cta-sheen",
+    "animated-number",
+    "az-index-open",
+    "billing-toggle-clip",
+    "card-hover-border",
+    "card-hover-shadow",
+    "catalog-scatter-throw",
+    "cover-hover-scale",
+    "demo-loop-agents",
+    "demo-loop-chat",
+    "demo-loop-flow",
+    "demo-loop-tables",
+    "dialog-open",
+    "dream-scroll-scrub",
+    "dream-time-tween",
+    "faq-accordion",
+    "faq-instant-toggle",
+    "floating-card-enter",
+    "header-dropdown",
+    "header-hide-show",
+    "header-nav-in",
+    "hero-line-home",
+    "hero-line-template",
+    "hero-plate-fade",
+    "infotip-fade",
+    "legal-toggle",
+    "logo-rotate-random",
+    "logo-rotate-set",
+    "marquee-drift",
+    "mcp-card-in",
+    "mobile-sheet",
+    "models-grid-scrub",
+    "mosaic-pop",
+    "mosaic-swap",
+    "none",
+    "reading-progress",
+    "rollout-deck-pin",
+    "security-cipher-wall",
+    "security-stage-swap",
+    "signup-card-bots",
+    "sticky-bar-border",
+    "toc-scrollspy"
+  ],
+  "reducedMotionFallbacks": [
+    "not-applicable",
+    "static-end-state",
+    "static-first-set"
+  ]
+}

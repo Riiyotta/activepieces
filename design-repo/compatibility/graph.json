@@ -1,0 +1,433 @@
+{
+  "$description": "Rhythm/position/compatibility rules JSON Schema cannot express. Every rule id here is implemented in schema/semantic_validate.py RULES and vice versa (verify_all.py GRAPH_VALIDATOR_AGREEMENT). Exceptions are derived from the real template node sequences.",
+  "rules": [
+    {
+      "id": "TEMPLATE_KNOWN",
+      "severity": "error",
+      "description": "PageSpec.template must be a template id in templates/templates.json.",
+      "enforcedBy": "schema/semantic_validate.py RULES['TEMPLATE_KNOWN']"
+    },
+    {
+      "id": "ROUTE_MATCHES_TEMPLATE",
+      "severity": "error",
+      "description": "PageSpec.route must match one of the template's route patterns in templates/routes.json, including param enums (product/solution slugs, category keys, resource types).",
+      "enforcedBy": "schema/semantic_validate.py RULES['ROUTE_MATCHES_TEMPLATE']"
+    },
+    {
+      "id": "NODE_SEQUENCE_MATCHES_TEMPLATE",
+      "severity": "error",
+      "description": "nodes[] must follow the declared template's OWN node list: same order, every required node present, optional nodes may be omitted, no extra nodes, each node's variant within that slot's variants; repeatable slots may repeat consecutively.",
+      "enforcedBy": "schema/semantic_validate.py RULES['NODE_SEQUENCE_MATCHES_TEMPLATE']"
+    },
+    {
+      "id": "SHELL_HEADER_FIRST",
+      "severity": "error",
+      "description": "Layout templates start with shell.header; the standalone template.sales contains no shell.* node.",
+      "enforcedBy": "schema/semantic_validate.py RULES['SHELL_HEADER_FIRST']"
+    },
+    {
+      "id": "FOOTER_THEN_FLOATING_LAST",
+      "severity": "error",
+      "description": "shell.footer-closing is the last node, optionally followed only by shell.floating-card.",
+      "enforcedBy": "schema/semantic_validate.py RULES['FOOTER_THEN_FLOATING_LAST']"
+    },
+    {
+      "id": "FLOATING_CARD_ROUTE_RULE",
+      "severity": "error",
+      "description": "shell.floating-card is present iff the route does NOT match ^/(sales|pricing|admin|customers|blog)(/|$) (Layout.jsx).",
+      "enforcedBy": "schema/semantic_validate.py RULES['FLOATING_CARD_ROUTE_RULE']",
+      "evidence": [
+        {
+          "file": "src/components/Layout.jsx",
+          "lines": "15",
+          "quote": "!/^\\/(sales|pricing|admin|customers|blog)(\\/|$)/.test(pathname)"
+        }
+      ]
+    },
+    {
+      "id": "HEADER_ON_ART_HOME_ONLY",
+      "severity": "error",
+      "description": "shell.header variant on-art only on route '/', default everywhere else.",
+      "enforcedBy": "schema/semantic_validate.py RULES['HEADER_ON_ART_HOME_ONLY']",
+      "evidence": [
+        {
+          "file": "src/components/Layout.jsx",
+          "lines": "32",
+          "quote": "<Header heroArt={isHome} />"
+        }
+      ]
+    },
+    {
+      "id": "ONE_HERO",
+      "severity": "error",
+      "description": "At most one hero-category section per page, and exactly one on templates whose node list contains a hero. Named exceptions (templates with no hero section) are listed in `exceptions`.",
+      "enforcedBy": "schema/semantic_validate.py RULES['ONE_HERO']",
+      "exceptions": [
+        "template.blog-article",
+        "template.blog-listing",
+        "template.external-redirect",
+        "template.legal",
+        "template.not-found",
+        "template.oss-friends",
+        "template.pricing",
+        "template.resource-detail",
+        "template.sales"
+      ]
+    },
+    {
+      "id": "HERO_FOLLOWS_HEADER",
+      "severity": "error",
+      "description": "A hero-category section must immediately follow shell.header.",
+      "enforcedBy": "schema/semantic_validate.py RULES['HERO_FOLLOWS_HEADER']"
+    },
+    {
+      "id": "ONE_PER_PAGE",
+      "severity": "error",
+      "description": "Section constraints onePerPage / maxPerPage (keyed on section id) are respected.",
+      "enforcedBy": "schema/semantic_validate.py RULES['ONE_PER_PAGE']"
+    },
+    {
+      "id": "HOME_ROUTE_ONLY",
+      "severity": "error",
+      "description": "Sections with constraints.homeRouteOnly appear only on route '/'.",
+      "enforcedBy": "schema/semantic_validate.py RULES['HOME_ROUTE_ONLY']"
+    },
+    {
+      "id": "NO_CONSECUTIVE_SCROLL_STAGES",
+      "severity": "error",
+      "description": "Two scroll-stage sections (constraints.scrollStage) may not be adjacent.",
+      "enforcedBy": "schema/semantic_validate.py RULES['NO_CONSECUTIVE_SCROLL_STAGES']"
+    },
+    {
+      "id": "NO_ADJACENT_SAME_SECTION_VARIANT",
+      "severity": "error",
+      "description": "Two adjacent nodes may not share the same (section, variant) pair; the same section with DIFFERENT variants may be adjacent (e.g. capability-list triggers -> actions).",
+      "enforcedBy": "schema/semantic_validate.py RULES['NO_ADJACENT_SAME_SECTION_VARIANT']"
+    },
+    {
+      "id": "NO_ADJACENT_SAME_CATEGORY",
+      "severity": "warn",
+      "description": "Adjacent nodes of the same category are a rhythm smell unless the (section, section) pair is a named exception observed in a real template.",
+      "enforcedBy": "schema/semantic_validate.py RULES['NO_ADJACENT_SAME_CATEGORY']",
+      "exceptions": [
+        [
+          "catalog.about",
+          "catalog.capability-list"
+        ],
+        [
+          "catalog.capability-list",
+          "catalog.capability-list"
+        ],
+        [
+          "catalog.guides",
+          "catalog.related-grid"
+        ],
+        [
+          "catalog.related-grid",
+          "catalog.related-grid"
+        ],
+        [
+          "content.resource-cards",
+          "content.resource-related"
+        ],
+        [
+          "content.resource-related",
+          "content.resource-related"
+        ],
+        [
+          "feature.demo-split",
+          "feature.demo-split"
+        ],
+        [
+          "pricing.plans",
+          "pricing.compare"
+        ],
+        [
+          "proof.case-study",
+          "proof.testimonials"
+        ]
+      ]
+    },
+    {
+      "id": "MOTION_PATTERN_ALLOWED",
+      "severity": "error",
+      "description": "Every motion entry's pattern is in the section's allowedPatterns; requiredPatterns and the variant's variantRequiredPatterns are all present.",
+      "enforcedBy": "schema/semantic_validate.py RULES['MOTION_PATTERN_ALLOWED']"
+    },
+    {
+      "id": "MOTION_VALUES_PINNED",
+      "severity": "error",
+      "description": "Each motion entry reproduces its pattern's registry values exactly (trigger, durationMs, easing, delayMs, staggerMs, intervalMs).",
+      "enforcedBy": "schema/semantic_validate.py RULES['MOTION_VALUES_PINNED']"
+    },
+    {
+      "id": "REDUCED_MOTION_FALLBACK",
+      "severity": "error",
+      "description": "node.motion.reducedMotionFallback equals the section's const fallback.",
+      "enforcedBy": "schema/semantic_validate.py RULES['REDUCED_MOTION_FALLBACK']"
+    },
+    {
+      "id": "MOTION_BUDGET",
+      "severity": "warn",
+      "description": "At most 5 continuous / interval / loop motion entries per page (home uses 4).",
+      "enforcedBy": "schema/semantic_validate.py RULES['MOTION_BUDGET']",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "859",
+          "quote": "| Logo marquee | always | 82.8s (≥768) / 72s linear infinite, −50% | — |"
+        }
+      ]
+    },
+    {
+      "id": "MEDIA_ROLE_ALLOWED",
+      "severity": "error",
+      "description": "Each media item names a slot defined by the section, an assetRole allowed for that slot, and the slot's maxItems is respected.",
+      "enforcedBy": "schema/semantic_validate.py RULES['MEDIA_ROLE_ALLOWED']"
+    },
+    {
+      "id": "MEDIA_REF_POLICY",
+      "severity": "error",
+      "description": "Each media ref satisfies its role's generationPolicy refRule (placeholder:/data:/closed path list); never http(s).",
+      "enforcedBy": "schema/semantic_validate.py RULES['MEDIA_REF_POLICY']"
+    },
+    {
+      "id": "REQUIRED_MEDIA_SLOT",
+      "severity": "error",
+      "description": "Slots marked required are present.",
+      "enforcedBy": "schema/semantic_validate.py RULES['REQUIRED_MEDIA_SLOT']"
+    },
+    {
+      "id": "MAX_WORDS",
+      "severity": "error",
+      "description": "Every text field respects its x-maxWords budget.",
+      "enforcedBy": "schema/semantic_validate.py RULES['MAX_WORDS']"
+    },
+    {
+      "id": "VARIANT_RULES",
+      "severity": "error",
+      "description": "Section variantRules (requiredContent, forbiddenContent, requiredAnyContent, itemCount, contentEquals, minValue) hold.",
+      "enforcedBy": "schema/semantic_validate.py RULES['VARIANT_RULES']"
+    },
+    {
+      "id": "BENTO_ROW_SUM_24",
+      "severity": "error",
+      "description": "bento.grid card spans fill rows of exactly 24 columns.",
+      "enforcedBy": "schema/semantic_validate.py RULES['BENTO_ROW_SUM_24']",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "704",
+          "quote": "- Grid: `grid grid-cols-1 gap-4`; md: `grid-cols-24 gap-5` (20px), i.e. 24 equal columns."
+        }
+      ]
+    },
+    {
+      "id": "CATALOG_KIND_CONSISTENT",
+      "severity": "error",
+      "description": "All nodes carrying content.kind share one kind, which matches the route prefix (/pieces vs /mcp).",
+      "enforcedBy": "schema/semantic_validate.py RULES['CATALOG_KIND_CONSISTENT']"
+    },
+    {
+      "id": "ROUTE_SUBJECT_MATCH",
+      "severity": "error",
+      "description": "Catalog detail/pair subjects match the route slugs; pair slugs are distinct.",
+      "enforcedBy": "schema/semantic_validate.py RULES['ROUTE_SUBJECT_MATCH']",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CATALOG.md",
+          "lines": "18",
+          "quote": "| `/pieces/:a/:b` | 3,000 (250 sources × 12 targets) | PairPage | `a===b` → 404; either slug unknown → 404 |"
+        }
+      ]
+    },
+    {
+      "id": "REAL_ENTITY_DENYLIST",
+      "severity": "error",
+      "description": "No content string names a real customer, reviewer, case-study person, review platform/trademark or blog author (rules/content-policy.json).",
+      "enforcedBy": "schema/semantic_validate.py RULES['REAL_ENTITY_DENYLIST']"
+    },
+    {
+      "id": "REAL_COPY_VERBATIM",
+      "severity": "error",
+      "description": "No content string equals or contains a real-copy fingerprint (rules/content-policy.json).",
+      "enforcedBy": "schema/semantic_validate.py RULES['REAL_COPY_VERBATIM']"
+    },
+    {
+      "id": "NO_STORED_BODIES",
+      "severity": "error",
+      "description": "No content key named body/markdown/html/bodyText/article anywhere; article/resource/legal sections use bodyMode 'placeholder'.",
+      "enforcedBy": "schema/semantic_validate.py RULES['NO_STORED_BODIES']"
+    },
+    {
+      "id": "OUTBOUND_LINK_HOSTS",
+      "severity": "error",
+      "description": "Every href is internal ('/...') or on the outbound host allowlist.",
+      "enforcedBy": "schema/semantic_validate.py RULES['OUTBOUND_LINK_HOSTS']"
+    },
+    {
+      "id": "UNIQUE_NODE_IDS",
+      "severity": "error",
+      "description": "node.id values are unique.",
+      "enforcedBy": "schema/semantic_validate.py RULES['UNIQUE_NODE_IDS']"
+    }
+  ],
+  "observedPredecessors": {
+    "band.icon-cards": [
+      "governance.rollout-deck",
+      "security.feature-rows"
+    ],
+    "bento.grid": [
+      "feature.demo-split",
+      "hero.product-stage"
+    ],
+    "catalog.about": [
+      "hero.catalog-detail"
+    ],
+    "catalog.az-index": [
+      "faq.accordion"
+    ],
+    "catalog.browser": [
+      "hero.catalog-index"
+    ],
+    "catalog.capability-list": [
+      "catalog.about",
+      "catalog.capability-list",
+      "hero.catalog-detail"
+    ],
+    "catalog.categories": [
+      "cta.band"
+    ],
+    "catalog.guides": [
+      "faq.accordion"
+    ],
+    "catalog.related-grid": [
+      "catalog.guides",
+      "catalog.related-grid",
+      "faq.accordion"
+    ],
+    "content.article": [
+      "shell.header"
+    ],
+    "content.blog-listing": [
+      "shell.header"
+    ],
+    "content.legal": [
+      "shell.header"
+    ],
+    "content.resource-cards": [
+      "hero.resources"
+    ],
+    "content.resource-detail": [
+      "shell.header"
+    ],
+    "content.resource-related": [
+      "content.resource-cards",
+      "content.resource-related",
+      "faq.accordion"
+    ],
+    "cta.band": [
+      "bento.grid",
+      "catalog.browser",
+      "catalog.capability-list",
+      "proof.case-study"
+    ],
+    "directory.oss-friends": [
+      "shell.header"
+    ],
+    "faq.accordion": [
+      "band.icon-cards",
+      "bento.grid",
+      "catalog.capability-list",
+      "catalog.categories",
+      "content.resource-detail",
+      "content.resource-related",
+      "cta.band",
+      "pricing.compare",
+      "proof.testimonials"
+    ],
+    "feature.demo-split": [
+      "cta.band",
+      "feature.demo-split",
+      "proof.case-study"
+    ],
+    "governance.hero": [
+      "shell.header"
+    ],
+    "governance.models-grid": [
+      "governance.hero"
+    ],
+    "governance.rollout-deck": [
+      "proof.case-study"
+    ],
+    "hero.catalog-detail": [
+      "shell.header"
+    ],
+    "hero.catalog-index": [
+      "shell.header"
+    ],
+    "hero.home-stage": [
+      "shell.header"
+    ],
+    "hero.product-stage": [
+      "shell.header"
+    ],
+    "hero.resources": [
+      "shell.header"
+    ],
+    "media.app-shot": [
+      "hero.home-stage"
+    ],
+    "overlay.use-in-ai-dialog": [
+      "faq.accordion"
+    ],
+    "pricing.compare": [
+      "pricing.plans"
+    ],
+    "pricing.plans": [
+      "shell.header"
+    ],
+    "proof.case-study": [
+      "bento.grid",
+      "cta.band",
+      "governance.models-grid",
+      "story.dream-scroll"
+    ],
+    "proof.testimonials": [
+      "bento.grid",
+      "proof.case-study"
+    ],
+    "security.feature-rows": [
+      "security.hero-cipher"
+    ],
+    "security.hero-cipher": [
+      "shell.header"
+    ],
+    "shell.floating-card": [
+      "shell.footer-closing"
+    ],
+    "shell.footer-closing": [
+      "catalog.az-index",
+      "catalog.related-grid",
+      "content.article",
+      "content.blog-listing",
+      "content.legal",
+      "content.resource-cards",
+      "content.resource-related",
+      "directory.oss-friends",
+      "faq.accordion",
+      "overlay.use-in-ai-dialog",
+      "system.external-redirect",
+      "system.not-found"
+    ],
+    "story.dream-scroll": [
+      "media.app-shot"
+    ],
+    "system.external-redirect": [
+      "shell.header"
+    ],
+    "system.not-found": [
+      "shell.header"
+    ]
+  }
+}

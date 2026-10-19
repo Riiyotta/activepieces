@@ -1,0 +1,98 @@
+{
+  "id": "catalog.browser",
+  "layer": "section",
+  "category": "catalog",
+  "purpose": "Searchable, facet-filtered catalog grid of CatalogCards bound to pieces.json (no facet sidebar on category pages).",
+  "implementedBy": [
+    "src/components/catalog/CatalogBrowser.jsx",
+    "src/components/catalog/lib.js"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_CATALOG.md",
+      "lines": "299",
+      "quote": "### 4.2 Browser (catalog-browser)"
+    }
+  ],
+  "variants": {
+    "with-facets": {
+      "description": "/pieces and /mcp: facet sidebar.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CATALOG.md",
+          "lines": "15",
+          "quote": "| `/pieces` | 1 | CatalogPage kind=pieces, with filters | — |"
+        }
+      ]
+    },
+    "no-facets": {
+      "description": "Category pages: no facet sidebar.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CATALOG.md",
+          "lines": "16",
+          "quote": "| `/pieces/category/:key` | 17 | CatalogPage kind=pieces, **no facet sidebar**, category copy |"
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "kind",
+      "dataSource"
+    ],
+    "properties": {
+      "kind": {
+        "enum": [
+          "pieces",
+          "mcp"
+        ]
+      },
+      "dataSource": {
+        "const": "data:pieces"
+      }
+    }
+  },
+  "media": {
+    "slots": {
+      "pieceLogos": {
+        "roles": [
+          "piece.logo"
+        ],
+        "maxItems": 800,
+        "required": false
+      }
+    }
+  },
+  "constraints": {
+    "onePerPage": true
+  },
+  "variantRules": {},
+  "motion": {
+    "allowedPatterns": [
+      "card-hover-shadow"
+    ],
+    "requiredPatterns": [
+      "card-hover-shadow"
+    ],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "static-end-state"
+  },
+  "responsive": {
+    "evidence": [
+      {
+        "file": "specs/SPEC_CATALOG.md",
+        "lines": "163",
+        "quote": "Measured at 1440 in a 2-column grid: 420×235 for a single-line description;"
+      }
+    ],
+    "changes": {
+      "base": "1 column",
+      "lg": "sidebar + 2-column grid (3 without sidebar)"
+    }
+  },
+  "accessibility": [],
+  "notes": []
+}

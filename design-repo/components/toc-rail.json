@@ -1,0 +1,25 @@
+{
+  "id": "component.toc-rail",
+  "layer": "component",
+  "purpose": "\"On this page\" table of contents with scroll-spy.",
+  "composes": [],
+  "implementedBy": [
+    "src/components/content/parts.jsx",
+    "src/components/content/noToc.js"
+  ],
+  "rules": [
+    "Blog article left rail renders when hasTocRail(post) = post.hasToc || !NO_TOC.has(slug) AND the placeholder TOC has >= 3 entries; hidden below xl."
+  ],
+  "evidence": [
+    {
+      "file": "src/components/content/noToc.js",
+      "lines": "71",
+      "quote": "export const hasTocRail = (post) => post.hasToc || !NO_TOC.has(post.slug)"
+    },
+    {
+      "file": "src/pages/blog/BlogArticle.jsx",
+      "lines": "130",
+      "quote": "{hasTocRail(post) && ARTICLE_TOC.length >= 3 && ("
+    }
+  ]
+}

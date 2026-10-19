@@ -1,0 +1,63 @@
+/* F. Section-specific CSS for FeatureAgents (co-located; do not put this in index.css).
+ * Stage + visual shell (CLONE_SPEC §F/G/K): pages.CaRGUvqN.css `.stage:after`, entry.css `.visual-pad` / `.visual-stage`.
+ * Scoped to the section so it can't collide with other builders' copies. */
+[data-section='agents'] .stage::after {
+  content: '';
+  z-index: -5;
+  pointer-events: none;
+  background: radial-gradient(ellipse 62% 62% at 50% 50%, rgba(2, 6, 24, .08) 0, transparent 72%);
+  position: absolute;
+  inset: 0;
+}
+/* v4 `saturate-75` (not in the v3 scale) */
+[data-section='agents'] .stage-art {
+  filter: saturate(75%);
+}
+[data-section='agents'] .visual-pad {
+  width: 100%;
+  padding: 2.5rem 1.5rem;
+}
+@media (min-width: 640px) {
+  [data-section='agents'] .visual-pad {
+    padding: 3rem;
+  }
+}
+[data-section='agents'] .visual-stage {
+  border-radius: 1rem;
+  width: 100%;
+  max-width: 34rem;
+  height: 28rem;
+  box-shadow: var(--shadow-lift);
+  background-color: #fff;
+  margin-inline: auto;
+  position: relative;
+}
+
+/* agent-thread.BahVoFBt.css */
+[data-section='agents'] .thread {
+  -webkit-mask-image: linear-gradient(#0000, #000 28px);
+  mask-image: linear-gradient(#0000, #000 28px);
+}
+/* `fade` transition (enter): "· result" on a finished tool call */
+[data-section='agents'] .agent-fade-in {
+  animation: agent-fade-in .26s both;
+}
+@keyframes agent-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-section='agents'] .agent-fade-in {
+    animation: none;
+  }
+}
+
+/* v4 `md:divide-x md:divide-ink-950/10`: border-inline-end on every child but the last
+ * (v3 puts border-left on every child but the first, shifting columns 2-3 content by 1px). */
+@media (min-width: 768px) {
+  [data-section='agents'] .cols-divide > :not(:last-child) {
+    border-right-width: 1px;
+    border-color: rgb(2 6 24 / .1);
+  }
+}

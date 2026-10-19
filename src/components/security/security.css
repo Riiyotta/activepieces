@@ -1,0 +1,45 @@
+/* /security scoped CSS (security.D2D4B2fx.css; SPEC_MARKETING §4.A/§4.B/§4.E). */
+
+/* cipher-wall mask */
+.sec-wall {
+  -webkit-mask-image: linear-gradient(#0000 0, #000 16% 62%, #0000 88%);
+  mask-image: linear-gradient(#0000 0, #000 16% 62%, #0000 88%);
+}
+@media (min-width: 1024px) {
+  .sec-wall {
+    -webkit-mask-image: linear-gradient(90deg, #0000000f 0, #0000004d 32%, #000 56%), linear-gradient(#0000 0, #000 16% 86%, #0000);
+    mask-image: linear-gradient(90deg, #0000000f 0, #0000004d 32%, #000 56%), linear-gradient(#0000 0, #000 16% 86%, #0000);
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+  }
+}
+
+/* glyph-field fades */
+.glyph-section {
+  -webkit-mask-image: linear-gradient(#0000 0, #000 7% 74%, #0000);
+  mask-image: linear-gradient(#0000 0, #000 7% 74%, #0000);
+}
+.glyph-panel {
+  -webkit-mask-image: radial-gradient(68% 60%, #0000 0 52%, #000 96%);
+  mask-image: radial-gradient(68% 60%, #0000 0 52%, #000 96%);
+}
+
+/* security-stage highlight: v4 `bg-radial-[at_50%_34%] from-white/16 via-white/6 to-transparent to-72%` */
+.sec-stage-glow {
+  background-image: radial-gradient(at 50% 34%, rgb(255 255 255 / .16) 0%, rgb(255 255 255 / .06) 50%, transparent 72%);
+}
+
+/* Mock code tokens (SPEC_MARKETING §0.3). .code-fn/.code-str/.code-text are global (BentoPlatformCard.css);
+ * .code-dim is new and scoped here (the product builder's copy is scoped to .tpl-page). */
+[data-section='security_rows'] .code-dim {
+  color: var(--color-ink-600);
+}
+[data-section='security_rows'] .code-fn {
+  color: var(--color-primary-800);
+}
+[data-section='security_rows'] .code-str {
+  color: var(--color-accent-b-700);
+}
+[data-section='security_rows'] .code-text {
+  color: var(--color-ink-800);
+}

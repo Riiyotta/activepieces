@@ -1,0 +1,134 @@
+{
+  "id": "faq.accordion",
+  "layer": "section",
+  "category": "faq",
+  "purpose": "max-w-3xl FAQ: Sentient H2 + stack of edge-card accordion items; first item open, one open at a time.",
+  "implementedBy": [
+    "src/components/Faq.jsx",
+    "src/components/content/parts.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "771",
+      "quote": "## N. FAQ"
+    },
+    {
+      "file": "specs/SPEC_CATALOG.md",
+      "lines": "185",
+      "quote": "### 3.4 `FaqSection`"
+    },
+    {
+      "file": "specs/SPEC_CONTENT.md",
+      "lines": "211",
+      "quote": "### 1.13 FAQ accordion (resources pages)"
+    }
+  ],
+  "variants": {
+    "default": {
+      "description": "Faq.jsx: height+opacity 200ms ease-out; first item open.",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "780",
+          "quote": "- Accordion: one open at a time; **the first item is open by default**."
+        }
+      ],
+      "implementedBy": [
+        "src/components/Faq.jsx"
+      ]
+    },
+    "resource": {
+      "description": "ResourceFaq: panel toggles instantly, only the + icon rotates.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CONTENT.md",
+          "lines": "808",
+          "quote": "| FAQ | click | `+` icon rotate-45 | 200ms | — | panel toggles instantly (display) |"
+        }
+      ],
+      "implementedBy": [
+        "src/components/content/parts.jsx"
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "h2",
+      "items"
+    ],
+    "properties": {
+      "h2": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 10
+      },
+      "items": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 8,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "question",
+            "answer"
+          ],
+          "properties": {
+            "question": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 18
+            },
+            "answer": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 110
+            }
+          }
+        }
+      }
+    }
+  },
+  "media": {
+    "slots": {}
+  },
+  "constraints": {
+    "onePerPage": true
+  },
+  "variantRules": {},
+  "motion": {
+    "allowedPatterns": [
+      "faq-accordion",
+      "faq-instant-toggle"
+    ],
+    "requiredPatterns": [],
+    "variantRequiredPatterns": {
+      "default": [
+        "faq-accordion"
+      ],
+      "resource": [
+        "faq-instant-toggle"
+      ]
+    },
+    "reducedMotionFallback": "static-end-state"
+  },
+  "responsive": {
+    "evidence": [
+      {
+        "file": "specs/SPEC_MARKETING.md",
+        "lines": "69",
+        "quote": "On mobile, long questions wrap: the button stays `py-5`, so the question line-height is 28 and the item is 108px tall with 2 lines at 390."
+      }
+    ],
+    "changes": {
+      "base": "px-5 items; H2 30/36",
+      "sm": "px-6 items",
+      "md": "H2 36/40, mb-8"
+    }
+  },
+  "accessibility": [],
+  "notes": []
+}

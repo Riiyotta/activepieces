@@ -1,0 +1,117 @@
+{
+  "id": "band.icon-cards",
+  "layer": "section",
+  "category": "band",
+  "purpose": "Ink-100 ground band (48px bottom radius) with centered Sentient H2 and 6-9 icon-tile cards.",
+  "implementedBy": [
+    "src/components/IconBand.jsx",
+    "src/components/IconBand.css"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_MARKETING.md",
+      "lines": "74",
+      "quote": "### 1.3 `IconBand` (NEW; used on /security and /ai-governance)"
+    }
+  ],
+  "variants": {
+    "gradient": {
+      "description": "Top-faded ground (/security).",
+      "evidence": [
+        {
+          "file": "specs/SPEC_MARKETING.md",
+          "lines": "81",
+          "quote": "`background=\"gradient\"` adds `.is-faded`. /security uses `gradient` and /ai-governance uses the default `solid`."
+        }
+      ]
+    },
+    "solid": {
+      "description": "Solid ground (/ai-governance).",
+      "evidence": [
+        {
+          "file": "specs/SPEC_MARKETING.md",
+          "lines": "81",
+          "quote": "`background=\"gradient\"` adds `.is-faded`. /security uses `gradient` and /ai-governance uses the default `solid`."
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "h2",
+      "cards"
+    ],
+    "properties": {
+      "h2": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 6
+      },
+      "cards": {
+        "type": "array",
+        "minItems": 6,
+        "maxItems": 9,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "icon",
+            "title",
+            "body"
+          ],
+          "properties": {
+            "icon": {
+              "type": "string",
+              "pattern": "^solar:[a-z0-9-]+$",
+              "x-example": "solar:shield-check-bold"
+            },
+            "title": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 5
+            },
+            "body": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 26
+            }
+          }
+        }
+      }
+    }
+  },
+  "media": {
+    "slots": {}
+  },
+  "constraints": {
+    "onePerPage": true
+  },
+  "variantRules": {},
+  "motion": {
+    "allowedPatterns": [
+      "none"
+    ],
+    "requiredPatterns": [],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "not-applicable"
+  },
+  "responsive": {
+    "evidence": [
+      {
+        "file": "specs/SPEC_MARKETING.md",
+        "lines": "83",
+        "quote": "- Grid: `mt-12 md:mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3`."
+      }
+    ],
+    "changes": {
+      "base": "1 column",
+      "sm": "2 columns",
+      "md": "H2 48/48",
+      "lg": "3 columns"
+    }
+  },
+  "accessibility": [],
+  "notes": []
+}

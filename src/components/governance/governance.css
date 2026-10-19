@@ -1,0 +1,373 @@
+/* /ai-governance scoped CSS (ai-governance.COB1_X73.css + v4-only utilities from the SSR HTML;
+ * SPEC_MARKETING §5). Tokens that :root does not define are declared locally on the page wrapper. */
+
+.gov-page {
+  --color-accent-a-50: #ecfdf5;
+  --color-accent-a-100: #d0fae5;
+  --color-accent-a-300: #5ee9b5;
+  --color-accent-a-400: #00d492;
+  --color-accent-a-600: #009966;
+  --color-accent-a-950: #002c22;
+  --color-accent-b-50: #fffbeb;
+  --color-accent-b-100: #fef3c6;
+  --color-accent-b-300: #ffd230;
+  --color-accent-b-400: #ffb900;
+  --color-accent-b-500: #fe9a00;
+  --color-accent-b-600: #e17100;
+  --color-accent-b-950: #461901;
+  --color-accent-d-50: #f5f3ff;
+  --color-accent-d-100: #ede9fe;
+  --color-accent-d-300: #c4b4ff;
+  --color-accent-d-500: #8e51ff;
+  --color-accent-d-950: #2f0d68;
+}
+
+/* ---- A. Hero: `[--gut:.75rem] md:[--gut:1.25rem] lg:[--gut:1.75rem]`, `pt-chrome`, max-h calc */
+.gov-hero {
+  --gut: .75rem;
+}
+@media (min-width: 768px) {
+  .gov-hero {
+    --gut: 1.25rem;
+  }
+}
+@media (min-width: 1024px) {
+  .gov-hero {
+    --gut: 1.75rem;
+  }
+}
+.gov-card-wrap {
+  padding: var(--spacing-chrome) var(--gut) var(--gut);
+}
+.gov-card {
+  max-height: calc(100svh - var(--spacing-chrome) - var(--gut));
+}
+.gov-mark {
+  -webkit-mask: url(/brand/activepieces-mark.svg) center / contain no-repeat;
+  mask: url(/brand/activepieces-mark.svg) center / contain no-repeat;
+}
+/* shot-plate: `[-webkit-user-drag:none] [&_*]:cursor-default [&_img]:pointer-events-none` */
+.gov-plate {
+  -webkit-user-drag: none;
+}
+.gov-plate * {
+  cursor: default;
+}
+.gov-plate img {
+  pointer-events: none;
+}
+
+/* ---- B. Models grid (data-v-ccbc431c) */
+.models-grid li {
+  container-type: inline-size;
+}
+.models-grid .mg-frame {
+  gap: calc(var(--spacing) * 5);
+  aspect-ratio: 1.874;
+  width: min(100%, 80rem, 157.416vh);
+  display: grid;
+}
+.models-grid .mg-tier {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.models-grid .mg-band {
+  container-type: inline-size;
+}
+.models-grid .mg-rail {
+  position: absolute;
+  inset: 0;
+}
+.models-grid .mg-reflow {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  place-items: center;
+  gap: .75rem;
+  padding: clamp(1rem, 4%, 1.5rem);
+  display: grid;
+}
+.models-grid .mg-reflow .mg-tile {
+  width: 100%;
+  max-width: 4.5rem;
+}
+@media (min-width: 640px) {
+  .models-grid .mg-reflow {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+}
+.models-grid .mg-card {
+  gap: clamp(.5rem, 2cqw, .75rem);
+  padding: clamp(1.25rem, 5.5cqw, 1.75rem);
+}
+.models-grid .mg-glyph {
+  width: clamp(1.75rem, 9.5cqw, 2.375rem);
+  height: clamp(1.75rem, 9.5cqw, 2.375rem);
+}
+.models-grid .mg-brandmark {
+  width: clamp(2rem, 10cqw, 2.75rem);
+}
+.models-grid .mg-term {
+  letter-spacing: -.01em;
+  font-size: clamp(1.125rem, 5.9cqw, 1.3125rem);
+  line-height: 1.25;
+}
+.models-grid .mg-statement {
+  letter-spacing: -.015em;
+  font-size: clamp(1.25rem, 6.6cqw, 1.5rem);
+  line-height: 1.2;
+}
+.models-grid .mg-benefit {
+  font-size: clamp(.9375rem, 4.9cqw, 1rem);
+  line-height: 1.45;
+}
+.models-grid .mg-shell {
+  border-radius: 1.5rem;
+  background: linear-gradient(180deg, var(--color-ink-600), var(--color-ink-800));
+  padding: clamp(.5rem, 3cqw, .875rem);
+}
+.models-grid .mg-panel {
+  border-radius: .75rem;
+  background:
+    radial-gradient(90% 150% at 50% 0, color-mix(in oklab, var(--color-primary-500), transparent 72%), transparent 68%),
+    linear-gradient(180deg, var(--color-ink-800), var(--color-ink-950));
+}
+.models-grid .mg-panel::before {
+  content: '';
+  border-radius: inherit;
+  background-image: linear-gradient(90deg, #ffffff0f 1px, #0000 0), linear-gradient(#ffffff0f 1px, #0000 0);
+  background-size: 22px 22px;
+  position: absolute;
+  inset: 0;
+}
+.models-grid .mg-mark {
+  background-color: #ffffff8c;
+  -webkit-mask-image: url(/brand/activepieces-mark.svg);
+  mask-image: url(/brand/activepieces-mark.svg);
+  -webkit-mask-position: 50%;
+  mask-position: 50%;
+  -webkit-mask-size: auto 55%;
+  mask-size: auto 55%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+.models-grid .mg-tile {
+  aspect-ratio: 1;
+  background-color: var(--color-ink-50);
+  width: 4.5rem;
+  box-shadow: 0 3px 6px -2px color-mix(in oklab, var(--color-primary-950), transparent 72%), inset 0 0 0 1px var(--color-ink-200);
+  will-change: transform;
+  border-radius: 22%;
+  place-items: center;
+  display: grid;
+}
+.models-grid .mg-rail .mg-tile {
+  width: 9.58%;
+}
+@media (min-width: 80rem) and (min-height: 48rem) {
+  .models-grid .mg-frame {
+    grid-template-rows: minmax(0, 1fr) minmax(0, .99fr) minmax(0, 1fr);
+  }
+}
+
+/* ---- D. Rollout deck (data-v-ab8d8fcb) */
+.gov-stages-ground {
+  background-color: var(--color-ink-100);
+  border: 1px solid var(--color-ink-200);
+  border-bottom: 0;
+  -webkit-mask-image: linear-gradient(#0000 0, #0000001f 5rem, #00000073 12rem, #000c 18rem, #000 24rem);
+  mask-image: linear-gradient(#0000 0, #0000001f 5rem, #00000073 12rem, #000c 18rem, #000 24rem);
+}
+.gov-deck {
+  flex-direction: column;
+  gap: 1rem;
+  display: flex;
+}
+.gov-slot,
+.gov-stage {
+  position: relative;
+}
+.gov-stage {
+  isolation: isolate;
+  background-image: linear-gradient(
+    to bottom,
+    transparent 42%,
+    color-mix(in oklab, var(--tint), transparent 92%) 70%,
+    color-mix(in oklab, var(--tint), transparent 78%) 100%
+  );
+  flex-direction: column;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+}
+.gov-copy {
+  display: grid;
+}
+.gov-copy > * {
+  grid-area: 1 / 1;
+}
+.gov-short {
+  display: none;
+}
+.gov-slot[data-family='primary'] {
+  --tint: var(--color-primary-400);
+  --tint-soft: color-mix(in oklab, var(--color-primary-50), var(--color-primary-100));
+  --tint-deep: var(--color-primary-950);
+  --mark-a: var(--color-primary-300);
+  --mark-b: var(--color-primary-400);
+  --mark-c: var(--color-primary-500);
+  --mark-d: var(--color-primary-600);
+}
+.gov-slot[data-family='accent-a'] {
+  --tint: var(--color-accent-a-400);
+  --tint-soft: color-mix(in oklab, var(--color-accent-a-50), var(--color-accent-a-100));
+  --tint-deep: var(--color-accent-a-950);
+  --mark-a: var(--color-accent-a-300);
+  --mark-b: var(--color-accent-a-400);
+  --mark-c: var(--color-accent-a-500);
+  --mark-d: var(--color-accent-a-600);
+}
+.gov-slot[data-family='accent-b'] {
+  --tint: var(--color-accent-b-400);
+  --tint-soft: color-mix(in oklab, var(--color-accent-b-50), var(--color-accent-b-100));
+  --tint-deep: var(--color-accent-b-950);
+  --mark-a: var(--color-accent-b-300);
+  --mark-b: var(--color-accent-b-400);
+  --mark-c: var(--color-accent-b-500);
+  --mark-d: var(--color-accent-b-600);
+}
+.gov-slot[data-family='accent-d'] {
+  --tint: var(--color-accent-d-400);
+  --tint-soft: color-mix(in oklab, var(--color-accent-d-50), var(--color-accent-d-100));
+  --tint-deep: var(--color-accent-d-950);
+  --mark-a: var(--color-accent-d-300);
+  --mark-b: var(--color-accent-d-400);
+  --mark-c: var(--color-accent-d-500);
+  --mark-d: var(--color-accent-d-600);
+}
+.gov-mark-blob {
+  display: none;
+}
+.gov-mark-blob .blob-a {
+  fill: var(--mark-a);
+}
+.gov-mark-blob .blob-b {
+  fill: var(--mark-b);
+}
+.gov-mark-blob .blob-c {
+  fill: var(--mark-c);
+}
+.gov-mark-blob .blob-d {
+  fill: var(--mark-d);
+}
+.gov-point-chip {
+  background-color: var(--tint-soft);
+}
+.gov-point-icon {
+  color: var(--tint-deep);
+}
+.gov-extras {
+  flex-direction: column;
+}
+.gov-art,
+.gov-extras {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+.gov-art {
+  margin-bottom: -1.5rem;
+  margin-right: -1.5rem;
+  padding-top: .75rem;
+  padding-left: .75rem;
+  position: relative;
+  overflow: hidden;
+}
+@media (min-width: 768px) {
+  .gov-art {
+    margin-bottom: -2rem;
+    margin-right: -2rem;
+  }
+}
+.gov-art-fade {
+  --fade-x: 3rem;
+  width: 100%;
+  min-width: 0;
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - var(--fade-x)), #000000fa calc(100% - var(--fade-x) * .9167), #000000ec calc(100% - var(--fade-x) * .8333), #000000d7 calc(100% - var(--fade-x) * .75), #000000bd calc(100% - var(--fade-x) * .6667), #0000009f calc(100% - var(--fade-x) * .5833), #00000080 calc(100% - var(--fade-x) * .5), #00000060 calc(100% - var(--fade-x) * .4167), #00000042 calc(100% - var(--fade-x) * .3333), #00000028 calc(100% - var(--fade-x) * .25), #00000013 calc(100% - var(--fade-x) * .1667), #00000005 calc(100% - var(--fade-x) * .0833), transparent 100%);
+  mask-image: linear-gradient(to right, #000 calc(100% - var(--fade-x)), #000000fa calc(100% - var(--fade-x) * .9167), #000000ec calc(100% - var(--fade-x) * .8333), #000000d7 calc(100% - var(--fade-x) * .75), #000000bd calc(100% - var(--fade-x) * .6667), #0000009f calc(100% - var(--fade-x) * .5833), #00000080 calc(100% - var(--fade-x) * .5), #00000060 calc(100% - var(--fade-x) * .4167), #00000042 calc(100% - var(--fade-x) * .3333), #00000028 calc(100% - var(--fade-x) * .25), #00000013 calc(100% - var(--fade-x) * .1667), #00000005 calc(100% - var(--fade-x) * .0833), transparent 100%);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+@media (min-width: 1024px) {
+  .gov-deck {
+    height: var(--deck);
+    flex-direction: row;
+  }
+  .gov-wrap {
+    --nav: var(--spacing-chrome);
+    --deck: min(40.5rem, 74vh);
+  }
+  .gov-wrap.is-pinned {
+    height: calc(var(--n) * 90vh);
+  }
+  .gov-wrap.is-pinned .gov-pin {
+    top: calc(var(--nav) + (100vh - var(--nav) - var(--deck)) / 2);
+    position: sticky;
+  }
+  .gov-slot {
+    will-change: flex-grow;
+    flex: 1 1 0;
+    min-width: 0;
+    transition: flex-grow .38s cubic-bezier(.22, 1, .36, 1);
+  }
+  .gov-slot.is-open {
+    flex-grow: 2.8;
+  }
+  .gov-mark-blob {
+    z-index: -1;
+    aspect-ratio: 1;
+    opacity: .17;
+    width: 155%;
+    height: auto;
+    transition: opacity .22s .12s;
+    display: block;
+    position: absolute;
+    bottom: -9%;
+    left: 50%;
+    transform: translate(-50%);
+    -webkit-mask-image: linear-gradient(#0000 4%, #000 52%);
+    mask-image: linear-gradient(#0000 4%, #000 52%);
+  }
+  .is-open .gov-mark-blob {
+    opacity: 0;
+    transition: opacity 90ms;
+  }
+  .gov-copy {
+    min-height: 4.5rem;
+  }
+  .gov-short {
+    display: block;
+  }
+  .gov-copy > *,
+  .gov-extras {
+    transition: opacity .12s, transform .12s;
+  }
+  .gov-extras,
+  .gov-long {
+    opacity: 0;
+    transform: translateY(.5rem);
+  }
+  .is-open .gov-short {
+    opacity: 0;
+  }
+  .is-open .gov-extras,
+  .is-open .gov-long {
+    opacity: 1;
+    transition: opacity .18s .14s, transform .18s .14s;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gov-copy > *,
+  .gov-extras,
+  .gov-slot {
+    transition-duration: 1ms;
+  }
+}

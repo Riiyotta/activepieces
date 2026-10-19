@@ -1,0 +1,112 @@
+{
+  "$description": "Button component tokens (sizes + variants) referencing foundation/semantic tokens.",
+  "evidence": [
+    {
+      "file": "src/components/ui/Button.jsx",
+      "lines": "7-12",
+      "quote": "export const BUTTON_SIZES = {"
+    }
+  ],
+  "tokens": {
+    "button": {
+      "size": {
+        "sm": {
+          "$type": "composite",
+          "$value": {
+            "height": "{spacing.unit}*9",
+            "paddingX": "{spacing.unit}*4",
+            "fontSize": "{font.size.sm}"
+          }
+        },
+        "md": {
+          "$type": "composite",
+          "$value": {
+            "height": "{spacing.unit}*11",
+            "paddingX": "{spacing.unit}*6",
+            "fontSize": "{font.sizeCustom.15px}"
+          }
+        },
+        "lg": {
+          "$type": "composite",
+          "$value": {
+            "height": "{spacing.unit}*12",
+            "paddingX": "{spacing.unit}*7",
+            "fontSize": "{font.size.base}"
+          }
+        },
+        "xl": {
+          "$type": "composite",
+          "$value": {
+            "height": "{spacing.unit}*12.5",
+            "paddingX": "{spacing.unit}*8",
+            "fontSize": "{font.sizeCustom.17px}"
+          }
+        }
+      },
+      "variant": {
+        "brand": {
+          "$type": "composite",
+          "$value": {
+            "background": "{surface.brand-action}",
+            "hover": "{surface.brand-action-hover}",
+            "text": "{color.white}"
+          }
+        },
+        "solid": {
+          "$type": "composite",
+          "$value": {
+            "background": "{surface.solid-action}",
+            "hover": "{surface.solid-action-hover}",
+            "text": "{color.white}"
+          }
+        },
+        "secondary": {
+          "$type": "composite",
+          "$value": {
+            "background": "{surface.subtle}",
+            "hover": "{color.ink.100}",
+            "text": "{text.strong}",
+            "shadow": "{elevation.card}",
+            "shadowHover": "{elevation.card-hover}"
+          }
+        },
+        "glass": {
+          "$type": "composite",
+          "$value": {
+            "background": "{color.white}/70",
+            "hover": "{color.white}",
+            "text": "{text.strong}"
+          }
+        },
+        "light": {
+          "$type": "composite",
+          "$value": {
+            "background": "{color.white}",
+            "hover": "{color.ink.100}",
+            "text": "{text.strong}"
+          }
+        },
+        "quiet-light": {
+          "$type": "composite",
+          "$value": {
+            "background": "transparent",
+            "hover": "{color.white}/10",
+            "text": "{color.white}"
+          }
+        }
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{radius.full}"
+      },
+      "transition": {
+        "$type": "duration",
+        "$value": "{duration.button}"
+      },
+      "easing": {
+        "$type": "cubicBezier",
+        "$value": "{easing.ease-out}"
+      }
+    }
+  }
+}

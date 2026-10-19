@@ -1,0 +1,110 @@
+{
+  "$description": "Z-index values registered in tailwind.config.cjs and where each is used.",
+  "evidence": [
+    {
+      "file": "tailwind.config.cjs",
+      "lines": "146-149",
+      "quote": "zIndex: {"
+    }
+  ],
+  "tokens": {
+    "zIndex": {
+      "10": {
+        "$type": "number",
+        "$value": 10,
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "302",
+            "quote": "z-index: 10`"
+          }
+        ],
+        "usage": "hero base plate"
+      },
+      "40": {
+        "$type": "number",
+        "$value": 40,
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "305",
+            "quote": "same CSS, `z-index: 40`"
+          }
+        ],
+        "usage": "hero front plate"
+      },
+      "60": {
+        "$type": "number",
+        "$value": 60,
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "306",
+            "quote": "`z-index: 60`, pointer-events none"
+          }
+        ],
+        "usage": "hero bottom fade"
+      },
+      "65": {
+        "$type": "number",
+        "$value": 65,
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "399",
+            "quote": "- Wrapper: `.hero-line.relative.z-65`"
+          }
+        ],
+        "usage": "hero shot wrapper"
+      },
+      "70": {
+        "$type": "number",
+        "$value": 70,
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "309",
+            "quote": "`relative z-70 flex w-full max-w-4xl"
+          }
+        ],
+        "usage": "hero content column"
+      },
+      "100": {
+        "$type": "number",
+        "$value": 100,
+        "evidence": [
+          {
+            "file": "src/components/Header.jsx",
+            "lines": "248",
+            "quote": "fixed inset-x-0 top-0 z-100"
+          }
+        ],
+        "usage": "fixed header"
+      },
+      "120": {
+        "$type": "number",
+        "$value": 120,
+        "evidence": [
+          {
+            "file": "src/components/Layout.jsx",
+            "lines": "28",
+            "quote": "focus:z-120"
+          }
+        ],
+        "usage": "skip link"
+      },
+      "130": {
+        "$type": "number",
+        "$value": 130,
+        "evidence": [
+          {
+            "file": "src/components/FloatingCard.jsx",
+            "lines": "28",
+            "quote": "fixed right-5 bottom-5 z-130"
+          }
+        ],
+        "usage": "floating card"
+      }
+    }
+  }
+}

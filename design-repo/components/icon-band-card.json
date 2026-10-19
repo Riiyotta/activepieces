@@ -1,0 +1,18 @@
+{
+  "id": "component.icon-band-card",
+  "layer": "component",
+  "purpose": "Centered card with 80px tinted icon tile cycling primary/accent-d/accent-b/accent-a 300.",
+  "composes": [
+    "icon"
+  ],
+  "implementedBy": [
+    "src/components/IconBand.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_MARKETING.md",
+      "lines": "84",
+      "quote": "- Card `article`: `flex flex-col items-center rounded-2xl bg-white px-8 py-10 md:px-10 md:py-14 text-center`."
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+/* /sales scoped CSS (specs/ref/css/sales.DTnZcJMe.css, SPEC_MARKETING §2). */
+
+/* Select chevron */
+.select-chevron {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%2394a3b8' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.6' viewBox='0 0 16 16'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E");
+}
+
+/* Logo grid swap: 160ms ease-out, no stagger */
+.logo-fade-sales {
+  transition: opacity 0.16s ease-out, transform 0.16s ease-out;
+}
+.logo-fade-sales.is-out,
+.logo-fade-sales.is-from {
+  opacity: 0;
+  transform: scale(0.94);
+}
+@media (prefers-reduced-motion: reduce) {
+  .logo-fade-sales {
+    transition: none;
+  }
+}

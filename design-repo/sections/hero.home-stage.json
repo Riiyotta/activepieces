@@ -1,0 +1,156 @@
+{
+  "id": "hero.home-stage",
+  "layer": "section",
+  "category": "hero",
+  "purpose": "Homepage hero: layered art plates, centered Sentient H1, subhead, 'Use in your AI' + 'Talk to sales' CTAs, note, customer logo marquee.",
+  "implementedBy": [
+    "src/components/Hero.jsx",
+    "src/components/Hero.css"
+  ],
+  "evidence": [
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "292",
+      "quote": "## A. Hero stage"
+    },
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "335",
+      "quote": "**Hero entrance animation (CSS, `html.js` only).**"
+    }
+  ],
+  "variants": {
+    "default": {
+      "description": "Single variant.",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "310",
+          "quote": "- **H1** \"AI Agents with enterprise control\":"
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "h1",
+      "subhead",
+      "aiCtaLabel",
+      "secondaryCta",
+      "note"
+    ],
+    "properties": {
+      "h1": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 8
+      },
+      "subhead": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 28
+      },
+      "aiCtaLabel": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 5
+      },
+      "secondaryCta": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "label",
+          "href"
+        ],
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 4
+          },
+          "href": {
+            "type": "string",
+            "pattern": "^(/[A-Za-z0-9._~%/?=&#-]*|https://(cloud\\.activepieces\\.com|github\\.com/activepieces|www\\.activepieces\\.com|trust\\.activepieces\\.com)(/[A-Za-z0-9._~%/?=&#-]*)?)$",
+            "x-example": "/sales?ap_cta=example"
+          }
+        }
+      },
+      "note": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 8
+      }
+    }
+  },
+  "media": {
+    "slots": {
+      "plates": {
+        "roles": [
+          "art.plate"
+        ],
+        "maxItems": 2,
+        "required": false
+      },
+      "marqueeLogos": {
+        "roles": [
+          "customer.logo"
+        ],
+        "maxItems": 24,
+        "required": false
+      },
+      "aiCtaLogos": {
+        "roles": [
+          "ai-client.logo"
+        ],
+        "maxItems": 3,
+        "required": false
+      }
+    }
+  },
+  "constraints": {
+    "onePerPage": true,
+    "homeRouteOnly": true,
+    "mustFollow": "shell.header"
+  },
+  "variantRules": {},
+  "motion": {
+    "allowedPatterns": [
+      "hero-plate-fade",
+      "hero-line-home",
+      "marquee-drift",
+      "ai-cta-sheen"
+    ],
+    "requiredPatterns": [
+      "hero-line-home",
+      "marquee-drift"
+    ],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "static-end-state"
+  },
+  "responsive": {
+    "evidence": [
+      {
+        "file": "CLONE_SPEC.md",
+        "lines": "312",
+        "quote": "  - Sizes: 36px (base) → 48px sm → 60px md → 72px lg."
+      },
+      {
+        "file": "CLONE_SPEC.md",
+        "lines": "320",
+        "quote": "  - Row: `flex w-full max-w-sm flex-col gap-3`; from sm: `max-w-none flex-row flex-wrap justify-center`."
+      }
+    ],
+    "changes": {
+      "base": "H1 36px; CTAs stacked full width (max-w-sm)",
+      "sm": "H1 48px; CTAs side by side",
+      "md": "H1 60px; marquee logos x1.15 (82.8s)",
+      "lg": "H1 72px"
+    }
+  },
+  "accessibility": [],
+  "notes": [
+    "Hero CTAs are text-[17px] leading-normal at ALL widths (QA correction; see rules/tailwind-v3-v4.json TW-HERO-CTA-17)."
+  ]
+}

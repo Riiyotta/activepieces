@@ -1,0 +1,407 @@
+/* ------------------------------------------------------------------
+ * Fonts (ASSET_MANIFEST §1, exact unicode ranges from entry.LEuMnHPd.css).
+ * Inter / Fira Code woff2 files are variable; faces are still declared per weight like the original.
+ * ------------------------------------------------------------------ */
+/* Inter / Fira Code: exactly the original's @nuxt/fonts output (normal style) - one face per weight,
+ * local() first, latin-ext declared before latin. local() matters: where the font is installed
+ * (e.g. Inter 4.0 desktop), the original renders the installed static font, not the woff2. */
+@font-face {
+  font-family: Inter;
+  src: local('Inter Thin'), url(/_fonts/zkQRrBN3g9v_dVJWVkYryI2HWN4gfl77yu_FVFWNDYY-dCKEZ5lgZTVD30ATELD5lKDbBeBCP_ph7B4YtZQnSns.woff2) format('woff2');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: Inter;
+  src: local('Inter Thin'), url(/_fonts/HgJel4iAS5mDVqJaDUYKmxaMJg4zKHTGmyD1FQkOsTM-2hVuuQIZ4GSGMgNv6dvlqz7cfD6lr7xLohUph7OCgFg.woff2) format('woff2');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: Inter;
+  src: local('Inter ExtraLight'), url(/_fonts/zkQRrBN3g9v_dVJWVkYryI2HWN4gfl77yu_FVFWNDYY-dCKEZ5lgZTVD30ATELD5lKDbBeBCP_ph7B4YtZQnSns.woff2) format('woff2');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: Inter;
+  src: local('Inter ExtraLight'), url(/_fonts/HgJel4iAS5mDVqJaDUYKmxaMJg4zKHTGmyD1FQkOsTM-2hVuuQIZ4GSGMgNv6dvlqz7cfD6lr7xLohUph7OCgFg.woff2) format('woff2');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: Inter;
+  src: local('Inter Light'), url(/_fonts/zkQRrBN3g9v_dVJWVkYryI2HWN4gfl77yu_FVFWNDYY-dCKEZ5lgZTVD30ATELD5lKDbBeBCP_ph7B4YtZQnSns.woff2) format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: Inter;
+  src: local('Inter Light'), url(/_fonts/HgJel4iAS5mDVqJaDUYKmxaMJg4zKHTGmyD1FQkOsTM-2hVuuQIZ4GSGMgNv6dvlqz7cfD6lr7xLohUph7OCgFg.woff2) format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: Inter;
+  src: local('Inter Regular'), local('Inter'), url(/_fonts/zkQRrBN3g9v_dVJWVkYryI2HWN4gfl77yu_FVFWNDYY-dCKEZ5lgZTVD30ATELD5lKDbBeBCP_ph7B4YtZQnSns.woff2) format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: Inter;
+  src: local('Inter Regular'), local('Inter'), url(/_fonts/HgJel4iAS5mDVqJaDUYKmxaMJg4zKHTGmyD1FQkOsTM-2hVuuQIZ4GSGMgNv6dvlqz7cfD6lr7xLohUph7OCgFg.woff2) format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: Inter;
+  src: local('Inter Medium'), url(/_fonts/zkQRrBN3g9v_dVJWVkYryI2HWN4gfl77yu_FVFWNDYY-dCKEZ5lgZTVD30ATELD5lKDbBeBCP_ph7B4YtZQnSns.woff2) format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: Inter;
+  src: local('Inter Medium'), url(/_fonts/HgJel4iAS5mDVqJaDUYKmxaMJg4zKHTGmyD1FQkOsTM-2hVuuQIZ4GSGMgNv6dvlqz7cfD6lr7xLohUph7OCgFg.woff2) format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: Inter;
+  src: local('Inter SemiBold'), url(/_fonts/zkQRrBN3g9v_dVJWVkYryI2HWN4gfl77yu_FVFWNDYY-dCKEZ5lgZTVD30ATELD5lKDbBeBCP_ph7B4YtZQnSns.woff2) format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: Inter;
+  src: local('Inter SemiBold'), url(/_fonts/HgJel4iAS5mDVqJaDUYKmxaMJg4zKHTGmyD1FQkOsTM-2hVuuQIZ4GSGMgNv6dvlqz7cfD6lr7xLohUph7OCgFg.woff2) format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: Inter;
+  src: local('Inter Bold'), url(/_fonts/zkQRrBN3g9v_dVJWVkYryI2HWN4gfl77yu_FVFWNDYY-dCKEZ5lgZTVD30ATELD5lKDbBeBCP_ph7B4YtZQnSns.woff2) format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: Inter;
+  src: local('Inter Bold'), url(/_fonts/HgJel4iAS5mDVqJaDUYKmxaMJg4zKHTGmyD1FQkOsTM-2hVuuQIZ4GSGMgNv6dvlqz7cfD6lr7xLohUph7OCgFg.woff2) format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: Inter;
+  src: local('Inter ExtraBold'), url(/_fonts/zkQRrBN3g9v_dVJWVkYryI2HWN4gfl77yu_FVFWNDYY-dCKEZ5lgZTVD30ATELD5lKDbBeBCP_ph7B4YtZQnSns.woff2) format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: Inter;
+  src: local('Inter ExtraBold'), url(/_fonts/HgJel4iAS5mDVqJaDUYKmxaMJg4zKHTGmyD1FQkOsTM-2hVuuQIZ4GSGMgNv6dvlqz7cfD6lr7xLohUph7OCgFg.woff2) format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: Inter;
+  src: local('Inter Black'), url(/_fonts/zkQRrBN3g9v_dVJWVkYryI2HWN4gfl77yu_FVFWNDYY-dCKEZ5lgZTVD30ATELD5lKDbBeBCP_ph7B4YtZQnSns.woff2) format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: Inter;
+  src: local('Inter Black'), url(/_fonts/HgJel4iAS5mDVqJaDUYKmxaMJg4zKHTGmyD1FQkOsTM-2hVuuQIZ4GSGMgNv6dvlqz7cfD6lr7xLohUph7OCgFg.woff2) format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Fira Code';
+  src: local('Fira Code Light'), url(/_fonts/Lr-hqqZZsYmCt0ITUlr1CUrWim9fsKvoDFZliMxgNHY-iTa_Yt_PzhOY9TX7ZXdSlEPim6iRt92xhECwaxWxd5w.woff2) format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Fira Code';
+  src: local('Fira Code Light'), url(/_fonts/UA7OtwYHwGN_HjcVGTdmiQxUit7FlqkCwxVUWSeXVnQ-B4OXCFOL_tWrYODpQTc07aMaj0c2cewTOmBRWR9tD-A.woff2) format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Fira Code';
+  src: local('Fira Code Regular'), local('Fira Code'), url(/_fonts/Lr-hqqZZsYmCt0ITUlr1CUrWim9fsKvoDFZliMxgNHY-iTa_Yt_PzhOY9TX7ZXdSlEPim6iRt92xhECwaxWxd5w.woff2) format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Fira Code';
+  src: local('Fira Code Regular'), local('Fira Code'), url(/_fonts/UA7OtwYHwGN_HjcVGTdmiQxUit7FlqkCwxVUWSeXVnQ-B4OXCFOL_tWrYODpQTc07aMaj0c2cewTOmBRWR9tD-A.woff2) format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Fira Code';
+  src: local('Fira Code Medium'), url(/_fonts/Lr-hqqZZsYmCt0ITUlr1CUrWim9fsKvoDFZliMxgNHY-iTa_Yt_PzhOY9TX7ZXdSlEPim6iRt92xhECwaxWxd5w.woff2) format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Fira Code';
+  src: local('Fira Code Medium'), url(/_fonts/UA7OtwYHwGN_HjcVGTdmiQxUit7FlqkCwxVUWSeXVnQ-B4OXCFOL_tWrYODpQTc07aMaj0c2cewTOmBRWR9tD-A.woff2) format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Fira Code';
+  src: local('Fira Code SemiBold'), url(/_fonts/Lr-hqqZZsYmCt0ITUlr1CUrWim9fsKvoDFZliMxgNHY-iTa_Yt_PzhOY9TX7ZXdSlEPim6iRt92xhECwaxWxd5w.woff2) format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Fira Code';
+  src: local('Fira Code SemiBold'), url(/_fonts/UA7OtwYHwGN_HjcVGTdmiQxUit7FlqkCwxVUWSeXVnQ-B4OXCFOL_tWrYODpQTc07aMaj0c2cewTOmBRWR9tD-A.woff2) format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Fira Code';
+  src: local('Fira Code Bold'), url(/_fonts/Lr-hqqZZsYmCt0ITUlr1CUrWim9fsKvoDFZliMxgNHY-iTa_Yt_PzhOY9TX7ZXdSlEPim6iRt92xhECwaxWxd5w.woff2) format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Fira Code';
+  src: local('Fira Code Bold'), url(/_fonts/UA7OtwYHwGN_HjcVGTdmiQxUit7FlqkCwxVUWSeXVnQ-B4OXCFOL_tWrYODpQTc07aMaj0c2cewTOmBRWR9tD-A.woff2) format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: Sentient;
+  src: url(/_nuxt/sentient-500.hDsrbtgn.woff2) format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: Sentient;
+  src: url(/_nuxt/sentient-700.DV7iGHJJ.woff2) format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+/* metric-matched fallbacks (exact values from the original) */
+@font-face {
+  font-family: 'Inter Fallback: sans-serif';
+  src: local('sans-serif');
+  size-adjust: 100%;
+  ascent-override: 96.875%;
+  descent-override: 24.1211%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Fira Code Fallback: monospace';
+  src: local('monospace');
+  size-adjust: 100%;
+  ascent-override: 99%;
+  descent-override: 32.2%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Sentient Fallback: Georgia';
+  src: local(Georgia);
+  size-adjust: 107.896%;
+  ascent-override: 88.9748%;
+  descent-override: 29.6583%;
+  line-gap-override: 7.4146%;
+}
+@font-face {
+  font-family: 'Sentient Fallback: Times New Roman';
+  src: local('Times New Roman');
+  size-adjust: 118.4%;
+  ascent-override: 81.0811%;
+  descent-override: 27.027%;
+  line-gap-override: 6.7568%;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------
+ * Design tokens as CSS variables, for co-located section CSS files.
+ * Same values as tailwind.config.js (CLONE_SPEC §0).
+ * ------------------------------------------------------------------ */
+:root {
+  --ease-smooth: cubic-bezier(.22, 1, .36, 1);
+  --ease-out: cubic-bezier(0, 0, .2, 1);
+  --ease-in-out: cubic-bezier(.4, 0, .2, 1);
+  --leading-display: 1.015;
+  --spacing: .25rem;
+  --spacing-chrome: 5.25rem;
+
+  --color-white: #fff;
+  --color-ink-50: #f8fafc;
+  --color-ink-100: #f1f5f9;
+  --color-ink-150: #eaedf0;
+  --color-ink-200: #e2e8f0;
+  --color-ink-300: #cad5e2;
+  --color-ink-400: #90a1b9;
+  --color-ink-500: #62748e;
+  --color-ink-600: #45556c;
+  --color-ink-700: #314158;
+  --color-ink-800: #1d293d;
+  --color-ink-900: #0f172b;
+  --color-ink-950: #020618;
+  --color-primary-50: #f0f9ff;
+  --color-primary-100: #dff2fe;
+  --color-primary-200: #b8e6fe;
+  --color-primary-300: #74d4ff;
+  --color-primary-400: #00bcff;
+  --color-primary-500: #00a6f4;
+  --color-primary-600: #0084d1;
+  --color-primary-700: #0069a8;
+  --color-primary-800: #00598a;
+  --color-primary-900: #024a70;
+  --color-primary-950: #052f4a;
+  --color-accent-a-500: #00bc7d;
+  --color-accent-b-700: #bb4d00;
+  --color-accent-c-400: #ff6467;
+  --color-accent-d-200: #ddd6ff;
+  --color-accent-d-400: #a684ff;
+  --color-accent-d-600: #7f22fe;
+  --color-accent-d-900: #4d179a;
+
+  --cast-06: rgba(2, 6, 24, .06);
+  --cast-08: rgba(2, 6, 24, .08);
+  --cast-10: rgba(2, 6, 24, .10);
+  --cast-20: rgba(2, 6, 24, .20);
+  --shadow-lift: 0 0 0 1px var(--cast-10), 0 2px 4px -2px var(--cast-08), 0 8px 16px -6px var(--cast-08);
+  --shadow-over: 0 0 0 1px var(--cast-10), 0 4px 8px -4px var(--cast-10), 0 16px 32px -12px var(--cast-20);
+}
+
+/* ------------------------------------------------------------------
+ * Base (Tailwind v4 preflight differences + original html rules)
+ * ------------------------------------------------------------------ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    text-wrap: pretty;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
+    font-family: theme('fontFamily.sans');
+  }
+  /* v4 preflight: images/svg are block, buttons have no default bg, cursor pointer on buttons */
+  button:not(:disabled),
+  [role='button']:not([aria-disabled='true']) {
+    cursor: pointer;
+  }
+  dialog {
+    padding: 0;
+  }
+  /* v4 default border color is currentColor; v3 uses gray-200. Match v4. */
+  *,
+  ::before,
+  ::after {
+    border-color: currentColor;
+  }
+}
+
+/* ------------------------------------------------------------------
+ * Shared utilities used by several sections
+ * ------------------------------------------------------------------ */
+@layer utilities {
+  /* bottom fade mask (testimonials, footer links card); set --fade per breakpoint */
+  .fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - var(--fade, 11rem)), #000000f5 calc(100% - var(--fade, 11rem) * .85), #000000d9 calc(100% - var(--fade, 11rem) * .7), #000000ab calc(100% - var(--fade, 11rem) * .55), #00000073 calc(100% - var(--fade, 11rem) * .4), #0000003b calc(100% - var(--fade, 11rem) * .25), #00000014 calc(100% - var(--fade, 11rem) * .12), transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 calc(100% - var(--fade, 11rem)), #000000f5 calc(100% - var(--fade, 11rem) * .85), #000000d9 calc(100% - var(--fade, 11rem) * .7), #000000ab calc(100% - var(--fade, 11rem) * .55), #00000073 calc(100% - var(--fade, 11rem) * .4), #0000003b calc(100% - var(--fade, 11rem) * .25), #00000014 calc(100% - var(--fade, 11rem) * .12), transparent 100%);
+  }
+}
+
+/* ------------------------------------------------------------------
+ * Global keyframes / shared entrance motion
+ * ------------------------------------------------------------------ */
+
+/* Hero entrance lines (A subhead/CTAs/marquee and B hero shot). Only with JS (html.js). */
+html.js .hero-line {
+  animation: hero-line .76s var(--ease-smooth) calc(.38s + var(--i) * 90ms) both;
+}
+@keyframes hero-line {
+  0% {
+    opacity: 0;
+    filter: blur(5px);
+    translate: 0 14px;
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    translate: 0;
+  }
+}
+
+/* v4 animate-pulse / blink used by demo carets */
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .hero-line {
+    animation: none;
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "id": "content.resource-detail",
+  "layer": "section",
+  "category": "content",
+  "purpose": "Resource detail: breadcrumb, H1, excerpt, meta, PLACEHOLDER prose + 'Read the full guide on activepieces.com', share, build CTA aside, right TOC (lg).",
+  "implementedBy": [
+    "src/pages/resources/ResourceDetail.jsx",
+    "src/components/content/placeholder.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_CONTENT.md",
+      "lines": "689",
+      "quote": "## 8. `/resources/:type/:slug` (detail)"
+    },
+    {
+      "file": "src/pages/resources/ResourceDetail.jsx",
+      "lines": "74",
+      "quote": "<ReadFullLink href={item.url}>Read the full guide on activepieces.com</ReadFullLink>"
+    }
+  ],
+  "variants": {
+    "default": {
+      "description": "Single variant.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CONTENT.md",
+          "lines": "718",
+          "quote": "- The TOC rail sits on the **right** here (256 wide) and is hidden below 1024. At 768 and 390 there is a single column."
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "item",
+      "bodyMode"
+    ],
+    "properties": {
+      "item": {
+        "type": "string",
+        "pattern": "^data:resources#(glossary|automation-guides|automation-use-cases|integration-use-cases)/[a-z0-9-]+$",
+        "x-example": "data:resources#glossary/example"
+      },
+      "bodyMode": {
+        "const": "placeholder"
+      }
+    }
+  },
+  "media": {
+    "slots": {}
+  },
+  "constraints": {
+    "onePerPage": true,
+    "mustFollow": "shell.header"
+  },
+  "variantRules": {},
+  "motion": {
+    "allowedPatterns": [
+      "toc-scrollspy"
+    ],
+    "requiredPatterns": [
+      "toc-scrollspy"
+    ],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "static-end-state"
+  },
+  "responsive": {
+    "evidence": [
+      {
+        "file": "specs/SPEC_CONTENT.md",
+        "lines": "718",
+        "quote": "- The TOC rail sits on the **right** here (256 wide) and is hidden below 1024. At 768 and 390 there is a single column."
+      }
+    ],
+    "changes": {
+      "base": "single column",
+      "lg": "article + right TOC 16rem"
+    }
+  },
+  "accessibility": [],
+  "notes": [
+    "No body field: resource bodies and FAQ answers are not stored (faqCount only)."
+  ]
+}

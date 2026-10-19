@@ -1,0 +1,1525 @@
+{
+  "$description": "One entry per distinct PAGE SHAPE (not per route). nodes[] is the exact ordered node sequence a PageSpec of that template must follow; required/repeatable are machine-enforced by schema/semantic_validate.py.",
+  "templates": {
+    "template.home": {
+      "purpose": "Homepage: enterprise AI platform story (hero, sticky scroll story, demos, bentos, proof, FAQ).",
+      "implementedBy": [
+        "src/pages/Home.jsx"
+      ],
+      "evidence": [
+        {
+          "file": "src/pages/Home.jsx",
+          "lines": "23-37",
+          "quote": "<Hero onUseInAi={() => setAiDialogOpen(true)} />"
+        },
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "265",
+          "quote": "## 2. Page section map (top to bottom)"
+        }
+      ],
+      "nodes": [
+        {
+          "section": "shell.header",
+          "variants": [
+            "on-art"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "hero.home-stage",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "media.app-shot",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "story.dream-scroll",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "proof.case-study",
+          "variants": [
+            "case-a"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "cta.band",
+          "variants": [
+            "home"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "feature.demo-split",
+          "variants": [
+            "agents-demo"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "feature.demo-split",
+          "variants": [
+            "flow-demo"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "bento.grid",
+          "variants": [
+            "home-platform"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "cta.band",
+          "variants": [
+            "home"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "proof.case-study",
+          "variants": [
+            "case-b"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "feature.demo-split",
+          "variants": [
+            "pieces-mosaic"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "bento.grid",
+          "variants": [
+            "home-workspace"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "proof.testimonials",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "faq.accordion",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "overlay.use-in-ai-dialog",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false,
+          "note": "rendered inside <main> after Faq"
+        },
+        {
+          "section": "shell.footer-closing",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "shell.floating-card",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        }
+      ],
+      "id": "template.home",
+      "standalone": false
+    },
+    "template.product": {
+      "purpose": "Product page (/product/*): template hero with live demo + 3 columns, 8-card bento, 5-item FAQ.",
+      "implementedBy": [
+        "src/pages/ProductPage.jsx"
+      ],
+      "evidence": [
+        {
+          "file": "specs/SPEC_PRODUCT_SOLUTIONS.md",
+          "lines": "19",
+          "quote": "| **ProductPage** | 4 × /product/* |"
+        },
+        {
+          "file": "src/pages/ProductPage.jsx",
+          "lines": "47-48",
+          "quote": "<TemplateBento section={page.section} h2={page.grid.h2} cards={page.grid.cards} />"
+        }
+      ],
+      "nodes": [
+        {
+          "section": "shell.header",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "hero.product-stage",
+          "variants": [
+            "product-columns"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "bento.grid",
+          "variants": [
+            "product"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "faq.accordion",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "shell.footer-closing",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "shell.floating-card",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        }
+      ],
+      "id": "template.product",
+      "standalone": false
+    },
+    "template.solution": {
+      "purpose": "Solution page (/solutions/*): template hero with static mock + rotating logos, 6-card bento, case study, testimonials, 4-item FAQ.",
+      "implementedBy": [
+        "src/pages/SolutionPage.jsx"
+      ],
+      "evidence": [
+        {
+          "file": "specs/SPEC_PRODUCT_SOLUTIONS.md",
+          "lines": "20",
+          "quote": "| **SolutionPage** | 10 × /solutions/* |"
+        },
+        {
+          "file": "src/pages/SolutionPage.jsx",
+          "lines": "48-51",
+          "quote": "<TemplateBento section={page.section} h2={page.grid.h2} cards={page.grid.cards} />"
+        }
+      ],
+      "nodes": [
+        {
+          "section": "shell.header",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "hero.product-stage",
+          "variants": [
+            "solution-logos"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "bento.grid",
+          "variants": [
+            "solution"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "proof.case-study",
+          "variants": [
+            "case-a",
+            "case-b"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "proof.testimonials",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "faq.accordion",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "shell.footer-closing",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "shell.floating-card",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        }
+      ],
+      "id": "template.solution",
+      "standalone": false
+    },
+    "template.pricing": {
+      "purpose": "Pricing: plans + compare matrix + FAQ; no floating card.",
+      "implementedBy": [
+        "src/pages/Pricing.jsx"
+      ],
+      "evidence": [
+        {
+          "file": "specs/SPEC_MARKETING.md",
+          "lines": "215",
+          "quote": "| A | Plans: hero, toggle, 4 plan cards, Embed/Enterprise rows, rotating logos |"
+        },
+        {
+          "file": "src/pages/Pricing.jsx",
+          "lines": "45-46",
+          "quote": "<CompareTable annual={annual} />"
+        }
+      ],
+      "nodes": [
+        {
+          "section": "shell.header",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "pricing.plans",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "pricing.compare",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "faq.accordion",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "shell.footer-closing",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        }
+      ],
+      "id": "template.pricing",
+      "standalone": false
+    },
+    "template.sales": {
+      "purpose": "Standalone /sales page rendered OUTSIDE Layout (no Header/Footer/FloatingCard).",
+      "implementedBy": [
+        "src/pages/Sales.jsx"
+      ],
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "55-56",
+          "quote": "{/* Standalone layout (no shared Header/Footer/FloatingCard): SPEC_MARKETING §2 */}"
+        }
+      ],
+      "standalone": true,
+      "nodes": [
+        {
+          "section": "sales.split",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        }
+      ],
+      "id": "template.sales"
+    },
+    "template.security": {
+      "purpose": "/security: dark cipher hero, scrollytelling feature rows, gradient icon band, FAQ, custom closing buttons.",
+      "implementedBy": [
+        "src/pages/Security.jsx"
+      ],
+      "evidence": [
+        {
+          "file": "src/pages/Security.jsx",
+          "lines": "48-51",
+          "quote": "<SecurityHero />"
+        }
+      ],
+      "nodes": [
+        {
+          "section": "shell.header",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "security.hero-cipher",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "security.feature-rows",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "band.icon-cards",
+          "variants": [
+            "gradient"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "faq.accordion",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "shell.footer-closing",
+          "variants": [
+            "custom-buttons"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "shell.floating-card",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        }
+      ],
+      "id": "template.security",
+      "standalone": false
+    },
+    "template.ai-governance": {
+      "purpose": "/ai-governance: image-card hero, models grid scrub, case study, rollout deck, solid icon band, FAQ.",
+      "implementedBy": [
+        "src/pages/AiGovernance.jsx"
+      ],
+      "evidence": [
+        {
+          "file": "src/pages/AiGovernance.jsx",
+          "lines": "48-53",
+          "quote": "<GovernanceHero />"
+        }
+      ],
+      "nodes": [
+        {
+          "section": "shell.header",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "governance.hero",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "governance.models-grid",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "proof.case-study",
+          "variants": [
+            "case-b"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "governance.rollout-deck",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "band.icon-cards",
+          "variants": [
+            "solid"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "faq.accordion",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "shell.footer-closing",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "shell.floating-card",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        }
+      ],
+      "id": "template.ai-governance",
+      "standalone": false
+    },
+    "template.embed": {
+      "purpose": "/embed: product hero with flow demo + highlights, 8-cell bento, FAQ.",
+      "implementedBy": [
+        "src/pages/Embed.jsx"
+      ],
+      "evidence": [
+        {
+          "file": "src/pages/Embed.jsx",
+          "lines": "31-33",
+          "quote": "<EmbedHero />"
+        }
+      ],
+      "nodes": [
+        {
+          "section": "shell.header",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "hero.product-stage",
+          "variants": [
+            "embed-highlights"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "bento.grid",
+          "variants": [
+            "embed"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "faq.accordion",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "shell.footer-closing",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "shell.floating-card",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        }
+      ],
+      "id": "template.embed",
+      "standalone": false
+    },
+    "template.oss-friends": {
+      "purpose": "/oss-friends directory page.",
+      "implementedBy": [
+        "src/pages/OssFriends.jsx"
+      ],
+      "evidence": [
+        {
+          "file": "specs/SPEC_MARKETING.md",
+          "lines": "794",
+          "quote": "- Container: `mx-auto w-full max-w-7xl px-5 pt-28 pb-24 md:px-6 md:pt-32 md:pb-32 lg:px-8`. It is the only child of main"
+        }
+      ],
+      "nodes": [
+        {
+          "section": "shell.header",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "directory.oss-friends",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "shell.footer-closing",
+          "variants": [
+            "custom-buttons"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "shell.floating-card",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        }
+      ],
+      "id": "template.oss-friends",
+      "standalone": false
+    },
+    "template.catalog-index": {
+      "purpose": "/pieces and /mcp catalog index.",
+      "implementedBy": [
+        "src/pages/CatalogPage.jsx"
+      ],
+      "evidence": [
+        {
+          "file": "specs/SPEC_CATALOG.md",
+          "lines": "223",
+          "quote": "Section order (the `data-section` value is prefixed with `pieces-` or `mcp-`): **hero → browser → browser-cta → categories → faq → az**"
+        },
+        {
+          "file": "src/pages/CatalogPage.jsx",
+          "lines": "49",
+          "quote": "<CatalogBrowser section={`${kind}-browser`}"
+        }
+      ],
+      "nodes": [
+        {
+          "section": "shell.header",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "hero.catalog-index",
+          "variants": [
+            "pieces-scatter",
+            "mcp-connect"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "catalog.browser",
+          "variants": [
+            "with-facets"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "cta.band",
+          "variants": [
+            "catalog-inline"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "catalog.categories",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "faq.accordion",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "catalog.az-index",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "shell.footer-closing",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "shell.floating-card",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        }
+      ],
+      "id": "template.catalog-index",
+      "standalone": false
+    },
+    "template.catalog-category": {
+      "purpose": "/pieces/category/:key and /mcp/category/:key (17 keys each).",
+      "implementedBy": [
+        "src/pages/CatalogPage.jsx"
+      ],
+      "evidence": [
+        {
+          "file": "src/pages/CatalogPage.jsx",
+          "lines": "43",
+          "quote": "<CategoryHero copy={copy} section={`${kind}-hero`} />"
+        },
+        {
+          "file": "specs/SPEC_CATALOG.md",
+          "lines": "293",
+          "quote": "**C. Category pages** (`product-hero` without art, highlights or logos). There is no scatter."
+        }
+      ],
+      "nodes": [
+        {
+          "section": "shell.header",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "hero.catalog-index",
+          "variants": [
+            "category"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "catalog.browser",
+          "variants": [
+            "no-facets"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "cta.band",
+          "variants": [
+            "catalog-inline"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "catalog.categories",
+          "variants": [
+            "default"
+          ],
+          "required": false,
+          "repeatable": false,
+          "note": "rendered only when other categories exist"
+        },
+        {
+          "section": "faq.accordion",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "catalog.az-index",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "shell.footer-closing",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "shell.floating-card",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        }
+      ],
+      "id": "template.catalog-category",
+      "standalone": false
+    },
+    "template.catalog-detail": {
+      "purpose": "/pieces/:slug and /mcp/:slug (768 each), data-bound to pieces.json + public/data/pieces/<slug>.json.",
+      "implementedBy": [
+        "src/pages/DetailPage.jsx"
+      ],
+      "evidence": [
+        {
+          "file": "specs/SPEC_CATALOG.md",
+          "lines": "452-463",
+          "quote": "## 5. PieceDetail: `/pieces/:slug` and `/mcp/:slug`"
+        }
+      ],
+      "nodes": [
+        {
+          "section": "shell.header",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "hero.catalog-detail",
+          "variants": [
+            "piece",
+            "mcp"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "catalog.about",
+          "variants": [
+            "piece",
+            "mcp"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "catalog.capability-list",
+          "variants": [
+            "triggers",
+            "tools"
+          ],
+          "required": false,
+          "repeatable": false,
+          "note": "pieces: Triggers; mcp: Tools; only if non-empty"
+        },
+        {
+          "section": "catalog.capability-list",
+          "variants": [
+            "actions",
+            "triggers"
+          ],
+          "required": false,
+          "repeatable": false,
+          "note": "pieces: Actions; mcp: Triggers; only if non-empty"
+        },
+        {
+          "section": "cta.band",
+          "variants": [
+            "catalog-inline"
+          ],
+          "required": false,
+          "repeatable": false,
+          "note": "only if any capability section rendered"
+        },
+        {
+          "section": "faq.accordion",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "catalog.guides",
+          "variants": [
+            "default"
+          ],
+          "required": false,
+          "repeatable": false
+        },
+        {
+          "section": "catalog.related-grid",
+          "variants": [
+            "pairings"
+          ],
+          "required": false,
+          "repeatable": false,
+          "note": "pieces only, when pairable"
+        },
+        {
+          "section": "catalog.related-grid",
+          "variants": [
+            "related"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "shell.footer-closing",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "shell.floating-card",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        }
+      ],
+      "id": "template.catalog-detail",
+      "standalone": false
+    },
+    "template.catalog-pair": {
+      "purpose": "/pieces/:a/:b for ANY two distinct valid slugs (3,000 listed in the sitemap).",
+      "implementedBy": [
+        "src/pages/PairPage.jsx"
+      ],
+      "evidence": [
+        {
+          "file": "specs/SPEC_CATALOG.md",
+          "lines": "550-558",
+          "quote": "## 6. PairPage: `/pieces/:a/:b`"
+        }
+      ],
+      "nodes": [
+        {
+          "section": "shell.header",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "hero.catalog-detail",
+          "variants": [
+            "pair"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "catalog.capability-list",
+          "variants": [
+            "ideas"
+          ],
+          "required": false,
+          "repeatable": false,
+          "note": "omitted if no ideas are generated"
+        },
+        {
+          "section": "faq.accordion",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "catalog.related-grid",
+          "variants": [
+            "pair-source"
+          ],
+          "required": false,
+          "repeatable": false
+        },
+        {
+          "section": "catalog.related-grid",
+          "variants": [
+            "pair-target"
+          ],
+          "required": false,
+          "repeatable": false
+        },
+        {
+          "section": "shell.footer-closing",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "shell.floating-card",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        }
+      ],
+      "id": "template.catalog-pair",
+      "standalone": false
+    },
+    "template.blog-listing": {
+      "purpose": "Blog index / page n / category / author listings (no floating card on /blog*).",
+      "implementedBy": [
+        "src/pages/blog/BlogIndex.jsx",
+        "src/pages/blog/BlogCategory.jsx",
+        "src/pages/blog/BlogAuthor.jsx"
+      ],
+      "evidence": [
+        {
+          "file": "specs/SPEC_CONTENT.md",
+          "lines": "20",
+          "quote": "| `/blog` | Blog index p1: search, category pills, featured post, 12-card grid, pagination | `blog.json` |"
+        }
+      ],
+      "nodes": [
+        {
+          "section": "shell.header",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "content.blog-listing",
+          "variants": [
+            "index-first",
+            "index-page",
+            "category",
+            "author"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "shell.footer-closing",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        }
+      ],
+      "id": "template.blog-listing",
+      "standalone": false
+    },
+    "template.blog-article": {
+      "purpose": "Blog article (793 posts): metadata + placeholder body + outbound link (no floating card).",
+      "implementedBy": [
+        "src/pages/blog/BlogArticle.jsx"
+      ],
+      "evidence": [
+        {
+          "file": "specs/SPEC_CONTENT.md",
+          "lines": "24",
+          "quote": "| `/blog/:slug` | Article | `blog.json` |"
+        }
+      ],
+      "nodes": [
+        {
+          "section": "shell.header",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "content.article",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "shell.footer-closing",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        }
+      ],
+      "id": "template.blog-article",
+      "standalone": false
+    },
+    "template.resources-hub": {
+      "purpose": "/resources hub (4 category cards, no FAQ).",
+      "implementedBy": [
+        "src/pages/resources/ResourcesHub.jsx"
+      ],
+      "evidence": [
+        {
+          "file": "specs/SPEC_CONTENT.md",
+          "lines": "570",
+          "quote": "- The resources hub page has no FAQ. Its footer closing copy is in §1.14."
+        }
+      ],
+      "nodes": [
+        {
+          "section": "shell.header",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "hero.resources",
+          "variants": [
+            "hub"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "content.resource-cards",
+          "variants": [
+            "hub-categories"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "shell.footer-closing",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "shell.floating-card",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        }
+      ],
+      "id": "template.resources-hub",
+      "standalone": false
+    },
+    "template.resource-category": {
+      "purpose": "/resources/:type listing (4 types).",
+      "implementedBy": [
+        "src/pages/resources/ResourceCategory.jsx"
+      ],
+      "evidence": [
+        {
+          "file": "src/pages/resources/ResourceCategory.jsx",
+          "lines": "221-222",
+          "quote": "<KeepExploring res={res} type={type} />"
+        }
+      ],
+      "nodes": [
+        {
+          "section": "shell.header",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "hero.resources",
+          "variants": [
+            "category"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "content.resource-cards",
+          "variants": [
+            "category-listing"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "content.resource-related",
+          "variants": [
+            "keep-exploring"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "faq.accordion",
+          "variants": [
+            "resource"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "shell.footer-closing",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "shell.floating-card",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        }
+      ],
+      "id": "template.resource-category",
+      "standalone": false
+    },
+    "template.resource-detail": {
+      "purpose": "/resources/:type/:slug (1,063 items): placeholder body + outbound link.",
+      "implementedBy": [
+        "src/pages/resources/ResourceDetail.jsx"
+      ],
+      "evidence": [
+        {
+          "file": "src/pages/resources/ResourceDetail.jsx",
+          "lines": "109",
+          "quote": "{faqs.length > 0 && <ResourceFaq key={slug}"
+        }
+      ],
+      "nodes": [
+        {
+          "section": "shell.header",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "content.resource-detail",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "faq.accordion",
+          "variants": [
+            "resource"
+          ],
+          "required": false,
+          "repeatable": false,
+          "note": "placeholder Q/A x min(faqCount,3)"
+        },
+        {
+          "section": "content.resource-related",
+          "variants": [
+            "apps"
+          ],
+          "required": false,
+          "repeatable": false
+        },
+        {
+          "section": "content.resource-related",
+          "variants": [
+            "related"
+          ],
+          "required": false,
+          "repeatable": false
+        },
+        {
+          "section": "shell.footer-closing",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "shell.floating-card",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        }
+      ],
+      "id": "template.resource-detail",
+      "standalone": false
+    },
+    "template.legal": {
+      "purpose": "/terms and /privacy with placeholder legal body.",
+      "implementedBy": [
+        "src/pages/Legal.jsx"
+      ],
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "49-50",
+          "quote": "<Route path=\"/privacy\" element={<ContentRoute page=\"Legal\" doc=\"privacy\" />} />"
+        }
+      ],
+      "nodes": [
+        {
+          "section": "shell.header",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "content.legal",
+          "variants": [
+            "terms",
+            "privacy"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "shell.footer-closing",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "shell.floating-card",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        }
+      ],
+      "id": "template.legal",
+      "standalone": false
+    },
+    "template.external-redirect": {
+      "purpose": "/docs/* hand-off to the original docs app (separate app on the original; not cloned).",
+      "implementedBy": [
+        "src/pages/ExternalRedirect.jsx"
+      ],
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "51",
+          "quote": "<Route path=\"/docs/*\" element={<ExternalRedirect />} />"
+        }
+      ],
+      "nodes": [
+        {
+          "section": "shell.header",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "system.external-redirect",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "shell.footer-closing",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "shell.floating-card",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        }
+      ],
+      "id": "template.external-redirect",
+      "standalone": false
+    },
+    "template.not-found": {
+      "purpose": "Catch-all 404 inside Layout; floating card follows the route rule.",
+      "implementedBy": [
+        "src/pages/NotFound.jsx"
+      ],
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "53",
+          "quote": "<Route path=\"*\" element={<NotFound />} />"
+        }
+      ],
+      "nodes": [
+        {
+          "section": "shell.header",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "system.not-found",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "shell.footer-closing",
+          "variants": [
+            "default"
+          ],
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "shell.floating-card",
+          "variants": [
+            "default"
+          ],
+          "required": false,
+          "repeatable": false,
+          "note": "present iff the route is not under a hidden prefix"
+        }
+      ],
+      "id": "template.not-found",
+      "standalone": false
+    }
+  }
+}

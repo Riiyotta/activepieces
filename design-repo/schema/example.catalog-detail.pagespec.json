@@ -1,0 +1,230 @@
+{
+  "pageSpecVersion": "1.0.0",
+  "template": "template.catalog-detail",
+  "route": "/pieces/slack",
+  "meta": {
+    "title": "Slack integration | Example",
+    "description": "Data-bound example: every hero/about/capability string is generated from pieces.json at render time."
+  },
+  "nodes": [
+    {
+      "id": "header",
+      "section": "shell.header",
+      "variant": "default",
+      "content": {},
+      "motion": {
+        "entries": [
+          {
+            "pattern": "header-nav-in",
+            "trigger": "mount",
+            "durationMs": 620,
+            "easing": "ease-smooth",
+            "delayMs": 240
+          },
+          {
+            "pattern": "header-hide-show",
+            "trigger": "scroll-direction",
+            "durationMs": 300,
+            "easing": "ease-smooth"
+          }
+        ],
+        "reducedMotionFallback": "static-end-state"
+      }
+    },
+    {
+      "id": "hero",
+      "section": "hero.catalog-detail",
+      "variant": "piece",
+      "content": {
+        "kind": "pieces",
+        "subject": "data:pieces#slack"
+      },
+      "motion": {
+        "entries": [],
+        "reducedMotionFallback": "not-applicable"
+      },
+      "media": [
+        {
+          "slot": "logos",
+          "assetRole": "piece.logo",
+          "ref": "data:pieces#slack",
+          "alt": "Slack logo"
+        }
+      ]
+    },
+    {
+      "id": "about",
+      "section": "catalog.about",
+      "variant": "piece",
+      "content": {
+        "kind": "pieces",
+        "subject": "data:pieces#slack"
+      },
+      "motion": {
+        "entries": [],
+        "reducedMotionFallback": "not-applicable"
+      }
+    },
+    {
+      "id": "triggers",
+      "section": "catalog.capability-list",
+      "variant": "triggers",
+      "content": {
+        "kind": "pieces",
+        "subject": "data:pieces#slack"
+      },
+      "motion": {
+        "entries": [],
+        "reducedMotionFallback": "not-applicable"
+      }
+    },
+    {
+      "id": "actions",
+      "section": "catalog.capability-list",
+      "variant": "actions",
+      "content": {
+        "kind": "pieces",
+        "subject": "data:pieces#slack"
+      },
+      "motion": {
+        "entries": [],
+        "reducedMotionFallback": "not-applicable"
+      }
+    },
+    {
+      "id": "mid-cta",
+      "section": "cta.band",
+      "variant": "catalog-inline",
+      "content": {
+        "h2": "Put Slack to work in a flow",
+        "body": "Connect it once and every trigger and action above is ready to drop into the builder. Free to start, hosted or self-hosted.",
+        "primaryLabel": "Build a Slack flow",
+        "primaryHref": "https://cloud.activepieces.com/sign-up?ap_cta=pieces_detail_mid",
+        "secondaryLabel": "Talk to sales"
+      },
+      "motion": {
+        "entries": [],
+        "reducedMotionFallback": "not-applicable"
+      }
+    },
+    {
+      "id": "faq",
+      "section": "faq.accordion",
+      "variant": "default",
+      "content": {
+        "h2": "Slack questions.",
+        "items": [
+          {
+            "question": "Do I need to write code to use Slack in a flow?",
+            "answer": "No. Pick a trigger or an action and fill in its fields in the builder."
+          },
+          {
+            "question": "Where do the flows run?",
+            "answer": "On the hosted cloud or on your own servers."
+          }
+        ]
+      },
+      "motion": {
+        "entries": [
+          {
+            "pattern": "faq-accordion",
+            "trigger": "click",
+            "durationMs": 200,
+            "easing": "ease-out"
+          }
+        ],
+        "reducedMotionFallback": "static-end-state"
+      }
+    },
+    {
+      "id": "guides",
+      "section": "catalog.guides",
+      "variant": "default",
+      "content": {
+        "kind": "pieces",
+        "subject": "data:pieces#slack"
+      },
+      "motion": {
+        "entries": [
+          {
+            "pattern": "card-hover-shadow",
+            "trigger": "hover",
+            "durationMs": 200,
+            "easing": "ease-out"
+          }
+        ],
+        "reducedMotionFallback": "static-end-state"
+      }
+    },
+    {
+      "id": "pairings",
+      "section": "catalog.related-grid",
+      "variant": "pairings",
+      "content": {
+        "kind": "pieces",
+        "subject": "data:pieces#slack"
+      },
+      "motion": {
+        "entries": [
+          {
+            "pattern": "card-hover-shadow",
+            "trigger": "hover",
+            "durationMs": 200,
+            "easing": "ease-out"
+          }
+        ],
+        "reducedMotionFallback": "static-end-state"
+      }
+    },
+    {
+      "id": "related",
+      "section": "catalog.related-grid",
+      "variant": "related",
+      "content": {
+        "kind": "pieces",
+        "subject": "data:pieces#slack"
+      },
+      "motion": {
+        "entries": [
+          {
+            "pattern": "card-hover-shadow",
+            "trigger": "hover",
+            "durationMs": 200,
+            "easing": "ease-out"
+          }
+        ],
+        "reducedMotionFallback": "static-end-state"
+      }
+    },
+    {
+      "id": "footer",
+      "section": "shell.footer-closing",
+      "variant": "default",
+      "content": {
+        "h2": "Connect it, and the rest of your stack.",
+        "lede": "Free on every plan and open source, on the hosted cloud or your own servers."
+      },
+      "motion": {
+        "entries": [],
+        "reducedMotionFallback": "not-applicable"
+      }
+    },
+    {
+      "id": "floating",
+      "section": "shell.floating-card",
+      "variant": "default",
+      "content": {},
+      "motion": {
+        "entries": [
+          {
+            "pattern": "floating-card-enter",
+            "trigger": "scroll-threshold",
+            "durationMs": 300,
+            "easing": "ease-smooth"
+          }
+        ],
+        "reducedMotionFallback": "static-end-state"
+      }
+    }
+  ]
+}

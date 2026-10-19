@@ -1,0 +1,966 @@
+<!-- Unique bento mock bodies across /product/* and /solutions/* (21). Each block is the full frame element (positioning wrapper + sheet) as SSR-rendered. Body markup is identical wherever the mock is reused; only the frame mode/background differ per card (see SPEC_PRODUCT_SOLUTIONS.md). -->
+
+<!-- ===== MOCK sendMessageConfig  (first seen: /product/ai-agent-builder "Locked Inputs", mode=center; frame children=1) ===== -->
+<div class="absolute inset-x-5 inset-y-0 flex items-center md:inset-x-9">
+<div class="relative w-full">
+<div class="overflow-hidden rounded-xl border border-ink-950/10 bg-ink-50 ring-1 ring-ink-950/10">
+<div class="flex items-center gap-2.5 px-6 py-5">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/slack.svg" width="20"/>
+<span class="text-[15px] font-semibold text-ink-950">Send message</span>
+</div>
+<div class="divide-y divide-ink-950/10 border-t border-ink-950/10">
+<div class="flex items-center gap-3 px-6 py-4">
+<span aria-hidden="true" class="iconify i-solar:lock-linear size-4 shrink-0 text-ink-400" style="">
+</span>
+<span class="shrink-0 text-[14px] text-ink-900">Workspace</span>
+<span class="text-ink-500 ml-auto min-w-0 truncate text-[13px]">calder-eu</span>
+</div>
+<div class="flex items-center gap-3 px-6 py-4">
+<span aria-hidden="true" class="iconify i-solar:lock-linear size-4 shrink-0 text-ink-400" style="">
+</span>
+<span class="shrink-0 text-[14px] text-ink-900">Channel</span>
+<span class="text-ink-500 ml-auto min-w-0 truncate text-[13px]">#billing-alerts</span>
+</div>
+<div class="flex items-center gap-3 px-6 py-4">
+<span aria-hidden="true" class="iconify i-solar:stars-linear size-4 shrink-0 text-primary-700" style="">
+</span>
+<span class="shrink-0 text-[14px] text-ink-900">Message</span>
+<span class="text-primary-800 ml-auto min-w-0 truncate text-[13px]">The agent writes this</span>
+</div>
+<div class="flex items-center gap-3 px-6 py-4">
+<span aria-hidden="true" class="iconify i-solar:shield-linear size-4 shrink-0 text-ink-400" style="">
+</span>
+<span class="text-[14px] text-ink-900">Max steps</span>
+<span class="ml-auto text-[13px] text-ink-500 tabular-nums">20 per run</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ===== MOCK aiProviders  (first seen: /product/ai-agent-builder "Your Own Model", mode=center; frame children=1) ===== -->
+<div class="absolute inset-x-5 inset-y-0 flex items-center md:inset-x-9">
+<div class="relative w-full">
+<div class="overflow-hidden rounded-xl border border-ink-950/10 bg-ink-50 ring-1 ring-ink-950/10">
+<div class="flex items-center gap-2.5 px-6 py-5">
+<span aria-hidden="true" class="iconify i-solar:stars-linear size-4 shrink-0 text-ink-400" style="">
+</span>
+<span class="text-[15px] font-semibold text-ink-950">AI providers</span>
+</div>
+<div class="divide-y divide-ink-950/10 border-t border-ink-950/10">
+<div class="flex items-center gap-3 px-6 py-4">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/openai.svg" width="20"/>
+<span class="truncate text-[14px] text-ink-900">OpenAI</span>
+</div>
+<div class="flex items-center gap-3 px-6 py-4">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/anthropic-claude.svg" width="20"/>
+<span class="truncate text-[14px] text-ink-900">Anthropic</span>
+</div>
+<div class="flex items-center gap-3 px-6 py-4">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/google-gemini.svg" width="20"/>
+<span class="truncate text-[14px] text-ink-900">Google Gemini</span>
+</div>
+<div class="flex items-center gap-3 px-6 py-4">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/azure-openai.svg" width="20"/>
+<span class="truncate text-[14px] text-ink-900">Azure OpenAI</span>
+</div>
+<div class="flex items-center gap-3 px-6 py-4">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/aws-bedrock.svg" width="20"/>
+<span class="truncate text-[14px] text-ink-900">AWS Bedrock</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ===== MOCK mcpServer  (first seen: /product/ai-agent-builder "External MCP", mode=float; frame children=1) ===== -->
+<div class="absolute inset-0 grid place-items-center px-5 md:px-9">
+<div class="relative w-full max-w-[330px]">
+<div class="overflow-hidden rounded-xl border border-ink-950/10 bg-ink-50 ring-1 ring-ink-950/10">
+<div class="flex items-baseline gap-3 px-6 pt-6 pb-4">
+<span class="text-[18px] font-semibold text-ink-950">MCP server</span>
+<span class="ml-auto flex shrink-0 items-center gap-2 text-[14px] text-ink-500">
+<span class="size-1.5 rounded-full bg-accent-a-500">
+</span> Live </span>
+</div>
+<div class="flex items-center gap-4 bg-ink-900/4 px-6 py-3.5">
+<span class="flex size-8 shrink-0 items-center justify-center">
+<span aria-hidden="true" class="iconify i-solar:link-minimalistic-2-linear size-5 text-ink-950/30" style="">
+</span>
+</span>
+<span class="min-w-0 flex-1 truncate font-mono text-[15px] text-ink-600"> mcp.activepieces.com/v1 </span>
+</div>
+<div class="flex flex-col px-6 pt-3 pb-6">
+<div class="flex items-center gap-4 py-3">
+<span class="flex size-8 shrink-0 items-center justify-center">
+<img alt="" aria-hidden="true" class="size-6" decoding="async" height="24" loading="lazy" src="/logos/pieces/stripe.svg" width="24"/>
+</span>
+<span class="min-w-0 flex-1 truncate font-mono text-[15px] text-ink-900">create_invoice</span>
+</div>
+<div class="flex items-center gap-4 py-3">
+<span class="flex size-8 shrink-0 items-center justify-center">
+<img alt="" aria-hidden="true" class="size-6" decoding="async" height="24" loading="lazy" src="/logos/pieces/hubspot.svg" width="24"/>
+</span>
+<span class="min-w-0 flex-1 truncate font-mono text-[15px] text-ink-900">find_customer</span>
+</div>
+<div class="flex items-center gap-4 py-3">
+<span class="flex size-8 shrink-0 items-center justify-center">
+<img alt="" aria-hidden="true" class="size-6" decoding="async" height="24" loading="lazy" src="/logos/pieces/slack.svg" width="24"/>
+</span>
+<span class="min-w-0 flex-1 truncate font-mono text-[15px] text-ink-900">post_message</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ===== MOCK approvalRefund  (first seen: /product/ai-agent-builder "Human Approvals", mode=wide; frame children=2) ===== -->
+<div class="absolute top-6 right-5 left-5 -bottom-12 md:top-9 md:right-9 md:left-9 md:-bottom-20">
+<div class="overflow-hidden rounded-xl border border-ink-950/10 bg-ink-50 ring-1 ring-ink-950/10">
+<div class="flex flex-col gap-5 px-9 py-8">
+<span class="flex items-center gap-2 text-[12px] text-ink-500">
+<span aria-hidden="true" class="iconify i-solar:clock-circle-linear size-3.5 shrink-0" style="">
+</span> Waiting for approval </span>
+<div class="flex flex-col gap-2">
+<p class="text-[20px] font-semibold text-ink-950">Refund $2,480.00 to Northaven</p>
+<p class="max-w-[48ch] text-[13px] text-ink-600"> Duplicate charge picked up by the refund flow. Nothing moves until someone signs off. </p>
+</div>
+<div class="flex items-center gap-2.5">
+<span class="rounded-lg border border-ink-950/10 bg-ink-950 px-4 py-2 text-[13px] font-medium text-white"> Approve </span>
+<span class="rounded-lg border border-ink-950/10 bg-ink-50 px-4 py-2 text-[13px] font-medium text-ink-800"> Reject </span>
+</div>
+</div>
+<div class="flex shrink-0 items-center gap-3 border-t border-ink-950/10 px-9 py-4">
+<span class="size-6 shrink-0 rounded-full bg-ink-200">
+</span>
+<span class="text-[12px] text-ink-500">Refund flow · step 3 of 6 · 4m ago</span>
+</div>
+<div class="border-t border-ink-950/10 px-9 pt-5">
+<p class="pb-1 text-[11px] text-ink-500 uppercase">Earlier today</p>
+<div class="divide-y divide-ink-950/10">
+<div class="flex items-center gap-3 py-3.5">
+<span aria-hidden="true" class="iconify i-solar:check-circle-linear size-4 shrink-0 text-accent-a-700" style="">
+</span>
+<span class="text-[13px] text-ink-800">Refund $180.00 to Piera</span>
+<span class="ml-auto text-[12px] text-ink-500">Dana</span>
+</div>
+<div class="flex items-center gap-3 py-3.5">
+<span aria-hidden="true" class="iconify i-solar:check-circle-linear size-4 shrink-0 text-accent-a-700" style="">
+</span>
+<span class="text-[13px] text-ink-800">Discount 20% for Wren Labs</span>
+<span class="ml-auto text-[12px] text-ink-500">Sam</span>
+</div>
+<div class="flex items-center gap-3 py-3.5">
+<span aria-hidden="true" class="iconify i-solar:check-circle-linear size-4 shrink-0 text-accent-a-700" style="">
+</span>
+<span class="text-[13px] text-ink-800">Refund $940.00 to Verano</span>
+<span class="ml-auto text-[12px] text-ink-500">Dana</span>
+</div>
+</div>
+</div>
+</div>
+<div class="absolute -top-5 right-8 w-[38%] max-w-[262px] min-w-[220px]">
+<div class="overflow-hidden rounded-xl bg-ink-50 ring-1 ring-ink-950/10">
+<div class="flex items-center gap-2.5 px-4 pt-4 pb-3">
+<span aria-hidden="true" class="iconify i-solar:tuning-linear size-4 shrink-0 text-ink-400" style="">
+</span>
+<span class="text-[14px] font-medium text-ink-950">Approval rule</span>
+</div>
+<div class="divide-y divide-ink-950/10 border-t border-ink-950/10">
+<div class="flex items-center justify-between gap-4 px-4 py-2.5">
+<span class="text-[13px] text-ink-600">Amount over</span>
+<span class="text-[13px] text-ink-900 tabular-nums">$1,000</span>
+</div>
+<div class="flex items-center justify-between gap-4 px-4 py-2.5">
+<span class="text-[13px] text-ink-600">Approver</span>
+<span class="text-[13px] text-ink-900 tabular-nums">Finance</span>
+</div>
+<div class="flex items-center justify-between gap-4 px-4 py-2.5">
+<span class="text-[13px] text-ink-600">Times out in</span>
+<span class="text-[13px] text-ink-900 tabular-nums">24h</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ===== MOCK runResume  (first seen: /product/ai-agent-builder "Runs That Resume", mode=crop-left; frame children=1) ===== -->
+<div class="absolute top-6 right-5 -left-12 -bottom-12 md:top-9 md:right-9 md:-left-28 md:-bottom-20">
+<div class="overflow-hidden rounded-xl border border-ink-950/10 bg-ink-50 ring-1 ring-ink-950/10 h-full">
+<div class="flex items-baseline gap-3 pt-6 pr-8 pb-3 pl-36">
+<span class="text-[18px] font-semibold text-ink-950">Run #48,213</span>
+<span class="ml-auto shrink-0 text-[14px] text-ink-500 tabular-nums">2.44s</span>
+</div>
+<div class="flex flex-col pr-8 pl-36">
+<div class="flex items-center gap-4 py-3.5">
+<span class="flex size-10 shrink-0 items-center justify-center">
+<img alt="" aria-hidden="true" class="size-7" decoding="async" height="28" loading="lazy" src="/logos/pieces/stripe.svg" width="28"/>
+</span>
+<span class="min-w-0 flex-1 truncate text-[16px] text-ink-900">Charge in Stripe</span>
+<span aria-hidden="true" class="iconify i-solar:check-circle-linear size-5 shrink-0 text-accent-a-700" style="">
+</span>
+<span class="w-12 shrink-0 text-right text-[15px] text-ink-500 tabular-nums">1.20s</span>
+</div>
+<div class="flex items-center gap-4 py-3.5">
+<span class="flex size-10 shrink-0 items-center justify-center">
+<img alt="" aria-hidden="true" class="size-7" decoding="async" height="28" loading="lazy" src="/logos/pieces/gmail.svg" width="28"/>
+</span>
+<span class="min-w-0 flex-1 truncate text-[16px] text-ink-900">Send the receipt</span>
+<span aria-hidden="true" class="iconify i-solar:check-circle-linear size-5 shrink-0 text-accent-a-700" style="">
+</span>
+<span class="w-12 shrink-0 text-right text-[15px] text-ink-500 tabular-nums">0.38s</span>
+</div>
+<div class="flex items-center gap-3 py-5">
+<span class="h-px flex-1 border-t border-dashed border-accent-c-200">
+</span>
+<span class="shrink-0 text-[15px] text-ink-700">Resumed from checkpoint</span>
+<span class="h-px flex-1 border-t border-dashed border-accent-c-200">
+</span>
+</div>
+<div class="flex items-center gap-4 py-3.5">
+<span class="flex size-10 shrink-0 items-center justify-center">
+<img alt="" aria-hidden="true" class="size-7" decoding="async" height="28" loading="lazy" src="/logos/pieces/google-sheets.svg" width="28"/>
+</span>
+<span class="min-w-0 flex-1 truncate text-[16px] text-ink-900">Append to revenue sheet</span>
+<span aria-hidden="true" class="iconify i-solar:check-circle-linear size-5 shrink-0 text-accent-a-700" style="">
+</span>
+<span class="w-12 shrink-0 text-right text-[15px] text-ink-500 tabular-nums">0.21s</span>
+</div>
+<div class="flex items-center gap-4 py-3.5">
+<span class="flex size-10 shrink-0 items-center justify-center">
+<img alt="" aria-hidden="true" class="size-7" decoding="async" height="28" loading="lazy" src="/logos/pieces/slack.svg" width="28"/>
+</span>
+<span class="min-w-0 flex-1 truncate text-[16px] text-ink-900">Notify the account owner</span>
+<span aria-hidden="true" class="iconify i-solar:check-circle-linear size-5 shrink-0 text-accent-a-700" style="">
+</span>
+<span class="w-12 shrink-0 text-right text-[15px] text-ink-500 tabular-nums">0.12s</span>
+</div>
+<div class="flex items-center gap-4 py-3.5">
+<span class="flex size-10 shrink-0 items-center justify-center">
+<img alt="" aria-hidden="true" class="size-7" decoding="async" height="28" loading="lazy" src="/logos/pieces/zendesk.svg" width="28"/>
+</span>
+<span class="min-w-0 flex-1 truncate text-[16px] text-ink-900">Close the ticket</span>
+<span aria-hidden="true" class="iconify i-solar:check-circle-linear size-5 shrink-0 text-accent-a-700" style="">
+</span>
+<span class="w-12 shrink-0 text-right text-[15px] text-ink-500 tabular-nums">0.09s</span>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ===== MOCK codeSendQuote  (first seen: /product/ai-agent-builder "Custom Tools", mode=center; frame children=1) ===== -->
+<div class="absolute inset-x-5 inset-y-0 flex items-center md:inset-x-9">
+<div class="relative w-full">
+<div class="overflow-hidden rounded-xl border border-ink-950/10 bg-ink-50 ring-1 ring-ink-950/10">
+<div class="relative flex shrink-0 items-center gap-2 border-b border-ink-950/10 px-5 py-3.5">
+<span class="bg-ink-950/10 size-2.5 rounded-full">
+</span>
+<span class="bg-ink-950/10 size-2.5 rounded-full">
+</span>
+<span class="bg-ink-950/10 size-2.5 rounded-full">
+</span>
+<span class="pointer-events-none absolute inset-x-0 text-center font-mono text-[12px] text-ink-500">send-quote.ts</span>
+</div>
+<div class="flex flex-col px-5 py-5">
+<p class="font-mono text-[13px] whitespace-pre code-text" style="padding-left:0rem;">
+<span class="code-key">export const</span>
+<span class=""> quote = </span>
+<span class="code-fn">createAction</span>
+<span class="">({</span>
+</p>
+<p class="font-mono text-[13px] whitespace-pre code-text" style="padding-left:0.9rem;">
+<span class="">name: </span>
+<span class="code-str">'send_quote'</span>
+<span class="">,</span>
+</p>
+<p class="font-mono text-[13px] whitespace-pre code-text" style="padding-left:0.9rem;">
+<span class="">props: { amount, email },</span>
+</p>
+<p class="font-mono text-[13px] whitespace-pre code-text" style="padding-left:0.9rem;">
+<span class="code-key">async </span>
+<span class="code-fn">run</span>
+<span class="">(ctx) {</span>
+</p>
+<p class="font-mono text-[13px] whitespace-pre code-text" style="padding-left:1.8rem;">
+<span class="code-key">return </span>
+<span class="code-fn">billing</span>
+<span class="">.send(ctx)</span>
+</p>
+<p class="font-mono text-[13px] whitespace-pre code-text" style="padding-left:0.9rem;">
+<span class="">},</span>
+</p>
+<p class="font-mono text-[13px] whitespace-pre code-text" style="padding-left:0rem;">
+<span class="">})</span>
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ===== MOCK refundForm  (first seen: /product/ai-agent-builder "Hosted Forms", mode=center; frame children=1) ===== -->
+<div class="absolute inset-x-5 inset-y-0 flex items-center md:inset-x-9">
+<div class="relative w-full">
+<div class="overflow-hidden rounded-xl border border-ink-950/10 bg-ink-50 ring-1 ring-ink-950/10">
+<div class="flex items-baseline gap-3 px-6 py-5">
+<span class="text-[15px] font-semibold text-ink-950">Refund request</span>
+<span class="ml-auto text-[12px] text-ink-500">Waiting for a person</span>
+</div>
+<div class="flex flex-col gap-4 border-t border-ink-950/10 px-6 py-5">
+<label class="flex flex-col gap-2">
+<span class="text-[12px] text-ink-500">What went wrong</span>
+<span class="rounded-lg border border-ink-950/10 bg-ink-50 px-3 pt-2.5 pb-6 text-[14px] text-ink-900"> Charged twice on the March invoice. </span>
+</label>
+<label class="flex flex-col gap-2">
+<span class="text-[12px] text-ink-500">Receipt</span>
+<span class="flex items-center gap-2 rounded-lg border border-dashed border-ink-950/20 px-3 py-2.5 text-[14px] text-ink-700">
+<span aria-hidden="true" class="iconify i-solar:file-text-linear size-4 shrink-0 text-ink-400" style="">
+</span> invoice-3184.pdf </span>
+</label>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ===== MOCK terminalCompose  (first seen: /product/ai-agent-builder "Open Source", mode=center; frame children=1) ===== -->
+<div class="absolute inset-x-5 inset-y-0 flex items-center md:inset-x-9">
+<div class="relative w-full">
+<div class="overflow-hidden rounded-xl border border-ink-950/10 bg-ink-50 ring-1 ring-ink-950/10">
+<div class="relative flex shrink-0 items-center gap-2 border-b border-ink-950/10 px-5 py-3.5">
+<span class="bg-ink-950/10 size-2.5 rounded-full">
+</span>
+<span class="bg-ink-950/10 size-2.5 rounded-full">
+</span>
+<span class="bg-ink-950/10 size-2.5 rounded-full">
+</span>
+<span class="pointer-events-none absolute inset-x-0 text-center font-mono text-[12px] text-ink-500">bash</span>
+</div>
+<div class="flex flex-col px-6 py-5 font-mono text-[13px]">
+<p class="whitespace-pre">
+<span class="code-fn">~/activepieces</span>
+<span class="code-key"> $ </span>
+<span class="code-text">docker compose up</span>
+</p>
+<span aria-hidden="true" class="h-[0.85em]">
+</span>
+<div class="grid grid-cols-[1.1rem_5.5rem_minmax(0,1fr)]">
+<span class="code-key">✓</span>
+<span class="code-dim">postgres</span>
+<span class="code-text">ready</span>
+</div>
+<div class="grid grid-cols-[1.1rem_5.5rem_minmax(0,1fr)]">
+<span class="code-key">✓</span>
+<span class="code-dim">workers</span>
+<span class="code-text">online</span>
+</div>
+<div class="grid grid-cols-[1.1rem_5.5rem_minmax(0,1fr)]">
+<span class="code-key">✓</span>
+<span class="code-dim">pieces</span>
+<span class="code-text">750 loaded</span>
+</div>
+<span aria-hidden="true" class="h-[0.85em]">
+</span>
+<div class="grid grid-cols-[1.1rem_5.5rem_minmax(0,1fr)]">
+<span class="code-key">-&gt;</span>
+<span class="code-dim">local</span>
+<span class="code-fn">http://localhost:8080</span>
+</div>
+<span aria-hidden="true" class="h-[0.85em]">
+</span>
+<p class="flex items-center whitespace-pre">
+<span class="code-key">$ </span>
+<span aria-hidden="true" class="inline-block h-[1.15em] w-[0.5em] bg-ink-300">
+</span>
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ===== MOCK chatThreadBerlin  (first seen: /product/chat "A Real Thread", mode=center; frame children=1) ===== -->
+<div class="absolute inset-x-5 inset-y-0 flex items-center md:inset-x-9">
+<div class="relative w-full">
+<div class="overflow-hidden rounded-xl border border-ink-950/10 bg-ink-50 ring-1 ring-ink-950/10">
+<div class="flex flex-col gap-4 px-6 py-5">
+<div class="flex flex-col items-end gap-2">
+<span class="max-w-[85%] rounded-2xl rounded-tr-md bg-ink-950 px-4 py-3 text-[14px] text-white">How did the Berlin store do last week?</span>
+</div>
+<span class="flex items-center gap-1.5 text-[12px] text-ink-500">
+<span aria-hidden="true" class="iconify i-solar:stars-linear size-3.5 shrink-0" style="">
+</span> Flow ran 4 steps </span>
+<div class="flex flex-col gap-2 self-start">
+<p class="text-[14px] font-semibold text-ink-950">Berlin, week 14</p>
+<p class="text-[14px] text-ink-800"> Revenue landed at €48,210, up 7.4% on the week before. </p>
+</div>
+<div class="mt-1 flex items-center gap-3 rounded-full border border-ink-950/10 bg-ink-50 px-4 py-3">
+<span aria-hidden="true" class="iconify i-solar:add-linear size-4 shrink-0 text-ink-400" style="">
+</span>
+<span class="text-[13px] text-ink-500">Ask for something else</span>
+<span class="ml-auto flex size-7 items-center justify-center rounded-full bg-ink-950">
+<span aria-hidden="true" class="iconify i-solar:plain-linear size-3.5 text-white" style="">
+</span>
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ===== MOCK chatShareSettings  (first seen: /product/chat "One Public Link", mode=center; frame children=1) ===== -->
+<div class="absolute inset-x-5 inset-y-0 flex items-center md:inset-x-9">
+<div class="relative w-full">
+<div class="overflow-hidden rounded-xl border border-ink-950/10 bg-ink-50 ring-1 ring-ink-950/10">
+<div class="flex items-center gap-3 px-6 py-5">
+<span class="text-[15px] font-semibold text-ink-950">Store Desk</span>
+<span class="ml-auto flex items-center gap-2 text-[12px] text-ink-500">
+<span class="size-1.5 rounded-full bg-accent-a-500">
+</span> Published </span>
+</div>
+<div class="flex items-center gap-3 border-t border-ink-950/10 bg-ink-50/60 px-6 py-4">
+<span aria-hidden="true" class="iconify i-solar:share-linear size-4 shrink-0 text-ink-400" style="">
+</span>
+<span class="min-w-0 truncate text-[13px] text-ink-700"> chat.activepieces.com/s/store-desk </span>
+</div>
+<div class="divide-y divide-ink-950/10 border-t border-ink-950/10">
+<div class="flex items-center gap-3 px-6 py-4">
+<span class="text-[14px] text-ink-900">Who can open it</span>
+<span class="ml-auto shrink-0 text-[13px] text-ink-500">Anyone with the link</span>
+</div>
+<div class="flex items-center gap-3 px-6 py-4">
+<span class="text-[14px] text-ink-900">Bot name</span>
+<span class="ml-auto shrink-0 text-[13px] text-ink-500">Store Desk</span>
+</div>
+<div class="flex items-center gap-3 px-6 py-4">
+<span class="text-[14px] text-ink-900">Draft version</span>
+<span class="ml-auto shrink-0 text-[13px] text-ink-500">Stays private</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ===== MOCK chatFile  (first seen: /product/chat "Files Both Ways", mode=center; frame children=1) ===== -->
+<div class="absolute inset-x-5 inset-y-0 flex items-center md:inset-x-9">
+<div class="relative w-full">
+<div class="overflow-hidden rounded-xl border border-ink-950/10 bg-ink-50 ring-1 ring-ink-950/10">
+<div class="flex flex-col gap-4 px-6 py-5">
+<div class="flex flex-col items-end gap-2">
+<span class="max-w-[85%] rounded-2xl rounded-tr-md bg-ink-950 px-4 py-3 text-[14px] text-white">Pull the numbers out of this for finance.</span>
+<span class="flex items-center gap-2 rounded-lg border border-ink-950/10 bg-ink-50 px-3 py-2 text-[13px] text-ink-700">
+<span aria-hidden="true" class="iconify i-solar:document-linear size-4 shrink-0 text-ink-400" style="">
+</span> march-invoices.csv </span>
+</div>
+<div class="flex flex-col gap-2 self-start">
+<p class="text-[14px] font-semibold text-ink-950">Berlin, week 14</p>
+<p class="text-[14px] text-ink-800"> Revenue landed at €48,210, up 7.4% on the week before. </p>
+<span class="mt-1 flex w-fit items-center gap-2 rounded-lg border border-ink-950/10 bg-ink-50 px-3 py-2 text-[13px] text-ink-800">
+<span aria-hidden="true" class="iconify i-solar:file-text-linear size-4 shrink-0 text-accent-c-500" style="">
+</span> march-summary.pdf </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ===== MOCK routerTable  (first seen: /product/chat "Any Steps In Between", mode=wide; frame children=1) ===== -->
+<div class="absolute top-6 right-5 left-5 -bottom-12 md:top-9 md:right-9 md:left-9 md:-bottom-20">
+<div class="overflow-hidden rounded-xl border border-ink-950/10 bg-ink-50 ring-1 ring-ink-950/10">
+<div class="flex items-baseline gap-3 px-6 py-5">
+<span class="text-[15px] font-semibold text-ink-950">Route the run</span>
+<span class="ml-auto text-[12px] text-ink-500">First match</span>
+</div>
+<div class="divide-y divide-ink-950/10 border-t border-ink-950/10">
+<div class="flex items-center gap-4 px-6 py-4">
+<span class="bg-accent-a-500 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="w-28 shrink-0 truncate text-[14px] text-ink-900">Enterprise</span>
+<span class="min-w-0 flex-1 truncate text-[13px] text-ink-500">seats &gt; 200</span>
+<span class="hidden shrink-0 items-center gap-2.5 sm:flex">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/slack.svg" width="20"/>
+<span class="truncate text-[13px] text-ink-700">Alert the account owner</span>
+</span>
+</div>
+<div class="flex items-center gap-4 px-6 py-4">
+<span class="bg-accent-a-500 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="w-28 shrink-0 truncate text-[14px] text-ink-900">Business</span>
+<span class="min-w-0 flex-1 truncate text-[13px] text-ink-500">seats &gt; 50</span>
+<span class="hidden shrink-0 items-center gap-2.5 sm:flex">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/hubspot.svg" width="20"/>
+<span class="truncate text-[13px] text-ink-700">Queue a check-in</span>
+</span>
+</div>
+<div class="flex items-center gap-4 px-6 py-4">
+<span class="bg-accent-a-500 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="w-28 shrink-0 truncate text-[14px] text-ink-900">Trialing</span>
+<span class="min-w-0 flex-1 truncate text-[13px] text-ink-500">trial ends in 3</span>
+<span class="hidden shrink-0 items-center gap-2.5 sm:flex">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/calendly.svg" width="20"/>
+<span class="truncate text-[13px] text-ink-700">Book an onboarding call</span>
+</span>
+</div>
+<div class="flex items-center gap-4 px-6 py-4">
+<span class="bg-accent-a-500 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="w-28 shrink-0 truncate text-[14px] text-ink-900">Churn risk</span>
+<span class="min-w-0 flex-1 truncate text-[13px] text-ink-500">usage down 40%</span>
+<span class="hidden shrink-0 items-center gap-2.5 sm:flex">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/linear.svg" width="20"/>
+<span class="truncate text-[13px] text-ink-700">Open a save task</span>
+</span>
+</div>
+<div class="flex items-center gap-4 px-6 py-4">
+<span class="bg-accent-a-500 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="w-28 shrink-0 truncate text-[14px] text-ink-900">Self-serve</span>
+<span class="min-w-0 flex-1 truncate text-[13px] text-ink-500">plan is Free</span>
+<span class="hidden shrink-0 items-center gap-2.5 sm:flex">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/gmail.svg" width="20"/>
+<span class="truncate text-[13px] text-ink-700">Send the upgrade nudge</span>
+</span>
+</div>
+<div class="flex items-center gap-4 px-6 py-4">
+<span class="bg-accent-a-500 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="w-28 shrink-0 truncate text-[14px] text-ink-900">Past due</span>
+<span class="min-w-0 flex-1 truncate text-[13px] text-ink-500">invoice unpaid</span>
+<span class="hidden shrink-0 items-center gap-2.5 sm:flex">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/stripe.svg" width="20"/>
+<span class="truncate text-[13px] text-ink-700">Retry the charge</span>
+</span>
+</div>
+<div class="flex items-center gap-4 px-6 py-4">
+<span class="bg-ink-300 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="w-28 shrink-0 truncate text-[14px] text-ink-900">Otherwise</span>
+<span class="min-w-0 flex-1 truncate text-[13px] text-ink-500">nothing matched</span>
+<span class="hidden shrink-0 items-center gap-2.5 sm:flex">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/google-sheets.svg" width="20"/>
+<span class="truncate text-[13px] text-ink-700">Log it and carry on</span>
+</span>
+</div>
+<div class="flex items-center gap-4 px-6 py-4">
+<span aria-hidden="true" class="iconify i-solar:undo-left-linear size-4 shrink-0 text-ink-400" style="">
+</span>
+<span class="text-[14px] text-ink-900">Loop on items</span>
+<span class="ml-auto text-[13px] text-ink-500">Repeats every step above</span>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ===== MOCK chatLimits  (first seen: /product/chat "The Limits", mode=center; frame children=1) ===== -->
+<div class="absolute inset-x-5 inset-y-0 flex items-center md:inset-x-9">
+<div class="relative w-full">
+<div class="overflow-hidden rounded-xl border border-ink-950/10 bg-ink-50 ring-1 ring-ink-950/10">
+<div class="flex items-center gap-2.5 px-6 py-5">
+<span aria-hidden="true" class="iconify i-solar:clock-circle-linear size-4 shrink-0 text-ink-400" style="">
+</span>
+<span class="text-[15px] font-semibold text-ink-950">Chat limits</span>
+</div>
+<div class="divide-y divide-ink-950/10 border-t border-ink-950/10">
+<div class="flex items-center gap-3 px-6 py-4">
+<span class="truncate text-[14px] text-ink-900">Reply timeout</span>
+<span class="ml-auto shrink-0 text-[13px] text-ink-500 tabular-nums">30s</span>
+</div>
+<div class="flex items-center gap-3 px-6 py-4">
+<span class="truncate text-[14px] text-ink-900">File, cloud</span>
+<span class="ml-auto shrink-0 text-[13px] text-ink-500 tabular-nums">10 MB</span>
+</div>
+<div class="flex items-center gap-3 px-6 py-4">
+<span class="truncate text-[14px] text-ink-900">File, self-hosted</span>
+<span class="ml-auto shrink-0 text-[13px] text-ink-500 tabular-nums">25 MB</span>
+</div>
+<div class="flex items-center gap-3 px-6 py-4">
+<span class="truncate text-[14px] text-ink-900">Run history</span>
+<span class="ml-auto shrink-0 text-[13px] text-ink-500 tabular-nums">30 days</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ===== MOCK projectMembers  (first seen: /product/chat "Access Control", mode=wide; frame children=2) ===== -->
+<div class="absolute top-6 right-5 left-5 -bottom-12 md:top-9 md:right-9 md:left-9 md:-bottom-20">
+<div class="overflow-hidden rounded-xl border border-ink-950/10 bg-ink-50 ring-1 ring-ink-950/10 h-full">
+<div class="flex items-baseline gap-3 px-6 py-5">
+<span class="text-[15px] font-semibold text-ink-950">Marketing project</span>
+<span class="text-[12px] text-ink-500 tabular-nums">6 members</span>
+</div>
+<div class="divide-y divide-ink-950/10 border-t border-ink-950/10">
+<div class="flex items-center gap-3.5 px-6 py-4">
+<span class="bg-primary-200 size-8 shrink-0 rounded-full">
+</span>
+<span class="truncate text-[14px] text-ink-900">Dana Rowe</span>
+<span class="ml-auto flex shrink-0 items-center gap-1.5 text-[13px] text-ink-600">Admin <span aria-hidden="true" class="iconify i-solar:alt-arrow-down-linear size-3.5 text-ink-950/30" style="">
+</span>
+</span>
+</div>
+<div class="flex items-center gap-3.5 px-6 py-4">
+<span class="bg-accent-a-200 size-8 shrink-0 rounded-full">
+</span>
+<span class="truncate text-[14px] text-ink-900">Sam Okafor</span>
+<span class="ml-auto flex shrink-0 items-center gap-1.5 text-[13px] text-ink-600">Editor <span aria-hidden="true" class="iconify i-solar:alt-arrow-down-linear size-3.5 text-ink-950/30" style="">
+</span>
+</span>
+</div>
+<div class="flex items-center gap-3.5 px-6 py-4">
+<span class="bg-accent-b-200 size-8 shrink-0 rounded-full">
+</span>
+<span class="truncate text-[14px] text-ink-900">Ines Kaur</span>
+<span class="ml-auto flex shrink-0 items-center gap-1.5 text-[13px] text-ink-600">Viewer <span aria-hidden="true" class="iconify i-solar:alt-arrow-down-linear size-3.5 text-ink-950/30" style="">
+</span>
+</span>
+</div>
+<div class="flex items-center gap-3.5 px-6 py-4">
+<span class="bg-accent-c-200 size-8 shrink-0 rounded-full">
+</span>
+<span class="truncate text-[14px] text-ink-900">Milo Tran</span>
+<span class="ml-auto flex shrink-0 items-center gap-1.5 text-[13px] text-ink-600">Viewer <span aria-hidden="true" class="iconify i-solar:alt-arrow-down-linear size-3.5 text-ink-950/30" style="">
+</span>
+</span>
+</div>
+<div class="flex items-center gap-3.5 px-6 py-4">
+<span class="bg-ink-200 size-8 shrink-0 rounded-full">
+</span>
+<span class="truncate text-[14px] text-ink-900">Ari Bloom</span>
+<span class="ml-auto flex shrink-0 items-center gap-1.5 text-[13px] text-ink-600">Editor <span aria-hidden="true" class="iconify i-solar:alt-arrow-down-linear size-3.5 text-ink-950/30" style="">
+</span>
+</span>
+</div>
+<div class="flex items-center gap-3.5 px-6 py-4">
+<span class="bg-ink-200 size-8 shrink-0 rounded-full">
+</span>
+<span class="truncate text-[14px] text-ink-900">Noor Haddad</span>
+<span class="ml-auto flex shrink-0 items-center gap-1.5 text-[13px] text-ink-600">Viewer <span aria-hidden="true" class="iconify i-solar:alt-arrow-down-linear size-3.5 text-ink-950/30" style="">
+</span>
+</span>
+</div>
+</div>
+</div>
+<div class="absolute top-[38%] right-10 w-[36%] max-w-[170px] min-w-[140px]">
+<div class="flex flex-col rounded-xl bg-ink-50 p-1.5 ring-1 ring-ink-950/10">
+<span class="text-ink-700 flex items-center gap-2 rounded-lg px-3 py-2 text-[13px]">Admin </span>
+<span class="bg-ink-900/5 text-ink-950 flex items-center gap-2 rounded-lg px-3 py-2 text-[13px]">Editor <span aria-hidden="true" class="iconify i-solar:check-circle-linear ml-auto size-3.5 text-accent-a-700" style="">
+</span>
+</span>
+<span class="text-ink-700 flex items-center gap-2 rounded-lg px-3 py-2 text-[13px]">Viewer </span>
+</div>
+</div>
+</div>
+
+<!-- ===== MOCK typedFields  (first seen: /product/tables "Typed Fields", mode=center; frame children=1) ===== -->
+<div class="absolute inset-x-5 inset-y-0 flex items-center md:inset-x-9">
+<div class="relative w-full">
+<div class="overflow-hidden rounded-xl border border-ink-950/10 bg-ink-50 ring-1 ring-ink-950/10">
+<div class="flex items-center gap-2.5 px-6 py-5">
+<span aria-hidden="true" class="iconify i-solar:database-linear size-4 shrink-0 text-ink-400" style="">
+</span>
+<span class="text-[15px] font-semibold text-ink-950">Accounts</span>
+</div>
+<div class="divide-y divide-ink-950/10 border-t border-ink-950/10">
+<div class="flex items-center gap-3 px-6 py-4">
+<span class="truncate text-[14px] text-ink-900">Company</span>
+<span class="ml-auto shrink-0 text-[13px] text-ink-500 tabular-nums">Text</span>
+</div>
+<div class="flex items-center gap-3 px-6 py-4">
+<span class="truncate text-[14px] text-ink-900">MRR</span>
+<span class="ml-auto shrink-0 text-[13px] text-ink-500 tabular-nums">Number</span>
+</div>
+<div class="flex items-center gap-3 px-6 py-4">
+<span class="truncate text-[14px] text-ink-900">Renews</span>
+<span class="ml-auto shrink-0 text-[13px] text-ink-500 tabular-nums">Date</span>
+</div>
+<div class="flex items-center gap-3 px-6 py-4">
+<span class="truncate text-[14px] text-ink-900">Stage</span>
+<span class="ml-auto shrink-0 text-[13px] text-ink-500 tabular-nums">Single-select</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ===== MOCK customersTable  (first seen: /product/tables "Editable Rows", mode=crop; frame children=1) ===== -->
+<div class="absolute top-6 left-5 -right-12 -bottom-12 md:top-9 md:left-9 md:-right-28 md:-bottom-20">
+<div class="overflow-hidden rounded-xl border border-ink-950/10 bg-ink-50 ring-1 ring-ink-950/10 h-full">
+<div class="flex items-baseline gap-3 py-5 pr-36 pl-8">
+<span class="text-[18px] font-semibold text-ink-950">Customers</span>
+<span class="ml-auto shrink-0 text-[14px] text-ink-500 tabular-nums">1,284 rows</span>
+</div>
+<div class="divide-y divide-ink-950/8 border-t border-ink-950/8">
+<div class="grid grid-cols-[minmax(0,1fr)_7rem_5rem] items-center gap-4 pr-36 pl-8 py-5">
+<span class="truncate text-[16px] text-ink-900">Verano Coffee</span>
+<span class="flex items-center gap-2.5 text-[15px] text-ink-600">
+<span class="bg-accent-a-500 size-2 shrink-0 rounded-full">
+</span> Active</span>
+<span class="text-right text-[16px] text-ink-900 tabular-nums">$6,400</span>
+</div>
+<div class="grid grid-cols-[minmax(0,1fr)_7rem_5rem] items-center gap-4 pr-36 pl-8 py-5">
+<span class="truncate text-[16px] text-ink-900">Piera</span>
+<span class="flex items-center gap-2.5 text-[15px] text-ink-600">
+<span class="bg-accent-b-500 size-2 shrink-0 rounded-full">
+</span> Trial</span>
+<span class="text-right text-[16px] text-ink-900 tabular-nums">$2,800</span>
+</div>
+<div class="grid grid-cols-[minmax(0,1fr)_7rem_5rem] items-center gap-4 pr-36 pl-8 py-5">
+<span class="truncate text-[16px] text-ink-900">Wren Labs</span>
+<span class="flex items-center gap-2.5 text-[15px] text-ink-600">
+<span class="bg-accent-a-500 size-2 shrink-0 rounded-full">
+</span> Active</span>
+<span class="text-right text-[16px] text-ink-900 tabular-nums">$5,100</span>
+</div>
+<div class="grid grid-cols-[minmax(0,1fr)_7rem_5rem] items-center gap-4 pr-36 pl-8 py-5">
+<span class="truncate text-[16px] text-ink-900">Northaven</span>
+<span class="flex items-center gap-2.5 text-[15px] text-ink-600">
+<span class="bg-accent-a-500 size-2 shrink-0 rounded-full">
+</span> Active</span>
+<span class="text-right text-[16px] text-ink-900 tabular-nums">$9,750</span>
+</div>
+<div class="grid grid-cols-[minmax(0,1fr)_7rem_5rem] items-center gap-4 pr-36 pl-8 py-5">
+<span class="truncate text-[16px] text-ink-900">Halcyon Press</span>
+<span class="flex items-center gap-2.5 text-[15px] text-ink-600">
+<span class="bg-accent-b-500 size-2 shrink-0 rounded-full">
+</span> Trial</span>
+<span class="text-right text-[16px] text-ink-900 tabular-nums">$1,900</span>
+</div>
+<div class="grid grid-cols-[minmax(0,1fr)_7rem_5rem] items-center gap-4 pr-36 pl-8 py-5">
+<span class="truncate text-[16px] text-ink-900">Linden Freight</span>
+<span class="flex items-center gap-2.5 text-[15px] text-ink-600">
+<span class="bg-accent-a-500 size-2 shrink-0 rounded-full">
+</span> Active</span>
+<span class="text-right text-[16px] text-ink-900 tabular-nums">$8,300</span>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ===== MOCK tablesPieceOps  (first seen: /product/tables "Every Operation", mode=center; frame children=1) ===== -->
+<div class="absolute inset-x-5 inset-y-0 flex items-center md:inset-x-9">
+<div class="relative w-full">
+<div class="overflow-hidden rounded-xl border border-ink-950/10 bg-ink-50 ring-1 ring-ink-950/10">
+<div class="flex items-center gap-2.5 px-6 py-5">
+<span aria-hidden="true" class="iconify i-solar:layers-linear size-4 shrink-0 text-ink-400" style="">
+</span>
+<span class="text-[15px] font-semibold text-ink-950">Tables piece</span>
+</div>
+<div class="divide-y divide-ink-950/10 border-t border-ink-950/10">
+<div class="flex items-center gap-3 px-6 py-4">
+<span class="truncate text-[14px] text-ink-900">create_records</span>
+</div>
+<div class="flex items-center gap-3 px-6 py-4">
+<span class="truncate text-[14px] text-ink-900">find_records</span>
+</div>
+<div class="flex items-center gap-3 px-6 py-4">
+<span class="truncate text-[14px] text-ink-900">update_record</span>
+</div>
+<div class="flex items-center gap-3 px-6 py-4">
+<span class="truncate text-[14px] text-ink-900">delete_record</span>
+</div>
+<div class="flex items-center gap-3 px-6 py-4">
+<span class="truncate text-[14px] text-ink-900">download_table</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ===== MOCK tableTriggers  (first seen: /product/tables "Change Triggers", mode=wide; frame children=1) ===== -->
+<div class="absolute top-6 right-5 left-5 -bottom-12 md:top-9 md:right-9 md:left-9 md:-bottom-20">
+<div class="overflow-hidden rounded-xl border border-ink-950/10 bg-ink-50 ring-1 ring-ink-950/10">
+<div class="flex items-baseline gap-3 px-6 py-5">
+<span class="text-[15px] font-semibold text-ink-950">Accounts</span>
+<span class="ml-auto text-[12px] text-ink-500">3 triggers armed</span>
+</div>
+<div class="divide-y divide-ink-950/10 border-t border-ink-950/10">
+<div class="flex items-center gap-4 px-6 py-4">
+<span class="bg-accent-a-500 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="w-32 shrink-0 truncate text-[14px] text-ink-900">Record created</span>
+<span class="min-w-0 flex-1 truncate text-[13px] text-ink-500">Northaven</span>
+<span class="flex shrink-0 items-center gap-2.5">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/gmail.svg" width="20"/>
+<span class="truncate text-[13px] text-ink-700">Send the welcome pack</span>
+</span>
+</div>
+<div class="flex items-center gap-4 px-6 py-4">
+<span class="bg-accent-b-500 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="w-32 shrink-0 truncate text-[14px] text-ink-900">Record updated</span>
+<span class="min-w-0 flex-1 truncate text-[13px] text-ink-500">Piera</span>
+<span class="flex shrink-0 items-center gap-2.5">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/slack.svg" width="20"/>
+<span class="truncate text-[13px] text-ink-700">Post to #revenue</span>
+</span>
+</div>
+<div class="flex items-center gap-4 px-6 py-4">
+<span class="bg-accent-a-500 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="w-32 shrink-0 truncate text-[14px] text-ink-900">Record created</span>
+<span class="min-w-0 flex-1 truncate text-[13px] text-ink-500">Wren Labs</span>
+<span class="flex shrink-0 items-center gap-2.5">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/hubspot.svg" width="20"/>
+<span class="truncate text-[13px] text-ink-700">Create the CRM company</span>
+</span>
+</div>
+<div class="flex items-center gap-4 px-6 py-4">
+<span class="bg-accent-b-500 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="w-32 shrink-0 truncate text-[14px] text-ink-900">Record updated</span>
+<span class="min-w-0 flex-1 truncate text-[13px] text-ink-500">Verano Coffee</span>
+<span class="flex shrink-0 items-center gap-2.5">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/google-sheets.svg" width="20"/>
+<span class="truncate text-[13px] text-ink-700">Sync the renewal date</span>
+</span>
+</div>
+<div class="flex items-center gap-4 px-6 py-4">
+<span class="bg-accent-c-200 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="w-32 shrink-0 truncate text-[14px] text-ink-900">Record deleted</span>
+<span class="min-w-0 flex-1 truncate text-[13px] text-ink-500">Linden Freight</span>
+<span class="flex shrink-0 items-center gap-2.5">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/notion.svg" width="20"/>
+<span class="truncate text-[13px] text-ink-700">Archive the account</span>
+</span>
+</div>
+<div class="flex items-center gap-4 px-6 py-4">
+<span class="bg-accent-b-500 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="w-32 shrink-0 truncate text-[14px] text-ink-900">Record updated</span>
+<span class="min-w-0 flex-1 truncate text-[13px] text-ink-500">Halcyon Press</span>
+<span class="flex shrink-0 items-center gap-2.5">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/stripe.svg" width="20"/>
+<span class="truncate text-[13px] text-ink-700">Retry the invoice</span>
+</span>
+</div>
+<div class="flex items-center gap-4 px-6 py-4">
+<span class="bg-accent-a-500 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="w-32 shrink-0 truncate text-[14px] text-ink-900">Record created</span>
+<span class="min-w-0 flex-1 truncate text-[13px] text-ink-500">Marlow &amp; Co</span>
+<span class="flex shrink-0 items-center gap-2.5">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/linear.svg" width="20"/>
+<span class="truncate text-[13px] text-ink-700">Open an onboarding task</span>
+</span>
+</div>
+<div class="flex items-center gap-4 px-6 py-4">
+<span class="bg-accent-b-500 size-1.5 shrink-0 rounded-full">
+</span>
+<span class="w-32 shrink-0 truncate text-[14px] text-ink-900">Record updated</span>
+<span class="min-w-0 flex-1 truncate text-[13px] text-ink-500">Piera</span>
+<span class="flex shrink-0 items-center gap-2.5">
+<img alt="" class="size-5 shrink-0" height="20" src="/logos/pieces/slack.svg" width="20"/>
+<span class="truncate text-[13px] text-ink-700">Notify the owner</span>
+</span>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ===== MOCK triggerTypes  (first seen: /product/workflow-builder "Any Trigger", mode=center; frame children=1) ===== -->
+<div class="absolute inset-x-5 inset-y-0 flex items-center md:inset-x-9">
+<div class="relative w-full">
+<div class="overflow-hidden rounded-xl border border-ink-950/10 bg-ink-50 ring-1 ring-ink-950/10">
+<div class="flex items-center gap-2.5 px-6 py-5">
+<span aria-hidden="true" class="iconify i-solar:bolt-linear size-4 shrink-0 text-ink-400" style="">
+</span>
+<span class="text-[15px] font-semibold text-ink-950">Trigger types</span>
+</div>
+<div class="divide-y divide-ink-950/10 border-t border-ink-950/10">
+<div class="flex items-center gap-3 px-6 py-4">
+<span class="truncate text-[14px] text-ink-900">Webhook</span>
+<span class="ml-auto shrink-0 text-[13px] text-ink-500 tabular-nums">Instant</span>
+</div>
+<div class="flex items-center gap-3 px-6 py-4">
+<span class="truncate text-[14px] text-ink-900">App event</span>
+<span class="ml-auto shrink-0 text-[13px] text-ink-500 tabular-nums">Instant</span>
+</div>
+<div class="flex items-center gap-3 px-6 py-4">
+<span class="truncate text-[14px] text-ink-900">Polling</span>
+<span class="ml-auto shrink-0 text-[13px] text-ink-500 tabular-nums">Scheduled</span>
+</div>
+<div class="flex items-center gap-3 px-6 py-4">
+<span class="truncate text-[14px] text-ink-900">Schedule</span>
+<span class="ml-auto shrink-0 text-[13px] text-ink-500 tabular-nums">Cron</span>
+</div>
+<div class="flex items-center gap-3 px-6 py-4">
+<span class="truncate text-[14px] text-ink-900">Manual run</span>
+<span class="ml-auto shrink-0 text-[13px] text-ink-500 tabular-nums">On demand</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ===== MOCK testStepStripe  (first seen: /product/workflow-builder "Test Every Step", mode=crop; frame children=1) ===== -->
+<div class="absolute top-6 left-5 -right-12 -bottom-12 md:top-9 md:left-9 md:-right-28 md:-bottom-20">
+<div class="overflow-hidden rounded-xl border border-ink-950/10 bg-ink-50 ring-1 ring-ink-950/10">
+<div class="flex items-center gap-3 pt-6 pr-36 pb-5 pl-6">
+<img alt="" class="size-7 shrink-0" decoding="async" height="28" loading="lazy" src="/logos/pieces/stripe.svg" width="28"/>
+<span class="truncate text-[18px] font-semibold text-ink-950">Charge in Stripe</span>
+</div>
+<div class="flex flex-col gap-4 border-t border-ink-950/10 pt-5 pr-36 pb-6 pl-6">
+<div class="flex flex-col gap-1.5">
+<span class="text-[14px] text-ink-500">Amount</span>
+<span class="flex h-11 items-center rounded-lg bg-white px-3.5 font-mono text-[15px] text-ink-900 ring-1 ring-ink-950/10">4200</span>
+</div>
+<div class="flex flex-col gap-1.5">
+<span class="text-[14px] text-ink-500">Currency</span>
+<span class="flex h-11 items-center rounded-lg bg-white px-3.5 font-mono text-[15px] text-ink-900 ring-1 ring-ink-950/10">eur</span>
+</div>
+</div>
+<div class="flex items-center gap-3 border-t border-ink-950/10 bg-ink-900/5 py-5 pr-36 pl-6">
+<span class="size-1.5 shrink-0 rounded-full bg-accent-a-500">
+</span>
+<span class="text-[16px] text-ink-900">Succeeded in 0.42s</span>
+</div>
+<div class="divide-y divide-ink-950/10 border-t border-ink-950/10">
+<div class="flex items-baseline gap-6 py-4 pr-36 pl-6">
+<span class="shrink-0 font-mono text-[15px] text-ink-500">id</span>
+<span class="ml-auto truncate font-mono text-[15px] text-ink-900">ch_3PmQ8f</span>
+</div>
+<div class="flex items-baseline gap-6 py-4 pr-36 pl-6">
+<span class="shrink-0 font-mono text-[15px] text-ink-500">status</span>
+<span class="ml-auto truncate font-mono text-[15px] text-ink-900">succeeded</span>
+</div>
+<div class="flex items-baseline gap-6 py-4 pr-36 pl-6">
+<span class="shrink-0 font-mono text-[15px] text-ink-500">customer</span>
+<span class="ml-auto truncate font-mono text-[15px] text-ink-900">cus_QK41nd</span>
+</div>
+<div class="flex items-baseline gap-6 py-4 pr-36 pl-6">
+<span class="shrink-0 font-mono text-[15px] text-ink-500">receipt</span>
+<span class="ml-auto truncate font-mono text-[15px] text-ink-900">stripe.com/r/8f21</span>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ===== MOCK versionHistory  (first seen: /product/workflow-builder "Draft and Publish", mode=center; frame children=1) ===== -->
+<div class="absolute inset-x-5 inset-y-0 flex items-center md:inset-x-9">
+<div class="relative w-full">
+<div class="overflow-hidden rounded-xl border border-ink-950/10 bg-ink-50 ring-1 ring-ink-950/10">
+<div class="flex items-center gap-2.5 px-6 py-5">
+<span aria-hidden="true" class="iconify i-solar:clock-circle-linear size-4 shrink-0 text-ink-400" style="">
+</span>
+<span class="text-[15px] font-semibold text-ink-950">Version history</span>
+</div>
+<div class="divide-y divide-ink-950/10 border-t border-ink-950/10">
+<div class="flex items-center gap-3 px-6 py-4">
+<span class="truncate text-[14px] text-ink-900">v13 · Draft</span>
+<span class="ml-auto shrink-0 text-[13px] text-ink-500 tabular-nums">Editing</span>
+</div>
+<div class="flex items-center gap-3 px-6 py-4">
+<span class="truncate text-[14px] text-ink-900">v12 · Published</span>
+<span class="ml-auto shrink-0 text-[13px] text-ink-500 tabular-nums">Live</span>
+</div>
+<div class="flex items-center gap-3 px-6 py-4">
+<span class="truncate text-[14px] text-ink-900">v11 · Published</span>
+<span class="ml-auto shrink-0 text-[13px] text-ink-500 tabular-nums">Locked</span>
+</div>
+<div class="flex items-center gap-3 px-6 py-4">
+<span class="truncate text-[14px] text-ink-900">v10 · Published</span>
+<span class="ml-auto shrink-0 text-[13px] text-ink-500 tabular-nums">Locked</span>
+</div>
+</div>
+</div>
+</div>
+</div>

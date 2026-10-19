@@ -1,0 +1,19 @@
+{
+  "id": "component.breadcrumb",
+  "layer": "component",
+  "purpose": "nav[aria-label=Breadcrumb] with alt-arrow separators; last crumb ink-900 medium.",
+  "composes": [
+    "icon"
+  ],
+  "implementedBy": [
+    "src/components/catalog/parts.jsx",
+    "src/components/content/parts.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_CATALOG.md",
+      "lines": "214",
+      "quote": "### 3.7 Breadcrumb (detail and pair heroes)"
+    }
+  ]
+}

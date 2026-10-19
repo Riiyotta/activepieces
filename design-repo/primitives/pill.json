@@ -1,0 +1,25 @@
+{
+  "id": "primitive.pill",
+  "layer": "primitive",
+  "purpose": "Rounded-full selector pill (blog category pills, pricing plan tabs, billing toggle buttons).",
+  "implementedBy": [
+    "src/components/content/parts.jsx",
+    "src/components/pricing/BillingToggle.jsx",
+    "src/components/pricing/CompareTable.jsx"
+  ],
+  "rules": [
+    "Active: bg-ink-950 text-white (tabs) / clip-path reveal (billing toggle); inactive text-ink-600 hover:text-ink-950."
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_CONTENT.md",
+      "lines": "144",
+      "quote": "### 1.5 Category pills (`nav[aria-label=Categories]`)"
+    },
+    {
+      "file": "specs/SPEC_MARKETING.md",
+      "lines": "324",
+      "quote": "Active: `bg-ink-950 text-white`. Inactive: `text-ink-600 hover:text-ink-950`."
+    }
+  ]
+}

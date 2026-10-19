@@ -1,0 +1,16 @@
+{
+  "id": "component.info-tip",
+  "layer": "component",
+  "purpose": "Dotted-underline trigger with dark tooltip clamped 12px inside the viewport.",
+  "composes": [],
+  "implementedBy": [
+    "src/components/pricing/InfoTip.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_MARKETING.md",
+      "lines": "139",
+      "quote": "### 1.7 `InfoTip` (NEW; /pricing)"
+    }
+  ]
+}

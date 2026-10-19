@@ -1,0 +1,115 @@
+{
+  "id": "content.resource-cards",
+  "layer": "section",
+  "category": "content",
+  "purpose": "Resources hub category cards (4) or a category listing (search, glossary letter nav, 24 per page).",
+  "implementedBy": [
+    "src/pages/resources/ResourcesHub.jsx",
+    "src/pages/resources/ResourceCategory.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_CONTENT.md",
+      "lines": "580",
+      "quote": "**Category card**:"
+    },
+    {
+      "file": "specs/SPEC_CONTENT.md",
+      "lines": "611",
+      "quote": "### 7.1 Structure"
+    }
+  ],
+  "variants": {
+    "hub-categories": {
+      "description": "4 category cards with counts.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CONTENT.md",
+          "lines": "597",
+          "quote": "| /resources/glossary | solar:book-2-linear | Glossary |"
+        }
+      ]
+    },
+    "category-listing": {
+      "description": "Search + items grid (+ letter nav for glossary).",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CONTENT.md",
+          "lines": "619",
+          "quote": "    [glossary only] nav[aria-label=\"Jump to letter\"].flex.flex-wrap.gap-1   27 items A–Z + \"#\""
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "dataSource"
+    ],
+    "properties": {
+      "h2": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 8
+      },
+      "type": {
+        "enum": [
+          "glossary",
+          "automation-guides",
+          "automation-use-cases",
+          "integration-use-cases"
+        ]
+      },
+      "dataSource": {
+        "const": "data:resources"
+      }
+    }
+  },
+  "media": {
+    "slots": {}
+  },
+  "constraints": {
+    "onePerPage": true
+  },
+  "variantRules": {
+    "hub-categories": {
+      "requiredContent": [
+        "h2"
+      ],
+      "forbiddenContent": [
+        "type"
+      ]
+    },
+    "category-listing": {
+      "requiredContent": [
+        "type"
+      ]
+    }
+  },
+  "motion": {
+    "allowedPatterns": [
+      "card-hover-shadow"
+    ],
+    "requiredPatterns": [
+      "card-hover-shadow"
+    ],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "static-end-state"
+  },
+  "responsive": {
+    "evidence": [
+      {
+        "file": "specs/SPEC_CONTENT.md",
+        "lines": "591",
+        "quote": "| 1440 | 596×313 | 40 | 24 |"
+      }
+    ],
+    "changes": {
+      "base": "1 column",
+      "sm": "2 columns"
+    }
+  },
+  "accessibility": [],
+  "notes": []
+}

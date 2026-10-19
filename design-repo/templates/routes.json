@@ -1,0 +1,798 @@
+{
+  "$description": "Route inventory = the real react-router table in src/App.jsx (one entry per <Route> pattern). Catalog/blog/resource URLs are data-driven: ~4,500 catalog URLs come from 3 templates + JSON, not per-page files.",
+  "hiddenFloatingCardPrefixes": {
+    "regex": "^/(sales|pricing|admin|customers|blog)(/|$)",
+    "evidence": [
+      {
+        "file": "src/components/Layout.jsx",
+        "lines": "15",
+        "quote": "!/^\\/(sales|pricing|admin|customers|blog)(\\/|$)/.test(pathname)"
+      }
+    ]
+  },
+  "headerHeroArtRule": {
+    "rule": "Header heroArt (on-art variant) only on '/'",
+    "evidence": [
+      {
+        "file": "src/components/Layout.jsx",
+        "lines": "32",
+        "quote": "<Header heroArt={isHome} />"
+      }
+    ]
+  },
+  "facts": {
+    "routePatterns": 30,
+    "layoutRoutePatterns": 29,
+    "concreteUrlsEnumerable": 6628,
+    "originalSitemapUrls": 6518,
+    "data": {
+      "pieces": 768,
+      "pieceCategories": 17,
+      "sitemapPairs": 3000,
+      "blogPosts": 796,
+      "blogPostsListed": 794,
+      "blogAuthors": 95,
+      "blogCategories": 7,
+      "blogIndexPages": 67,
+      "resources": 1063,
+      "products": 4,
+      "solutions": 10
+    }
+  },
+  "factsEvidence": [
+    {
+      "file": "src/components/content/data.jsx",
+      "lines": "13",
+      "quote": "posts: b.posts.filter((p) => p.listed !== false),"
+    },
+    {
+      "file": "ia.json",
+      "lines": "426",
+      "quote": "\"routeCount\""
+    },
+    {
+      "file": "specs/SPEC_CATALOG.md",
+      "lines": "11",
+      "quote": "## 0. Routes and URL inventory (sitemap: 6,518 URLs)"
+    },
+    {
+      "file": "specs/SPEC_CONTENT.md",
+      "lines": "30",
+      "quote": "Sitemap (`/sitemap.xml`, 6,518 URLs) contains 854 `/blog/*` entries"
+    }
+  ],
+  "routes": [
+    {
+      "pattern": "/",
+      "template": "template.home",
+      "component": "Home",
+      "layout": "Layout",
+      "headerVariant": "on-art",
+      "floatingCard": true,
+      "params": {},
+      "concreteUrlCount": 1,
+      "closingCopy": "homepage defaults (Footer.jsx)",
+      "sampleRoute": "/",
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "23",
+          "quote": "<Route index element={<Home />} />"
+        }
+      ]
+    },
+    {
+      "pattern": "/product/:slug",
+      "template": "template.product",
+      "component": "ProductPage",
+      "layout": "Layout",
+      "headerVariant": "default",
+      "floatingCard": true,
+      "params": {
+        "slug": {
+          "enum": [
+            "workflow-builder",
+            "ai-agent-builder",
+            "tables",
+            "chat"
+          ]
+        }
+      },
+      "concreteUrlCount": 4,
+      "closingCopy": "per page (src/data/products.js)",
+      "sampleRoute": "/product/workflow-builder",
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "25",
+          "quote": "path=\"/product/:slug\""
+        }
+      ]
+    },
+    {
+      "pattern": "/solutions/:slug",
+      "template": "template.solution",
+      "component": "SolutionPage",
+      "layout": "Layout",
+      "headerVariant": "default",
+      "floatingCard": true,
+      "params": {
+        "slug": {
+          "enum": [
+            "marketing",
+            "sales",
+            "customer-support",
+            "finance",
+            "hr",
+            "operations",
+            "engineering",
+            "it",
+            "internal-tools",
+            "open-source-developers"
+          ]
+        }
+      },
+      "concreteUrlCount": 10,
+      "closingCopy": "per page (src/data/solutions.js)",
+      "sampleRoute": "/solutions/marketing",
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "26",
+          "quote": "path=\"/solutions/:slug\""
+        }
+      ]
+    },
+    {
+      "pattern": "/pieces",
+      "template": "template.catalog-index",
+      "component": "CatalogRoute kind=pieces",
+      "layout": "Layout",
+      "headerVariant": "default",
+      "floatingCard": true,
+      "params": {},
+      "concreteUrlCount": 1,
+      "closingCopy": "Connect your first app in a few minutes.",
+      "sampleRoute": "/pieces",
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "27",
+          "quote": "path=\"/pieces\""
+        }
+      ]
+    },
+    {
+      "pattern": "/pieces/category/:key",
+      "template": "template.catalog-category",
+      "component": "CatalogRoute kind=pieces",
+      "layout": "Layout",
+      "headerVariant": "default",
+      "floatingCard": true,
+      "params": {
+        "key": {
+          "enum": [
+            "artificial_intelligence",
+            "productivity",
+            "marketing",
+            "communication",
+            "sales_and_crm",
+            "developer_tools",
+            "content_and_files",
+            "business_intelligence",
+            "core",
+            "commerce",
+            "forms_and_surveys",
+            "accounting",
+            "customer_support",
+            "payment_processing",
+            "human_resources",
+            "universal_ai",
+            "flow_control"
+          ]
+        }
+      },
+      "concreteUrlCount": 17,
+      "closingCopy": "default",
+      "sampleRoute": "/pieces/category/artificial_intelligence",
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "28",
+          "quote": "path=\"/pieces/category/:key\""
+        }
+      ]
+    },
+    {
+      "pattern": "/pieces/:slug",
+      "template": "template.catalog-detail",
+      "component": "DetailRoute kind=pieces",
+      "layout": "Layout",
+      "headerVariant": "default",
+      "floatingCard": true,
+      "params": {
+        "slug": {
+          "source": "data:pieces",
+          "count": 768
+        }
+      },
+      "concreteUrlCount": 768,
+      "closingCopy": "default",
+      "sampleRoute": "/pieces/slack",
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "29",
+          "quote": "path=\"/pieces/:slug\""
+        }
+      ]
+    },
+    {
+      "pattern": "/pieces/:a/:b",
+      "template": "template.catalog-pair",
+      "component": "PairRoute",
+      "layout": "Layout",
+      "headerVariant": "default",
+      "floatingCard": true,
+      "params": {
+        "a": {
+          "source": "data:pieces"
+        },
+        "b": {
+          "source": "data:pieces"
+        }
+      },
+      "concreteUrlCount": 3000,
+      "closingCopy": "default",
+      "sampleRoute": "/pieces/google-sheets/slack",
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "30",
+          "quote": "path=\"/pieces/:a/:b\""
+        }
+      ],
+      "note": "Any two DISTINCT valid slugs render (768 x 767 = 589056 possible); 3000 pairs are listed in the original sitemap (src/data/pairs.json). a===b or an unknown slug renders NotFound."
+    },
+    {
+      "pattern": "/mcp",
+      "template": "template.catalog-index",
+      "component": "CatalogRoute kind=mcp",
+      "layout": "Layout",
+      "headerVariant": "default",
+      "floatingCard": true,
+      "params": {},
+      "concreteUrlCount": 1,
+      "closingCopy": "Give your agent something to do.",
+      "sampleRoute": "/mcp",
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "31",
+          "quote": "path=\"/mcp\""
+        }
+      ]
+    },
+    {
+      "pattern": "/mcp/category/:key",
+      "template": "template.catalog-category",
+      "component": "CatalogRoute kind=mcp",
+      "layout": "Layout",
+      "headerVariant": "default",
+      "floatingCard": true,
+      "params": {
+        "key": {
+          "enum": [
+            "artificial_intelligence",
+            "productivity",
+            "marketing",
+            "communication",
+            "sales_and_crm",
+            "developer_tools",
+            "content_and_files",
+            "business_intelligence",
+            "core",
+            "commerce",
+            "forms_and_surveys",
+            "accounting",
+            "customer_support",
+            "payment_processing",
+            "human_resources",
+            "universal_ai",
+            "flow_control"
+          ]
+        }
+      },
+      "concreteUrlCount": 17,
+      "closingCopy": "default",
+      "sampleRoute": "/mcp/category/artificial_intelligence",
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "32",
+          "quote": "path=\"/mcp/category/:key\""
+        }
+      ]
+    },
+    {
+      "pattern": "/mcp/:slug",
+      "template": "template.catalog-detail",
+      "component": "DetailRoute kind=mcp",
+      "layout": "Layout",
+      "headerVariant": "default",
+      "floatingCard": true,
+      "params": {
+        "slug": {
+          "source": "data:pieces",
+          "count": 768
+        }
+      },
+      "concreteUrlCount": 768,
+      "closingCopy": "default",
+      "sampleRoute": "/mcp/slack",
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "33",
+          "quote": "path=\"/mcp/:slug\""
+        }
+      ],
+      "note": "There are no /mcp/:a/:b pair pages (they fall through to NotFound)."
+    },
+    {
+      "pattern": "/security",
+      "template": "template.security",
+      "component": "Security",
+      "layout": "Layout",
+      "headerVariant": "default",
+      "floatingCard": true,
+      "params": {},
+      "concreteUrlCount": 1,
+      "closingCopy": "custom (buttons + reassurance)",
+      "sampleRoute": "/security",
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "34",
+          "quote": "path=\"/security\""
+        }
+      ]
+    },
+    {
+      "pattern": "/ai-governance",
+      "template": "template.ai-governance",
+      "component": "AiGovernance",
+      "layout": "Layout",
+      "headerVariant": "default",
+      "floatingCard": true,
+      "params": {},
+      "concreteUrlCount": 1,
+      "closingCopy": "default",
+      "sampleRoute": "/ai-governance",
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "35",
+          "quote": "path=\"/ai-governance\""
+        }
+      ]
+    },
+    {
+      "pattern": "/embed",
+      "template": "template.embed",
+      "component": "Embed",
+      "layout": "Layout",
+      "headerVariant": "default",
+      "floatingCard": true,
+      "params": {},
+      "concreteUrlCount": 1,
+      "closingCopy": "default",
+      "sampleRoute": "/embed",
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "36",
+          "quote": "path=\"/embed\""
+        }
+      ]
+    },
+    {
+      "pattern": "/pricing",
+      "template": "template.pricing",
+      "component": "Pricing",
+      "layout": "Layout",
+      "headerVariant": "default",
+      "floatingCard": false,
+      "params": {},
+      "concreteUrlCount": 1,
+      "closingCopy": "default",
+      "sampleRoute": "/pricing",
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "37",
+          "quote": "path=\"/pricing\""
+        }
+      ]
+    },
+    {
+      "pattern": "/oss-friends",
+      "template": "template.oss-friends",
+      "component": "OssFriends",
+      "layout": "Layout",
+      "headerVariant": "default",
+      "floatingCard": true,
+      "params": {},
+      "concreteUrlCount": 1,
+      "closingCopy": "custom secondary (Read the source)",
+      "sampleRoute": "/oss-friends",
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "38",
+          "quote": "path=\"/oss-friends\""
+        }
+      ]
+    },
+    {
+      "pattern": "/blog",
+      "template": "template.blog-listing",
+      "component": "BlogIndex",
+      "layout": "Layout",
+      "headerVariant": "default",
+      "floatingCard": false,
+      "params": {},
+      "concreteUrlCount": 1,
+      "closingCopy": "all /blog*: Read about it, then go and build it yourself.",
+      "sampleRoute": "/blog",
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "39",
+          "quote": "path=\"/blog\""
+        }
+      ]
+    },
+    {
+      "pattern": "/blog/page/:n",
+      "template": "template.blog-listing",
+      "component": "BlogIndex",
+      "layout": "Layout",
+      "headerVariant": "default",
+      "floatingCard": false,
+      "params": {
+        "n": {
+          "pattern": "^[0-9]+$",
+          "min": 2,
+          "max": 67
+        }
+      },
+      "concreteUrlCount": 66,
+      "closingCopy": "default",
+      "sampleRoute": "/blog/page/2",
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "40",
+          "quote": "path=\"/blog/page/:n\""
+        }
+      ]
+    },
+    {
+      "pattern": "/blog/category/:slug",
+      "template": "template.blog-listing",
+      "component": "BlogCategory",
+      "layout": "Layout",
+      "headerVariant": "default",
+      "floatingCard": false,
+      "params": {
+        "slug": {
+          "enum": [
+            "automation-software",
+            "automation-thoughts",
+            "automation-tutorials",
+            "company",
+            "engineering",
+            "guides-ai",
+            "product"
+          ]
+        }
+      },
+      "concreteUrlCount": 7,
+      "closingCopy": "default",
+      "sampleRoute": "/blog/category/automation-software",
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "41",
+          "quote": "path=\"/blog/category/:slug\""
+        }
+      ]
+    },
+    {
+      "pattern": "/blog/category/:slug/:n",
+      "template": "template.blog-listing",
+      "component": "BlogCategory",
+      "layout": "Layout",
+      "headerVariant": "default",
+      "floatingCard": false,
+      "params": {
+        "slug": {
+          "enum": [
+            "automation-software",
+            "automation-thoughts",
+            "automation-tutorials",
+            "company",
+            "engineering",
+            "guides-ai",
+            "product"
+          ]
+        },
+        "n": {
+          "pattern": "^[0-9]+$",
+          "min": 2
+        }
+      },
+      "concreteUrlCount": null,
+      "closingCopy": "default",
+      "sampleRoute": "/blog/category/automation-software/2",
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "42",
+          "quote": "path=\"/blog/category/:slug/:n\""
+        }
+      ]
+    },
+    {
+      "pattern": "/blog/author/:slug",
+      "template": "template.blog-listing",
+      "component": "BlogAuthor",
+      "layout": "Layout",
+      "headerVariant": "default",
+      "floatingCard": false,
+      "params": {
+        "slug": {
+          "source": "data:blog#authors",
+          "count": 95
+        }
+      },
+      "concreteUrlCount": 95,
+      "closingCopy": "default",
+      "sampleRoute": "/blog/author/example-author",
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "43",
+          "quote": "path=\"/blog/author/:slug\""
+        }
+      ]
+    },
+    {
+      "pattern": "/blog/author/:slug/:n",
+      "template": "template.blog-listing",
+      "component": "BlogAuthor",
+      "layout": "Layout",
+      "headerVariant": "default",
+      "floatingCard": false,
+      "params": {
+        "slug": {
+          "source": "data:blog#authors"
+        },
+        "n": {
+          "pattern": "^[0-9]+$",
+          "min": 2
+        }
+      },
+      "concreteUrlCount": null,
+      "closingCopy": "default",
+      "sampleRoute": "/blog/author/example-author/2",
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "44",
+          "quote": "path=\"/blog/author/:slug/:n\""
+        }
+      ]
+    },
+    {
+      "pattern": "/blog/:slug",
+      "template": "template.blog-article",
+      "component": "BlogArticle",
+      "layout": "Layout",
+      "headerVariant": "default",
+      "floatingCard": false,
+      "params": {
+        "slug": {
+          "source": "data:blog#posts",
+          "count": 796
+        }
+      },
+      "concreteUrlCount": 796,
+      "closingCopy": "default",
+      "sampleRoute": "/blog/example-post",
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "45",
+          "quote": "path=\"/blog/:slug\""
+        }
+      ]
+    },
+    {
+      "pattern": "/resources",
+      "template": "template.resources-hub",
+      "component": "ResourcesHub",
+      "layout": "Layout",
+      "headerVariant": "default",
+      "floatingCard": true,
+      "params": {},
+      "concreteUrlCount": 1,
+      "closingCopy": "all /resources*: Put what you read into practice today.",
+      "sampleRoute": "/resources",
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "46",
+          "quote": "path=\"/resources\""
+        }
+      ]
+    },
+    {
+      "pattern": "/resources/:category",
+      "template": "template.resource-category",
+      "component": "ResourceCategory",
+      "layout": "Layout",
+      "headerVariant": "default",
+      "floatingCard": true,
+      "params": {
+        "category": {
+          "enum": [
+            "glossary",
+            "automation-guides",
+            "automation-use-cases",
+            "integration-use-cases"
+          ]
+        }
+      },
+      "concreteUrlCount": 4,
+      "closingCopy": "default",
+      "sampleRoute": "/resources/glossary",
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "47",
+          "quote": "path=\"/resources/:category\""
+        }
+      ]
+    },
+    {
+      "pattern": "/resources/:category/:slug",
+      "template": "template.resource-detail",
+      "component": "ResourceDetail",
+      "layout": "Layout",
+      "headerVariant": "default",
+      "floatingCard": true,
+      "params": {
+        "category": {
+          "enum": [
+            "glossary",
+            "automation-guides",
+            "automation-use-cases",
+            "integration-use-cases"
+          ]
+        },
+        "slug": {
+          "source": "data:resources",
+          "count": 1063
+        }
+      },
+      "concreteUrlCount": 1063,
+      "closingCopy": "default",
+      "sampleRoute": "/resources/glossary/example",
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "48",
+          "quote": "path=\"/resources/:category/:slug\""
+        }
+      ]
+    },
+    {
+      "pattern": "/privacy",
+      "template": "template.legal",
+      "component": "Legal doc=privacy",
+      "layout": "Layout",
+      "headerVariant": "default",
+      "floatingCard": true,
+      "params": {},
+      "concreteUrlCount": 1,
+      "closingCopy": "Keep your data where you want it.",
+      "sampleRoute": "/privacy",
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "49",
+          "quote": "path=\"/privacy\""
+        }
+      ]
+    },
+    {
+      "pattern": "/terms",
+      "template": "template.legal",
+      "component": "Legal doc=terms",
+      "layout": "Layout",
+      "headerVariant": "default",
+      "floatingCard": true,
+      "params": {},
+      "concreteUrlCount": 1,
+      "closingCopy": "Make something this afternoon.",
+      "sampleRoute": "/terms",
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "50",
+          "quote": "path=\"/terms\""
+        }
+      ]
+    },
+    {
+      "pattern": "/docs/*",
+      "template": "template.external-redirect",
+      "component": "ExternalRedirect",
+      "layout": "Layout",
+      "headerVariant": "default",
+      "floatingCard": true,
+      "params": {},
+      "concreteUrlCount": null,
+      "closingCopy": "default",
+      "sampleRoute": "/docs/install/overview",
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "51",
+          "quote": "path=\"/docs/*\""
+        }
+      ],
+      "note": "window.location.replace to https://www.activepieces.com + same path (navigation hand-off, not an asset request)."
+    },
+    {
+      "pattern": "/sales",
+      "template": "template.sales",
+      "component": "Sales (outside Layout)",
+      "layout": "standalone",
+      "headerVariant": "none",
+      "floatingCard": false,
+      "params": {},
+      "concreteUrlCount": 1,
+      "closingCopy": "none (standalone)",
+      "sampleRoute": "/sales",
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "56",
+          "quote": "path=\"/sales\""
+        }
+      ]
+    },
+    {
+      "pattern": "*",
+      "template": "template.not-found",
+      "component": "NotFound",
+      "layout": "Layout",
+      "headerVariant": "default",
+      "floatingCard": true,
+      "params": {},
+      "concreteUrlCount": null,
+      "closingCopy": "default",
+      "sampleRoute": "/does-not-exist",
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "53",
+          "quote": "<Route path=\"*\" element={<NotFound />} />"
+        }
+      ]
+    }
+  ]
+}

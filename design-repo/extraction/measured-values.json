@@ -1,0 +1,369 @@
+{
+  "$description": "Citation ledger: the real files/lines backing each design-repo decision, plus groundwork claims found wrong. Paths are relative to the SOURCE PROJECT ROOT (the folder containing design-repo/). verify_all.py checks every citation object ({file, lines, quote}) in the repo against those files when the sibling source tree is present, and only WARNS (skips) when it is absent (standalone copy).",
+  "sourceRootRelativeToRepo": "..",
+  "measurementProvenance": "Recon by headless Playwright (Chromium) on 2026-10-16 at 1440/1280/768/390 (CLONE_SPEC.md + specs/*.md), corrected by later QA passes applied in src/. This design-repo was built from static evidence only (no browser).",
+  "entries": [
+    {
+      "id": "route-table",
+      "value": "30 <Route> patterns: 27 between ROUTES:BEGIN/END (incl. /docs/*) + index + * inside Layout, and /sales outside Layout.",
+      "citations": [
+        {
+          "file": "src/App.jsx",
+          "lines": "24",
+          "quote": "{/* ROUTES:BEGIN */}"
+        },
+        {
+          "file": "src/App.jsx",
+          "lines": "52",
+          "quote": "{/* ROUTES:END */}"
+        },
+        {
+          "file": "src/App.jsx",
+          "lines": "56",
+          "quote": "<Route path=\"/sales\" element={<Sales />} />"
+        }
+      ]
+    },
+    {
+      "id": "stack",
+      "value": "React 18 + react-router-dom 6 + Vite 5 + Tailwind 3 (CommonJS tailwind.config.cjs).",
+      "citations": [
+        {
+          "file": "package.json",
+          "lines": "12",
+          "quote": "\"react\": \"^18.3.1\""
+        },
+        {
+          "file": "package.json",
+          "lines": "20",
+          "quote": "\"tailwindcss\": \"^3.4.17\""
+        },
+        {
+          "file": "package.json",
+          "lines": "21",
+          "quote": "\"vite\": \"^5.4.11\""
+        },
+        {
+          "file": "BUILD_CONVENTIONS.md",
+          "lines": "6",
+          "quote": "- Tailwind config is `tailwind.config.cjs` (CommonJS — hot reloads)."
+        }
+      ]
+    },
+    {
+      "id": "floating-card-routes",
+      "value": "Floating card is hidden on /sales, /pricing, /admin, /customers, /blog and their subpaths; shown everywhere else in Layout including /product/* and /solutions/*.",
+      "citations": [
+        {
+          "file": "src/components/Layout.jsx",
+          "lines": "15",
+          "quote": "!/^\\/(sales|pricing|admin|customers|blog)(\\/|$)/.test(pathname)"
+        }
+      ]
+    },
+    {
+      "id": "header-hero-art",
+      "value": "Header heroArt only on '/'.",
+      "citations": [
+        {
+          "file": "src/components/Layout.jsx",
+          "lines": "11",
+          "quote": "const isHome = pathname === '/'"
+        }
+      ]
+    },
+    {
+      "id": "toc-rail-rule",
+      "value": "Blog article TOC rail: hasTocRail(post) = post.hasToc || !NO_TOC.has(slug), 63 measured no-rail slugs.",
+      "citations": [
+        {
+          "file": "src/components/content/noToc.js",
+          "lines": "71",
+          "quote": "export const hasTocRail = (post) => post.hasToc || !NO_TOC.has(post.slug)"
+        },
+        {
+          "file": "src/components/content/noToc.js",
+          "lines": "1",
+          "quote": "// Blog posts that render with no \"On this page\" rail on the live site"
+        }
+      ]
+    },
+    {
+      "id": "dialog-reset",
+      "value": "Use-in-your-AI dialog resets to the first client (Claude) after close.",
+      "citations": [
+        {
+          "file": "src/components/UseInAiDialog.jsx",
+          "lines": "686",
+          "quote": "setActive(0)"
+        },
+        {
+          "file": "src/components/UseInAiDialog.jsx",
+          "lines": "33",
+          "quote": "name: 'Claude',"
+        }
+      ]
+    },
+    {
+      "id": "hero-line-home",
+      "value": ".76s ease-smooth, delay .38s + i*90ms, blur 5px, rise 14px.",
+      "citations": [
+        {
+          "file": "src/index.css",
+          "lines": "381",
+          "quote": "animation: hero-line .76s var(--ease-smooth) calc(.38s + var(--i) * 90ms) both;"
+        },
+        {
+          "file": "src/index.css",
+          "lines": "386",
+          "quote": "filter: blur(5px);"
+        }
+      ]
+    },
+    {
+      "id": "hero-line-template",
+      "value": ".64s ease-smooth, delay i*70ms, blur 4px, rise 12px.",
+      "citations": [
+        {
+          "file": "src/components/templates/Template.css",
+          "lines": "7",
+          "quote": "animation: tpl-hero-line .64s var(--ease-smooth) calc(var(--i) * 70ms) both;"
+        },
+        {
+          "file": "src/components/templates/Template.css",
+          "lines": "12",
+          "quote": "filter: blur(4px);"
+        }
+      ]
+    },
+    {
+      "id": "bento-spans",
+      "value": "Product cards spans 12,12,9,15,15,9,12,12; solution 12,12,9,15,15,9; home H 12,12,9,15,9,15,12,12; every row sums to 24.",
+      "citations": [
+        {
+          "file": "specs/SPEC_PRODUCT_SOLUTIONS.md",
+          "lines": "27",
+          "quote": "- **Bento grid.** 8 cards in spans 12/12, 9/15, 15/9, 12/12 on product pages."
+        }
+      ]
+    },
+    {
+      "id": "case-study-assignment",
+      "value": "Funding Societies on marketing, customer-support, hr, it, internal-tools; Alan on sales, finance, operations, engineering, open-source-developers.",
+      "citations": [
+        {
+          "file": "specs/SPEC_PRODUCT_SOLUTIONS.md",
+          "lines": "404",
+          "quote": "| **Funding Societies** | marketing, customer-support, hr, it, internal-tools |"
+        }
+      ]
+    },
+    {
+      "id": "data-counts",
+      "value": "768 pieces, 17 categories, 3,000 sitemap pairs, 793 posts, 95 authors, 7 blog categories, 1,063 resources.",
+      "citations": [
+        {
+          "file": "src/data/pieces.json",
+          "lines": "1",
+          "quote": "\"facts\":{\"pieces\":768,\"categories\":17"
+        },
+        {
+          "file": "specs/SPEC_CONTENT.md",
+          "lines": "36",
+          "quote": "### 0.1 Data files (produced by `scripts/fetch-content-index.mjs`)"
+        }
+      ]
+    },
+    {
+      "id": "blog-listed",
+      "value": "blog.json posts with listed:false are routable articles but excluded from index/category/author listings (useBlog exposes posts = listed, allPosts = all; BlogArticle looks up allPosts).",
+      "citations": [
+        {
+          "file": "src/components/content/data.jsx",
+          "lines": "13",
+          "quote": "posts: b.posts.filter((p) => p.listed !== false),"
+        },
+        {
+          "file": "src/pages/blog/BlogArticle.jsx",
+          "lines": "112",
+          "quote": "const post = blog?.allPosts.find((p) => p.slug === slug)"
+        }
+      ]
+    },
+    {
+      "id": "docs-redirect",
+      "value": "/docs/* hands off to https://www.activepieces.com + same path via window.location.replace (navigation, not a runtime asset request).",
+      "citations": [
+        {
+          "file": "src/pages/ExternalRedirect.jsx",
+          "lines": "11",
+          "quote": "window.location.replace(target)"
+        }
+      ]
+    },
+    {
+      "id": "author-link-fallback",
+      "value": "Article author link uses a.slug ?? 'activepieces' (matches the original href, which 404s there too).",
+      "citations": [
+        {
+          "file": "src/pages/blog/BlogArticle.jsx",
+          "lines": "284",
+          "quote": "to={`/blog/author/${a.slug ?? 'activepieces'}`}"
+        }
+      ]
+    },
+    {
+      "id": "ia-inventory",
+      "value": "Project-root ia.json (independent IA pass) maps the 6,518-URL sitemap onto the clone route table.",
+      "citations": [
+        {
+          "file": "ia.json",
+          "lines": "3",
+          "quote": "6,518 URLs"
+        }
+      ]
+    },
+    {
+      "id": "no-dark-mode",
+      "value": "No `dark:` variants anywhere in src/ (single light theme).",
+      "citations": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "84",
+          "quote": "Root wrapper: `min-h-screen overflow-x-clip bg-white font-sans text-ink-600 antialiased`"
+        }
+      ]
+    }
+  ],
+  "groundworkCorrections": [
+    {
+      "claim": "SPEC_PRODUCT_SOLUTIONS §1: 'no floating demo card (homepage §P) on any of these pages'.",
+      "finding": "Wrong for the delivered clone: Layout.jsx shows it on /product/* and /solutions/* (QA correction); only /sales, /pricing, /admin, /customers, /blog(/...) hide it.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_PRODUCT_SOLUTIONS.md",
+          "lines": "30",
+          "quote": "There are no CTA bands, no dream section and no floating demo card (homepage §P) on any of these pages."
+        },
+        {
+          "file": "src/components/Layout.jsx",
+          "lines": "12",
+          "quote": "// The live site shows the floating demo card on /product/* and /solutions/* too;"
+        }
+      ]
+    },
+    {
+      "claim": "Coordinator brief: floating card hidden on '/blog/*'.",
+      "finding": "The regex also hides it on /blog itself (prefix match with (\\/|$)).",
+      "evidence": [
+        {
+          "file": "src/components/Layout.jsx",
+          "lines": "15",
+          "quote": "!/^\\/(sales|pricing|admin|customers|blog)(\\/|$)/.test(pathname)"
+        }
+      ]
+    },
+    {
+      "claim": "SPEC_CONTENT §5.1: TOC rail renders 'only if TOC has >=3 entries'.",
+      "finding": "Implementation adds hasTocRail(post) = post.hasToc || !NO_TOC.has(slug) AND >=3 entries.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CONTENT.md",
+          "lines": "324",
+          "quote": "aside.hidden.w-52.shrink-0.xl:block.min-[90rem]:w-60          ← only if TOC has ≥3 entries"
+        },
+        {
+          "file": "src/pages/blog/BlogArticle.jsx",
+          "lines": "130",
+          "quote": "{hasTocRail(post) && ARTICLE_TOC.length >= 3 && ("
+        }
+      ]
+    },
+    {
+      "claim": "CLONE_SPEC A.1/H: customer logos, /rows/water.webp and /grid/iris.webp 'missing locally'.",
+      "finding": "Stale: all 24 customer logos (+ funding-societies.webp), water.webp and iris.webp now exist under public/.",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "395",
+          "quote": "  All of these logos are missing locally (see the manifest)."
+        },
+        {
+          "file": "src/components/Hero.jsx",
+          "lines": "33",
+          "quote": "const url = `url(/logos/customers/${file})`"
+        }
+      ]
+    },
+    {
+      "claim": "src/components/FloatingCard.jsx header comment: route-based hiding 'does not apply to this single-page clone'.",
+      "finding": "Stale source comment; hiding is implemented in Layout.jsx.",
+      "evidence": [
+        {
+          "file": "src/components/FloatingCard.jsx",
+          "lines": "7",
+          "quote": "Route-based hiding (/sales, /pricing, ...) does not apply to this single-page clone."
+        }
+      ]
+    },
+    {
+      "claim": "src/components/embed/EmbedHero.jsx header comment: hero-line entrance 'is NOT built here'.",
+      "finding": "Stale source comment; embed.css implements html.js .embed-line (.64s, i*70ms).",
+      "evidence": [
+        {
+          "file": "src/components/embed/EmbedHero.jsx",
+          "lines": "8",
+          "quote": "The original's `hero-line` entrance (p/buttons/stage/highlights, .64s, --i×70ms) is NOT built here:"
+        },
+        {
+          "file": "src/components/embed/embed.css",
+          "lines": "40",
+          "quote": "animation: embed-hero-line .64s var(--ease-smooth) calc(var(--i, 0) * 70ms) both;"
+        }
+      ]
+    },
+    {
+      "claim": "Groundwork / SPEC_CONTENT: 793 blog posts.",
+      "finding": "blog.json was regenerated during this build: 796 posts (2 with listed:false are sitemap-only). Counts in this repo are recomputed from the live data.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CONTENT.md",
+          "lines": "841",
+          "quote": "- **Data snapshot.** 792–793 posts at index time"
+        },
+        {
+          "file": "src/components/content/data.jsx",
+          "lines": "12",
+          "quote": "allPosts: b.posts,"
+        }
+      ]
+    },
+    {
+      "claim": "Coordinator brief route list (29 patterns).",
+      "finding": "A /docs/* -> ExternalRedirect route was added afterwards; routes.json has 30 patterns and verify_all ROUTES parity checks App.jsx.",
+      "evidence": [
+        {
+          "file": "src/App.jsx",
+          "lines": "51",
+          "quote": "<Route path=\"/docs/*\" element={<ExternalRedirect />} />"
+        }
+      ]
+    },
+    {
+      "claim": "CLONE_SPEC A: hero CTA text 16px base / 17px sm.",
+      "finding": "QA correction: text-[17px] leading-normal at all widths.",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "322",
+          "quote": "    - Padding: `pl-6 pr-5` (sm `pl-7 pr-6`), gap 14px, 16px text (sm 17px)."
+        },
+        {
+          "file": "src/components/Hero.jsx",
+          "lines": "102",
+          "quote": "ai-cta w-full gap-3.5 bg-ink-950 pr-5 pl-6 text-[17px] leading-normal"
+        }
+      ]
+    }
+  ]
+}

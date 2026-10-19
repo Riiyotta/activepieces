@@ -1,0 +1,155 @@
+{
+  "id": "proof.testimonials",
+  "layer": "section",
+  "category": "proof",
+  "purpose": "H2 + GitHub stats (v4 divide) over a 3/2/1-column grid of 9 review cards with a bottom fade mask.",
+  "implementedBy": [
+    "src/components/Testimonials.jsx",
+    "src/components/Testimonials.css"
+  ],
+  "evidence": [
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "750",
+      "quote": "## M. Testimonials"
+    },
+    {
+      "file": "specs/SPEC_PRODUCT_SOLUTIONS.md",
+      "lines": "387",
+      "quote": "## 8. Testimonials (solutions only; reuse `Testimonials` with an H2 prop)"
+    }
+  ],
+  "variants": {
+    "default": {
+      "description": "Single variant (H2 differs per page).",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "762",
+          "quote": "- Grid: `grid grid-cols-1 gap-3`; sm 2 columns; lg 3 columns. 9 cards; measured 419×180 at 1440."
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "h2",
+      "stats",
+      "cards"
+    ],
+    "properties": {
+      "h2": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 14
+      },
+      "stats": {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 2,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "value",
+            "label"
+          ],
+          "properties": {
+            "value": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 1
+            },
+            "label": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 3
+            }
+          }
+        }
+      },
+      "cards": {
+        "type": "array",
+        "minItems": 3,
+        "maxItems": 9,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "quote",
+            "name",
+            "source"
+          ],
+          "properties": {
+            "quote": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 40
+            },
+            "name": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 4
+            },
+            "source": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 4
+            }
+          }
+        }
+      }
+    }
+  },
+  "media": {
+    "slots": {
+      "avatars": {
+        "roles": [
+          "testimonial.avatar"
+        ],
+        "maxItems": 9,
+        "required": false
+      },
+      "platformMarks": {
+        "roles": [
+          "review-platform.mark"
+        ],
+        "maxItems": 9,
+        "required": false
+      }
+    }
+  },
+  "constraints": {
+    "onePerPage": true
+  },
+  "variantRules": {},
+  "motion": {
+    "allowedPatterns": [
+      "none"
+    ],
+    "requiredPatterns": [],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "not-applicable"
+  },
+  "responsive": {
+    "evidence": [
+      {
+        "file": "CLONE_SPEC.md",
+        "lines": "758",
+        "quote": "- Wrapper `-m-3 p-3 fade-b`, with `--fade` 6rem / md 7.5rem / lg 9rem. The bottom fade mask:"
+      }
+    ],
+    "changes": {
+      "base": "1 column, fade 6rem",
+      "sm": "2 columns",
+      "md": "header row with stats right; fade 7.5rem",
+      "lg": "3 columns; fade 9rem"
+    }
+  },
+  "accessibility": [],
+  "notes": [
+    "Real reviewers and quotes: generated instances must use synthetic people and placeholder avatars (initials)."
+  ]
+}

@@ -1,0 +1,6 @@
+/* N. Section-specific CSS for Faq (co-located; do not put this in index.css). */
+
+/* Answer collapse: `transition: all 200ms ease-out` (CLONE_SPEC §N), applied only while animating. */
+.faq-collapse-anim {
+  transition: all 200ms cubic-bezier(0, 0, .2, 1);
+}

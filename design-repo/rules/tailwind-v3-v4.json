@@ -1,0 +1,250 @@
+{
+  "$description": "Load-bearing rules for anyone GENERATING CODE from this design-repo: the clone is Tailwind v3 reproducing a Tailwind v4 original. These govern the implementation layer; PageSpecs carry no class strings (see tokens/llm/token-policy.json `overrides`).",
+  "evidence": [
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "7",
+      "quote": "The original is Nuxt 3 (Vue) with Tailwind **v4**. The clone uses Tailwind **v3**."
+    }
+  ],
+  "rules": [
+    {
+      "id": "TW-DIVIDE",
+      "v4": "divide-x / divide-y put the rule on every child but the LAST (border-inline-end / border-bottom).",
+      "v3": "divide-x / divide-y put border-left / border-top on every child but the FIRST, shifting columns 2..n by 1px.",
+      "rule": "Never use v3 divide-* for a v4 divide; use the explicit scoped classes (border-right on :not(:last-child)).",
+      "instances": [
+        "stats-divide",
+        "alan-stats-divide",
+        "testi-stats-divide",
+        "cols-divide",
+        "tpl-cols-divide",
+        "tpl-divide-y"
+      ],
+      "evidence": [
+        {
+          "file": "src/components/CaseFundingSocieties.css",
+          "lines": "10",
+          "quote": "/* v4 `sm:divide-x sm:divide-ink-950/10`: v4 draws the rule as border-inline-end on every child but the"
+        },
+        {
+          "file": "src/components/CaseAlan.css",
+          "lines": "10",
+          "quote": ".alan-stats-divide > :not(:last-child) {"
+        },
+        {
+          "file": "src/components/Testimonials.css",
+          "lines": "19",
+          "quote": ".testi-stats-divide > :not(:last-child) {"
+        },
+        {
+          "file": "src/components/FeatureAgents.css",
+          "lines": "59",
+          "quote": "[data-section='agents'] .cols-divide > :not(:last-child) {"
+        },
+        {
+          "file": "src/components/templates/Template.css",
+          "lines": "65",
+          "quote": ".tpl-cols-divide > :not(:last-child) {"
+        },
+        {
+          "file": "src/components/templates/Template.css",
+          "lines": "227",
+          "quote": ".tpl-divide-y > :not(:last-child) {"
+        }
+      ]
+    },
+    {
+      "id": "TW-LEADING-TEXT-28",
+      "v4": "text-2xl carries a unitless line-height ratio (2/1.5) that a later md:text-[28px] keeps -> 28px/37.33px.",
+      "v3": "text-2xl sets line-height 2rem; md:text-[28px] keeps 32px.",
+      "rule": "28px CTA h2 needs leading-[calc(2/1.5)].",
+      "evidence": [
+        {
+          "file": "src/components/CtaShip.jsx",
+          "lines": "10",
+          "quote": "leading-[calc(2/1.5)]"
+        },
+        {
+          "file": "src/components/CtaRollout.jsx",
+          "lines": "10",
+          "quote": "leading-[calc(2/1.5)]"
+        },
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "596",
+          "quote": "  - H2: Sentient 700, ink-900, 24/32 (md 28px / 37.33px)."
+        }
+      ]
+    },
+    {
+      "id": "TW-LEADING-BENTO",
+      "v4": "text-sm ratio 1.25/.875 carries into md:text-[15px] -> 21.43px.",
+      "v3": "fixed 1.25rem -> 20px.",
+      "rule": "Bento card body: md:text-[15px] md:leading-[1.428571].",
+      "evidence": [
+        {
+          "file": "src/components/BentoPlatformCard.jsx",
+          "lines": "68",
+          "quote": "md:leading-[1.428571]"
+        },
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "707",
+          "quote": "h3 18/28 (md 20/28) weight 500 ink-900; p 14/20 (md 15px / 21.43px) ink-600."
+        }
+      ]
+    },
+    {
+      "id": "TW-HERO-CTA-17",
+      "rule": "Homepage hero CTAs are text-[17px] leading-normal at ALL widths (QA correction over CLONE_SPEC's 16px base).",
+      "evidence": [
+        {
+          "file": "src/components/Hero.jsx",
+          "lines": "102",
+          "quote": "ai-cta w-full gap-3.5 bg-ink-950 pr-5 pl-6 text-[17px] leading-normal"
+        },
+        {
+          "file": "src/components/Hero.jsx",
+          "lines": "125",
+          "quote": "group w-full gap-2 bg-white/70 px-8 text-[17px] leading-normal"
+        }
+      ]
+    },
+    {
+      "id": "TW-SPACING-SCALE",
+      "rule": "v4 spacing (any N x 0.25rem) is reproduced by generating 0..200 in .5 steps; v4 class names (pt-34, -mt-73, h-12.5) are valid.",
+      "evidence": [
+        {
+          "file": "tailwind.config.cjs",
+          "lines": "3-9",
+          "quote": "// Tailwind v4 spacing: every N maps to N * 0.25rem"
+        }
+      ]
+    },
+    {
+      "id": "TW-OPACITY-SCALE",
+      "rule": "Any integer opacity modifier (bg-ink-950/6) is registered in the v3 config.",
+      "evidence": [
+        {
+          "file": "tailwind.config.cjs",
+          "lines": "12-14",
+          "quote": "// v4 accepts any integer opacity modifier"
+        }
+      ]
+    },
+    {
+      "id": "TW-RADIUS-SCALE",
+      "rule": "Radius scale is the v4 one (sm=4px, DEFAULT=4px, ... 4xl=32px), replacing v3 defaults.",
+      "evidence": [
+        {
+          "file": "tailwind.config.cjs",
+          "lines": "35",
+          "quote": "// CLONE_SPEC 0.3 (v4 radius scale; differs from v3 defaults)"
+        }
+      ]
+    },
+    {
+      "id": "TW-BORDER-COLOR",
+      "rule": "Default border color is currentColor (v4), not v3 gray-200.",
+      "evidence": [
+        {
+          "file": "src/index.css",
+          "lines": "356",
+          "quote": "/* v4 default border color is currentColor; v3 uses gray-200. Match v4. */"
+        }
+      ]
+    },
+    {
+      "id": "TW-BUTTON-CURSOR",
+      "rule": "Buttons get cursor:pointer from the base layer (v4 preflight difference).",
+      "evidence": [
+        {
+          "file": "src/index.css",
+          "lines": "348",
+          "quote": "/* v4 preflight: images/svg are block, buttons have no default bg, cursor pointer on buttons */"
+        }
+      ]
+    },
+    {
+      "id": "TW-FOCUS-OUTLINE",
+      "rule": "Focus rings need explicit `outline` in v3: focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-700.",
+      "evidence": [
+        {
+          "file": "BUILD_CONVENTIONS.md",
+          "lines": "11",
+          "quote": "- Focus rings: `focus-visible:outline focus-visible:outline-2"
+        }
+      ]
+    },
+    {
+      "id": "TW-BG-LINEAR",
+      "rule": "v4 bg-linear-to-b is written bg-gradient-to-b in v3 (pricing wrapper).",
+      "evidence": [
+        {
+          "file": "src/pages/Pricing.jsx",
+          "lines": "28",
+          "quote": "bg-gradient-to-b from-white via-ink-50 to-ink-50"
+        },
+        {
+          "file": "specs/SPEC_MARKETING.md",
+          "lines": "211",
+          "quote": "The `<main>` content is wrapped in `div.bg-linear-to-b.from-white.via-ink-50.to-ink-50`"
+        }
+      ]
+    },
+    {
+      "id": "TW-CONTAINER-QUERIES",
+      "rule": "No container-query plugin: write plain @container CSS.",
+      "evidence": [
+        {
+          "file": "BUILD_CONVENTIONS.md",
+          "lines": "15",
+          "quote": "- Container queries: no plugin — write plain `@container` CSS."
+        }
+      ]
+    },
+    {
+      "id": "TW-HERO-LINE-SCOPE",
+      "rule": "Global html.js .hero-line is the HOMEPAGE entrance (.76s, .38s+i*90ms, blur 5px, 14px). Template heroes use scoped classes with .64s / i*70ms / blur 4px / 12px: .tpl-line, .cat-hero .hero-line, .embed-line, .res-hero-line.",
+      "evidence": [
+        {
+          "file": "src/index.css",
+          "lines": "381",
+          "quote": "animation: hero-line .76s var(--ease-smooth) calc(.38s + var(--i) * 90ms) both;"
+        },
+        {
+          "file": "src/components/templates/Template.css",
+          "lines": "7",
+          "quote": "animation: tpl-hero-line .64s var(--ease-smooth) calc(var(--i) * 70ms) both;"
+        },
+        {
+          "file": "src/components/catalog/catalog.css",
+          "lines": "281",
+          "quote": "html.js .cat-hero .hero-line {"
+        },
+        {
+          "file": "src/components/embed/embed.css",
+          "lines": "40",
+          "quote": "animation: embed-hero-line .64s var(--ease-smooth) calc(var(--i, 0) * 70ms) both;"
+        },
+        {
+          "file": "src/components/content/content.css",
+          "lines": "45",
+          "quote": "html.js .res-hero-line{animation:res-hero-line .64s"
+        }
+      ]
+    },
+    {
+      "id": "TW-V4-SYNTAX-CHECK",
+      "rule": "Any v4-only syntax copied from saved original markup must be checked against v3 before use.",
+      "evidence": [
+        {
+          "file": "BUILD_CONVENTIONS.md",
+          "lines": "16",
+          "quote": "- v4-only syntax copied from the saved HTML must be checked against v3."
+        }
+      ]
+    }
+  ]
+}

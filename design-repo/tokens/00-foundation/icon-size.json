@@ -1,0 +1,113 @@
+{
+  "$description": "Icon sizes actually used with the Iconify mask <Icon> (size-* utilities).",
+  "evidence": [
+    {
+      "file": "src/components/ui/Icon.jsx",
+      "lines": "2",
+      "quote": "Size with size-* and colour with text-*."
+    }
+  ],
+  "tokens": {
+    "iconSize": {
+      "3": {
+        "$type": "dimension",
+        "$value": "12px",
+        "evidence": [
+          {
+            "file": "src/pages/blog/BlogArticle.jsx",
+            "lines": "146",
+            "quote": "size-3 shrink-0 text-ink-500"
+          }
+        ]
+      },
+      "3.5": {
+        "$type": "dimension",
+        "$value": "14px",
+        "evidence": [
+          {
+            "file": "specs/SPEC_CATALOG.md",
+            "lines": "217",
+            "quote": "solar:alt-arrow-right-linear size-3.5 text-ink-500"
+          }
+        ]
+      },
+      "4": {
+        "$type": "dimension",
+        "$value": "16px",
+        "evidence": [
+          {
+            "file": "BUILD_CONVENTIONS.md",
+            "lines": "12",
+            "quote": "<Icon name=\"solar:check-circle-linear\" className=\"size-4\" />"
+          }
+        ]
+      },
+      "5": {
+        "$type": "dimension",
+        "$value": "20px",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "778",
+            "quote": "Icon: `solar:add-linear`, 20px, ink-600"
+          }
+        ]
+      },
+      "5.5": {
+        "$type": "dimension",
+        "$value": "22px",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "206",
+            "quote": "containing a 22px icon in ink-700"
+          }
+        ]
+      },
+      "6": {
+        "$type": "dimension",
+        "$value": "24px",
+        "evidence": [
+          {
+            "file": "specs/SPEC_MARKETING.md",
+            "lines": "423",
+            "quote": "icon `mt-0.5 size-6 text-ink-900`"
+          }
+        ]
+      },
+      "7": {
+        "$type": "dimension",
+        "$value": "28px",
+        "evidence": [
+          {
+            "file": "specs/SPEC_CONTENT.md",
+            "lines": "583",
+            "quote": "icon size-7 text-ink-600"
+          }
+        ]
+      },
+      "12": {
+        "$type": "dimension",
+        "$value": "48px",
+        "evidence": [
+          {
+            "file": "specs/SPEC_MARKETING.md",
+            "lines": "408",
+            "quote": "icon `mb-5 size-12 text-primary-200`"
+          }
+        ]
+      },
+      "14": {
+        "$type": "dimension",
+        "$value": "56px",
+        "evidence": [
+          {
+            "file": "specs/SPEC_MARKETING.md",
+            "lines": "85",
+            "quote": "with a 56px (`size-14`) bold Solar icon"
+          }
+        ]
+      }
+    }
+  }
+}

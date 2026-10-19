@@ -1,0 +1,72 @@
+{
+  "id": "catalog.guides",
+  "layer": "section",
+  "category": "catalog",
+  "purpose": "'Guides using <name>' 4-column grid of linked guide cards (rendered only when the piece has guides).",
+  "implementedBy": [
+    "src/pages/DetailPage.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_CATALOG.md",
+      "lines": "206",
+      "quote": "### 3.6 `GuideCard` / guides section"
+    }
+  ],
+  "variants": {
+    "default": {
+      "description": "Single variant.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CATALOG.md",
+          "lines": "207",
+          "quote": "- Rendered only when `guides.length` > 0."
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "kind",
+      "subject"
+    ],
+    "properties": {
+      "kind": {
+        "enum": [
+          "pieces",
+          "mcp"
+        ]
+      },
+      "subject": {
+        "type": "string",
+        "pattern": "^data:pieces#[a-z0-9-]+$",
+        "x-example": "data:pieces#slack"
+      }
+    }
+  },
+  "media": {
+    "slots": {}
+  },
+  "constraints": {
+    "onePerPage": true
+  },
+  "variantRules": {},
+  "motion": {
+    "allowedPatterns": [
+      "card-hover-shadow"
+    ],
+    "requiredPatterns": [
+      "card-hover-shadow"
+    ],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "static-end-state"
+  },
+  "responsive": {
+    "evidence": [],
+    "changes": {}
+  },
+  "accessibility": [],
+  "notes": []
+}

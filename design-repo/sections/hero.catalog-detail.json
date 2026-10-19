@@ -1,0 +1,146 @@
+{
+  "id": "hero.catalog-detail",
+  "layer": "section",
+  "category": "hero",
+  "purpose": "Detail/pair hero: breadcrumb, logo box(es), H1 '<name> integration' | '<name> MCP server' | 'Connect A to B', lead, CTAs, facts dl. All copy is template-generated from data.",
+  "implementedBy": [
+    "src/pages/DetailPage.jsx",
+    "src/pages/PairPage.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_CATALOG.md",
+      "lines": "478",
+      "quote": "### 5.1 Detail hero"
+    },
+    {
+      "file": "specs/SPEC_CATALOG.md",
+      "lines": "562",
+      "quote": "### 6.1 Hero (`recipe-hero`, same wrapper as §5.1)"
+    }
+  ],
+  "variants": {
+    "piece": {
+      "description": "/pieces/:slug",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CATALOG.md",
+          "lines": "483",
+          "quote": "  - h1 `font-display text-4xl md:text-5xl font-bold text-balance text-ink-900` (36/40 → 48/48) = \"{name} integration\" / \"{name} MCP server\""
+        }
+      ]
+    },
+    "mcp": {
+      "description": "/mcp/:slug (adds the single-server note).",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CATALOG.md",
+          "lines": "487",
+          "quote": "- MCP only, a note `p.mt-2.5.max-w-2xl.text-[15px].text-ink-500`:"
+        }
+      ]
+    },
+    "pair": {
+      "description": "/pieces/:a/:b (any distinct valid pair).",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CATALOG.md",
+          "lines": "24",
+          "quote": "- **Any** valid pair renders on the original, not just the 3,000 in the sitemap."
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "kind",
+      "subject"
+    ],
+    "properties": {
+      "kind": {
+        "enum": [
+          "pieces",
+          "mcp"
+        ]
+      },
+      "subject": {
+        "type": "string",
+        "pattern": "^data:pieces#[a-z0-9-]+$",
+        "x-example": "data:pieces#slack"
+      },
+      "subjectB": {
+        "type": "string",
+        "pattern": "^data:pieces#[a-z0-9-]+$",
+        "x-example": "data:pieces#slack"
+      }
+    }
+  },
+  "media": {
+    "slots": {
+      "logos": {
+        "roles": [
+          "piece.logo"
+        ],
+        "maxItems": 2,
+        "required": false
+      }
+    }
+  },
+  "constraints": {
+    "onePerPage": true,
+    "mustFollow": "shell.header"
+  },
+  "variantRules": {
+    "pair": {
+      "requiredContent": [
+        "subjectB"
+      ],
+      "contentEquals": {
+        "kind": "pieces"
+      }
+    },
+    "piece": {
+      "forbiddenContent": [
+        "subjectB"
+      ],
+      "contentEquals": {
+        "kind": "pieces"
+      }
+    },
+    "mcp": {
+      "forbiddenContent": [
+        "subjectB"
+      ],
+      "contentEquals": {
+        "kind": "mcp"
+      }
+    }
+  },
+  "motion": {
+    "allowedPatterns": [
+      "none"
+    ],
+    "requiredPatterns": [],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "not-applicable"
+  },
+  "responsive": {
+    "evidence": [
+      {
+        "file": "specs/SPEC_CATALOG.md",
+        "lines": "498",
+        "quote": "  - Columns: 5×243 at 1440, 3×240 at 768."
+      }
+    ],
+    "changes": {
+      "base": "facts 1 column; buttons full width",
+      "sm": "facts 2 columns",
+      "md": "facts 3 columns with divide",
+      "lg": "facts 5 columns (pair: 4)"
+    }
+  },
+  "accessibility": [],
+  "notes": []
+}

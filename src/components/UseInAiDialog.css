@@ -1,0 +1,167 @@
+/* Q. Section-specific CSS for UseInAiDialog (co-located; do not put this in index.css).
+ * Ported from mcp-connect-dialog.BUS9cZUT.css (data-v-5e369e15). --radius-2xl = 16px, --radius-lg = 8px.
+ * Open: opacity .2s ease-out + translate .24s ease-smooth from 0 4px (@starting-style).
+ * Close: opacity .13s ease-in. Backdrop rgba(2,6,24,.4). <768: bottom sheet from translate 0 100%. */
+
+.mcp-sheet {
+  border-radius: 16px;
+  width: min(58rem, 100vw - 2rem);
+  box-shadow: var(--shadow-over);
+  opacity: 0;
+  transition: opacity .13s ease-in, overlay .13s allow-discrete, display .13s allow-discrete;
+  translate: 0;
+}
+.mcp-sheet[open] {
+  opacity: 1;
+  transition: opacity .2s ease-out, translate .24s var(--ease-smooth), overlay .24s allow-discrete, display .24s allow-discrete;
+  translate: 0;
+}
+@starting-style {
+  .mcp-sheet[open] {
+    opacity: 0;
+    translate: 0 4px;
+  }
+}
+.mcp-sheet::backdrop {
+  background: transparent;
+  transition: background-color .13s ease-in, overlay .13s allow-discrete, display .13s allow-discrete;
+}
+.mcp-sheet[open]::backdrop {
+  background-color: rgba(2, 6, 24, .4);
+  transition: background-color .2s ease-out, overlay .2s allow-discrete, display .2s allow-discrete;
+}
+@starting-style {
+  .mcp-sheet[open]::backdrop {
+    background-color: transparent;
+  }
+}
+
+.mcp-shell {
+  max-height: calc(100svh - 4rem);
+}
+.mcp-rail-list {
+  scrollbar-width: thin;
+  scroll-padding-inline: 1.5rem;
+  overflow: auto hidden;
+}
+.mcp-rail-list,
+.mcp-panel-scroll {
+  overscroll-behavior: contain;
+}
+.mcp-panel-scroll {
+  -webkit-overflow-scrolling: touch;
+  overflow-y: auto;
+}
+.mcp-panel-scroll pre {
+  overscroll-behavior-x: contain;
+}
+
+.mcp-pill {
+  box-sizing: border-box;
+  pointer-events: none;
+  border: 1px solid var(--cast-10);
+  box-shadow: 0 1px 2px -1px var(--cast-08);
+  transition: transform .22s var(--ease-smooth), opacity .12s ease-out;
+  background-color: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.mcp-rail-pill {
+  border-radius: 8px;
+}
+.mcp-seg-pill {
+  transition: transform .2s var(--ease-smooth), width .2s var(--ease-smooth), opacity .12s ease-out;
+  border-radius: .4rem;
+}
+.mcp-rail-item {
+  transition: background-color .16s ease-out, color .16s ease-out;
+}
+.mcp-seg-btn {
+  transition: color .16s ease-out;
+}
+.mcp-tap {
+  transition: background-color .16s ease-out, color .16s ease-out;
+}
+
+@keyframes mcp-fade-swap {
+  0% {
+    opacity: 0;
+    translate: 0 4px;
+  }
+}
+html.js .mcp-sheet .mcp-fade {
+  animation: mcp-fade-swap .2s var(--ease-smooth) both;
+}
+
+@media (width >= 48rem) {
+  .mcp-shell {
+    height: min(41rem, 100svh - 5rem);
+    max-height: none;
+  }
+  .mcp-rail-list {
+    overflow: hidden auto;
+  }
+}
+
+@media (width < 48rem) {
+  .mcp-sheet {
+    border-radius: 16px 16px 0 0;
+    width: 100%;
+    max-width: none;
+    transition: opacity .16s ease-in, translate .2s ease-in, overlay .2s allow-discrete, display .2s allow-discrete;
+    border-width: 1px 0 0;
+    margin: auto 0 0;
+    translate: 0 100%;
+  }
+  .mcp-sheet[open] {
+    translate: 0;
+  }
+  @starting-style {
+    .mcp-sheet[open] {
+      translate: 0 100%;
+    }
+  }
+  .mcp-shell {
+    max-height: calc(100svh - 3rem);
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+  .mcp-rail {
+    border-bottom: 1px solid var(--cast-10);
+  }
+  .mcp-rail-list {
+    --fade-s: 1.25rem;
+    --fade-e: 1.25rem;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 var(--fade-s), #000 calc(100% - var(--fade-e)), transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, #000 var(--fade-s), #000 calc(100% - var(--fade-e)), transparent 100%);
+    scrollbar-width: none;
+  }
+  .mcp-rail-list.at-start {
+    --fade-s: 0rem;
+  }
+  .mcp-rail-list.at-end {
+    --fade-e: 0rem;
+  }
+  .mcp-rail-list::-webkit-scrollbar {
+    display: none;
+  }
+  .mcp-rail-pill {
+    transition: transform .2s var(--ease-smooth), width .2s var(--ease-smooth), opacity .12s ease-out;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mcp-pill,
+  .mcp-rail-item,
+  .mcp-rail-pill,
+  .mcp-seg-btn,
+  .mcp-seg-pill,
+  .mcp-sheet,
+  .mcp-sheet::backdrop,
+  .mcp-tap {
+    transition: none;
+  }
+  html.js .mcp-sheet .mcp-fade {
+    animation: none;
+  }
+}

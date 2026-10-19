@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900"><rect width="1600" height="900" fill="#0a0c14"/><defs><linearGradient id="hdaug0" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient><linearGradient id="hdaug1" x1="0" y1="1" x2="1" y2="0">
+    <stop offset="0" stop-color="#ff3d8a"/><stop offset="1" stop-color="#5b2ee5"/></linearGradient><linearGradient id="hdaug2" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient><filter id="hdaub" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="26"/></filter></defs>
+  <g filter="url(#hdaub)"><path d="M 709 950 C 984 638, 1170 627, 1212 470 S 1565 58, 1680 60" fill="none" stroke="url(#hdaug0)" stroke-width="120" opacity="0.85"/><path d="M 971 980 C 1193 670, 1269 735, 1477 459 S 1600 201, 1700 220" fill="none" stroke="url(#hdaug1)" stroke-width="70" opacity="0.6"/><path d="M 1137 1000 C 1352 820, 1420 860, 1560 640" fill="none" stroke="url(#hdaug2)" stroke-width="40" opacity="0.5"/></g></svg>

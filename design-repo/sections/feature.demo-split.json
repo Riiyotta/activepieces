@@ -1,0 +1,201 @@
+{
+  "id": "feature.demo-split",
+  "layer": "section",
+  "category": "feature",
+  "purpose": "Feature section: Sentient H2 (5/12) + lede (6/12), art stage with a live demo visual, 3 text columns with v4 divide.",
+  "implementedBy": [
+    "src/components/FeatureAgents.jsx",
+    "src/components/FeatureFlow.jsx",
+    "src/components/FeaturePieces.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "603",
+      "quote": "## F / G / K. Feature sections (shared layout)"
+    }
+  ],
+  "variants": {
+    "agents-demo": {
+      "description": "F: agent thread demo (scripted cursor loop) on meadow art.",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "625",
+          "quote": "### F visual: agent thread demo (scripted loop with a fake cursor)"
+        }
+      ],
+      "implementedBy": [
+        "src/components/FeatureAgentsDemo.jsx"
+      ]
+    },
+    "flow-demo": {
+      "description": "G: flow canvas demo on clouds art.",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "660",
+          "quote": "### G visual: flow canvas demo"
+        }
+      ],
+      "implementedBy": [
+        "src/components/FeatureFlowDemo.jsx"
+      ]
+    },
+    "pieces-mosaic": {
+      "description": "K: '760+' logo mosaic + 'View all pieces' link.",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "678",
+          "quote": "### K visual: pieces mosaic"
+        }
+      ],
+      "implementedBy": [
+        "src/components/FeaturePieces.jsx"
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "h2",
+      "lede",
+      "columns"
+    ],
+    "properties": {
+      "h2": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 8
+      },
+      "lede": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 28
+      },
+      "columns": {
+        "type": "array",
+        "minItems": 3,
+        "maxItems": 3,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "title",
+            "body"
+          ],
+          "properties": {
+            "title": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 8
+            },
+            "body": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 32
+            }
+          }
+        }
+      },
+      "link": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "label",
+          "href"
+        ],
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 4
+          },
+          "href": {
+            "type": "string",
+            "pattern": "^(/[A-Za-z0-9._~%/?=&#-]*|https://(cloud\\.activepieces\\.com|github\\.com/activepieces|www\\.activepieces\\.com|trust\\.activepieces\\.com)(/[A-Za-z0-9._~%/?=&#-]*)?)$",
+            "x-example": "/sales?ap_cta=example"
+          }
+        }
+      }
+    }
+  },
+  "media": {
+    "slots": {
+      "stageArt": {
+        "roles": [
+          "art.panel"
+        ],
+        "maxItems": 1,
+        "required": true
+      },
+      "mosaicLogos": {
+        "roles": [
+          "piece.logo"
+        ],
+        "maxItems": 40,
+        "required": false
+      }
+    }
+  },
+  "constraints": {
+    "maxPerPage": 3,
+    "homeRouteOnly": true
+  },
+  "variantRules": {
+    "pieces-mosaic": {
+      "requiredContent": [
+        "link"
+      ]
+    },
+    "agents-demo": {
+      "forbiddenContent": [
+        "link"
+      ]
+    },
+    "flow-demo": {
+      "forbiddenContent": [
+        "link"
+      ]
+    }
+  },
+  "motion": {
+    "allowedPatterns": [
+      "demo-loop-agents",
+      "demo-loop-flow",
+      "mosaic-pop",
+      "mosaic-swap"
+    ],
+    "requiredPatterns": [],
+    "variantRequiredPatterns": {
+      "agents-demo": [
+        "demo-loop-agents"
+      ],
+      "flow-demo": [
+        "demo-loop-flow"
+      ],
+      "pieces-mosaic": [
+        "mosaic-pop",
+        "mosaic-swap"
+      ]
+    },
+    "reducedMotionFallback": "static-end-state"
+  },
+  "responsive": {
+    "evidence": [
+      {
+        "file": "CLONE_SPEC.md",
+        "lines": "617",
+        "quote": "- Columns: `relative z-10 grid grid-cols-1 gap-8`; md: `grid-cols-3 gap-0 divide-x divide-ink-950/10`."
+      }
+    ],
+    "changes": {
+      "base": "header stacked; columns stacked",
+      "md": "header 5/7 split; columns 3 with v4 divide (.cols-divide)"
+    }
+  },
+  "accessibility": [],
+  "notes": []
+}

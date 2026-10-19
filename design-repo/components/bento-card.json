@@ -1,0 +1,27 @@
+{
+  "id": "component.bento-card",
+  "layer": "component",
+  "purpose": "Bento cell: header (h3 + p) over an art-tinted visual holding a mock sheet in one of 5 frame modes.",
+  "composes": [
+    "edge-card"
+  ],
+  "implementedBy": [
+    "src/components/BentoPlatformCard.jsx"
+  ],
+  "rules": [
+    "h-[470px] md:h-[500px]; static (no hover, no motion).",
+    "Body p uses md:text-[15px] md:leading-[1.428571] (TW-LEADING-BENTO)."
+  ],
+  "evidence": [
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "706",
+      "quote": "`group flex h-[470px] md:h-[500px] w-full flex-col overflow-hidden rounded-2xl bg-white shadow-edge`"
+    },
+    {
+      "file": "src/components/BentoPlatformCard.jsx",
+      "lines": "68",
+      "quote": "md:leading-[1.428571]"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "component.testimonial-card",
+  "layer": "component",
+  "purpose": "figure with quoted blockquote and avatar/name/source caption.",
+  "composes": [
+    "edge-card",
+    "avatar"
+  ],
+  "implementedBy": [
+    "src/components/Testimonials.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "763",
+      "quote": "- Card `figure`: `flex flex-col gap-5 rounded-2xl bg-white p-6 shadow-edge`."
+    }
+  ]
+}

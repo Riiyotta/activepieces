@@ -1,0 +1,93 @@
+{
+  "$description": "Shadow foundation built from the ink-950 cast alpha tokens.",
+  "evidence": [
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "51",
+      "quote": "### 0.2 Shadows"
+    }
+  ],
+  "tokens": {
+    "shadow": {
+      "edge": {
+        "$type": "shadow",
+        "$value": "0 0 0 1px var(--cast-10), 0 1px 2px -1px var(--cast-08)",
+        "evidence": [
+          {
+            "file": "tailwind.config.cjs",
+            "lines": "131",
+            "quote": "edge: '0 0 0 1px var(--cast-10), 0 1px 2px -1px var(--cast-08)'"
+          }
+        ],
+        "usage": "hairline-ring card style used almost everywhere"
+      },
+      "edge-hover": {
+        "$type": "shadow",
+        "$value": "0 0 0 1px var(--cast-20), 0 2px 4px -1px var(--cast-08), 0 4px 8px -2px var(--cast-06)",
+        "evidence": [
+          {
+            "file": "tailwind.config.cjs",
+            "lines": "132",
+            "quote": "'edge-hover':"
+          }
+        ]
+      },
+      "lift": {
+        "$type": "shadow",
+        "$value": "0 0 0 1px var(--cast-10), 0 2px 4px -2px var(--cast-08), 0 8px 16px -6px var(--cast-08)",
+        "evidence": [
+          {
+            "file": "src/index.css",
+            "lines": "332",
+            "quote": "--shadow-lift: 0 0 0 1px var(--cast-10)"
+          }
+        ]
+      },
+      "over": {
+        "$type": "shadow",
+        "$value": "0 0 0 1px var(--cast-10), 0 4px 8px -4px var(--cast-10), 0 16px 32px -12px var(--cast-20)",
+        "evidence": [
+          {
+            "file": "src/index.css",
+            "lines": "333",
+            "quote": "--shadow-over: 0 0 0 1px var(--cast-10)"
+          }
+        ]
+      },
+      "sm": {
+        "$type": "shadow",
+        "$value": "0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px -1px rgba(0,0,0,.1)",
+        "evidence": [
+          {
+            "file": "tailwind.config.cjs",
+            "lines": "135",
+            "quote": "sm: '0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px -1px rgba(0,0,0,.1)'"
+          }
+        ]
+      },
+      "xs": {
+        "$type": "shadow",
+        "$value": "0 1px 2px 0 rgba(0,0,0,.05)",
+        "evidence": [
+          {
+            "file": "tailwind.config.cjs",
+            "lines": "136",
+            "quote": "xs: '0 1px 2px 0 rgba(0,0,0,.05)'"
+          }
+        ]
+      },
+      "hero-frame": {
+        "$type": "shadow",
+        "$value": "0 0 0 1px cast-20, 0 0 0 6px #ffffff8c, 0 24px 60px -24px cast-20",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "402",
+            "quote": "`box-shadow: 0 0 0 1px cast-20, 0 0 0 6px #ffffff8c"
+          }
+        ],
+        "usage": "homepage hero shot frame only"
+      }
+    }
+  }
+}

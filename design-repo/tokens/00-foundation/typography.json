@@ -1,0 +1,367 @@
+{
+  "$description": "Type foundation: 3 families (Inter body, Sentient display headings, Fira Code mocks), Tailwind v4 type scale reproduced in v3.",
+  "evidence": [
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "79",
+      "quote": "### 0.5 Fonts"
+    },
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "87",
+      "quote": "### 0.6 Type scale"
+    },
+    {
+      "file": "src/index.css",
+      "lines": "58",
+      "quote": "src: local('Inter Regular'), local('Inter')"
+    }
+  ],
+  "fontLoading": {
+    "rule": "Inter @font-face lists local() names first per weight (installed static Inter wins over the woff2), latin-ext before latin; Sentient 500/700 and Fira Code are self-hosted under /_nuxt and /_fonts.",
+    "evidence": [
+      {
+        "file": "src/index.css",
+        "lines": "6",
+        "quote": "local() first, latin-ext declared before latin"
+      },
+      {
+        "file": "src/index.css",
+        "lines": "241",
+        "quote": "src: url(/_nuxt/sentient-700.DV7iGHJJ.woff2)"
+      }
+    ]
+  },
+  "tokens": {
+    "font": {
+      "family": {
+        "sans": {
+          "$type": "fontFamily",
+          "$value": "Inter, \"Inter Fallback: sans-serif\", ui-sans-serif, system-ui, sans-serif",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "122",
+              "quote": "sans: ['Inter'"
+            }
+          ]
+        },
+        "display": {
+          "$type": "fontFamily",
+          "$value": "Sentient, \"Sentient Fallback: Georgia\", \"Sentient Fallback: Times New Roman\", ui-serif, Georgia, serif",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "123",
+              "quote": "display: ['Sentient'"
+            }
+          ]
+        },
+        "mono": {
+          "$type": "fontFamily",
+          "$value": "\"Fira Code\", \"Fira Code Fallback: monospace\", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "124",
+              "quote": "mono: ['\"Fira Code\"'"
+            }
+          ]
+        }
+      },
+      "size": {
+        "xs": {
+          "$type": "fontSize",
+          "$value": {
+            "fontSize": "0.75rem",
+            "lineHeight": "1rem"
+          },
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "50",
+              "quote": "xs: ['0.75rem', { lineHeight: '1rem' }]"
+            }
+          ]
+        },
+        "sm": {
+          "$type": "fontSize",
+          "$value": {
+            "fontSize": "0.875rem",
+            "lineHeight": "1.25rem"
+          },
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "51",
+              "quote": "sm: ['0.875rem', { lineHeight: '1.25rem' }]"
+            }
+          ]
+        },
+        "base": {
+          "$type": "fontSize",
+          "$value": {
+            "fontSize": "1rem",
+            "lineHeight": "1.5rem"
+          },
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "52",
+              "quote": "base: ['1rem', { lineHeight: '1.5rem' }]"
+            }
+          ]
+        },
+        "lg": {
+          "$type": "fontSize",
+          "$value": {
+            "fontSize": "1.125rem",
+            "lineHeight": "1.75rem"
+          },
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "53",
+              "quote": "lg: ['1.125rem', { lineHeight: '1.75rem' }]"
+            }
+          ]
+        },
+        "xl": {
+          "$type": "fontSize",
+          "$value": {
+            "fontSize": "1.25rem",
+            "lineHeight": "1.75rem"
+          },
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "54",
+              "quote": "xl: ['1.25rem', { lineHeight: '1.75rem' }]"
+            }
+          ]
+        },
+        "2xl": {
+          "$type": "fontSize",
+          "$value": {
+            "fontSize": "1.5rem",
+            "lineHeight": "2rem"
+          },
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "55",
+              "quote": "'2xl': ['1.5rem', { lineHeight: '2rem' }]"
+            }
+          ]
+        },
+        "3xl": {
+          "$type": "fontSize",
+          "$value": {
+            "fontSize": "1.875rem",
+            "lineHeight": "2.25rem"
+          },
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "56",
+              "quote": "'3xl': ['1.875rem', { lineHeight: '2.25rem' }]"
+            }
+          ]
+        },
+        "4xl": {
+          "$type": "fontSize",
+          "$value": {
+            "fontSize": "2.25rem",
+            "lineHeight": "2.5rem"
+          },
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "57",
+              "quote": "'4xl': ['2.25rem', { lineHeight: '2.5rem' }]"
+            }
+          ]
+        },
+        "5xl": {
+          "$type": "fontSize",
+          "$value": {
+            "fontSize": "3rem",
+            "lineHeight": "1"
+          },
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "58",
+              "quote": "'5xl': ['3rem', { lineHeight: '1' }]"
+            }
+          ]
+        },
+        "6xl": {
+          "$type": "fontSize",
+          "$value": {
+            "fontSize": "3.75rem",
+            "lineHeight": "1"
+          },
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "59",
+              "quote": "'6xl': ['3.75rem', { lineHeight: '1' }]"
+            }
+          ]
+        },
+        "7xl": {
+          "$type": "fontSize",
+          "$value": {
+            "fontSize": "4.5rem",
+            "lineHeight": "1"
+          },
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "60",
+              "quote": "'7xl': ['4.5rem', { lineHeight: '1' }]"
+            }
+          ]
+        }
+      },
+      "sizeCustom": {
+        "13px": {
+          "$type": "fontSize",
+          "$value": {
+            "fontSize": "13px"
+          },
+          "evidence": [
+            {
+              "file": "CLONE_SPEC.md",
+              "lines": "207",
+              "quote": "description 13px ink-600"
+            }
+          ],
+          "usage": "menu descriptions, mock meta"
+        },
+        "15px": {
+          "$type": "fontSize",
+          "$value": {
+            "fontSize": "15px"
+          },
+          "evidence": [
+            {
+              "file": "src/components/ui/Button.jsx",
+              "lines": "9",
+              "quote": "md: 'h-11 px-6 text-[15px]'"
+            }
+          ],
+          "usage": "md button, nav items, bento card body at md"
+        },
+        "17px": {
+          "$type": "fontSize",
+          "$value": {
+            "fontSize": "17px",
+            "lineHeight": "normal"
+          },
+          "evidence": [
+            {
+              "file": "src/components/ui/Button.jsx",
+              "lines": "11",
+              "quote": "xl: 'h-12.5 px-8 text-[17px]'"
+            },
+            {
+              "file": "src/components/Hero.jsx",
+              "lines": "102",
+              "quote": "text-[17px] leading-normal"
+            }
+          ],
+          "usage": "xl button / hero CTAs (leading-normal at all widths)"
+        },
+        "28px": {
+          "$type": "fontSize",
+          "$value": {
+            "fontSize": "28px",
+            "lineHeight": "calc(2/1.5)"
+          },
+          "evidence": [
+            {
+              "file": "src/components/CtaShip.jsx",
+              "lines": "10",
+              "quote": "leading-[calc(2/1.5)]"
+            }
+          ],
+          "usage": "CTA band h2 at md (v4 inherited line-height ratio)"
+        }
+      },
+      "weight": {
+        "regular": {
+          "$type": "fontWeight",
+          "$value": 400,
+          "evidence": [
+            {
+              "file": "CLONE_SPEC.md",
+              "lines": "80",
+              "quote": "Weights 400/500/600/700."
+            }
+          ]
+        },
+        "medium": {
+          "$type": "fontWeight",
+          "$value": 500,
+          "evidence": [
+            {
+              "file": "CLONE_SPEC.md",
+              "lines": "80",
+              "quote": "Weights 400/500/600/700."
+            }
+          ]
+        },
+        "semibold": {
+          "$type": "fontWeight",
+          "$value": 600,
+          "evidence": [
+            {
+              "file": "CLONE_SPEC.md",
+              "lines": "80",
+              "quote": "Weights 400/500/600/700."
+            }
+          ]
+        },
+        "bold": {
+          "$type": "fontWeight",
+          "$value": 700,
+          "evidence": [
+            {
+              "file": "CLONE_SPEC.md",
+              "lines": "81",
+              "quote": "Weight 700 for every heading"
+            }
+          ]
+        }
+      },
+      "lineHeight": {
+        "display": {
+          "$type": "lineHeight",
+          "$value": "1.015",
+          "evidence": [
+            {
+              "file": "tailwind.config.cjs",
+              "lines": "127",
+              "quote": "display: '1.015'"
+            }
+          ]
+        }
+      },
+      "tracking": {
+        "tight": {
+          "$type": "letterSpacing",
+          "$value": "-0.025em",
+          "evidence": [
+            {
+              "file": "CLONE_SPEC.md",
+              "lines": "103",
+              "quote": "`tracking-tight` is −.025em."
+            }
+          ]
+        }
+      }
+    }
+  }
+}

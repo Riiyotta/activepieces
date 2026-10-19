@@ -1,0 +1,117 @@
+{
+  "id": "hero.resources",
+  "layer": "section",
+  "category": "hero",
+  "purpose": "Centered resources hero over a primary-tinted radial wash; category variant adds a breadcrumb.",
+  "implementedBy": [
+    "src/pages/resources/ResourcesHub.jsx",
+    "src/pages/resources/ResourceCategory.jsx",
+    "src/components/content/content.css"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_CONTENT.md",
+      "lines": "555",
+      "quote": "## 6. `/resources` (hub)"
+    },
+    {
+      "file": "specs/SPEC_CONTENT.md",
+      "lines": "611",
+      "quote": "### 7.1 Structure"
+    }
+  ],
+  "variants": {
+    "hub": {
+      "description": "/resources",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CONTENT.md",
+          "lines": "560",
+          "quote": "    h1.font-display.text-5xl.font-bold.text-balance.text-ink-900.md:text-6xl   \"Stop redoing the same work every week\""
+        }
+      ]
+    },
+    "category": {
+      "description": "/resources/:type with breadcrumb",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CONTENT.md",
+          "lines": "614",
+          "quote": "  breadcrumb (§1.11, centred, hero-line --i:0):  Resources › {Category}"
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "h1",
+      "lede"
+    ],
+    "properties": {
+      "h1": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 10
+      },
+      "lede": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 30
+      },
+      "type": {
+        "enum": [
+          "glossary",
+          "automation-guides",
+          "automation-use-cases",
+          "integration-use-cases"
+        ]
+      }
+    }
+  },
+  "media": {
+    "slots": {}
+  },
+  "constraints": {
+    "onePerPage": true,
+    "mustFollow": "shell.header"
+  },
+  "variantRules": {
+    "category": {
+      "requiredContent": [
+        "type"
+      ]
+    },
+    "hub": {
+      "forbiddenContent": [
+        "type"
+      ]
+    }
+  },
+  "motion": {
+    "allowedPatterns": [
+      "hero-line-template"
+    ],
+    "requiredPatterns": [
+      "hero-line-template"
+    ],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "static-end-state"
+  },
+  "responsive": {
+    "evidence": [
+      {
+        "file": "specs/SPEC_CONTENT.md",
+        "lines": "571",
+        "quote": "- At 390 the buttons stretch (`max-sm:*:grow`): 173 + 165."
+      }
+    ],
+    "changes": {
+      "base": "buttons stretch; H1 48/48",
+      "md": "H1 60/60"
+    }
+  },
+  "accessibility": [],
+  "notes": []
+}

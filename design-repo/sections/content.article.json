@@ -1,0 +1,115 @@
+{
+  "id": "content.article",
+  "layer": "section",
+  "category": "content",
+  "purpose": "Blog article: progress bar, optional TOC rail, banner cover, meta, PLACEHOLDER body + 'Read the full article on activepieces.com', share, closing card, sticky sign-up rail, Keep reading.",
+  "implementedBy": [
+    "src/pages/blog/BlogArticle.jsx",
+    "src/components/content/placeholder.jsx",
+    "src/components/content/prose.css",
+    "src/components/content/noToc.js"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_CONTENT.md",
+      "lines": "317",
+      "quote": "## 5. `/blog/:slug` (article)"
+    },
+    {
+      "file": "specs/SPEC_CONTENT.md",
+      "lines": "12",
+      "quote": "**Content policy.** The clone stores **metadata only**"
+    },
+    {
+      "file": "src/pages/blog/BlogArticle.jsx",
+      "lines": "195",
+      "quote": "<ReadFullLink href={post.url}>Read the full article on activepieces.com</ReadFullLink>"
+    }
+  ],
+  "variants": {
+    "default": {
+      "description": "Single variant.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CONTENT.md",
+          "lines": "319",
+          "quote": "### 5.1 Layout skeleton"
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "post",
+      "bodyMode"
+    ],
+    "properties": {
+      "post": {
+        "type": "string",
+        "pattern": "^data:blog#[a-z0-9-]+$",
+        "x-example": "data:blog#example-post"
+      },
+      "bodyMode": {
+        "const": "placeholder"
+      }
+    }
+  },
+  "media": {
+    "slots": {
+      "cover": {
+        "roles": [
+          "blog.cover"
+        ],
+        "maxItems": 4,
+        "required": false
+      },
+      "bots": {
+        "roles": [
+          "mock.avatar"
+        ],
+        "maxItems": 5,
+        "required": false
+      }
+    }
+  },
+  "constraints": {
+    "onePerPage": true,
+    "mustFollow": "shell.header"
+  },
+  "variantRules": {},
+  "motion": {
+    "allowedPatterns": [
+      "reading-progress",
+      "toc-scrollspy",
+      "signup-card-bots",
+      "cover-hover-scale"
+    ],
+    "requiredPatterns": [
+      "reading-progress"
+    ],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "static-end-state"
+  },
+  "responsive": {
+    "evidence": [
+      {
+        "file": "specs/SPEC_CONTENT.md",
+        "lines": "337",
+        "quote": "| 1440 | x32 w240 | x328 w704 (flex-shrunk from 736) | x1088 w320 | gaps 56; all sticky at top 112 |"
+      }
+    ],
+    "changes": {
+      "base": "article only (350)",
+      "lg": "right sign-up rail",
+      "xl": "left TOC rail when hasTocRail(post) && >=3 entries",
+      "article-wide": "wide rails (w240 / w320)"
+    }
+  },
+  "accessibility": [],
+  "notes": [
+    "There is deliberately NO body/markdown field: article bodies are not stored and must never be generated or attributed to a real author.",
+    "TOC rail rule is hasTocRail(post) = post.hasToc || !NO_TOC.has(slug) (63 measured slugs), not hasToc alone."
+  ]
+}

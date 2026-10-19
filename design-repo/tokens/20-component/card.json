@@ -1,0 +1,47 @@
+{
+  "$description": "Card-family tokens.",
+  "evidence": [
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "763",
+      "quote": "- Card `figure`: `flex flex-col gap-5 rounded-2xl bg-white p-6 shadow-edge`."
+    },
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "706",
+      "quote": "`group flex h-[470px] md:h-[500px] w-full flex-col overflow-hidden rounded-2xl bg-white shadow-edge`"
+    }
+  ],
+  "tokens": {
+    "card": {
+      "radius": {
+        "$type": "dimension",
+        "$value": "{radius.2xl}"
+      },
+      "radius-cta": {
+        "$type": "dimension",
+        "$value": "{radius.3xl}"
+      },
+      "radius-stage": {
+        "$type": "dimension",
+        "$value": "{radius.4xl}"
+      },
+      "shadow": {
+        "$type": "shadow",
+        "$value": "{elevation.card}"
+      },
+      "shadow-hover": {
+        "$type": "shadow",
+        "$value": "{elevation.card-hover}"
+      },
+      "bento-height-base": {
+        "$type": "dimension",
+        "$value": "470px"
+      },
+      "bento-height-md": {
+        "$type": "dimension",
+        "$value": "500px"
+      }
+    }
+  }
+}

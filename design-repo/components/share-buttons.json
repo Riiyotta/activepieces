@@ -1,0 +1,18 @@
+{
+  "id": "component.share-buttons",
+  "layer": "component",
+  "purpose": "Share row (X, LinkedIn, copy link) in compact or bordered variants.",
+  "composes": [
+    "icon"
+  ],
+  "implementedBy": [
+    "src/components/content/parts.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_CONTENT.md",
+      "lines": "170",
+      "quote": "### 1.9 Share buttons (from `DImJtvCM.js`)"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+/* M. Section-specific CSS for Testimonials (co-located; do not put this in index.css). */
+
+/* Bottom fade depth for the global .fade-b mask (CLONE_SPEC §M: 6rem / md 7.5rem / lg 9rem). */
+.testimonials-fade {
+  --fade: 6rem;
+}
+@media (width >= 48rem) {
+  .testimonials-fade {
+    --fade: 7.5rem;
+  }
+}
+@media (width >= 64rem) {
+  .testimonials-fade {
+    --fade: 9rem;
+  }
+}
+
+/* Tailwind v4 divide-x semantics (right border on all but the last child); v3's left-border rule shifts columns 1px. */
+.testi-stats-divide > :not(:last-child) {
+  border-right-width: 1px;
+  border-color: rgb(2 6 24 / .1);
+}

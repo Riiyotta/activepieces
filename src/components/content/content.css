@@ -1,0 +1,54 @@
+/* Content templates (blog, resources) — component styles not expressible as utilities.
+ * Values from SPEC_CONTENT §1.2 (post-card.Bc58JJ62.css), §5.8, §5.9, §5.11 and §6. */
+
+/* §1.2 Hero cover: background + live title text, sized in container units. */
+.hero-cover{aspect-ratio:16/9;container-type:inline-size}
+@media (min-width:768px){.hero-cover.banner{aspect-ratio:3}.hero-cover.banner .kicker{margin-bottom:1.6cqw}}
+.hero-cover.ink-dark{--cover-ink:#020618}
+.hero-cover.ink-light{--cover-ink:#fff}
+.hero-cover .col{position:absolute;top:50%;left:7cqw;right:7cqw;transform:translateY(-50%)}
+.hero-cover .kicker{letter-spacing:.22em;margin-bottom:2.4cqw;font-size:max(1.3cqw,9px);line-height:1.5;color:var(--cover-ink)}
+.hero-cover .title{font-size:var(--title-size);letter-spacing:-.01em;line-height:1.16;color:var(--cover-ink)}
+@container (max-width:560px){.hero-cover .kicker{display:none}.hero-cover .title{font-size:clamp(17px,calc(var(--title-size)*1.2),30px)}}
+
+/* §5.1 article widths at ≥90rem (min-[90rem]: variants in the original). */
+@media (min-width:1440px){.art-wrap{max-width:92rem}.art-cols{gap:3.5rem}.art-toc{width:15rem}.art-main{max-width:46rem}.art-rail{width:20rem}}
+
+/* §5.8 Closing card ink. */
+.close.ink-dark{--close-ink:#020618;--close-quiet:rgba(2,6,24,.65)}
+.close.ink-light{--close-ink:#fff;--close-quiet:rgba(255,255,255,.75)}
+
+/* §5.9 Right-rail CTA card. */
+.cta-meadow{opacity:.7;filter:saturate(.72) brightness(1.04) contrast(.98)}
+.logo-layer{position:absolute;inset:0;-webkit-mask-position:50%;mask-position:50%;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+.logo-layer.wordmark{-webkit-mask-image:url(/brand/activepieces-wordmark.svg);mask-image:url(/brand/activepieces-wordmark.svg)}
+.logo-layer.logomark{-webkit-mask-image:url(/brand/activepieces-logomark.svg);mask-image:url(/brand/activepieces-logomark.svg)}
+
+/* §5.11 Bot avatars: infinite peek loop + hover pose (measured on /blog/ai-agent-security, peek-e5341513).
+ * 5s cubic-bezier(.34,1.56,.64,1) infinite, fill none, delay --i*.9s (0/.9/1.8/2.7/3.6s).
+ * Hover: animation removed, 350ms transition to the pose with --i*40ms stagger; on leave the loop restarts at t=0. */
+.bots{display:flex;justify-content:space-evenly;height:2.5rem;position:relative;overflow:hidden}
+.bot{width:2.75rem;height:2.75rem;border-radius:.75rem;transform:translateY(85%);transition:transform .35s cubic-bezier(.34,1.56,.64,1);
+  animation:ct-peek 5s cubic-bezier(.34,1.56,.64,1) calc(var(--i)*.9s) infinite}
+.group:hover .bot{transform:translateY(12%) rotate(calc((var(--i) - 2)*4deg));transition-delay:calc(var(--i)*40ms);animation:none}
+@keyframes ct-peek{
+  0%,30%,100%{transform:translateY(85%) rotate(0deg)}
+  10%{transform:translateY(18%) rotate(-8deg)}
+  16%{transform:translateY(22%) rotate(6deg)}
+  22%{transform:translateY(18%) rotate(0deg)}
+}
+/* Original keeps the transition under reduced motion; only the loop is dropped and both states share one pose. */
+@media (prefers-reduced-motion:reduce){.bot,.group:hover .bot{animation:none;transform:translateY(40%)}}
+
+/* §6 Resources hero lines (hub, category pages; not the detail page): hero-line-6f07f5e8 on the original.
+ * .64s var(--ease-smooth) delay --i*70ms fill both, on load. Scoped so the global homepage .hero-line is untouched. */
+html.js .res-hero-line{animation:res-hero-line .64s var(--ease-smooth,cubic-bezier(.22,1,.36,1)) calc(var(--i,0)*70ms) both}
+@keyframes res-hero-line{
+  0%{opacity:0;filter:blur(4px);translate:0 12px}
+  100%{opacity:1;filter:none;translate:0}
+}
+@media (prefers-reduced-motion:reduce){html.js .res-hero-line{animation:none}}
+
+/* §6 Resources hero wash. */
+.hero-wash::before{content:"";z-index:-1;position:absolute;inset-inline:-25%;top:-55%;height:145%;pointer-events:none;
+  background:radial-gradient(ellipse 42% 50% at 50% 50%, rgba(184,230,254,.55) 0, rgba(223,242,254,.28) 45%, transparent 72%)}

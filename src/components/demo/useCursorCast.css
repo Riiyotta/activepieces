@@ -1,0 +1,42 @@
+/* Fake demo cursor — verbatim from use-cursor-cast.zpCrF353.css (class renamed .cursor -> .demo-cursor). */
+.demo-cursor {
+  transition: transform var(--travel, .52s) cubic-bezier(.5, .02, .2, 1), opacity .26s ease;
+  will-change: transform;
+}
+.demo-cursor .cursor-glyph {
+  transform-origin: 4px 3px;
+  transition: transform .13s;
+}
+.demo-cursor .cursor-glyph.cursor-down {
+  transform: scale(.82);
+}
+.demo-cursor .click-ring {
+  border: 1.5px solid var(--cursor-ring);
+  border-radius: 9999px;
+  width: 19px;
+  height: 19px;
+  margin: -3px 0 0 -4px;
+  animation: demo-click-ring .48s ease-out forwards;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+@keyframes demo-click-ring {
+  0% {
+    opacity: .5;
+    transform: scale(.35);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.9);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .demo-cursor,
+  .demo-cursor .cursor-glyph {
+    transition: none;
+  }
+  .demo-cursor .click-ring {
+    animation: none;
+  }
+}

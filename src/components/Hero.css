@@ -1,0 +1,153 @@
+/* Hero stage (CLONE_SPEC §A). Ported from the scoped CSS of the home page (data-v-29e1bf9b),
+ * the plate component (data-v-ffdf2bb7) and the drift marquee (data-v-21cd31c1). */
+
+.hero-stage {
+  --gutter: 1.25rem;
+  padding-inline: var(--gutter);
+  background-color: var(--color-primary-400);
+}
+@media (width >= 48rem) {
+  .hero-stage {
+    --gutter: 1.5rem;
+  }
+}
+@media (width >= 64rem) {
+  .hero-stage {
+    --gutter: 2rem;
+  }
+}
+
+.hero-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 8.75rem;
+  z-index: 60;
+  pointer-events: none;
+  background: linear-gradient(#fff0, #ffffff05 18%, #ffffff14 33%, #ffffff30 46%, #ffffff59 58%, #ffffff8c 69%, #ffffffbf 79%, #ffffffe6 88%, #fffffffa 95%, #fff);
+}
+
+/* --- layered art plates --- */
+.plate {
+  --art-w: max(100%, 1500px);
+  width: var(--art-w);
+  max-width: none;
+  margin-left: calc(var(--art-w) / -2);
+  object-fit: fill;
+  pointer-events: none;
+  height: 100%;
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+}
+.plate.base {
+  z-index: 10;
+}
+.plate.front {
+  z-index: 40;
+}
+html.js .plate {
+  animation: plate-in .82s var(--ease-smooth) var(--enter-delay, 0s) both;
+}
+html.js .plate.front {
+  --enter-delay: 90ms;
+}
+@keyframes plate-in {
+  0% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* --- "Use in your AI" CTA --- */
+.ai-cta {
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 1px 0 #fff3, inset 0 -1px 0 #00000059, 0 1px 2px #0003, 0 10px 28px -10px rgba(2, 6, 24, .6);
+  background-image: linear-gradient(#ffffff1a, #0000 60%);
+}
+.ai-cta::before {
+  content: '';
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, #0000 35%, #ffffff29 50%, #0000 65%);
+  translate: -110%;
+}
+.ai-cta:hover::before {
+  transition: translate .9s var(--ease-smooth);
+  translate: 110%;
+}
+.ai-cta-logo {
+  opacity: .82;
+  transition: translate .42s var(--ease-smooth) calc(var(--n) * 40ms), opacity .3s ease-out;
+}
+.ai-cta:hover .ai-cta-logo {
+  opacity: 1;
+  translate: calc((var(--n) - 1) * 3px) -1px;
+}
+
+/* --- customer logo marquee --- */
+.drift {
+  --logo-factor: 1;
+  --logo-base: 2.25rem;
+  --logo-gap-base: 3rem;
+  --drift-base: 72s;
+  --logo-h: calc(var(--logo-base) * var(--logo-factor));
+  --logo-gap: calc(var(--logo-gap-base) * var(--logo-factor));
+  --drift-duration: calc(var(--drift-base) * var(--logo-factor));
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, #0000, #000 4% 96%, #0000);
+  mask-image: linear-gradient(90deg, #0000, #000 4% 96%, #0000);
+}
+@media (width >= 48rem) {
+  .drift {
+    --logo-factor: 1.15;
+    --logo-gap-base: 4rem;
+  }
+}
+.drift-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: drift var(--drift-duration) linear infinite;
+}
+.drift-logo {
+  display: block;
+  flex: none;
+  width: calc(var(--logo-h) * var(--logo-ratio) * var(--s, 1));
+  height: calc(var(--logo-h) * var(--s, 1));
+  margin-right: var(--logo-gap);
+  transform: translateY(calc(var(--logo-h) * var(--shift, 0)));
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+@keyframes drift {
+  to {
+    transform: translate(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .plate {
+    opacity: 1;
+    animation: none;
+  }
+  .ai-cta::before {
+    display: none;
+  }
+  .ai-cta:hover .ai-cta-logo {
+    translate: none;
+  }
+  .drift-track {
+    animation: none;
+  }
+}

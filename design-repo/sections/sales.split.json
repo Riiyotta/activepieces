@@ -1,0 +1,153 @@
+{
+  "id": "sales.split",
+  "layer": "section",
+  "category": "sales",
+  "purpose": "Standalone /sales page (no Header/Footer/FloatingCard): coast background, Sign up top bar, form card (left at lg) joined by a notch to the pitch card (right). The form NEVER submits; it swaps to a local 'Thanks' state.",
+  "implementedBy": [
+    "src/pages/Sales.jsx",
+    "src/components/sales/SalesForm.jsx",
+    "src/components/sales/SalesLogoGrid.jsx",
+    "src/pages/Sales.css"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_MARKETING.md",
+      "lines": "152",
+      "quote": "## 2. /sales  (standalone layout)"
+    },
+    {
+      "file": "specs/SPEC_MARKETING.md",
+      "lines": "200",
+      "quote": "- The clone does **not** submit. To mimic success, swap to the \"thanks\" state:"
+    },
+    {
+      "file": "src/App.jsx",
+      "lines": "56",
+      "quote": "<Route path=\"/sales\" element={<Sales />} />"
+    }
+  ],
+  "variants": {
+    "default": {
+      "description": "Single variant.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_MARKETING.md",
+          "lines": "161",
+          "quote": "- `main#main-content`: `mx-auto flex w-full max-w-7xl flex-1 flex-col-reverse gap-4 sm:gap-6 lg:flex-row-reverse lg:gap-8`."
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "h1",
+      "lede",
+      "bullets",
+      "quote",
+      "quoteBy",
+      "submitBehavior"
+    ],
+    "properties": {
+      "h1": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 6
+      },
+      "lede": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 14
+      },
+      "bullets": {
+        "type": "array",
+        "minItems": 3,
+        "maxItems": 3,
+        "items": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 10
+        }
+      },
+      "quote": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 30
+      },
+      "quoteBy": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 3
+      },
+      "submitBehavior": {
+        "const": "local-thanks-state"
+      }
+    }
+  },
+  "media": {
+    "slots": {
+      "background": {
+        "roles": [
+          "art.panel"
+        ],
+        "maxItems": 1,
+        "required": true
+      },
+      "formLogo": {
+        "roles": [
+          "brand.logo-full"
+        ],
+        "maxItems": 1,
+        "required": false
+      },
+      "quoteAvatar": {
+        "roles": [
+          "testimonial.avatar"
+        ],
+        "maxItems": 1,
+        "required": false
+      },
+      "logos": {
+        "roles": [
+          "customer.logo"
+        ],
+        "maxItems": 24,
+        "required": false
+      }
+    }
+  },
+  "constraints": {
+    "onePerPage": true,
+    "mustBeFirst": true,
+    "standaloneOnly": true
+  },
+  "variantRules": {},
+  "motion": {
+    "allowedPatterns": [
+      "logo-rotate-random"
+    ],
+    "requiredPatterns": [
+      "logo-rotate-random"
+    ],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "static-first-set"
+  },
+  "responsive": {
+    "evidence": [
+      {
+        "file": "specs/SPEC_MARKETING.md",
+        "lines": "161",
+        "quote": "Because of `-reverse`, the **form is on the left and the pitch on the right** at lg, and the **form is first** on mobile."
+      }
+    ],
+    "changes": {
+      "base": "form first, pitch below",
+      "lg": "form left, pitch right (54%), notch bridge, fixed background"
+    }
+  },
+  "accessibility": [],
+  "notes": [
+    "Free-mail validation stays client-side; the original endpoints (/api/sales-lead etc.) must never be called."
+  ]
+}

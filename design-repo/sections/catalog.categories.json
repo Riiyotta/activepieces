@@ -1,0 +1,88 @@
+{
+  "id": "catalog.categories",
+  "layer": "section",
+  "category": "catalog",
+  "purpose": "Grid of links to the other category pages.",
+  "implementedBy": [
+    "src/pages/CatalogPage.jsx",
+    "src/components/catalog/parts.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_CATALOG.md",
+      "lines": "377",
+      "quote": "### 4.4 Categories"
+    },
+    {
+      "file": "src/pages/CatalogPage.jsx",
+      "lines": "57",
+      "quote": "{cards.length ? <CategoryGrid section={`${kind}-categories`}"
+    }
+  ],
+  "variants": {
+    "default": {
+      "description": "Single variant.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CATALOG.md",
+          "lines": "377",
+          "quote": "### 4.4 Categories"
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "h2",
+      "kind"
+    ],
+    "properties": {
+      "h2": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 8
+      },
+      "kind": {
+        "enum": [
+          "pieces",
+          "mcp"
+        ]
+      }
+    }
+  },
+  "media": {
+    "slots": {}
+  },
+  "constraints": {
+    "onePerPage": true
+  },
+  "variantRules": {},
+  "motion": {
+    "allowedPatterns": [
+      "card-hover-shadow"
+    ],
+    "requiredPatterns": [
+      "card-hover-shadow"
+    ],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "static-end-state"
+  },
+  "responsive": {
+    "evidence": [
+      {
+        "file": "specs/SPEC_CATALOG.md",
+        "lines": "377",
+        "quote": "### 4.4 Categories"
+      }
+    ],
+    "changes": {
+      "base": "1 column",
+      "sm": "2 columns",
+      "lg": "3 columns"
+    }
+  },
+  "accessibility": [],
+  "notes": []
+}

@@ -1,0 +1,164 @@
+{
+  "id": "security.hero-cipher",
+  "layer": "section",
+  "category": "hero",
+  "purpose": "Dark primary-950 hero with animated cipher-wall canvas and 3D ASCII lock, white H1, light/quiet-light CTAs, 4 facts.",
+  "implementedBy": [
+    "src/components/security/SecurityHero.jsx",
+    "src/components/security/cipherWall.js",
+    "src/components/security/lockGeometry.js"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_MARKETING.md",
+      "lines": "391",
+      "quote": "### 4.A Hero (`section.relative.isolate.overflow-hidden.bg-primary-950`, #052f4a)"
+    },
+    {
+      "file": "specs/SPEC_MARKETING.md",
+      "lines": "496",
+      "quote": "### 4.E Canvas art (port from `specs/ref/js/security.G6mAqp3Z.js`; do not re-derive)"
+    }
+  ],
+  "variants": {
+    "default": {
+      "description": "Single variant.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_MARKETING.md",
+          "lines": "397",
+          "quote": "- Container (the \"frame\"): `relative mx-auto w-full max-w-7xl px-5 pt-28 pb-24 md:px-8 md:pt-32 md:pb-32 lg:px-12`."
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "h1",
+      "lede",
+      "primary",
+      "secondary",
+      "facts"
+    ],
+    "properties": {
+      "h1": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 8
+      },
+      "lede": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 32
+      },
+      "primary": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "label",
+          "href"
+        ],
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 4
+          },
+          "href": {
+            "type": "string",
+            "pattern": "^(/[A-Za-z0-9._~%/?=&#-]*|https://(cloud\\.activepieces\\.com|github\\.com/activepieces|www\\.activepieces\\.com|trust\\.activepieces\\.com)(/[A-Za-z0-9._~%/?=&#-]*)?)$",
+            "x-example": "/sales?ap_cta=example"
+          }
+        }
+      },
+      "secondary": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "label",
+          "href"
+        ],
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 4
+          },
+          "href": {
+            "type": "string",
+            "pattern": "^(/[A-Za-z0-9._~%/?=&#-]*|https://(cloud\\.activepieces\\.com|github\\.com/activepieces|www\\.activepieces\\.com|trust\\.activepieces\\.com)(/[A-Za-z0-9._~%/?=&#-]*)?)$",
+            "x-example": "/sales?ap_cta=example"
+          }
+        }
+      },
+      "facts": {
+        "type": "array",
+        "minItems": 4,
+        "maxItems": 4,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "icon",
+            "title",
+            "body"
+          ],
+          "properties": {
+            "icon": {
+              "type": "string",
+              "pattern": "^solar:[a-z0-9-]+$",
+              "x-example": "solar:shield-check-bold"
+            },
+            "title": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 4
+            },
+            "body": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 10
+            }
+          }
+        }
+      }
+    }
+  },
+  "media": {
+    "slots": {}
+  },
+  "constraints": {
+    "onePerPage": true,
+    "mustFollow": "shell.header"
+  },
+  "variantRules": {},
+  "motion": {
+    "allowedPatterns": [
+      "security-cipher-wall"
+    ],
+    "requiredPatterns": [
+      "security-cipher-wall"
+    ],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "static-end-state"
+  },
+  "responsive": {
+    "evidence": [
+      {
+        "file": "specs/SPEC_MARKETING.md",
+        "lines": "406",
+        "quote": "- Facts `dl.mt-12.md:mt-16.grid.w-full.grid-cols-1.gap-10.border-t.border-white/15.pt-12.sm:grid-cols-2.md:grid-cols-4.md:gap-0.md:divide-x.md:divide-white/15`"
+      }
+    ],
+    "changes": {
+      "base": "facts 1 column",
+      "sm": "facts 2 columns",
+      "md": "facts 4 columns with divide",
+      "lg": "copy 6/12 + lock box 6/12"
+    }
+  },
+  "accessibility": [],
+  "notes": []
+}

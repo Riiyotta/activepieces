@@ -1,0 +1,16 @@
+{
+  "id": "component.hero-cover",
+  "layer": "component",
+  "purpose": "Blog post cover (image or generated SVG) with title overlay ink rule.",
+  "composes": [],
+  "implementedBy": [
+    "src/components/content/parts.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_CONTENT.md",
+      "lines": "82",
+      "quote": "### 1.2 Hero cover (`hero-cover`): the post \"image\" (cards, featured post, article banner)"
+    }
+  ]
+}

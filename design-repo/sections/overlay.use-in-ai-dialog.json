@@ -1,0 +1,81 @@
+{
+  "id": "overlay.use-in-ai-dialog",
+  "layer": "section",
+  "category": "overlay",
+  "purpose": "Native <dialog> 'Connect to <client>' sheet opened by the home hero 'Use in your AI' button; resets to the first client (Claude) on reopen.",
+  "implementedBy": [
+    "src/components/UseInAiDialog.jsx",
+    "src/components/UseInAiDialog.css"
+  ],
+  "evidence": [
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "836",
+      "quote": "## Q. MCP connect dialog (opened by the hero \"Use in your AI\" button)"
+    },
+    {
+      "file": "src/components/UseInAiDialog.jsx",
+      "lines": "682",
+      "quote": "// Fresh content for the next open, swapped in after the 130ms close transition"
+    }
+  ],
+  "variants": {
+    "default": {
+      "description": "Single variant.",
+      "evidence": [
+        {
+          "file": "src/pages/Home.jsx",
+          "lines": "37",
+          "quote": "<UseInAiDialog open={aiDialogOpen} onClose={() => setAiDialogOpen(false)} />"
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [],
+    "properties": {}
+  },
+  "media": {
+    "slots": {
+      "clientLogos": {
+        "roles": [
+          "ai-client.logo"
+        ],
+        "maxItems": 12,
+        "required": false
+      }
+    }
+  },
+  "constraints": {
+    "onePerPage": true,
+    "homeRouteOnly": true
+  },
+  "variantRules": {},
+  "motion": {
+    "allowedPatterns": [
+      "dialog-open"
+    ],
+    "requiredPatterns": [
+      "dialog-open"
+    ],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "static-end-state"
+  },
+  "responsive": {
+    "evidence": [
+      {
+        "file": "CLONE_SPEC.md",
+        "lines": "841",
+        "quote": "- Below 768: it becomes a bottom sheet (top radius 16, full width, slides from `translate: 0 100%`)."
+      }
+    ],
+    "changes": {
+      "base": "bottom sheet",
+      "md": "centered 58rem dialog with left client rail"
+    }
+  },
+  "accessibility": [],
+  "notes": []
+}

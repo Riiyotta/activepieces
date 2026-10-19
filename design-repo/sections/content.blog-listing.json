@@ -1,0 +1,176 @@
+{
+  "id": "content.blog-listing",
+  "layer": "section",
+  "category": "content",
+  "purpose": "Blog listing: header (index / page n / category / author), optional search + category pills + featured post, 12-card grid, pagination. Data-bound to blog.json.",
+  "implementedBy": [
+    "src/pages/blog/BlogIndex.jsx",
+    "src/pages/blog/BlogCategory.jsx",
+    "src/pages/blog/BlogAuthor.jsx",
+    "src/components/content/parts.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_CONTENT.md",
+      "lines": "238",
+      "quote": "## 2. `/blog` (index, page 1)"
+    },
+    {
+      "file": "specs/SPEC_CONTENT.md",
+      "lines": "287",
+      "quote": "## 3. `/blog/category/:slug`"
+    },
+    {
+      "file": "specs/SPEC_CONTENT.md",
+      "lines": "301",
+      "quote": "## 4. `/blog/author/:slug`"
+    }
+  ],
+  "variants": {
+    "index-first": {
+      "description": "/blog: search, pills, featured post, 12 cards.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CONTENT.md",
+          "lines": "250",
+          "quote": "  div.mt-12 > featured (2.3)                                  y440 h334"
+        }
+      ]
+    },
+    "index-page": {
+      "description": "/blog/page/:n: 'Page n of N.', pills, no search, no featured.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CONTENT.md",
+          "lines": "268",
+          "quote": "- Page n ≥ 2 (`/blog/page/n`): same h1, subtitle \"Page {n} of {pages}.\", no search, no featured post."
+        }
+      ]
+    },
+    "category": {
+      "description": "/blog/category/:slug(/:n)",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CONTENT.md",
+          "lines": "299",
+          "quote": "No search and no featured post. At 1440: header y128 h116, pills y276, grid y358."
+        }
+      ]
+    },
+    "author": {
+      "description": "/blog/author/:slug(/:n): photo header + short bio (mt-6 max-w-2xl text-lg), no pills.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CONTENT.md",
+          "lines": "313",
+          "quote": "No pills. At 1440: header 1216×104, image centred vertically, text column at x204."
+        },
+        {
+          "file": "src/pages/blog/BlogAuthor.jsx",
+          "lines": "48",
+          "quote": "{author.bio && <p className=\"mt-6 max-w-2xl text-lg leading-relaxed text-ink-600\">{author.bio}</p>}"
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "page",
+      "dataSource"
+    ],
+    "properties": {
+      "filterSlug": {
+        "type": "string",
+        "pattern": "^[a-z0-9-]+$",
+        "x-example": "product"
+      },
+      "page": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "dataSource": {
+        "const": "data:blog"
+      }
+    }
+  },
+  "media": {
+    "slots": {
+      "covers": {
+        "roles": [
+          "blog.cover"
+        ],
+        "maxItems": 13,
+        "required": false
+      },
+      "authorPhoto": {
+        "roles": [
+          "author.photo"
+        ],
+        "maxItems": 1,
+        "required": false
+      }
+    }
+  },
+  "constraints": {
+    "onePerPage": true,
+    "mustFollow": "shell.header"
+  },
+  "variantRules": {
+    "index-first": {
+      "forbiddenContent": [
+        "filterSlug"
+      ],
+      "contentEquals": {
+        "page": 1
+      }
+    },
+    "index-page": {
+      "forbiddenContent": [
+        "filterSlug"
+      ],
+      "minValue": {
+        "page": 2
+      }
+    },
+    "category": {
+      "requiredContent": [
+        "filterSlug"
+      ]
+    },
+    "author": {
+      "requiredContent": [
+        "filterSlug"
+      ]
+    }
+  },
+  "motion": {
+    "allowedPatterns": [
+      "cover-hover-scale"
+    ],
+    "requiredPatterns": [
+      "cover-hover-scale"
+    ],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "static-end-state"
+  },
+  "responsive": {
+    "evidence": [
+      {
+        "file": "specs/SPEC_CONTENT.md",
+        "lines": "260",
+        "quote": "| 1440 | 378.66 ×3 | 40 |"
+      }
+    ],
+    "changes": {
+      "base": "1 column",
+      "sm": "2 columns",
+      "lg": "3 columns; featured 2-column"
+    }
+  },
+  "accessibility": [],
+  "notes": [
+    "Listings use only LISTED posts (posts without listed:false); sitemap-only posts are routable at /blog/<slug> but excluded from index/category/author lists."
+  ]
+}

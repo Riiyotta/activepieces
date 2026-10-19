@@ -1,0 +1,48 @@
+{
+  "$description": "The only theme. The clone (like the original) has no dark mode: zero `dark:` utilities in src/.",
+  "theme": "light",
+  "evidence": [
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "84",
+      "quote": "Root wrapper: `min-h-screen overflow-x-clip bg-white font-sans text-ink-600 antialiased`"
+    }
+  ],
+  "resolved": {
+    "text.heading": "#0f172b",
+    "text.body": "#45556c",
+    "text.strong": "#020618",
+    "text.muted": "#62748e",
+    "text.subtle": "#90a1b9",
+    "text.hero-on-art": "#052f4a",
+    "text.link-accent": "#00598a",
+    "text.on-dark": "#ffffff",
+    "text.on-dark-muted": "#cad5e2",
+    "text.error": "#c10007",
+    "text.code-key": "#007a55",
+    "text.code-fn": "#00598a",
+    "text.code-str": "#bb4d00",
+    "text.code-text": "#1d293d",
+    "text.code-dim": "#45556c",
+    "surface.page": "#ffffff",
+    "surface.subtle": "#f8fafc",
+    "surface.muted": "#f1f5f9",
+    "surface.brand-action": "#0069a8",
+    "surface.brand-action-hover": "#00598a",
+    "surface.solid-action": "#020618",
+    "surface.solid-action-hover": "#0f172b",
+    "surface.hero-sky": "#00bcff",
+    "surface.dark-hero": "#052f4a",
+    "surface.floating-accent": "#7f22fe",
+    "border.hairline": "rgba(2, 6, 24, .10)",
+    "border.default": "#e2e8f0",
+    "focus.ring": "#0069a8",
+    "font.heading": "Sentient, \"Sentient Fallback: Georgia\", \"Sentient Fallback: Times New Roman\", ui-serif, Georgia, serif",
+    "font.body": "Inter, \"Inter Fallback: sans-serif\", ui-sans-serif, system-ui, sans-serif",
+    "font.mock-code": "\"Fira Code\", \"Fira Code Fallback: monospace\", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",
+    "elevation.card": "0 0 0 1px var(--cast-10), 0 1px 2px -1px var(--cast-08)",
+    "elevation.card-hover": "0 0 0 1px var(--cast-20), 0 2px 4px -1px var(--cast-08), 0 4px 8px -2px var(--cast-06)",
+    "elevation.stage": "0 0 0 1px var(--cast-10), 0 2px 4px -2px var(--cast-08), 0 8px 16px -6px var(--cast-08)",
+    "elevation.overlay": "0 0 0 1px var(--cast-10), 0 4px 8px -4px var(--cast-10), 0 16px 32px -12px var(--cast-20)"
+  }
+}

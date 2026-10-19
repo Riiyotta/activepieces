@@ -1,0 +1,10 @@
+/* H / L bento mock syntax colours (entry.LEuMnHPd.css, CLONE_SPEC §H/L). */
+.code-fn {
+  color: var(--color-primary-800);
+}
+.code-str {
+  color: var(--color-accent-b-700);
+}
+.code-text {
+  color: var(--color-ink-800);
+}

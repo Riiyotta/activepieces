@@ -1,0 +1,17 @@
+{
+  "id": "component.visual-stage",
+  "layer": "component",
+  "purpose": "Art-backed rounded-4xl stage (shadow-lift, radial vignette) holding a 544x448 white visual-stage for demos/mocks.",
+  "composes": [],
+  "implementedBy": [
+    "src/components/templates/TemplateHero.jsx",
+    "src/components/FeatureAgents.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "616",
+      "quote": "- `.visual-stage`: `border-radius: 16px; width: 100%; max-width: 34rem (544px); height: 28rem (448px)"
+    }
+  ]
+}

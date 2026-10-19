@@ -1,0 +1,95 @@
+{
+  "id": "directory.oss-friends",
+  "layer": "section",
+  "category": "directory",
+  "purpose": "H1 + lede + 3/2/1-column grid of 37 external OSS project cards (data-bound) + credits.",
+  "implementedBy": [
+    "src/pages/OssFriends.jsx",
+    "src/data/ossFriends.js"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_MARKETING.md",
+      "lines": "790",
+      "quote": "## 7. /oss-friends"
+    }
+  ],
+  "variants": {
+    "default": {
+      "description": "Single variant.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_MARKETING.md",
+          "lines": "798",
+          "quote": "- Grid `mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3`."
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "h1",
+      "lede",
+      "dataSource"
+    ],
+    "properties": {
+      "h1": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 6
+      },
+      "lede": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 14
+      },
+      "dataSource": {
+        "const": "data:ossFriends"
+      }
+    }
+  },
+  "media": {
+    "slots": {
+      "friendLogos": {
+        "roles": [
+          "oss-friend.logo"
+        ],
+        "maxItems": 40,
+        "required": false
+      }
+    }
+  },
+  "constraints": {
+    "onePerPage": true,
+    "mustFollow": "shell.header"
+  },
+  "variantRules": {},
+  "motion": {
+    "allowedPatterns": [
+      "card-hover-border"
+    ],
+    "requiredPatterns": [
+      "card-hover-border"
+    ],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "static-end-state"
+  },
+  "responsive": {
+    "evidence": [
+      {
+        "file": "specs/SPEC_MARKETING.md",
+        "lines": "798",
+        "quote": "- Grid `mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3`."
+      }
+    ],
+    "changes": {
+      "base": "1 column",
+      "sm": "2 columns",
+      "lg": "3 columns"
+    }
+  },
+  "accessibility": [],
+  "notes": []
+}

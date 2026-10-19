@@ -1,0 +1,135 @@
+{
+  "id": "governance.rollout-deck",
+  "layer": "section",
+  "category": "governance",
+  "purpose": "Four expanding stage cards (Adopt/Expand/Control/Monitor) pinned and driven by scroll at >=1024.",
+  "implementedBy": [
+    "src/components/governance/RolloutDeck.jsx",
+    "src/components/governance/DeckVisuals.jsx",
+    "src/components/governance/deckMarks.js"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_MARKETING.md",
+      "lines": "612",
+      "quote": "### 5.D Rollout deck (`governance-stages`)"
+    }
+  ],
+  "variants": {
+    "default": {
+      "description": "Single variant.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_MARKETING.md",
+          "lines": "615",
+          "quote": "- `div.wrap.mt-12` (+ `.is-pinned` at ≥1024 without reduced motion), with style `--n:4`."
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "h2",
+      "slots"
+    ],
+    "properties": {
+      "h2": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 12
+      },
+      "slots": {
+        "type": "array",
+        "minItems": 4,
+        "maxItems": 4,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "title",
+            "short",
+            "long",
+            "points"
+          ],
+          "properties": {
+            "title": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 2
+            },
+            "short": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 12
+            },
+            "long": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 40
+            },
+            "points": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "icon",
+                  "label"
+                ],
+                "properties": {
+                  "icon": {
+                    "type": "string",
+                    "pattern": "^solar:[a-z0-9-]+$",
+                    "x-example": "solar:shield-check-bold"
+                  },
+                  "label": {
+                    "type": "string",
+                    "minLength": 1,
+                    "x-maxWords": 6
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "media": {
+    "slots": {}
+  },
+  "constraints": {
+    "onePerPage": true,
+    "scrollStage": true
+  },
+  "variantRules": {},
+  "motion": {
+    "allowedPatterns": [
+      "rollout-deck-pin"
+    ],
+    "requiredPatterns": [
+      "rollout-deck-pin"
+    ],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "static-end-state"
+  },
+  "responsive": {
+    "evidence": [
+      {
+        "file": "specs/SPEC_MARKETING.md",
+        "lines": "627",
+        "quote": "- Below 1024 the deck is a column, all slots are expanded (`.short` hidden), and nothing is pinned."
+      }
+    ],
+    "changes": {
+      "base": "column, all slots expanded",
+      "lg": "pinned row deck, active slot flex-grow 2.8"
+    }
+  },
+  "accessibility": [],
+  "notes": []
+}

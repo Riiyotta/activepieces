@@ -1,0 +1,86 @@
+/* Header (CLONE_SPEC §1). Ported from the scoped site-header CSS (data-v-de93ca7a). */
+
+/* Declared only with the -webkit- prefix in the original: Chromium ignores it (no blur), Safari blurs. */
+.island {
+  -webkit-backdrop-filter: blur(30px);
+}
+
+.logo-layer {
+  position: absolute;
+  inset: 0;
+  -webkit-mask-position: 50%;
+  mask-position: 50%;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  transition: background-color .2s ease-out;
+}
+
+/* Entrance: hidden until mounted (only when JS ran), then fade down 8px. */
+html.js .nav-row {
+  opacity: 0;
+}
+.nav-row.is-ready {
+  animation: nav-in .62s var(--ease-smooth) .24s both;
+}
+@keyframes nav-in {
+  0% {
+    opacity: 0;
+    translate: 0 -8px;
+  }
+  to {
+    opacity: 1;
+    translate: 0;
+  }
+}
+
+/* Desktop mega panel */
+.panel-in {
+  animation: panel-in .18s var(--ease-smooth) both;
+}
+@keyframes panel-in {
+  0% {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+}
+
+/* Enterprise CTA rail underline */
+.cta-word::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 -5px;
+  height: 1.5px;
+  background: currentColor;
+  transform-origin: 0;
+  scale: 0 1;
+  transition: scale .26s var(--ease-smooth);
+}
+.cta-rail:hover .cta-word::after,
+.cta-rail:focus-visible .cta-word::after {
+  scale: 1;
+}
+
+/* Mobile sheet enter/leave (Vue <Transition name="sheet">) */
+.sheet-anim {
+  transition: opacity .18s ease, translate .22s var(--ease-smooth);
+}
+.sheet-anim.is-off {
+  opacity: 0;
+  translate: 0 -6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .nav-row {
+    opacity: 1;
+  }
+  .nav-row.is-ready,
+  .panel-in {
+    animation: none;
+  }
+  .cta-word::after,
+  .sheet-anim {
+    transition: none;
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "id": "shell.floating-card",
+  "layer": "section",
+  "category": "shell",
+  "purpose": "Fixed bottom-right 'See it in action / Book a 30-min demo' card shown after scrollY > 100 on every Layout route except /sales, /pricing, /admin, /customers and /blog(/...).",
+  "implementedBy": [
+    "src/components/FloatingCard.jsx",
+    "src/components/Layout.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "814",
+      "quote": "## P. Floating demo card (fixed, bottom-right)"
+    },
+    {
+      "file": "src/components/Layout.jsx",
+      "lines": "15",
+      "quote": "!/^\\/(sales|pricing|admin|customers|blog)(\\/|$)/.test(pathname)"
+    }
+  ],
+  "variants": {
+    "default": {
+      "description": "Single fixed variant.",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "819",
+          "quote": "- Link `a.ap-card` (/sales?ap_cta=floating_card):"
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [],
+    "properties": {}
+  },
+  "media": {
+    "slots": {
+      "mark": {
+        "roles": [
+          "brand.mark"
+        ],
+        "maxItems": 1,
+        "required": false
+      }
+    }
+  },
+  "constraints": {
+    "onePerPage": true,
+    "mustBeLast": true
+  },
+  "variantRules": {},
+  "motion": {
+    "allowedPatterns": [
+      "floating-card-enter"
+    ],
+    "requiredPatterns": [
+      "floating-card-enter"
+    ],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "static-end-state"
+  },
+  "responsive": {
+    "evidence": [
+      {
+        "file": "CLONE_SPEC.md",
+        "lines": "817",
+        "quote": "- Container: `fixed right-5 bottom-5 z-130` (below sm: `right-3 bottom-[max(.75rem, env(safe-area-inset-bottom))]`)."
+      }
+    ],
+    "changes": {
+      "base": "right-3, compact padding",
+      "sm": "right-5 bottom-5"
+    }
+  },
+  "accessibility": [],
+  "notes": [
+    "SPEC_PRODUCT_SOLUTIONS §1 claimed there is no floating card on /product and /solutions; QA found it IS shown there (Layout.jsx regex). The regex is authoritative."
+  ]
+}

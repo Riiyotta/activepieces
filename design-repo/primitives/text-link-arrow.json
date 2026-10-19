@@ -1,0 +1,24 @@
+{
+  "id": "primitive.text-link-arrow",
+  "layer": "primitive",
+  "purpose": "Inline text link with trailing alt-arrow-right icon that nudges 2px on hover (View all pieces, Browse all integrations, All guides).",
+  "implementedBy": [
+    "src/components/FeaturePieces.jsx",
+    "src/components/catalog/parts.jsx"
+  ],
+  "rules": [
+    "inline-flex min-h-11 items-center gap-1.5 text-sm text-ink-900; arrow size-4 group-hover:translate-x-0.5 (200ms ease-out)."
+  ],
+  "evidence": [
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "609",
+      "quote": "- K only adds a link \"View all pieces\": `mt-6 inline-flex min-h-11 items-center gap-1.5 text-sm text-ink-900`"
+    },
+    {
+      "file": "specs/SPEC_CATALOG.md",
+      "lines": "182",
+      "quote": "- right link `group inline-flex min-h-11 items-center gap-1.5 rounded-md text-sm text-ink-900 hover:text-ink-950`"
+    }
+  ]
+}

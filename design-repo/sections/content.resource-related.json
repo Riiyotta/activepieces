@@ -1,0 +1,98 @@
+{
+  "id": "content.resource-related",
+  "layer": "section",
+  "category": "content",
+  "purpose": "Rows of resource cards: sibling categories ('Keep exploring.'), 'Apps in this guide', or 'More terms|guides|use cases|integrations'.",
+  "implementedBy": [
+    "src/pages/resources/ResourceCategory.jsx",
+    "src/pages/resources/ResourceDetail.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_CONTENT.md",
+      "lines": "656",
+      "quote": "### 7.2 \"Keep exploring.\" (sibling categories)"
+    },
+    {
+      "file": "specs/SPEC_CONTENT.md",
+      "lines": "689",
+      "quote": "## 8. `/resources/:type/:slug` (detail)"
+    }
+  ],
+  "variants": {
+    "keep-exploring": {
+      "description": "Category page sibling categories.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CONTENT.md",
+          "lines": "656",
+          "quote": "### 7.2 \"Keep exploring.\" (sibling categories)"
+        }
+      ]
+    },
+    "apps": {
+      "description": "Detail page 'Apps in this guide' (only if apps.length).",
+      "evidence": [
+        {
+          "file": "src/pages/resources/ResourceDetail.jsx",
+          "lines": "111",
+          "quote": "{item.apps.length > 0 && ("
+        }
+      ]
+    },
+    "related": {
+      "description": "Detail page 'More ...' 6 related items.",
+      "evidence": [
+        {
+          "file": "src/pages/resources/ResourceDetail.jsx",
+          "lines": "124",
+          "quote": "{related.length > 0 && ("
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "type",
+      "dataSource"
+    ],
+    "properties": {
+      "type": {
+        "enum": [
+          "glossary",
+          "automation-guides",
+          "automation-use-cases",
+          "integration-use-cases"
+        ]
+      },
+      "dataSource": {
+        "const": "data:resources"
+      }
+    }
+  },
+  "media": {
+    "slots": {}
+  },
+  "constraints": {
+    "maxPerPage": 2
+  },
+  "variantRules": {},
+  "motion": {
+    "allowedPatterns": [
+      "card-hover-shadow"
+    ],
+    "requiredPatterns": [
+      "card-hover-shadow"
+    ],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "static-end-state"
+  },
+  "responsive": {
+    "evidence": [],
+    "changes": {}
+  },
+  "accessibility": [],
+  "notes": []
+}

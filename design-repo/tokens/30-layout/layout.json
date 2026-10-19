@@ -1,0 +1,92 @@
+{
+  "$description": "Layout tokens: container, gutters, section rhythm, grids.",
+  "evidence": [
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "116",
+      "quote": "Containers: `max-w-7xl` = 1280px. Gutters: px-5 (20) / md:px-6 (24) / lg:px-8 (32)."
+    },
+    {
+      "file": "specs/SPEC_CATALOG.md",
+      "lines": "133",
+      "quote": "### 2.4 Section rhythm (container = `mx-auto w-full max-w-7xl px-5 md:px-6 lg:px-8`, so gutters are 20/24/32)"
+    }
+  ],
+  "tokens": {
+    "layout": {
+      "container": {
+        "$type": "dimension",
+        "$value": "80rem",
+        "evidence": [
+          {
+            "file": "tailwind.config.cjs",
+            "lines": "151",
+            "quote": "'7xl': '80rem',"
+          }
+        ]
+      },
+      "container-faq": {
+        "$type": "dimension",
+        "$value": "48rem",
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "773",
+            "quote": "- Section: `px-5 py-24 md:px-6 md:py-32 lg:px-8` > `mx-auto max-w-3xl` (768)."
+          }
+        ]
+      },
+      "gutter": {
+        "$type": "composite",
+        "$value": {
+          "base": "{spacing.gutter-base}",
+          "md": "{spacing.gutter-md}",
+          "lg": "{spacing.gutter-lg}"
+        }
+      },
+      "section-y": {
+        "$type": "composite",
+        "$value": {
+          "base": "{spacing.section-y-base}",
+          "md": "{spacing.section-y-md}"
+        }
+      },
+      "band-y": {
+        "$type": "composite",
+        "$value": {
+          "base": "{spacing.band-y-base}",
+          "md": "{spacing.band-y-md}"
+        }
+      },
+      "header-height": {
+        "$type": "dimension",
+        "$value": "{spacing.chrome}"
+      },
+      "bento-columns": {
+        "$type": "number",
+        "$value": 24,
+        "evidence": [
+          {
+            "file": "CLONE_SPEC.md",
+            "lines": "704",
+            "quote": "- Grid: `grid grid-cols-1 gap-4`; md: `grid-cols-24 gap-5` (20px), i.e. 24 equal columns."
+          }
+        ]
+      },
+      "template-hero-pt": {
+        "$type": "composite",
+        "$value": {
+          "base": "7rem",
+          "md": "8rem"
+        },
+        "evidence": [
+          {
+            "file": "specs/SPEC_PRODUCT_SOLUTIONS.md",
+            "lines": "67",
+            "quote": "| padding T/B | 128 / 128 | 128 / 128 | 112 / 96 |"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,309 @@
+/* Catalog templates (SPEC_CATALOG §4–§6). Ported from the saved Nuxt CSS:
+ *   pieces.C8on5plE.css (pieces hero, scope 296097b1), mcp.DUdia9zP.css (connect cards 895181b6 + mcp hero 13c1bbfc),
+ *   catalog-page.D5ZfWbji.css (az-in, facet scrollbar, chip scroller).
+ * Class names are prefixed (cat-/mcp-) because the homepage Hero.css already defines global
+ * `.hero-stage` and `.plate` rules that would otherwise leak in.
+ * Load animations (throw-out / sail / tumble, catalog hero-line, card-in) live at the end of this file;
+ * interaction transitions (hover, reveal, chevron, az-in) sit with their components. */
+
+/* ---------- hero stage (pieces + mcp) ---------- */
+.cat-stage {
+  --col: 48rem;
+  --base: clamp(3.75rem, min(7.4vw, 11svh), 8rem);
+  --radius: 27%;
+  --ease-throw: cubic-bezier(.1, .88, .18, 1);
+  --rim: color-mix(in oklab, var(--color-ink-950), transparent 88%);
+}
+.cat-stage.is-mcp {
+  --col: 56rem;
+}
+.cat-col {
+  max-width: calc(var(--col) + 3rem);
+}
+.cat-scatter {
+  --ring: calc(var(--col) / 2 + 1.5rem);
+  --reach: calc(50% - var(--col) / 2 - 7rem);
+  --span: calc(100svh - var(--spacing-chrome));
+  z-index: -1;
+  perspective: 1500px;
+  pointer-events: none;
+  display: none;
+  inset: 0;
+}
+.cat-stage.is-mcp .cat-scatter {
+  height: var(--span);
+  inset: 0 0 auto 0;
+}
+.cat-drop,
+.cat-scatter {
+  transform-style: preserve-3d;
+  position: absolute;
+}
+.cat-drop {
+  --sail: calc(var(--nx) * (.15rem + var(--t) * .2rem));
+  --sail-y: calc(var(--ny) * (.15rem + var(--t) * .2rem));
+  will-change: translate, scale, opacity;
+  translate: -50% -50%;
+}
+.cat-plate {
+  --size: calc(var(--base) * var(--s, 1));
+  --step: calc(var(--size) * .018);
+  width: var(--size);
+  height: var(--size);
+  transform-style: preserve-3d;
+  transform: rotateX(var(--pitch)) rotateY(var(--turn)) rotate(var(--spin));
+  will-change: transform;
+  display: block;
+  position: relative;
+}
+.cat-layer {
+  background: color-mix(in oklab, var(--color-ink-200), var(--color-ink-500) calc(var(--l) * 7.5%));
+  transform: translateZ(calc(var(--l) * var(--step) * -1));
+}
+.cat-face,
+.cat-layer {
+  border-radius: var(--radius);
+  position: absolute;
+  inset: 0;
+}
+.cat-face {
+  background: linear-gradient(var(--sheen, 152deg), #fff 0, var(--color-ink-50) 58%, var(--color-ink-100) 100%);
+  outline: 1px solid var(--rim);
+  outline-offset: -1px;
+  place-items: center;
+  padding: 17%;
+  display: grid;
+}
+.cat-face img {
+  object-fit: contain;
+  filter: saturate(1.15);
+  width: 100%;
+  height: 100%;
+}
+.cat-face.compact {
+  --sheen: 152deg;
+  border-radius: 29%;
+  width: 3.25rem;
+  height: 3.25rem;
+  padding: .65rem;
+  position: relative;
+  inset: auto;
+}
+@media (width >= 48rem) {
+  .cat-col {
+    min-height: calc(100svh - var(--spacing-chrome));
+  }
+}
+@media (width >= 72rem) {
+  .cat-scatter {
+    display: block;
+  }
+  .cat-cluster {
+    display: none;
+  }
+}
+
+/* ---------- MCP connect cards ---------- */
+.mcp-card {
+  border: 1px solid var(--cast-10);
+  box-shadow: 0 1px 2px -1px var(--cast-08);
+  transition: border-color .2s ease-out, box-shadow .2s ease-out, transform .2s var(--ease-smooth);
+}
+.mcp-card:hover {
+  border-color: var(--cast-20);
+  box-shadow: 0 3px 8px -4px var(--cast-10);
+  transform: translateY(-1px);
+}
+.mcp-card:active {
+  box-shadow: 0 1px 2px -1px var(--cast-08);
+  transition-duration: 80ms;
+  transform: translateY(0);
+}
+.mcp-client-card {
+  flex: 0 0 calc(50% - .5rem);
+}
+@media (width >= 40rem) {
+  .mcp-client-card {
+    flex-basis: calc(33.333% - .667rem);
+  }
+}
+@media (width >= 64rem) {
+  .mcp-client-card {
+    flex-basis: calc(20% - .8rem);
+  }
+}
+.mcp-tap {
+  transition: background-color .2s ease-out, color .2s ease-out;
+}
+.mcp-chevron {
+  transition: rotate .3s var(--ease-smooth);
+}
+.mcp-chevron.is-flipped {
+  rotate: 180deg;
+}
+.mcp-reveal {
+  transition: grid-template-rows .32s var(--ease-smooth);
+  grid-template-rows: 0fr;
+  display: grid;
+}
+.mcp-reveal.is-open {
+  grid-template-rows: 1fr;
+}
+.mcp-reveal-clip {
+  opacity: 0;
+  transition: opacity .2s ease-out;
+  overflow: hidden;
+}
+.mcp-reveal.is-open .mcp-reveal-clip {
+  opacity: 1;
+  transition-delay: 90ms;
+}
+@media (prefers-reduced-motion: reduce) {
+  .mcp-card,
+  .mcp-chevron,
+  .mcp-reveal,
+  .mcp-reveal-clip,
+  .mcp-tap {
+    transition: none;
+  }
+  .mcp-card:active,
+  .mcp-card:hover {
+    transform: none;
+  }
+}
+
+/* ---------- catalog-page (az index, facet scrollbar, chip scroller) ---------- */
+.az-list {
+  animation: az-in .2s var(--ease-smooth) both;
+}
+@keyframes az-in {
+  0% {
+    opacity: 0;
+    translate: 0 -4px;
+  }
+  to {
+    opacity: 1;
+    translate: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .az-list {
+    animation: none;
+  }
+}
+.facet-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklab, var(--color-ink-950), transparent 86%) transparent;
+}
+.facet-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.facet-scroll::-webkit-scrollbar-thumb {
+  background: color-mix(in oklab, var(--color-ink-950), transparent 86%);
+  border-radius: 3.40282e38px;
+}
+.chip-scroll {
+  scrollbar-width: none;
+}
+.chip-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Detail-page loading placeholder (not on the original: it is SSR). Keeps the hero facts row height. */
+.cat-skel {
+  display: inline-block;
+  border-radius: .375rem;
+  background: var(--color-ink-100);
+  color: transparent;
+}
+
+/* ---------- load motion (Animation pass) ----------
+ * Values copied from pieces.C8on5plE.css (296097b1) / mcp.DUdia9zP.css (13c1bbfc, 895181b6) /
+ * product-hero.C5pKbCTC.css (203541ac) and confirmed with getAnimations() on the live site:
+ *   drop:   throw-out calc(.34s + t*.22s) var(--ease-throw) delay i*14ms both, then sail var(--float) ease-in-out delay .82s + i*20ms infinite
+ *   plate:  tumble calc(float*2.3) ease-in-out delay .82s + i*20ms infinite
+ *   hero:   hero-line .64s ease-smooth delay i*70ms (blur 4px, 12px) — catalog-scoped, overrides the global .76s/.38s+i*90ms
+ *   client: card-in .48s ease-smooth delay .26s + i*45ms */
+@keyframes cat-throw-out {
+  0% {
+    opacity: 0;
+    scale: .12;
+    translate: calc(-50% - var(--from-x)) calc(-50% - var(--from-y));
+  }
+  18% {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+    translate: -50% -50%;
+    scale: 1;
+  }
+}
+@keyframes cat-sail {
+  0%,
+  to {
+    translate: -50% -50%;
+  }
+  50% {
+    translate: calc(-50% + var(--sail)) calc(-50% + var(--sail-y));
+  }
+}
+@keyframes cat-tumble {
+  0%,
+  to {
+    transform: rotateX(var(--pitch)) rotateY(var(--turn)) rotate(var(--spin));
+  }
+  50% {
+    transform: rotateX(calc(var(--pitch) - 1deg)) rotateY(calc(var(--turn) + 2deg)) rotate(calc(var(--spin) + 1.5deg));
+  }
+}
+html.js .cat-drop {
+  animation:
+    cat-throw-out calc(.34s + var(--t) * .22s) var(--ease-throw) calc(var(--i) * 14ms) both,
+    cat-sail var(--float) ease-in-out calc(.82s + var(--i) * 20ms) infinite;
+}
+html.js .cat-plate {
+  animation: cat-tumble calc(var(--float) * 2.3) calc(.82s + var(--i) * 20ms) ease-in-out infinite;
+}
+
+@keyframes cat-hero-line {
+  0% {
+    opacity: 0;
+    filter: blur(4px);
+    translate: 0 12px;
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    translate: 0;
+  }
+}
+html.js .cat-hero .hero-line {
+  animation: cat-hero-line .64s var(--ease-smooth) calc(var(--i, 0) * 70ms) both;
+}
+
+@keyframes mcp-card-in {
+  0% {
+    opacity: 0;
+    translate: 0 10px;
+  }
+  to {
+    opacity: 1;
+    translate: 0;
+  }
+}
+html.js .mcp-client-card {
+  animation: mcp-card-in .48s var(--ease-smooth) calc(.26s + var(--i) * 45ms) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .cat-drop {
+    opacity: 1;
+  }
+  html.js .cat-drop,
+  html.js .cat-plate,
+  html.js .cat-hero .hero-line,
+  html.js .mcp-client-card {
+    animation: none;
+  }
+}

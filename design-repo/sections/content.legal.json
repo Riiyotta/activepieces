@@ -1,0 +1,103 @@
+{
+  "id": "content.legal",
+  "layer": "section",
+  "category": "content",
+  "purpose": "Legal long-form: sticky left document nav (Contents toggle below lg), H1, subtitle, last-updated, PLACEHOLDER legal prose + link to the original.",
+  "implementedBy": [
+    "src/pages/Legal.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_CONTENT.md",
+      "lines": "724",
+      "quote": "## 9. `/privacy` and `/terms` (legal long-form)"
+    }
+  ],
+  "variants": {
+    "terms": {
+      "description": "/terms",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CONTENT.md",
+          "lines": "753",
+          "quote": "| /terms | Terms of Service & Subscription Agreement |"
+        }
+      ]
+    },
+    "privacy": {
+      "description": "/privacy",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CONTENT.md",
+          "lines": "754",
+          "quote": "| /privacy | Privacy Policy |"
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "doc",
+      "bodyMode"
+    ],
+    "properties": {
+      "doc": {
+        "enum": [
+          "terms",
+          "privacy"
+        ]
+      },
+      "bodyMode": {
+        "const": "placeholder"
+      }
+    }
+  },
+  "media": {
+    "slots": {}
+  },
+  "constraints": {
+    "onePerPage": true,
+    "mustFollow": "shell.header"
+  },
+  "variantRules": {
+    "terms": {
+      "contentEquals": {
+        "doc": "terms"
+      }
+    },
+    "privacy": {
+      "contentEquals": {
+        "doc": "privacy"
+      }
+    }
+  },
+  "motion": {
+    "allowedPatterns": [
+      "legal-toggle"
+    ],
+    "requiredPatterns": [
+      "legal-toggle"
+    ],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "static-end-state"
+  },
+  "responsive": {
+    "evidence": [
+      {
+        "file": "specs/SPEC_CONTENT.md",
+        "lines": "730",
+        "quote": "  div.grid.gap-12.lg:grid-cols-[17rem_minmax(0,1fr)].lg:gap-24"
+      }
+    ],
+    "changes": {
+      "base": "Contents toggle above article",
+      "lg": "17rem sticky nav + article"
+    }
+  },
+  "accessibility": [],
+  "notes": [
+    "No legal text is stored; never generate legal terms."
+  ]
+}

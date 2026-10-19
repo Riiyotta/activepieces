@@ -1,0 +1,20 @@
+{
+  "id": "component.plan-card",
+  "layer": "component",
+  "purpose": "Pricing plan card with animated price, CTA and tooltip list.",
+  "composes": [
+    "edge-card",
+    "button",
+    "info-tip"
+  ],
+  "implementedBy": [
+    "src/components/pricing/PlanCards.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_MARKETING.md",
+      "lines": "240",
+      "quote": "  - Card `relative flex flex-col rounded-2xl bg-white p-7 shadow-edge` (padding 28)."
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+/* O. Section-specific CSS for Footer (co-located; do not put this in index.css). */
+
+/* `.dissolve` top fade-in mask on the meadow art (CLONE_SPEC §O, exact stops). */
+.closing-dissolve {
+  -webkit-mask-image: linear-gradient(#0000, #00000001 1.167%, #00000005 2.333%, #0000000b 3.5%, #00000013 4.667%, #0000001d 5.833%, #00000028 7%, #00000035 8.167%, #00000042 9.333%, #00000051 10.5%, #00000060 11.667%, #00000070 12.833%, #00000080 14%, #0000008f 15.167%, #0000009f 16.333%, #000000ae 17.5%, #000000bd 18.667%, #000000ca 19.833%, #000000d7 21%, #000000e2 22.167%, #000000ec 23.333%, #000000f4 24.5%, #000000fa 25.667%, #000000fe 26.833%, #000 28%);
+  mask-image: linear-gradient(#0000, #00000001 1.167%, #00000005 2.333%, #0000000b 3.5%, #00000013 4.667%, #0000001d 5.833%, #00000028 7%, #00000035 8.167%, #00000042 9.333%, #00000051 10.5%, #00000060 11.667%, #00000070 12.833%, #00000080 14%, #0000008f 15.167%, #0000009f 16.333%, #000000ae 17.5%, #000000bd 18.667%, #000000ca 19.833%, #000000d7 21%, #000000e2 22.167%, #000000ec 23.333%, #000000f4 24.5%, #000000fa 25.667%, #000000fe 26.833%, #000 28%);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+/* Links card bottom fade: --fade 2rem / md 2.5rem / lg 3rem. */
+.closing-card {
+  --fade: 2rem;
+}
+@media (width >= 48rem) {
+  .closing-card {
+    --fade: 2.5rem;
+  }
+}
+@media (width >= 64rem) {
+  .closing-card {
+    --fade: 3rem;
+  }
+}
+
+/* Y Combinator logo mask (aspect 116/24, h-4). */
+.closing-yc {
+  -webkit-mask-image: url(/logos/ycombinator.svg);
+  mask-image: url(/logos/ycombinator.svg);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}

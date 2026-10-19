@@ -1,0 +1,121 @@
+{
+  "$description": "Breakpoints (Tailwind v4 defaults = v3) plus xs 360 and three component-scoped media conditions.",
+  "evidence": [
+    {
+      "file": "tailwind.config.cjs",
+      "lines": "26",
+      "quote": "// CLONE_SPEC 0.7"
+    },
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "105",
+      "quote": "### 0.7 Breakpoints"
+    }
+  ],
+  "tokens": {
+    "breakpoint": {
+      "xs": {
+        "$type": "dimension",
+        "$value": "360px",
+        "evidence": [
+          {
+            "file": "tailwind.config.cjs",
+            "lines": "28",
+            "quote": "xs: '360px',"
+          }
+        ]
+      },
+      "sm": {
+        "$type": "dimension",
+        "$value": "640px",
+        "evidence": [
+          {
+            "file": "tailwind.config.cjs",
+            "lines": "29",
+            "quote": "sm: '640px',"
+          }
+        ]
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "768px",
+        "evidence": [
+          {
+            "file": "tailwind.config.cjs",
+            "lines": "30",
+            "quote": "md: '768px',"
+          }
+        ]
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "1024px",
+        "evidence": [
+          {
+            "file": "tailwind.config.cjs",
+            "lines": "31",
+            "quote": "lg: '1024px',"
+          }
+        ]
+      },
+      "xl": {
+        "$type": "dimension",
+        "$value": "1280px",
+        "evidence": [
+          {
+            "file": "tailwind.config.cjs",
+            "lines": "32",
+            "quote": "xl: '1280px',"
+          }
+        ]
+      },
+      "2xl": {
+        "$type": "dimension",
+        "$value": "1536px",
+        "evidence": [
+          {
+            "file": "tailwind.config.cjs",
+            "lines": "33",
+            "quote": "'2xl': '1536px',"
+          }
+        ]
+      },
+      "catalog-scatter": {
+        "$type": "dimension",
+        "$value": "72rem",
+        "evidence": [
+          {
+            "file": "specs/SPEC_CATALOG.md",
+            "lines": "241",
+            "quote": "**The cluster is hidden at ≥72rem (1152 px).**"
+          }
+        ],
+        "usage": "catalog hero 3D scatter shown / cluster hidden"
+      },
+      "article-wide": {
+        "$type": "dimension",
+        "$value": "90rem",
+        "evidence": [
+          {
+            "file": "specs/SPEC_CONTENT.md",
+            "lines": "80",
+            "quote": "min-[90rem]:max-w-[92rem]"
+          }
+        ],
+        "usage": "blog article wide rails"
+      },
+      "models-grid-pin": {
+        "$type": "dimension",
+        "$value": "80rem x 48rem",
+        "evidence": [
+          {
+            "file": "specs/SPEC_MARKETING.md",
+            "lines": "556",
+            "quote": "- **Active only when** `(min-width:80rem) and (min-height:48rem)`"
+          }
+        ],
+        "usage": "governance models grid pinned mode (width and height)"
+      }
+    }
+  }
+}

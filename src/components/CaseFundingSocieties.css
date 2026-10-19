@@ -1,0 +1,17 @@
+/* D. Section-specific CSS for CaseFundingSocieties (co-located; do not put this in index.css). */
+
+/* Original: text-[clamp(1.5rem,3.125vw_+_1px,2.5625rem)]/[calc(0.75em_+_14px)] (CLONE_SPEC §D/J).
+ * Written as plain CSS so the v3 arbitrary-value type inference can't misread clamp(). */
+[data-section='case-study-funding-societies'] .case-quote {
+  font-size: clamp(1.5rem, 3.125vw + 1px, 2.5625rem);
+  line-height: calc(.75em + 14px);
+}
+
+/* v4 `sm:divide-x sm:divide-ink-950/10`: v4 draws the rule as border-inline-end on every child but the
+ * last (v3 uses border-left on every child but the first, shifting columns 2-3 content by 1px). */
+@media (min-width: 640px) {
+  [data-section='case-study-funding-societies'] .stats-divide > :not(:last-child) {
+    border-right-width: 1px;
+    border-color: rgb(2 6 24 / .1);
+  }
+}

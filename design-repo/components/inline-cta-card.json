@@ -1,0 +1,19 @@
+{
+  "id": "component.inline-cta-card",
+  "layer": "component",
+  "purpose": "rounded-3xl CTA card: h2 + p left, lg brand + lg secondary right (row from md).",
+  "composes": [
+    "button"
+  ],
+  "implementedBy": [
+    "src/components/CtaShip.jsx",
+    "src/components/catalog/parts.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "592",
+      "quote": "- Card: `flex flex-col gap-7 rounded-3xl bg-white p-8 shadow-edge`"
+    }
+  ]
+}

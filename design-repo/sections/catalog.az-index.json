@@ -1,0 +1,72 @@
+{
+  "id": "catalog.az-index",
+  "layer": "section",
+  "category": "catalog",
+  "purpose": "Collapsible A-Z index of every entry of the kind.",
+  "implementedBy": [
+    "src/components/catalog/parts.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_CATALOG.md",
+      "lines": "387",
+      "quote": "### 4.6 A–Z index (az-index)"
+    }
+  ],
+  "variants": {
+    "default": {
+      "description": "Single variant.",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CATALOG.md",
+          "lines": "387",
+          "quote": "### 4.6 A–Z index (az-index)"
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "h2",
+      "kind"
+    ],
+    "properties": {
+      "h2": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 6
+      },
+      "kind": {
+        "enum": [
+          "pieces",
+          "mcp"
+        ]
+      }
+    }
+  },
+  "media": {
+    "slots": {}
+  },
+  "constraints": {
+    "onePerPage": true
+  },
+  "variantRules": {},
+  "motion": {
+    "allowedPatterns": [
+      "az-index-open"
+    ],
+    "requiredPatterns": [
+      "az-index-open"
+    ],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "static-end-state"
+  },
+  "responsive": {
+    "evidence": [],
+    "changes": {}
+  },
+  "accessibility": [],
+  "notes": []
+}

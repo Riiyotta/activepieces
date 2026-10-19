@@ -1,0 +1,19 @@
+{
+  "id": "component.faq-item",
+  "layer": "component",
+  "purpose": "Accordion item: question button + answer; + icon rotates 45deg.",
+  "composes": [
+    "edge-card",
+    "icon"
+  ],
+  "implementedBy": [
+    "src/components/Faq.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "775",
+      "quote": "- List: `flex flex-col gap-3`. Item: `rounded-2xl bg-white px-5 sm:px-6 shadow-edge`."
+    }
+  ]
+}

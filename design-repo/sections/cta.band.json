@@ -1,0 +1,113 @@
+{
+  "id": "cta.band",
+  "layer": "section",
+  "category": "cta",
+  "purpose": "Rounded-3xl CTA card: h2 + lede left, lg brand primary + lg secondary 'Talk to sales' right (row from md).",
+  "implementedBy": [
+    "src/components/CtaShip.jsx",
+    "src/components/CtaRollout.jsx",
+    "src/components/catalog/parts.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "CLONE_SPEC.md",
+      "lines": "589",
+      "quote": "## E / I. CTA bands"
+    },
+    {
+      "file": "specs/SPEC_CATALOG.md",
+      "lines": "197",
+      "quote": "### 3.5 `InlineCta` (browser-cta, detail mid-CTA)"
+    }
+  ],
+  "variants": {
+    "home": {
+      "description": "Homepage bands E and I (CtaShip / CtaRollout).",
+      "evidence": [
+        {
+          "file": "CLONE_SPEC.md",
+          "lines": "600",
+          "quote": "  - E: \"Your first flow can ship this afternoon.\""
+        }
+      ]
+    },
+    "catalog-inline": {
+      "description": "Catalog browser CTA and detail mid-CTA (InlineCta).",
+      "evidence": [
+        {
+          "file": "specs/SPEC_CATALOG.md",
+          "lines": "198",
+          "quote": "- Section `py-12 md:py-16`."
+        }
+      ]
+    }
+  },
+  "content": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "h2",
+      "body",
+      "primaryLabel",
+      "primaryHref",
+      "secondaryLabel"
+    ],
+    "properties": {
+      "h2": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 10
+      },
+      "body": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 34
+      },
+      "primaryLabel": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 5
+      },
+      "primaryHref": {
+        "type": "string",
+        "pattern": "^(/[A-Za-z0-9._~%/?=&#-]*|https://(cloud\\.activepieces\\.com|github\\.com/activepieces|www\\.activepieces\\.com|trust\\.activepieces\\.com)(/[A-Za-z0-9._~%/?=&#-]*)?)$",
+        "x-example": "/sales?ap_cta=example"
+      },
+      "secondaryLabel": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 4
+      }
+    }
+  },
+  "media": {
+    "slots": {}
+  },
+  "constraints": {
+    "maxPerPage": 2
+  },
+  "variantRules": {},
+  "motion": {
+    "allowedPatterns": [
+      "none"
+    ],
+    "requiredPatterns": [],
+    "variantRequiredPatterns": {},
+    "reducedMotionFallback": "not-applicable"
+  },
+  "responsive": {
+    "evidence": [
+      {
+        "file": "CLONE_SPEC.md",
+        "lines": "592",
+        "quote": "- Card: `flex flex-col gap-7 rounded-3xl bg-white p-8 shadow-edge`; md: `flex-row items-center justify-between gap-10 p-10`."
+      }
+    ],
+    "changes": {
+      "base": "column, buttons grow full width",
+      "md": "row; h2 28px with leading calc(2/1.5) (TW-LEADING-TEXT-28)"
+    }
+  },
+  "accessibility": [],
+  "notes": []
+}

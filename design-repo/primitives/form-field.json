@@ -1,0 +1,19 @@
+{
+  "id": "primitive.form-field",
+  "layer": "primitive",
+  "purpose": "Text input / textarea / select of the /sales form.",
+  "implementedBy": [
+    "src/components/sales/SalesForm.jsx"
+  ],
+  "rules": [
+    "rounded-xl border ink-950/20, hover ink-950/35, focus border primary-700 + 2px ring primary-700/15; h54.",
+    "Labels 14/20 500 ink-900; required marker ink-400 *."
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_MARKETING.md",
+      "lines": "188",
+      "quote": "- Input classes: `w-full rounded-xl border border-ink-950/20 bg-white px-4 py-3.5"
+    }
+  ]
+}

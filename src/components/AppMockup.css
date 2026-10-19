@@ -1,0 +1,25 @@
+/* B. Hero shot (CLONE_SPEC §B). Scoped CSS from data-v-cc39f7a4. Entrance uses the global .hero-line (--i:4). */
+.frame {
+  box-shadow: 0 0 0 1px var(--cast-20), 0 0 0 6px #ffffff8c, 0 24px 60px -24px var(--cast-20);
+}
+.cover {
+  background: linear-gradient(#fff0, #ffffff02 8.85%, #ffffff0f 17.7%, #ffffff2a 26.55%, #ffffff51 35.4%, #ffffff80 44.25%, #ffffffae 53.1%, #ffffffd5 61.95%, #fffffff0 70.8%, #fffffffd 79.65%, #fff 88.5%, #fff);
+}
+
+/* Tailwind v4 `@container` + `@[24rem]:` variants from the original agent cards (no v3 plugin installed). */
+.agent-card {
+  container-type: inline-size;
+}
+@container (min-width: 24rem) {
+  .agent-card-head {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .agent-card-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "component.resource-card",
+  "layer": "component",
+  "purpose": "Resource listing / related card (title + excerpt).",
+  "composes": [
+    "edge-card"
+  ],
+  "implementedBy": [
+    "src/components/content/parts.jsx"
+  ],
+  "evidence": [
+    {
+      "file": "specs/SPEC_CONTENT.md",
+      "lines": "201",
+      "quote": "### 1.12 Resource card (listing, \"More …\", \"Apps in this guide\")"
+    }
+  ]
+}

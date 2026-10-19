@@ -1,0 +1,608 @@
+{
+  "meta": {
+    "source": "https://www.activepieces.com/sitemap.xml (6,518 URLs, captured 2026-10-16) mapped onto the local React clone's route table in src/App.jsx",
+    "status": "measured-from-sitemap-and-clone-source",
+    "notes": "routeCount = URLs listed in the original sitemap. The clone renders more than the sitemap in three places: /pieces/:a/:b accepts any two distinct valid piece slugs (not only the 3,000 listed), blog listing pagination (/blog/page/:n, /blog/category/:slug/:n, /blog/author/:slug/:n) is not in the sitemap, and src/data/blog.json holds 796 posts (794 shown in listings, 2 sitemap-only) / 95 authors vs 791 / 56 in the sitemap; the live blog publishes several posts per hour, so listing order at the top of /blog reflects the snapshot time. NotFound (*) is not counted.",
+    "totalRoutes": 6518,
+    "totalTemplates": 23
+  },
+  "categories": {
+    "CHROME": "Site-wide shell rendered by src/components/Layout.jsx around every routed page.",
+    "OVERLAY": "Modal/dialog layers opened from within a page rather than occupying a slot in the page flow.",
+    "NAV": "In-page wayfinding: breadcrumbs, pagination, category pills, tables of contents.",
+    "HERO": "The first block under the header that names the page and carries its primary CTAs.",
+    "PRODUCT": "Blocks that explain or demonstrate product capability (demos, bento grids, feature rows, scroll stories).",
+    "PROOF": "Social proof: customer logos, case studies, testimonials.",
+    "CTA": "Standalone conversion bands between content sections (not the footer's closing CTA).",
+    "PRICING": "Plan, price and comparison blocks specific to /pricing.",
+    "FORM": "Data-entry blocks.",
+    "CATALOG": "Data-driven blocks fed by src/data/pieces.json and public/data/pieces/<slug>.json.",
+    "CONTENT": "Blog/resources listing and reading blocks fed by src/data/blog.json and src/data/resources.json (metadata only; bodies are placeholders by policy).",
+    "FAQ": "Question/answer accordions.",
+    "LEGAL": "Blocks specific to /privacy and /terms."
+  },
+  "sections": {
+    "chrome.header": {
+      "category": "CHROME",
+      "description": "Fixed floating 'island' header: wordmark, Product/Solutions/Enterprise mega-dropdowns with a sliding highlight, Open app + Talk to sales CTAs, burger sheet below 1024px; hides on scroll-down past 160px. Transparent 'on-art' state only on the homepage.",
+      "scope": "Every template except /sales, which renders outside Layout.",
+      "implementedBy": "Header.jsx"
+    },
+    "chrome.footer": {
+      "category": "CHROME",
+      "description": "Closing CTA over the meadow image (heading, lede, two buttons, optional reassurance list set per page via PageMetaContext/usePageClosing) followed by the multi-column links card with legal links and the YC badge.",
+      "scope": "Every template except /sales.",
+      "implementedBy": "Footer.jsx"
+    },
+    "chrome.floating-card": {
+      "category": "CHROME",
+      "description": "Fixed 'See it in action / Book a 30-min demo' card that fades in after scrollY > 100 and can be dismissed.",
+      "scope": "Every Layout template except /pricing and the blog templates (the live site also hides it on /sales, /admin and /customers).",
+      "implementedBy": "FloatingCard.jsx"
+    },
+    "overlay.use-in-ai-dialog": {
+      "category": "OVERLAY",
+      "description": "MCP 'Use in your AI' connect dialog: rail of 11 AI clients, per-client mode switch (One click / Config file / Ask the agent), code and prompt cards with copy buttons; bottom sheet below 768px.",
+      "scope": "Opened from the homepage hero button and from the MCP index's client cards.",
+      "implementedBy": "UseInAiDialog.jsx"
+    },
+    "nav.breadcrumb": {
+      "category": "NAV",
+      "description": "Small trail of parent links above a detail page's hero.",
+      "scope": "Piece detail, MCP detail, piece pair, blog article and resource detail templates.",
+      "implementedBy": "catalog/parts.jsx > Breadcrumb; content/parts.jsx (article and resource breadcrumbs)"
+    },
+    "nav.category-pills": {
+      "category": "NAV",
+      "description": "Horizontal row of blog category pills ('All' plus each category) with the active one filled.",
+      "scope": "Blog index and blog category templates.",
+      "implementedBy": "content/parts.jsx > CategoryPills"
+    },
+    "nav.pagination": {
+      "category": "NAV",
+      "description": "Numbered page links with a windowed range and prev/next arrows for blog listings.",
+      "scope": "Blog index, blog category and blog author templates.",
+      "implementedBy": "content/parts.jsx > Pagination"
+    },
+    "nav.toc": {
+      "category": "NAV",
+      "description": "Sticky 'On this page' rail with scroll-spy over the body's h2s; on articles it shows only at >=1280px and only when the article has a rail on the live site (hasToc or not in the 63-slug NO_TOC list).",
+      "scope": "Blog article and resource detail templates.",
+      "implementedBy": "content/parts.jsx > Toc; content/noToc.js"
+    },
+    "hero.home": {
+      "category": "HERO",
+      "description": "Homepage hero: sky background with two layered plates fading in, non-animated H1, staggered subhead and CTAs including the 'Use in your AI' button with its logo fan and sheen.",
+      "scope": "Homepage only.",
+      "implementedBy": "Hero.jsx"
+    },
+    "hero.template": {
+      "category": "HERO",
+      "description": "Left-aligned product/solution hero: H1, lede, dark 'Start building' + secondary CTA, then a 32px-radius stage with a background image holding a demo (flow, agent, tables or chat) or a static solution mock. Entrance .tpl-line (.64s, i x 70ms).",
+      "scope": "Product and solution templates.",
+      "implementedBy": "templates/TemplateHero.jsx (+ templates/TablesDemo.jsx, templates/ChatDemo.jsx, FeatureFlowDemo.jsx, FeatureAgentsDemo.jsx, templates/solutionHeroMocks.jsx)"
+    },
+    "hero.embed": {
+      "category": "HERO",
+      "description": "Embed product hero: same markup family as hero.template but a separate component, with the homepage flow-canvas demo in the stage and three highlight columns below.",
+      "scope": "/embed only.",
+      "implementedBy": "embed/EmbedHero.jsx"
+    },
+    "hero.security": {
+      "category": "HERO",
+      "description": "Dark security hero with the animated ASCII cipher-wall canvas and rotating 3D lock, plus a four-fact row.",
+      "scope": "/security only.",
+      "implementedBy": "security/SecurityHero.jsx (+ cipherWall.js, lockGeometry.js, GlyphField.jsx)"
+    },
+    "hero.governance": {
+      "category": "HERO",
+      "description": "Image-card hero with a 1280x720 admin-screen mock scaled into place and a customer-logo bar pinned to the viewport bottom.",
+      "scope": "/ai-governance only.",
+      "implementedBy": "governance/GovernanceHero.jsx"
+    },
+    "hero.catalog": {
+      "category": "HERO",
+      "description": "Catalog hero in three variants: /pieces 3D logo scatter (>=1152px) or logo cluster, /mcp scatter plus five client cards that open the connect dialog, and a plain left-aligned hero for category pages.",
+      "scope": "Pieces index, MCP index and catalog category templates.",
+      "implementedBy": "catalog/heroes.jsx > PiecesHero | McpHero | CategoryHero"
+    },
+    "hero.resources": {
+      "category": "HERO",
+      "description": "Soft-gradient resources hero with staggered blur-in lines (.res-hero-line): optional breadcrumb, H1, subtitle, buttons.",
+      "scope": "Resources hub and resource category templates.",
+      "implementedBy": "resources/ResourcesHub.jsx > ResHero"
+    },
+    "hero.listing": {
+      "category": "HERO",
+      "description": "Plain listing header: H1 with the blog title, category name or author name (author variant adds avatar and bio line); the index variant adds the search field.",
+      "scope": "Blog index, blog category and blog author templates.",
+      "implementedBy": "pages/blog/BlogIndex.jsx, BlogCategory.jsx, BlogAuthor.jsx (inline)"
+    },
+    "proof.customer-marquee": {
+      "category": "PROOF",
+      "description": "Infinite right-to-left marquee of 24 customer logos with faded edges (82.8s loop >=768px, 72s below).",
+      "scope": "Homepage only.",
+      "implementedBy": "Hero.jsx (marquee)"
+    },
+    "proof.logo-rotator": {
+      "category": "PROOF",
+      "description": "Grid of six customer logos that swaps to the next set every 3.5s with a 40ms per-cell stagger.",
+      "scope": "Solution, pricing and ai-governance templates.",
+      "implementedBy": "templates/LogoRotator.jsx (solutions, ai-governance); pricing/RotatingLogos.jsx (pricing) - two implementations of one section"
+    },
+    "proof.case-study": {
+      "category": "PROOF",
+      "description": "Customer case study: logo, large Sentient quote with attribution, three-stat row (v4 divide semantics).",
+      "scope": "Homepage (twice), solution template, /ai-governance.",
+      "implementedBy": "CaseFundingSocieties.jsx; CaseAlan.jsx"
+    },
+    "proof.testimonials": {
+      "category": "PROOF",
+      "description": "Nine review cards in up to three columns with a bottom fade, review-source logos and a two-stat block; heading set per page.",
+      "scope": "Homepage and solution template.",
+      "implementedBy": "Testimonials.jsx"
+    },
+    "product.app-mockup": {
+      "category": "PRODUCT",
+      "description": "Large app-window mockup card that overlaps the hero by -308px (2/1 desktop, 4/3 at >=640, 2/3 below).",
+      "scope": "Homepage only.",
+      "implementedBy": "AppMockup.jsx"
+    },
+    "product.dream-story": {
+      "category": "PRODUCT",
+      "description": "Sticky 420svh scroll story: three text beats, seven app windows flying in and collapsing, and a 9-card wire diagram drawing itself; a one-shot 2.4s animation at <=1023px.",
+      "scope": "Homepage only.",
+      "implementedBy": "Dream.jsx (+ DreamWindows.jsx)"
+    },
+    "product.feature-agents": {
+      "category": "PRODUCT",
+      "description": "'Agents that get the job done' feature block with the scripted agent-thread demo (fake cursor, tool calls, approve).",
+      "scope": "Homepage only (the demo itself is reused inside hero.template).",
+      "implementedBy": "FeatureAgents.jsx + FeatureAgentsDemo.jsx"
+    },
+    "product.feature-flow": {
+      "category": "PRODUCT",
+      "description": "'Simple by default. Deep on demand.' feature block with the scripted flow-canvas demo.",
+      "scope": "Homepage only (the demo itself is reused inside hero.template and hero.embed).",
+      "implementedBy": "FeatureFlow.jsx + FeatureFlowDemo.jsx"
+    },
+    "product.hero-columns": {
+      "category": "PRODUCT",
+      "description": "Three text columns under a product hero's stage describing the product's pillars.",
+      "scope": "Product template only.",
+      "implementedBy": "templates/TemplateHero.jsx > HeroColumns"
+    },
+    "product.bento-grid": {
+      "category": "PRODUCT",
+      "description": "Heading plus a 24-column bento grid of cards, each with a title, description and a mock UI sheet over an art background.",
+      "scope": "Homepage (twice), product, solution and embed templates.",
+      "implementedBy": "BentoPlatformCard.jsx (shared card) via BentoPlatform.jsx, BentoSecond.jsx, templates/TemplateBento.jsx, embed/EmbedBento.jsx"
+    },
+    "product.pieces-mosaic": {
+      "category": "PRODUCT",
+      "description": "'760+ open-source pieces' logo mosaic spelling 760+, popping in on mount and swapping one logo every 820ms.",
+      "scope": "Homepage only.",
+      "implementedBy": "FeaturePieces.jsx"
+    },
+    "product.feature-rows": {
+      "category": "PRODUCT",
+      "description": "Scroll section whose right-hand stage stays pinned and swaps between three mock visuals as each text row reaches mid-viewport.",
+      "scope": "/security only.",
+      "implementedBy": "security/FeatureRows.jsx + StageVisuals.jsx"
+    },
+    "product.icon-band": {
+      "category": "PRODUCT",
+      "description": "Heading plus a band of icon cards (six on security, nine on ai-governance) with solid or gradient background.",
+      "scope": "/security and /ai-governance.",
+      "implementedBy": "IconBand.jsx"
+    },
+    "product.models-grid": {
+      "category": "PRODUCT",
+      "description": "Scroll-scrubbed grid of five cards and eight AI-model tiles flying into place; pins only at >=1280x768.",
+      "scope": "/ai-governance only.",
+      "implementedBy": "governance/ModelsGrid.jsx"
+    },
+    "product.rollout-deck": {
+      "category": "PRODUCT",
+      "description": "Pinned four-panel deck that opens one panel at a time as the user scrolls.",
+      "scope": "/ai-governance only.",
+      "implementedBy": "governance/RolloutDeck.jsx + DeckVisuals.jsx"
+    },
+    "cta.band": {
+      "category": "CTA",
+      "description": "Full-width rounded CTA card with a 28px heading, one line of copy and brand + secondary buttons.",
+      "scope": "Homepage only (two instances).",
+      "implementedBy": "CtaShip.jsx; CtaRollout.jsx"
+    },
+    "cta.inline": {
+      "category": "CTA",
+      "description": "Compact mid-page CTA (title, body, Start building) inside catalog detail pages, shown only when the piece has capability sections.",
+      "scope": "Piece detail and MCP detail templates.",
+      "implementedBy": "catalog/parts.jsx > InlineCta"
+    },
+    "pricing.plans": {
+      "category": "PRICING",
+      "description": "Plans header with the Monthly/Annual clip-path toggle and four plan cards with count-up prices and hover tooltips.",
+      "scope": "/pricing only.",
+      "implementedBy": "pricing/BillingToggle.jsx + PlanCards.jsx + AnimatedNumber.jsx + InfoTip.jsx"
+    },
+    "pricing.split-rows": {
+      "category": "PRICING",
+      "description": "Embed and Enterprise rows sharing one background image.",
+      "scope": "/pricing only.",
+      "implementedBy": "pricing/SplitRows.jsx"
+    },
+    "pricing.compare-table": {
+      "category": "PRICING",
+      "description": "Feature comparison table with a sticky header on desktop that becomes plan tabs below 1024px (Plus selected).",
+      "scope": "/pricing only.",
+      "implementedBy": "pricing/CompareTable.jsx"
+    },
+    "form.sales-form": {
+      "category": "FORM",
+      "description": "Talk-to-sales form card: work-email validation with error text, conditional 'Other' input and a 'Thanks, {name}' end state; never submits over the network.",
+      "scope": "/sales only.",
+      "implementedBy": "sales/SalesForm.jsx"
+    },
+    "proof.sales-pitch": {
+      "category": "PROOF",
+      "description": "Sticky pitch card beside the sales form: quote plus a logo grid swapping one random logo every 1.4s, joined to the form by a white 'bridge' notch.",
+      "scope": "/sales only.",
+      "implementedBy": "pages/Sales.jsx + sales/SalesLogoGrid.jsx"
+    },
+    "content.oss-friends-grid": {
+      "category": "CONTENT",
+      "description": "Heading, link cards for open-source friend projects (local logos with first-letter fallback) and a credits block.",
+      "scope": "/oss-friends only.",
+      "implementedBy": "pages/OssFriends.jsx > FriendCard"
+    },
+    "catalog.browser": {
+      "category": "CATALOG",
+      "description": "Searchable catalog grid: 120ms debounced search, multi-select category filter, sort (Popular / A-Z / Most actions|tools), 24 per page with Show more, URL sync, empty state.",
+      "scope": "Pieces index, MCP index and catalog category templates.",
+      "implementedBy": "catalog/CatalogBrowser.jsx"
+    },
+    "catalog.category-grid": {
+      "category": "CATALOG",
+      "description": "Grid of category cards linking to each category page.",
+      "scope": "Pieces index and MCP index only (rendered only when there are category cards).",
+      "implementedBy": "catalog/parts.jsx > CategoryGrid"
+    },
+    "catalog.az-index": {
+      "category": "CATALOG",
+      "description": "Collapsible A-Z list of every piece link.",
+      "scope": "Pieces index, MCP index and catalog category templates.",
+      "implementedBy": "catalog/parts.jsx > AzIndex"
+    },
+    "catalog.detail-hero": {
+      "category": "CATALOG",
+      "description": "Piece/MCP detail hero: logo, name, description, CTAs and a facts row (auth, version, updated, counts).",
+      "scope": "Piece detail and MCP detail templates.",
+      "implementedBy": "pages/DetailPage.jsx > DetailHero"
+    },
+    "catalog.about": {
+      "category": "CATALOG",
+      "description": "Short 'About' block describing the piece.",
+      "scope": "Piece detail and MCP detail templates.",
+      "implementedBy": "pages/DetailPage.jsx (inline)"
+    },
+    "catalog.capabilities": {
+      "category": "CATALOG",
+      "description": "Lists of the piece's triggers and actions (or tools and triggers for MCP), one section per non-empty kind.",
+      "scope": "Piece detail and MCP detail templates.",
+      "implementedBy": "catalog/parts.jsx (capability sections)"
+    },
+    "catalog.guides": {
+      "category": "CATALOG",
+      "description": "'Guides using {piece}' links into the blog, when the piece has any.",
+      "scope": "Piece detail and MCP detail templates.",
+      "implementedBy": "catalog/parts.jsx > GuidesSection"
+    },
+    "catalog.pairings": {
+      "category": "CATALOG",
+      "description": "'Popular {piece} pairings' grid linking to pair pages.",
+      "scope": "Piece detail only (MCP detail has no pairings).",
+      "implementedBy": "catalog/parts.jsx > RelatedGrid (pairings variant)"
+    },
+    "catalog.related": {
+      "category": "CATALOG",
+      "description": "Grid of related pieces with a 'browse all' link.",
+      "scope": "Piece detail, MCP detail and piece pair templates (twice on pair pages: one per piece).",
+      "implementedBy": "catalog/parts.jsx > RelatedGrid"
+    },
+    "catalog.pair-hero": {
+      "category": "CATALOG",
+      "description": "Pair hero with both piece logos, the integration headline and four facts.",
+      "scope": "Piece pair template only.",
+      "implementedBy": "pages/PairPage.jsx (recipe-hero)"
+    },
+    "catalog.automation-ideas": {
+      "category": "CATALOG",
+      "description": "Generated automation ideas combining A's triggers with B's actions and vice versa (algorithm in catalog/lib.js).",
+      "scope": "Piece pair template only.",
+      "implementedBy": "pages/PairPage.jsx + catalog/lib.js"
+    },
+    "content.featured-post": {
+      "category": "CONTENT",
+      "description": "Latest post featured large (two columns at >=1024px) with its generated cover.",
+      "scope": "Blog index first page only.",
+      "implementedBy": "pages/blog/BlogIndex.jsx > Featured"
+    },
+    "content.post-grid": {
+      "category": "CONTENT",
+      "description": "12-card post grid (3/2/1 columns) with covers, titles, excerpts and meta.",
+      "scope": "Blog index, blog category and blog author templates.",
+      "implementedBy": "content/parts.jsx > PostGrid / PostCard"
+    },
+    "content.progress-bar": {
+      "category": "CONTENT",
+      "description": "2px reading-progress bar fixed at the top of the viewport.",
+      "scope": "Blog article only.",
+      "implementedBy": "pages/blog/BlogArticle.jsx > ProgressBar"
+    },
+    "content.article-header": {
+      "category": "CONTENT",
+      "description": "3:1 cover banner with live title text, excerpt, author chip with hover popover, and share buttons.",
+      "scope": "Blog article only.",
+      "implementedBy": "content/parts.jsx > HeroCover, AuthorChip, ShareButtons"
+    },
+    "content.article-body": {
+      "category": "CONTENT",
+      "description": "Prose column rendering the placeholder body (all prose styles) plus the 'Read the full article on activepieces.com' link; real bodies are intentionally not stored.",
+      "scope": "Blog article only.",
+      "implementedBy": "content/placeholder.jsx + content/prose.css + content/parts.jsx > ReadFullLink"
+    },
+    "content.signup-card": {
+      "category": "CONTENT",
+      "description": "Sticky sign-up card in the right rail with five peeking bot avatars (5s peek loop, hover pose), at >=1024px.",
+      "scope": "Blog article only.",
+      "implementedBy": "pages/blog/BlogArticle.jsx > SignupCard + content/content.css"
+    },
+    "content.keep-reading": {
+      "category": "CONTENT",
+      "description": "Closing CTA card (four copy variants chosen by slug) and three same-category 'Keep reading' cards.",
+      "scope": "Blog article only.",
+      "implementedBy": "pages/blog/BlogArticle.jsx + content/parts.jsx > PostCard"
+    },
+    "content.resource-type-grid": {
+      "category": "CONTENT",
+      "description": "Tiles linking to the four resource types (glossary, automation guides, automation use cases, integration use cases).",
+      "scope": "Resources hub only.",
+      "implementedBy": "pages/resources/ResourcesHub.jsx (inline)"
+    },
+    "content.resource-listing": {
+      "category": "CONTENT",
+      "description": "Resource listing: glossary letter jump-nav with per-letter sections, or 24 cards with Show more for the other types; search with empty state.",
+      "scope": "Resource category template only.",
+      "implementedBy": "pages/resources/ResourceCategory.jsx > CategoryView + content/parts.jsx > ResourceCard, ResEmpty"
+    },
+    "content.keep-exploring": {
+      "category": "CONTENT",
+      "description": "'Keep exploring.' cross-links to the other resource types.",
+      "scope": "Resource category template only.",
+      "implementedBy": "pages/resources/ResourceCategory.jsx > KeepExploring"
+    },
+    "content.resource-body": {
+      "category": "CONTENT",
+      "description": "704px resource article with placeholder body, 'Build this in Activepieces' box, 'Apps in this guide' and the read-full link.",
+      "scope": "Resource detail only.",
+      "implementedBy": "pages/resources/ResourceDetail.jsx > ResourceBody"
+    },
+    "content.related-resources": {
+      "category": "CONTENT",
+      "description": "Six related resource cards.",
+      "scope": "Resource detail only.",
+      "implementedBy": "content/parts.jsx > ResourceCard"
+    },
+    "faq.accordion": {
+      "category": "FAQ",
+      "description": "Single-open FAQ accordion (first item open, 200ms height/opacity, plus icon rotates 45 degrees); heading and items passed per page.",
+      "scope": "Homepage, product, solution, pricing, security, ai-governance, embed, pieces/MCP index, catalog category, piece/MCP detail and piece pair templates.",
+      "implementedBy": "Faq.jsx"
+    },
+    "faq.resource-faq": {
+      "category": "FAQ",
+      "description": "Multi-open FAQ with instant toggles (first item open); a different behaviour from faq.accordion, hence a separate component.",
+      "scope": "Resource category and resource detail templates.",
+      "implementedBy": "content/parts.jsx > ResourceFaq"
+    },
+    "legal.nav": {
+      "category": "LEGAL",
+      "description": "Sticky 'Legal' side nav (272px column, collapsible on mobile) listing the document's sections.",
+      "scope": "Legal template only.",
+      "implementedBy": "pages/Legal.jsx"
+    },
+    "legal.document": {
+      "category": "LEGAL",
+      "description": "848px legal column with numbered all-caps headings hanging in the gutter at >=1024px, placeholder text and a link to the full document on activepieces.com.",
+      "scope": "Legal template only.",
+      "implementedBy": "pages/Legal.jsx > LegalSection, SubSection + content/prose.css (.legal-prose)"
+    }
+  },
+  "templates": [
+    {
+      "id": "template.home",
+      "name": "Homepage",
+      "routeCount": 1,
+      "routes": ["/"],
+      "chrome": "full",
+      "sections": ["chrome.header", "hero.home", "proof.customer-marquee", "product.app-mockup", "product.dream-story", "proof.case-study", "cta.band", "product.feature-agents", "product.feature-flow", "product.bento-grid", "cta.band", "proof.case-study", "product.pieces-mosaic", "product.bento-grid", "proof.testimonials", "faq.accordion", "overlay.use-in-ai-dialog", "chrome.footer", "chrome.floating-card"]
+    },
+    {
+      "id": "template.product",
+      "name": "Product page",
+      "routeCount": 4,
+      "routes": ["/product/workflow-builder", "/product/ai-agent-builder", "/product/tables", "/product/chat"],
+      "chrome": "full",
+      "sections": ["chrome.header", "hero.template", "product.hero-columns", "product.bento-grid", "faq.accordion", "chrome.footer", "chrome.floating-card"]
+    },
+    {
+      "id": "template.solution",
+      "name": "Solution page",
+      "routeCount": 10,
+      "routes": ["/solutions/marketing", "/solutions/sales", "/solutions/customer-support", "/solutions/finance", "/solutions/hr", "/solutions/operations", "/solutions/engineering", "/solutions/it", "/solutions/internal-tools", "/solutions/open-source-developers"],
+      "chrome": "full",
+      "sections": ["chrome.header", "hero.template", "proof.logo-rotator", "product.bento-grid", "proof.case-study", "proof.testimonials", "faq.accordion", "chrome.footer", "chrome.floating-card"]
+    },
+    {
+      "id": "template.pricing",
+      "name": "Pricing",
+      "routeCount": 1,
+      "routes": ["/pricing"],
+      "chrome": "full-no-floating-card",
+      "sections": ["chrome.header", "pricing.plans", "pricing.split-rows", "proof.logo-rotator", "pricing.compare-table", "faq.accordion", "chrome.footer"]
+    },
+    {
+      "id": "template.sales",
+      "name": "Talk to sales",
+      "routeCount": 1,
+      "routes": ["/sales"],
+      "chrome": "none",
+      "sections": ["form.sales-form", "proof.sales-pitch"]
+    },
+    {
+      "id": "template.security",
+      "name": "Security",
+      "routeCount": 1,
+      "routes": ["/security"],
+      "chrome": "full",
+      "sections": ["chrome.header", "hero.security", "product.feature-rows", "product.icon-band", "faq.accordion", "chrome.footer", "chrome.floating-card"]
+    },
+    {
+      "id": "template.ai-governance",
+      "name": "AI governance",
+      "routeCount": 1,
+      "routes": ["/ai-governance"],
+      "chrome": "full",
+      "sections": ["chrome.header", "hero.governance", "proof.logo-rotator", "product.models-grid", "proof.case-study", "product.rollout-deck", "product.icon-band", "faq.accordion", "chrome.footer", "chrome.floating-card"]
+    },
+    {
+      "id": "template.embed",
+      "name": "Embed",
+      "routeCount": 1,
+      "routes": ["/embed"],
+      "chrome": "full",
+      "sections": ["chrome.header", "hero.embed", "product.bento-grid", "faq.accordion", "chrome.footer", "chrome.floating-card"]
+    },
+    {
+      "id": "template.oss-friends",
+      "name": "OSS friends",
+      "routeCount": 1,
+      "routes": ["/oss-friends"],
+      "chrome": "full",
+      "sections": ["chrome.header", "content.oss-friends-grid", "chrome.footer", "chrome.floating-card"]
+    },
+    {
+      "id": "template.pieces-index",
+      "name": "Pieces catalog index",
+      "routeCount": 1,
+      "routes": ["/pieces"],
+      "chrome": "full",
+      "sections": ["chrome.header", "hero.catalog", "catalog.browser", "catalog.category-grid", "faq.accordion", "catalog.az-index", "chrome.footer", "chrome.floating-card"]
+    },
+    {
+      "id": "template.mcp-index",
+      "name": "MCP catalog index",
+      "routeCount": 1,
+      "routes": ["/mcp"],
+      "chrome": "full",
+      "sections": ["chrome.header", "hero.catalog", "catalog.browser", "catalog.category-grid", "faq.accordion", "catalog.az-index", "overlay.use-in-ai-dialog", "chrome.footer", "chrome.floating-card"]
+    },
+    {
+      "id": "template.catalog-category",
+      "name": "Catalog category (pieces + MCP)",
+      "routeCount": 34,
+      "routePattern": "/pieces/category/{key} and /mcp/category/{key} (17 keys each)",
+      "chrome": "full",
+      "sections": ["chrome.header", "hero.catalog", "catalog.browser", "faq.accordion", "catalog.az-index", "chrome.footer", "chrome.floating-card"]
+    },
+    {
+      "id": "template.piece-detail",
+      "name": "Piece detail",
+      "routeCount": 768,
+      "routePattern": "/pieces/{slug} (768 slugs from src/data/pieces.json)",
+      "chrome": "full",
+      "sections": ["chrome.header", "nav.breadcrumb", "catalog.detail-hero", "catalog.about", "catalog.capabilities", "cta.inline", "faq.accordion", "catalog.guides", "catalog.pairings", "catalog.related", "chrome.footer", "chrome.floating-card"]
+    },
+    {
+      "id": "template.mcp-detail",
+      "name": "MCP detail",
+      "routeCount": 768,
+      "routePattern": "/mcp/{slug} (768 slugs from src/data/pieces.json)",
+      "chrome": "full",
+      "sections": ["chrome.header", "nav.breadcrumb", "catalog.detail-hero", "catalog.about", "catalog.capabilities", "cta.inline", "faq.accordion", "catalog.guides", "catalog.related", "chrome.footer", "chrome.floating-card"]
+    },
+    {
+      "id": "template.piece-pair",
+      "name": "Piece integration pair",
+      "routeCount": 3000,
+      "routePattern": "/pieces/{a}/{b} (3,000 listed in the sitemap: 250 sources x 12 targets; the clone accepts any two distinct valid slugs)",
+      "chrome": "full",
+      "sections": ["chrome.header", "nav.breadcrumb", "catalog.pair-hero", "catalog.automation-ideas", "faq.accordion", "catalog.related", "catalog.related", "chrome.footer", "chrome.floating-card"]
+    },
+    {
+      "id": "template.blog-index",
+      "name": "Blog index",
+      "routeCount": 1,
+      "routes": ["/blog"],
+      "chrome": "full-no-floating-card",
+      "sections": ["chrome.header", "hero.listing", "nav.category-pills", "content.featured-post", "content.post-grid", "nav.pagination", "chrome.footer"]
+    },
+    {
+      "id": "template.blog-article",
+      "name": "Blog article",
+      "routeCount": 791,
+      "routePattern": "/blog/{slug} (791 in the sitemap; 796 in src/data/blog.json)",
+      "chrome": "full-no-floating-card",
+      "sections": ["content.progress-bar", "chrome.header", "nav.breadcrumb", "nav.toc", "content.article-header", "content.article-body", "content.signup-card", "content.keep-reading", "chrome.footer"]
+    },
+    {
+      "id": "template.blog-category",
+      "name": "Blog category",
+      "routeCount": 7,
+      "routePattern": "/blog/category/{slug}",
+      "chrome": "full-no-floating-card",
+      "sections": ["chrome.header", "hero.listing", "nav.category-pills", "content.post-grid", "nav.pagination", "chrome.footer"]
+    },
+    {
+      "id": "template.blog-author",
+      "name": "Blog author",
+      "routeCount": 56,
+      "routePattern": "/blog/author/{slug} (56 in the sitemap; 95 authors in src/data/blog.json)",
+      "chrome": "full-no-floating-card",
+      "sections": ["chrome.header", "hero.listing", "content.post-grid", "nav.pagination", "chrome.footer"]
+    },
+    {
+      "id": "template.resources-hub",
+      "name": "Resources hub",
+      "routeCount": 1,
+      "routes": ["/resources"],
+      "chrome": "full",
+      "sections": ["chrome.header", "hero.resources", "content.resource-type-grid", "chrome.footer", "chrome.floating-card"]
+    },
+    {
+      "id": "template.resource-category",
+      "name": "Resource category",
+      "routeCount": 4,
+      "routes": ["/resources/glossary", "/resources/automation-guides", "/resources/automation-use-cases", "/resources/integration-use-cases"],
+      "chrome": "full",
+      "sections": ["chrome.header", "hero.resources", "content.resource-listing", "content.keep-exploring", "faq.resource-faq", "chrome.footer", "chrome.floating-card"]
+    },
+    {
+      "id": "template.resource-detail",
+      "name": "Resource detail",
+      "routeCount": 1063,
+      "routePattern": "/resources/{category}/{slug}",
+      "chrome": "full",
+      "sections": ["chrome.header", "nav.breadcrumb", "content.resource-body", "nav.toc", "faq.resource-faq", "content.related-resources", "chrome.footer", "chrome.floating-card"]
+    },
+    {
+      "id": "template.legal",
+      "name": "Legal",
+      "routeCount": 2,
+      "routes": ["/privacy", "/terms"],
+      "chrome": "full",
+      "sections": ["chrome.header", "legal.nav", "legal.document", "chrome.footer", "chrome.floating-card"]
+    }
+  ]
+}
