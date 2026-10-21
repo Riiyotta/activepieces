@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.1.0 (2026-10-21): generation-safe mode (review: brand assets could be reused directly)
+
+- PageSpec gets a required, closed `mode`: `reference` (real Activepieces brand available for clone fidelity) or `generated` (another brand). pageSpecVersion and allowlistVersion 1.0.0 -> 1.1.0 (required field = breaking PageSpec change). `schema/build_schema.py` generates the `mode` enum from `assets/asset-roles.json` `modes`.
+- `assets/asset-roles.json`: every one of the 24 roles now has `availability` (reference-only 9, generation-safe 11, blocked-in-generated 4) and `generatedModeAlternatives`; protected roles are pinned in `verify_all.py` (EXPECTED_AVAILABILITY). Three new generation-safe roles: `brand.placeholder`, `brand.user-supplied` (new policy `user-supplied-only`, refs `data:user-brand#...`), `art.generic`. 21 -> 24 roles.
+- Root cause found while doing this: `brand.wordmark`, `brand.logomark`, `art.closing` and `badge.backer` were wired into NO section media slot (the clone's Header/Footer draw them implicitly), so a PageSpec could neither express nor forbid them. New slots: shell.header `brand`, shell.footer-closing `closingArt` + `backerBadge`, governance.hero / governance.models-grid `brandMark`, media.app-shot `sidebarLogo`. Existing slots gained the generation-safe roles (art.generic / brand.placeholder / brand.user-supplied); content enums `bento.grid cards[].art` and `hero.product-stage stageArt` gained `generic`.
+- Sections carry `generatedMode` (`requiredSlots`, `forbiddenContentValues`, or `blocked` with cited evidence for content.article, content.resource-detail, content.legal, system.external-redirect, which hard-wire a hand-off to activepieces.com).
+- Validator: 6 new rules (PAGESPEC_MODE, GENERATED_MODE_ASSET_ROLES, GENERATED_MODE_SOURCE_ARTWORK, GENERATED_MODE_BRAND_TERMS, GENERATED_MODE_BLOCKED_SECTIONS, GENERATED_MODE_REQUIRED_SLOTS), each also in `compatibility/graph.json` (31 -> 37 rules) and `rules/content-policy.json`. MEDIA_REF_POLICY learned `user-supplied-only`.
+- New example `schema/example.generated.pagespec.json` (fictional brand). Existing examples declare `mode: "reference"`.
+- Adversarial suite: 123 -> 241 checks (112 controls, 117 mutations, 12 rule-level). Every template and route is now synthesized in both modes; 48 generated-mode mutations (wordmark / logomark / source-artwork leakage, smuggling through other roles/fields/spellings, missing or invalid mode) and 14 registry-tampering mutations (a pinned role changed to a different but valid availability, unclassified role, ...); controls include a reference-mode spec that keeps the real brand.
+- verify_all: new checks ASSET_AVAILABILITY, GENERATED_MODE_ENFORCEMENT (a behavioural probe of the validator) and GENERATION_MODES (19 -> 22); prove_drift: 16 -> 44 injected drifts, each asserted to fail the named check with the intended message. Counts and README table recomputed from disk (new count keys assetRolesReferenceOnly / assetRolesGenerationSafe / assetRolesBlockedInGenerated).
+- Known limits (README, Modes): renderer fallback when a slot is unbound is not checkable from a PageSpec; product-UI mock components and dataset-bound content are not blocked.
+- `art.panel` `paths` omits `/panel/meadow-640.webp` that `src/pages/blog/BlogArticle.jsx` renders (not fixed here: content.article is blocked in generated mode and reference mode is unchanged); recorded for a later pass.
+
 ## 1.0.0 (2026-10-16): initial from-scratch build
 
 - Tokens: 230 (foundation 167, semantic 35), single light theme, LLM catalog/policy/allowlist.

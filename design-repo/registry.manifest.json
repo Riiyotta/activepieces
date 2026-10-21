@@ -1,8 +1,8 @@
 {
   "repositoryId": "activepieces-clone-design-repo",
-  "repositoryVersion": "1.0.0",
-  "pageSpecVersion": "1.0.0",
-  "allowlistVersion": "1.0.0",
+  "repositoryVersion": "1.1.0",
+  "pageSpecVersion": "1.1.0",
+  "allowlistVersion": "1.1.0",
   "versionFieldNote": "allowlistVersion (== tokens/llm/component-allowlist.json version, also token-catalog/token-policy) and pageSpecVersion (== schema const) are machine-checked by extraction/verify_all.py VERSION_PARITY / TOKEN_CATALOG_KEYS. repositoryVersion is documentation-only and nothing checks it.",
   "status": "design-review-pending",
   "productionApproved": false,
@@ -35,14 +35,18 @@
     "templates": 21,
     "routePatterns": 30,
     "concreteUrlsEnumerable": 6628,
-    "assetRoles": 21,
+    "assetRoles": 24,
+    "assetRolesReferenceOnly": 9,
+    "assetRolesGenerationSafe": 11,
+    "assetRolesBlockedInGenerated": 4,
     "motionPatterns": 42,
-    "graphRules": 31,
+    "graphRules": 37,
     "tailwindV3V4Rules": 14,
-    "examplePageSpecs": 2
+    "examplePageSpecs": 3
   },
   "verification": [
     "python3 schema/semantic_validate.py schema/example.pagespec.json",
+    "python3 schema/semantic_validate.py schema/example.generated.pagespec.json",
     "python3 schema/tests/adversarial_test.py",
     "python3 extraction/verify_all.py",
     "python3 extraction/prove_drift.py"
@@ -56,6 +60,7 @@
     "schema/build_schema.py",
     "schema/example.pagespec.json",
     "schema/example.catalog-detail.pagespec.json",
+    "schema/example.generated.pagespec.json",
     "schema/tests/adversarial_test.py",
     "templates/templates.json",
     "templates/routes.json",

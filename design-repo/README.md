@@ -8,6 +8,11 @@ without inventing colors, copy budgets, structure or motion.
 
 Status: **design-review-pending**, `productionApproved: false`.
 
+Every PageSpec declares a closed `mode`: `"reference"` (clone fidelity, the real
+Activepieces brand stays available) or `"generated"` (a page for another brand: the
+Activepieces wordmark, logomark, artwork and name are rejected). See
+[Modes](#modes-reference-vs-generated).
+
 ## Read this first: real-company constraints
 
 1. **Real company, private study.** activepieces.com is a live commercial site.
@@ -36,6 +41,69 @@ Status: **design-review-pending**, `productionApproved: false`.
 6. **Article TOC rail** renders when `hasToc || !NO_TOC.has(slug)` (63 measured
    slugs) and the placeholder TOC has at least 3 entries. `hasToc` alone is not the rule.
 
+## Modes: reference vs generated
+
+`mode` is a required field of every PageSpec (`schema/pagespec.schema.json`,
+enum `["generated", "reference"]`, generated from `assets/asset-roles.json` `modes`).
+
+| mode | meaning | the real Activepieces brand |
+|---|---|---|
+| `mode: "reference"` | faithful reproduction of the study clone | available: wordmark, logomark, mark, full logo, commissioned art, editorial covers, investor badge (exactly the paths in `assets/asset-roles.json`) |
+| `mode: "generated"` | a new page for another (original or fictional) brand | rejected |
+
+**The exact rule for `mode: "generated"`** (`assets/asset-roles.json` `generatedModeRule`;
+each point is one rule in `compatibility/graph.json` and in `schema/semantic_validate.py`):
+
+1. A media item whose `assetRole` has `availability` `reference-only` or
+   `blocked-in-generated` is an error (`GENERATED_MODE_ASSET_ROLES`).
+2. A media ref that is a file of the clone (starts with `/`), or a content value that
+   names commissioned art (`sections/*.json` `generatedMode.forbiddenContentValues`:
+   bento `art` meadow/clouds/water/iris, hero `stageArt` meadow/clouds/coast), is an error
+   (`GENERATED_MODE_SOURCE_ARTWORK`). Only `placeholder:`, `generated:` and
+   `data:user-brand#` refs are possible.
+3. The names "Activepieces" / "Active Pieces" in any string (meta, content, node id, route,
+   media ref, alt, href host) are an error (`GENERATED_MODE_BRAND_TERMS`).
+4. Every surface where the clone draws its own brand/art by default must be bound explicitly
+   to a generation-safe role (`generatedMode.requiredSlots`: header `brand`, footer
+   `closingArt`, floating-card `mark`, home `plates`, product/embed `stageArt`, demo-split
+   `stageArt`, governance `heroArt` + `brandMark`, models-grid `brandMark`, dream `beatMark`,
+   sales `background` + `formLogo`, app-shot `sidebarLogo`, pricing `rowArt`;
+   `GENERATED_MODE_REQUIRED_SLOTS`).
+5. Sections whose contract hard-wires a hand-off to activepieces.com
+   (`content.article`, `content.resource-detail`, `content.legal`,
+   `system.external-redirect`) are blocked (`GENERATED_MODE_BLOCKED_SECTIONS`), so
+   `template.blog-article`, `template.resource-detail`, `template.legal` and
+   `template.external-redirect` are reference-only templates.
+
+In `mode: "reference"` none of rules 1-5 apply. `PAGESPEC_MODE` rejects a missing or unknown mode.
+
+Every role in `assets/asset-roles.json` carries `availability` (closed enum, pinned for the
+protected roles by `verify_all.py` `ASSET_AVAILABILITY`):
+
+| availability | roles | in generated mode |
+|---|---|---|
+| `reference-only` | brand.wordmark, brand.logomark, brand.mark, brand.logo-full, art.plate, art.panel, art.closing, art.gov-hero, blog.cover | error; each names its `generatedModeAlternatives` |
+| `blocked-in-generated` | badge.backer (Y Combinator), piece.logo, ai-client.logo, oss-friend.logo | error; no substitute, omit the slot |
+| `generation-safe` | brand.placeholder, brand.user-supplied, art.generic, customer.logo, case-study.logo, testimonial.avatar, review-platform.mark, author.photo, mock.avatar, mock.brand-fictional, icon.ui | allowed (placeholder:/generated:/data:user-brand# refs only) |
+
+Generation-safe alternatives (new roles, defined by this design-repo, no source citation by design):
+`brand.placeholder` (neutral placeholder for the page's own brand mark, ref `placeholder:brand-mark`),
+`brand.user-supplied` (the user's own logo, ref `data:user-brand#logo`, policy `user-supplied-only`),
+`art.generic` (generic or newly generated illustration, ref `generated:<name>`).
+`mock.brand-fictional` keeps its meaning (a fictional company shown INSIDE a product mock); it is not a
+stand-in for the page's own brand, and in generated mode its clone file (`/logos/calder.svg`) is rejected
+like any clone file. `schema/example.generated.pagespec.json` is a complete generation-safe example
+(fictional brand "Quillbright").
+
+Limits, stated plainly. (a) A PageSpec cannot constrain how a renderer behaves when a slot is unbound:
+in generated mode a renderer must never fall back to a built-in clone asset (that is why the
+brand/art surfaces above are REQUIRED to be bound). The investor badge has no slot filler in generated
+mode and the renderer must omit it. (b) The product-UI mock components (bento `mock`, hero `visual`,
+demo-split demos, app-shot) depict the Activepieces product and are not blocked; they are not logos or
+commissioned plates, but a generated page for a different product should treat them as illustrative.
+(c) Dataset-bound content (`data:pieces#...` subjects, catalog/blog listings) is not blocked at section
+level; only its logo/cover media roles are.
+
 ## Layout
 
 | path | what |
@@ -48,9 +116,9 @@ Status: **design-review-pending**, `productionApproved: false`.
 | `templates/templates.json` | one template per page shape: ordered node objects `{section, variants, required, repeatable}` |
 | `templates/routes.json` | route inventory = the real `src/App.jsx` table (`verify_all` checks parity) |
 | `compatibility/graph.json` | rhythm/position/policy rules with severities; each is implemented in `semantic_validate.py` |
-| `assets/asset-roles.json` | closed assetRole vocabulary with generation/licensing policy; pinned roles |
+| `assets/asset-roles.json` | closed assetRole vocabulary with generation/licensing policy, `availability` per role (reference-only / generation-safe / blocked-in-generated), the two `modes`, pinned roles |
 | `rules/` | `tailwind-v3-v4.json`, `content-policy.json` |
-| `schema/` | generated draft-07 schema, `build_schema.py`, `semantic_validate.py`, 2 examples, `tests/adversarial_test.py` |
+| `schema/` | generated draft-07 schema, `build_schema.py`, `semantic_validate.py`, 3 examples (2 reference-mode, 1 generated-mode), `tests/adversarial_test.py` |
 | `extraction/` | `measured-values.json` (citation ledger + groundwork corrections), `verify_all.py`, `prove_drift.py` |
 
 ## Counts (recomputed from disk; verify_all README_COUNTS fails on drift)
@@ -67,11 +135,14 @@ Status: **design-review-pending**, `productionApproved: false`.
 | templates | 21 |
 | routePatterns | 30 |
 | concreteUrlsEnumerable | 6628 |
-| assetRoles | 21 |
+| assetRoles | 24 |
+| assetRolesReferenceOnly | 9 |
+| assetRolesGenerationSafe | 11 |
+| assetRolesBlockedInGenerated | 4 |
 | motionPatterns | 42 |
-| graphRules | 31 |
+| graphRules | 37 |
 | tailwindV3V4Rules | 14 |
-| examplePageSpecs | 2 |
+| examplePageSpecs | 3 |
 
 Data facts at build time: 768 pieces in 17 categories, 3000 sitemap pairs,
 796 blog posts (794 listed; posts with `listed:false` are routable but not
@@ -142,14 +213,14 @@ listed), 95 authors, 1063 resources. The original sitemap has 6,518 URLs.
 
 ```bash
 pip install jsonschema                                   # draft-07 validator
-python3 schema/semantic_validate.py my.pagespec.json     # schema + every graph rule; exit 1 on error
+python3 schema/semantic_validate.py my.pagespec.json     # schema + every graph rule (incl. mode rules); exit 1 on error
 python3 schema/tests/adversarial_test.py                 # every mutation rejected, every control passes
 python3 extraction/verify_all.py                         # self-containment, parity, citations, counts
 python3 extraction/prove_drift.py                        # proves verify_all fails on injected drift
 python3 schema/build_schema.py                           # regenerate the schema after editing a section
 ```
 
-A PageSpec picks a `template` and a concrete `route`, and its `nodes[]` must
+A PageSpec picks a `mode`, a `template` and a concrete `route`, and its `nodes[]` must
 follow that template's own node list. Each node carries closed `content` (word
 budgets), `media` (slot + assetRole + policy-conformant ref) and `motion`. Motion
 entries must reproduce the registry values for their pattern exactly, plus the
@@ -169,5 +240,6 @@ build found wrong.
 ## Versions
 
 `allowlistVersion` and `pageSpecVersion` are machine-checked (VERSION_PARITY).
-`repositoryVersion` is documentation-only. The zip `../design-repo.zip` is a build
+`repositoryVersion` is documentation-only. 1.1.0 adds the required `mode` field (a breaking
+PageSpec change, hence the minor bump of pageSpecVersion and allowlistVersion). The zip `../design-repo.zip` is a build
 artefact regenerated last. Never commit it next to this folder.
