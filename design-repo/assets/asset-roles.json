@@ -1,12 +1,28 @@
 {
   "$description": "Closed assetRole vocabulary for every media slot in a PageSpec. Built from real usage sites in src/ (cited). Wired through schema/pagespec.schema.json (enum), tokens/llm/component-allowlist.json (assetRoles) and the example PageSpecs.",
+  "modes": {
+    "reference": "Faithful reproduction of the study clone. The real Activepieces brand (wordmark, logomark, mark, full logo), its commissioned art plates/panels/closing/gov-hero art and its editorial covers remain available, exactly as listed in `paths`. Still bound by every pinned placeholder-only role and by the content policy (no real people, customers or verbatim copy).",
+    "generated": "A new page for a different (original or fictional) brand. Any node, media item, content value or string that references a `reference-only` or `blocked-in-generated` role, a clone file path, a real art name, or the Activepieces name is an ERROR (semantic_validate.py GENERATED_MODE_* rules). Brand and art surfaces must be bound to the generation-safe roles: brand.placeholder, brand.user-supplied, art.generic."
+  },
+  "availabilities": {
+    "reference-only": "Real Activepieces brand, artwork or editorial asset. Allowed in `reference` mode only; an ERROR in `generated` mode. Always names the generation-safe role(s) that replace it in `generatedModeAlternatives`.",
+    "generation-safe": "Cannot carry the source company's brand, commissioned artwork, a third-party trademark or a real person's likeness (refs are limited to placeholder:/generated:/data:user-brand#). Allowed in both modes.",
+    "blocked-in-generated": "Third-party trademark, endorsement mark or source dataset asset with no like-for-like substitute. Allowed in `reference` mode only; an ERROR in `generated` mode. `generatedModeAlternatives` is empty: the slot is omitted in generated pages."
+  },
+  "generatedModeRule": "In mode 'generated': (1) a media item whose assetRole is reference-only or blocked-in-generated is an ERROR (GENERATED_MODE_ASSET_ROLES); (2) any media ref that is a clone file path (starts with '/') or any content value naming real Activepieces art (sections/*.json generatedMode.forbiddenContentValues) is an ERROR (GENERATED_MODE_SOURCE_ARTWORK); (3) the strings 'Activepieces' / 'Active Pieces' anywhere in the PageSpec (meta, content, ids, route, media refs, alt) or in an Activepieces href host is an ERROR (GENERATED_MODE_BRAND_TERMS); (4) every brand/art surface a section would otherwise draw from the clone's real assets must be bound explicitly to a generation-safe role (sections/*.json generatedMode.requiredSlots; GENERATED_MODE_REQUIRED_SLOTS). In mode 'reference' none of these rules apply. Renderer obligation (not machine-checkable from a PageSpec): in generated mode a renderer must never fall back to a built-in clone asset (wordmark, plates, closing art, YC badge) when a slot is unbound.",
+  "generatedModeRefSchemes": [
+    "placeholder:",
+    "generated:",
+    "data:user-brand#"
+  ],
   "realCompanyNotice": "This design-repo describes a private study clone of activepieces.com, a real, live commercial site. Brand marks, customer logos (Bosch, SAP, Hilton, ...), testimonial people and avatars, review screenshots, case-study claims and marketing copy belong to Activepieces or to third parties. Do not publish this repository or its clone, and do not reproduce any of these in generated output.",
   "generationPolicies": {
     "reuse-exact-path": "May only reference the exact existing local file listed in `paths`; never redraw, recolor, crop or re-encode it; never introduce a new file for this role.",
     "reuse-closed-set": "May reference any file in the role's closed `paths` list (exact strings); no new files may be added for this role by a generator.",
     "data-bound-only": "May only be bound through a `data:` reference resolved from the clone's own JSON data at render time (e.g. data:pieces#slack). A generator must never emit a literal path, pick a logo/photo for an entity not in the dataset, or fabricate one.",
     "placeholder-only": "Generated pages MUST use a `placeholder:` reference (rendered as a neutral grey block / initials). Real files exist in the clone only to reproduce the measured original; they must never be reused, regenerated, imitated or described in generated output.",
-    "may-generate-synthetic": "Synthetic, non-human, non-brand illustration. A generator may reuse the listed files or request a new synthetic asset (`generated:` ref) that depicts no real person, logo or trademark."
+    "may-generate-synthetic": "Synthetic, non-human, non-brand illustration. A generator may reuse the listed files or request a new synthetic asset (`generated:` ref) that depicts no real person, logo or trademark.",
+    "user-supplied-only": "May only be bound through `data:user-brand#<key>`, resolved at render time from the brand kit / logo the USER supplies. A generator must never emit a file path, URL or any Activepieces file for this role, and must never draw a logo itself."
   },
   "pinnedPolicies": {
     "customer.logo": "placeholder-only",
@@ -16,6 +32,30 @@
     "author.photo": "placeholder-only"
   },
   "pinnedNote": "Roles carrying a real person's likeness or a third-party trademark are pinned: verify_all.py fails if their policy changes to ANY other value (including another valid enum member).",
+  "pinnedAvailability": {
+    "brand.wordmark": "reference-only",
+    "brand.logomark": "reference-only",
+    "brand.mark": "reference-only",
+    "brand.logo-full": "reference-only",
+    "art.plate": "reference-only",
+    "art.panel": "reference-only",
+    "art.closing": "reference-only",
+    "art.gov-hero": "reference-only",
+    "blog.cover": "reference-only",
+    "badge.backer": "blocked-in-generated",
+    "piece.logo": "blocked-in-generated",
+    "ai-client.logo": "blocked-in-generated",
+    "oss-friend.logo": "blocked-in-generated",
+    "customer.logo": "generation-safe",
+    "case-study.logo": "generation-safe",
+    "testimonial.avatar": "generation-safe",
+    "review-platform.mark": "generation-safe",
+    "author.photo": "generation-safe",
+    "brand.placeholder": "generation-safe",
+    "brand.user-supplied": "generation-safe",
+    "art.generic": "generation-safe"
+  },
+  "pinnedAvailabilityNote": "Every role is classified (`availability`). Roles that carry the Activepieces trademark, commissioned art, a third-party trademark or a real person's likeness, and the generation-safe replacements, are PINNED: verify_all.py ASSET_AVAILABILITY fails if any of them is changed to ANY other availability (including another valid one) or if a role is unclassified. Pinned values are held in verify_all.py EXPECTED_AVAILABILITY independently of this file.",
   "noRuntimeExternalRequests": {
     "rule": "Every asset is local under public/ at its original path; media refs must never be http(s) URLs.",
     "evidence": [
@@ -29,6 +69,11 @@
   "roles": {
     "brand.wordmark": {
       "policy": "reuse-exact-path",
+      "availability": "reference-only",
+      "generatedModeAlternatives": [
+        "brand.placeholder",
+        "brand.user-supplied"
+      ],
       "paths": [
         "/brand/activepieces-wordmark.svg"
       ],
@@ -40,11 +85,16 @@
           "quote": "[mask-image:url(/brand/activepieces-wordmark.svg)]"
         }
       ],
-      "guidance": "Header chrome only (rendered by shell.header, never authored per page). Do not place the wordmark in generated content, do not alter it, and do not use it to imply endorsement outside this private study clone.",
+      "guidance": "Header chrome only: the shell.header `brand` slot (reference mode; the clone's Header draws it by default). Do not place the wordmark in generated content, do not alter it, and do not use it to imply endorsement outside this private study clone. GENERATED MODE: blocked. Replace with brand.placeholder or brand.user-supplied.",
       "refRule": "^/[A-Za-z0-9._/-]+$ and must be in paths"
     },
     "brand.logomark": {
       "policy": "reuse-exact-path",
+      "availability": "reference-only",
+      "generatedModeAlternatives": [
+        "brand.placeholder",
+        "brand.user-supplied"
+      ],
       "paths": [
         "/brand/activepieces-logomark.svg"
       ],
@@ -56,11 +106,16 @@
           "quote": "[mask-image:url(/brand/activepieces-logomark.svg)]"
         }
       ],
-      "guidance": "Header chrome only; same restrictions as brand.wordmark.",
+      "guidance": "Header chrome only (shell.header `brand` slot, also drawn by the clone's Header by default); same restrictions as brand.wordmark. GENERATED MODE: blocked. Replace with brand.placeholder or brand.user-supplied.",
       "refRule": "^/[A-Za-z0-9._/-]+$ and must be in paths"
     },
     "brand.mark": {
       "policy": "reuse-exact-path",
+      "availability": "reference-only",
+      "generatedModeAlternatives": [
+        "brand.placeholder",
+        "brand.user-supplied"
+      ],
       "paths": [
         "/brand/activepieces-mark.svg"
       ],
@@ -72,11 +127,16 @@
           "quote": "-webkit-mask-image: url(/brand/activepieces-mark.svg);"
         }
       ],
-      "guidance": "Floating card icon and governance brand tiles only, as a CSS mask. Never recolor outside the cited token, never redraw.",
+      "guidance": "Floating card icon and governance brand tiles only, as a CSS mask. Never recolor outside the cited token, never redraw. GENERATED MODE: blocked. Replace with brand.placeholder or brand.user-supplied.",
       "refRule": "^/[A-Za-z0-9._/-]+$ and must be in paths"
     },
     "brand.logo-full": {
       "policy": "reuse-closed-set",
+      "availability": "reference-only",
+      "generatedModeAlternatives": [
+        "brand.placeholder",
+        "brand.user-supplied"
+      ],
       "paths": [
         "/brand/activepieces-logo.svg",
         "/assets/activepieces-logo.svg"
@@ -89,11 +149,13 @@
           "quote": "[mask-image:url(/assets/activepieces-logo.svg)]"
         }
       ],
-      "guidance": "Dream beat 3, app mock sidebar and the /sales form header only.",
+      "guidance": "Dream beat 3, app mock sidebar and the /sales form header only. GENERATED MODE: blocked. Replace with brand.placeholder or brand.user-supplied.",
       "refRule": "^/[A-Za-z0-9._/-]+$ and must be in paths"
     },
     "customer.logo": {
       "policy": "placeholder-only",
+      "availability": "generation-safe",
+      "generatedModeAlternatives": [],
       "pinned": true,
       "paths": [],
       "owner": "Third-party trademarks (Bosch, SAP, Hilton, Dell Technologies, ... 24 companies)",
@@ -104,11 +166,13 @@
           "quote": "const url = `url(/logos/customers/${file})`"
         }
       ],
-      "guidance": "NEVER reproduce real customer logos or name real customers in generated output. Marquees and rotating grids in generated pages use `placeholder:customer-logo` refs (neutral masks of equal aspect).",
+      "guidance": "NEVER reproduce real customer logos or name real customers in generated output. Marquees and rotating grids in generated pages use `placeholder:customer-logo` refs (neutral masks of equal aspect). Pinned placeholder-only role: identical in both modes.",
       "refRule": "^placeholder:[a-z0-9.-]+$"
     },
     "case-study.logo": {
       "policy": "placeholder-only",
+      "availability": "generation-safe",
+      "generatedModeAlternatives": [],
       "pinned": true,
       "paths": [],
       "owner": "Third-party trademarks (case-study customers)",
@@ -119,11 +183,13 @@
           "quote": "src=\"/assets/funding-societies.webp\""
         }
       ],
-      "guidance": "Case-study logos are real companies. Generated case studies must use `placeholder:case-study-logo` and synthetic company names; never real claims or metrics attributed to a real company.",
+      "guidance": "Case-study logos are real companies. Generated case studies must use `placeholder:case-study-logo` and synthetic company names; never real claims or metrics attributed to a real company. Pinned placeholder-only role: identical in both modes.",
       "refRule": "^placeholder:[a-z0-9.-]+$"
     },
     "testimonial.avatar": {
       "policy": "placeholder-only",
+      "availability": "generation-safe",
+      "generatedModeAlternatives": [],
       "pinned": true,
       "paths": [],
       "owner": "Real reviewers (personal likeness)",
@@ -139,11 +205,13 @@
           "quote": "src=\"/reviews/g2-giuseppec.webp\""
         }
       ],
-      "guidance": "Photos of real people. NEVER reuse, regenerate or imitate a real person's likeness. Use `placeholder:avatar-initials` (the component's real initials fallback).",
+      "guidance": "Photos of real people. NEVER reuse, regenerate or imitate a real person's likeness. Use `placeholder:avatar-initials` (the component's real initials fallback). Pinned placeholder-only role: identical in both modes.",
       "refRule": "^placeholder:[a-z0-9.-]+$"
     },
     "review-platform.mark": {
       "policy": "placeholder-only",
+      "availability": "generation-safe",
+      "generatedModeAlternatives": [],
       "pinned": true,
       "paths": [],
       "owner": "G2, Trustpilot, Reddit (trademarks)",
@@ -154,11 +222,13 @@
           "quote": "g2: { src: '/assets/g2-logo.webp', alt: 'G2' },"
         }
       ],
-      "guidance": "Do not attribute synthetic quotes to a real review platform. Use `placeholder:review-source`.",
+      "guidance": "Do not attribute synthetic quotes to a real review platform. Use `placeholder:review-source`. Pinned placeholder-only role: identical in both modes.",
       "refRule": "^placeholder:[a-z0-9.-]+$"
     },
     "author.photo": {
       "policy": "placeholder-only",
+      "availability": "generation-safe",
+      "generatedModeAlternatives": [],
       "pinned": true,
       "paths": [],
       "owner": "Real blog authors (personal likeness)",
@@ -169,11 +239,15 @@
           "quote": "src={author.photoLocal}"
         }
       ],
-      "guidance": "Existing author photos are bound from blog.json by the content templates themselves; a PageSpec never names an author photo. Generated pages must never create or attribute an article to a real author.",
+      "guidance": "Existing author photos are bound from blog.json by the content templates themselves; a PageSpec never names an author photo. Generated pages must never create or attribute an article to a real author. Pinned placeholder-only role: identical in both modes.",
       "refRule": "^placeholder:[a-z0-9.-]+$"
     },
     "blog.cover": {
       "policy": "data-bound-only",
+      "availability": "reference-only",
+      "generatedModeAlternatives": [
+        "art.generic"
+      ],
       "paths": [],
       "owner": "Activepieces (editorial covers)",
       "evidence": [
@@ -183,11 +257,13 @@
           "quote": "src={cover.local}"
         }
       ],
-      "guidance": "Bound from blog.json cover.local only. No fabricated covers for posts that do not exist in the dataset.",
+      "guidance": "Bound from blog.json cover.local only. No fabricated covers for posts that do not exist in the dataset. GENERATED MODE: blocked (real Activepieces editorial covers). Use art.generic for covers.",
       "refRule": "^data:[a-z-]+#[A-Za-z0-9._/-]+$"
     },
     "piece.logo": {
       "policy": "data-bound-only",
+      "availability": "blocked-in-generated",
+      "generatedModeAlternatives": [],
       "paths": [],
       "owner": "Third-party app trademarks (Slack, Gmail, ...)",
       "evidence": [
@@ -202,11 +278,13 @@
           "quote": "function LogoTile({ logo }) {"
         }
       ],
-      "guidance": "Bound from pieces.json (catalog) or the fixed demo components. Never draw, recolor or invent an app logo; never show an app that is not in pieces.json.",
+      "guidance": "Bound from pieces.json (catalog) or the fixed demo components. Never draw, recolor or invent an app logo; never show an app that is not in pieces.json. GENERATED MODE: blocked. These are third-party marks bound from the clone's own pieces dataset; omit the slot.",
       "refRule": "^data:[a-z-]+#[A-Za-z0-9._/-]+$"
     },
     "ai-client.logo": {
       "policy": "data-bound-only",
+      "availability": "blocked-in-generated",
+      "generatedModeAlternatives": [],
       "paths": [],
       "owner": "Third-party trademarks (Claude, Cursor, ChatGPT, ...)",
       "evidence": [
@@ -216,11 +294,13 @@
           "quote": "logo: '/logos/clients/claude.svg',"
         }
       ],
-      "guidance": "Only via the fixed client list of the Use-in-your-AI dialog / MCP connect cards.",
+      "guidance": "Only via the fixed client list of the Use-in-your-AI dialog / MCP connect cards. GENERATED MODE: blocked. These are third-party marks from the clone's fixed client list; omit the slot.",
       "refRule": "^data:[a-z-]+#[A-Za-z0-9._/-]+$"
     },
     "oss-friend.logo": {
       "policy": "data-bound-only",
+      "availability": "blocked-in-generated",
+      "generatedModeAlternatives": [],
       "paths": [],
       "owner": "Third-party OSS projects",
       "evidence": [
@@ -230,11 +310,15 @@
           "quote": "// Logos were fetched once from img.logo.dev into /public/logos/oss-friends/."
         }
       ],
-      "guidance": "Bound from ossFriends.js only; local copies (no runtime logo.dev requests). On error the card shows the first-letter avatar.",
+      "guidance": "Bound from ossFriends.js only; local copies (no runtime logo.dev requests). On error the card shows the first-letter avatar. GENERATED MODE: blocked. These are third-party marks from the clone's oss-friends dataset; omit the slot.",
       "refRule": "^data:[a-z-]+#[A-Za-z0-9._/-]+$"
     },
     "art.plate": {
       "policy": "reuse-closed-set",
+      "availability": "reference-only",
+      "generatedModeAlternatives": [
+        "art.generic"
+      ],
       "owner": "Activepieces (commissioned art)",
       "paths": [
         "/assets/hero-base-2064.webp",
@@ -251,11 +335,15 @@
           "quote": "srcSet=\"/hero/hero-base-1376.webp 1376w, /assets/hero-base-2064.webp 2064w"
         }
       ],
-      "guidance": "Homepage hero only. Do not generate look-alike plates.",
+      "guidance": "Homepage hero only. Do not generate look-alike plates. GENERATED MODE: blocked (commissioned Activepieces art). Replace with art.generic.",
       "refRule": "^/[A-Za-z0-9._/-]+$ and must be in paths"
     },
     "art.panel": {
       "policy": "reuse-closed-set",
+      "availability": "reference-only",
+      "generatedModeAlternatives": [
+        "art.generic"
+      ],
       "owner": "Activepieces (commissioned art)",
       "paths": [
         "/panel/meadow.webp",
@@ -284,11 +372,15 @@
           "quote": "url(/rows/embed-clouds.webp)"
         }
       ],
-      "guidance": "Stage / bento / sales backgrounds. Closed set: meadow, clouds, coast, water, iris (+ embed-clouds for pricing rows).",
+      "guidance": "Stage / bento / sales backgrounds. Closed set: meadow, clouds, coast, water, iris (+ embed-clouds for pricing rows). GENERATED MODE: blocked (commissioned Activepieces art). Replace with art.generic.",
       "refRule": "^/[A-Za-z0-9._/-]+$ and must be in paths"
     },
     "art.closing": {
       "policy": "reuse-closed-set",
+      "availability": "reference-only",
+      "generatedModeAlternatives": [
+        "art.generic"
+      ],
       "owner": "Activepieces (commissioned art)",
       "paths": [
         "/closing/meadow-1376.webp",
@@ -302,11 +394,15 @@
           "quote": "srcSet=\"/closing/meadow-1376.webp 1376w, /assets/meadow-2064.webp 2064w\""
         }
       ],
-      "guidance": "Footer closing band only (rendered by shell.footer-closing).",
+      "guidance": "Footer closing band only (shell.footer-closing `closingArt` slot; the clone's Footer draws it by default). GENERATED MODE: blocked (commissioned Activepieces art). Replace with art.generic.",
       "refRule": "^/[A-Za-z0-9._/-]+$ and must be in paths"
     },
     "art.gov-hero": {
       "policy": "reuse-closed-set",
+      "availability": "reference-only",
+      "generatedModeAlternatives": [
+        "art.generic"
+      ],
       "owner": "Activepieces (commissioned art)",
       "paths": [
         "/gov-hero/green-1600.webp",
@@ -320,11 +416,13 @@
           "quote": "const SRCSET = [1600, 2400, 3200]"
         }
       ],
-      "guidance": "/ai-governance hero card only.",
+      "guidance": "/ai-governance hero card only. GENERATED MODE: blocked (commissioned Activepieces art). Replace with art.generic.",
       "refRule": "^/[A-Za-z0-9._/-]+$ and must be in paths"
     },
     "mock.avatar": {
       "policy": "may-generate-synthetic",
+      "availability": "generation-safe",
+      "generatedModeAlternatives": [],
       "owner": "Synthetic illustrations (bots, project seeds)",
       "paths": [
         "/avatars/bots/atlas.svg",
@@ -353,11 +451,13 @@
           "quote": "avatar: 'atlas.svg',"
         }
       ],
-      "guidance": "Non-human generated avatars inside product mocks. New synthetic ones are allowed; they must not depict a real person or brand.",
+      "guidance": "Non-human generated avatars inside product mocks. New synthetic ones are allowed; they must not depict a real person or brand. GENERATED MODE: allowed only with generated:/placeholder: refs; the clone's own /avatars/* files count as source artwork and are rejected.",
       "refRule": "^(/[A-Za-z0-9._/-]+|generated:[a-z0-9.-]+|placeholder:[a-z0-9.-]+)$"
     },
     "mock.brand-fictional": {
       "policy": "may-generate-synthetic",
+      "availability": "generation-safe",
+      "generatedModeAlternatives": [],
       "owner": "Fictional brand used inside mocks (\"Calder\")",
       "paths": [
         "/logos/calder.svg"
@@ -369,11 +469,13 @@
           "quote": "<img src=\"/logos/calder.svg\""
         }
       ],
-      "guidance": "Fictional company in mocks. Synthetic replacements allowed; must not resemble a real company.",
+      "guidance": "Fictional company in mocks. Synthetic replacements allowed; must not resemble a real company. GENERATED MODE: allowed only with generated:/placeholder: refs (a NEW fictional company inside a product mock); the clone's /logos/calder.svg file is source artwork and is rejected. Not a substitute for the page's own brand: use brand.placeholder / brand.user-supplied for that.",
       "refRule": "^(/[A-Za-z0-9._/-]+|generated:[a-z0-9.-]+|placeholder:[a-z0-9.-]+)$"
     },
     "badge.backer": {
       "policy": "reuse-exact-path",
+      "availability": "blocked-in-generated",
+      "generatedModeAlternatives": [],
       "owner": "Y Combinator (trademark)",
       "paths": [
         "/logos/ycombinator.svg"
@@ -385,11 +487,13 @@
           "quote": "-webkit-mask-image: url(/logos/ycombinator.svg);"
         }
       ],
-      "guidance": "Footer bottom row only (rendered by shell.footer-closing). Never in authored content.",
+      "guidance": "Footer bottom row only (shell.footer-closing `backerBadge` slot; the clone's Footer draws it by default). Never in authored content. GENERATED MODE: blocked, no substitute. A generated page must not show a Y Combinator (or any investor) badge; omit the slot.",
       "refRule": "^/[A-Za-z0-9._/-]+$ and must be in paths"
     },
     "icon.ui": {
       "policy": "reuse-closed-set",
+      "availability": "generation-safe",
+      "generatedModeAlternatives": [],
       "owner": "Solar icon set (CC BY 4.0, 480 Design) and simple-icons brand glyphs",
       "paths": [],
       "pathsRule": "Iconify mask classes registered in src/icons.css (`i-solar:*`, `i-simple-icons:*`); files under /icons/<set>/. Reference by icon name, not path.",
@@ -400,8 +504,44 @@
           "quote": "* Usage: <span class=\"iconify i-solar:NAME size-4\" aria-hidden=\"true\" />"
         }
       ],
-      "guidance": "Use registered icon names only. simple-icons glyphs (github, x, linkedin) are third-party marks: only in their real positions (header menu GitHub item, share buttons).",
+      "guidance": "Use registered icon names only. simple-icons glyphs (github, x, linkedin) are third-party marks: only in their real positions (header menu GitHub item, share buttons). GENERATED MODE: allowed (generic UI icons by name). Third-party brand glyphs (github, x, linkedin) stay confined to their real positions.",
       "refRule": "^/[A-Za-z0-9._/-]+$ and must be in paths"
+    },
+    "brand.placeholder": {
+      "policy": "placeholder-only",
+      "availability": "generation-safe",
+      "generatedModeAlternatives": [],
+      "definedByDesignRepo": true,
+      "paths": [],
+      "owner": "None: neutral placeholder for the page's OWN brand identity",
+      "evidence": [],
+      "evidenceNote": "Defined by this design-repo as a generation-safe alternative; it is not observed in src/, so there is no source citation by design.",
+      "guidance": "Stands in for the wordmark/logomark/mark/full logo of the brand the page is being generated for, when no real logo is available: a neutral monogram or grey rounded block rendered as a mask. Ref form `placeholder:brand-mark` (or `placeholder:brand-wordmark`). It must not imitate, trace or recolor any Activepieces mark and must not contain the Activepieces name.",
+      "refRule": "^placeholder:[a-z0-9.-]+$"
+    },
+    "brand.user-supplied": {
+      "policy": "user-supplied-only",
+      "availability": "generation-safe",
+      "generatedModeAlternatives": [],
+      "definedByDesignRepo": true,
+      "paths": [],
+      "owner": "The user (their own logo / brand kit)",
+      "evidence": [],
+      "evidenceNote": "Defined by this design-repo as a generation-safe alternative; it is not observed in src/, so there is no source citation by design.",
+      "guidance": "The user's own logo, supplied at render time from their brand kit. Ref form `data:user-brand#<key>` (for example `data:user-brand#logo`). A generator never emits a file path or URL for it and never draws the logo itself.",
+      "refRule": "^data:user-brand#[A-Za-z0-9._/-]+$"
+    },
+    "art.generic": {
+      "policy": "may-generate-synthetic",
+      "availability": "generation-safe",
+      "generatedModeAlternatives": [],
+      "definedByDesignRepo": true,
+      "paths": [],
+      "owner": "None: generic / generated illustration (abstract gradients, soft shapes)",
+      "evidenceNote": "Defined by this design-repo as a generation-safe alternative; it is not observed in src/, so there is no source citation by design.",
+      "evidence": [],
+      "guidance": "Replaces art.plate / art.panel / art.closing / art.gov-hero and blog.cover in generated pages: a neutral abstract gradient or a newly generated illustration with no brand, person, product UI or text. Ref form `generated:<name>` or `placeholder:<name>`. Never a clone file path, never a look-alike of a commissioned Activepieces plate (meadow, clouds, coast, water, iris).",
+      "refRule": "^(generated:[a-z0-9.-]+|placeholder:[a-z0-9.-]+)$"
     }
   }
 }

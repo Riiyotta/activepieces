@@ -14,6 +14,8 @@
         "brand.logomark",
         "brand.mark",
         "brand.logo-full",
+        "brand.placeholder",
+        "brand.user-supplied",
         "customer.logo",
         "badge.backer"
       ]
@@ -23,7 +25,8 @@
     }
   },
   "rules": [
-    "mask-size contain, mask-position center, no-repeat; color comes from a bg-ink-* token."
+    "mask-size contain, mask-position center, no-repeat; color comes from a bg-ink-* token.",
+    "In generated mode only brand.placeholder / brand.user-supplied (and the placeholder-only customer.logo) may be painted; the real brand.* roles and badge.backer are reference-mode only (assets/asset-roles.json availability)."
   ],
   "evidence": [
     {

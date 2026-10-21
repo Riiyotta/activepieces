@@ -1,6 +1,6 @@
 {
   "$description": "What is enforced vs. convention for token usage.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "resolutionOrder": [
     "00-foundation",
     "themes/light (single theme)",

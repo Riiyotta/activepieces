@@ -45,6 +45,17 @@
   "media": {
     "slots": {}
   },
+  "generatedMode": {
+    "blocked": true,
+    "reason": "Contract pins content.targetOrigin to https://www.activepieces.com (a hand-off to the real site), so it cannot exist on a page for another brand.",
+    "evidence": [
+      {
+        "file": "src/pages/ExternalRedirect.jsx",
+        "lines": "6",
+        "quote": "origin = 'https://www.activepieces.com'"
+      }
+    ]
+  },
   "constraints": {
     "onePerPage": true,
     "mustFollow": "shell.header"

@@ -57,6 +57,17 @@
   "media": {
     "slots": {}
   },
+  "generatedMode": {
+    "blocked": true,
+    "reason": "This section's contract renders a placeholder body plus a 'Read the full ... on activepieces.com' hand-off to the real site (rules/content-policy.json storedBodies), so it cannot exist on a page for another brand.",
+    "evidence": [
+      {
+        "file": "src/pages/Legal.jsx",
+        "lines": "161",
+        "quote": "Read the full {d.full} on activepieces.com"
+      }
+    ]
+  },
   "constraints": {
     "onePerPage": true,
     "mustFollow": "shell.header"

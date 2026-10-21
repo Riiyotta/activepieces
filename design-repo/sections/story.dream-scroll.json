@@ -57,7 +57,9 @@
     "slots": {
       "beatMark": {
         "roles": [
-          "brand.logo-full"
+          "brand.logo-full",
+          "brand.placeholder",
+          "brand.user-supplied"
         ],
         "maxItems": 1,
         "required": false
@@ -71,6 +73,12 @@
         "required": false
       }
     }
+  },
+  "generatedMode": {
+    "requiredSlots": [
+      "beatMark"
+    ],
+    "note": "In mode 'generated' the real clone renders reference-only brand/art here by default; the listed slots must be bound to a generation-safe role and the listed content values are rejected. Reference mode is unchanged."
   },
   "constraints": {
     "onePerPage": true,

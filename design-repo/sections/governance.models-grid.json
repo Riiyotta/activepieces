@@ -79,8 +79,23 @@
         ],
         "maxItems": 8,
         "required": false
+      },
+      "brandMark": {
+        "roles": [
+          "brand.mark",
+          "brand.placeholder",
+          "brand.user-supplied"
+        ],
+        "maxItems": 1,
+        "required": false
       }
     }
+  },
+  "generatedMode": {
+    "requiredSlots": [
+      "brandMark"
+    ],
+    "note": "In mode 'generated' the real clone renders reference-only brand/art here by default; the listed slots must be bound to a generation-safe role and the listed content values are rejected. Reference mode is unchanged."
   },
   "constraints": {
     "onePerPage": true,

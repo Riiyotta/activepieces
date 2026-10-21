@@ -89,14 +89,17 @@
     "slots": {
       "background": {
         "roles": [
-          "art.panel"
+          "art.panel",
+          "art.generic"
         ],
         "maxItems": 1,
         "required": true
       },
       "formLogo": {
         "roles": [
-          "brand.logo-full"
+          "brand.logo-full",
+          "brand.placeholder",
+          "brand.user-supplied"
         ],
         "maxItems": 1,
         "required": false
@@ -116,6 +119,13 @@
         "required": false
       }
     }
+  },
+  "generatedMode": {
+    "requiredSlots": [
+      "background",
+      "formLogo"
+    ],
+    "note": "In mode 'generated' the real clone renders reference-only brand/art here by default; the listed slots must be bound to a generation-safe role and the listed content values are rejected. Reference mode is unchanged."
   },
   "constraints": {
     "onePerPage": true,

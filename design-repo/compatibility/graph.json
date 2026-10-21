@@ -192,6 +192,42 @@
       "enforcedBy": "schema/semantic_validate.py RULES['MEDIA_REF_POLICY']"
     },
     {
+      "id": "PAGESPEC_MODE",
+      "severity": "error",
+      "description": "PageSpec.mode is present and one of the modes declared in assets/asset-roles.json `modes` (reference | generated).",
+      "enforcedBy": "schema/semantic_validate.py RULES['PAGESPEC_MODE']"
+    },
+    {
+      "id": "GENERATED_MODE_ASSET_ROLES",
+      "severity": "error",
+      "description": "mode 'generated': no media item may use an assetRole whose `availability` is reference-only or blocked-in-generated (assets/asset-roles.json). mode 'reference': allowed.",
+      "enforcedBy": "schema/semantic_validate.py RULES['GENERATED_MODE_ASSET_ROLES']"
+    },
+    {
+      "id": "GENERATED_MODE_SOURCE_ARTWORK",
+      "severity": "error",
+      "description": "mode 'generated': no media ref may be a file path of the source clone ('/...'), and no content value may name commissioned source art (sections/*.json generatedMode.forbiddenContentValues, e.g. bento art 'meadow'). mode 'reference': allowed.",
+      "enforcedBy": "schema/semantic_validate.py RULES['GENERATED_MODE_SOURCE_ARTWORK']"
+    },
+    {
+      "id": "GENERATED_MODE_BRAND_TERMS",
+      "severity": "error",
+      "description": "mode 'generated': the source brand name (Activepieces / Active Pieces) must not appear in any string of the PageSpec (meta, content, ids, route, media ref/alt, hrefs). mode 'reference': allowed.",
+      "enforcedBy": "schema/semantic_validate.py RULES['GENERATED_MODE_BRAND_TERMS']"
+    },
+    {
+      "id": "GENERATED_MODE_BLOCKED_SECTIONS",
+      "severity": "error",
+      "description": "mode 'generated': a node of a section whose contract sets generatedMode.blocked (content.article, content.resource-detail, content.legal, system.external-redirect: each hard-wires a hand-off to activepieces.com) is rejected, so templates built on them are reference-only. mode 'reference': allowed.",
+      "enforcedBy": "schema/semantic_validate.py RULES['GENERATED_MODE_BLOCKED_SECTIONS']"
+    },
+    {
+      "id": "GENERATED_MODE_REQUIRED_SLOTS",
+      "severity": "error",
+      "description": "mode 'generated': every media slot named in the section's generatedMode.requiredSlots (surfaces where the clone draws its own brand/art by default) is bound to a generation-safe role. mode 'reference': not required.",
+      "enforcedBy": "schema/semantic_validate.py RULES['GENERATED_MODE_REQUIRED_SLOTS']"
+    },
+    {
       "id": "REQUIRED_MEDIA_SLOT",
       "severity": "error",
       "description": "Slots marked required are present.",

@@ -99,7 +99,8 @@
     "slots": {
       "covers": {
         "roles": [
-          "blog.cover"
+          "blog.cover",
+          "art.generic"
         ],
         "maxItems": 13,
         "required": false

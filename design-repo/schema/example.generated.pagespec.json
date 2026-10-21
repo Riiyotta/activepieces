@@ -1,0 +1,365 @@
+{
+  "pageSpecVersion": "1.1.0",
+  "mode": "generated",
+  "template": "template.solution",
+  "route": "/solutions/finance",
+  "meta": {
+    "title": "Quillbright billing automation",
+    "description": "Generation-safe example PageSpec for a fictional brand (Quillbright). Original copy, placeholder brand mark, user-supplied logo and generic illustrations only."
+  },
+  "nodes": [
+    {
+      "id": "header",
+      "section": "shell.header",
+      "variant": "default",
+      "content": {},
+      "motion": {
+        "entries": [
+          {
+            "pattern": "header-nav-in",
+            "trigger": "mount",
+            "durationMs": 620,
+            "easing": "ease-smooth",
+            "delayMs": 240
+          },
+          {
+            "pattern": "header-hide-show",
+            "trigger": "scroll-direction",
+            "durationMs": 300,
+            "easing": "ease-smooth"
+          },
+          {
+            "pattern": "header-dropdown",
+            "trigger": "hover-focus",
+            "durationMs": 300,
+            "easing": "ease-smooth"
+          },
+          {
+            "pattern": "mobile-sheet",
+            "trigger": "click",
+            "durationMs": 220,
+            "easing": "ease-smooth"
+          }
+        ],
+        "reducedMotionFallback": "static-end-state"
+      },
+      "media": [
+        {
+          "slot": "brand",
+          "assetRole": "brand.placeholder",
+          "ref": "placeholder:brand-wordmark",
+          "alt": "Quillbright wordmark placeholder"
+        }
+      ]
+    },
+    {
+      "id": "hero",
+      "section": "hero.product-stage",
+      "variant": "solution-logos",
+      "content": {
+        "h1": "Close the month without chasing a single spreadsheet.",
+        "lede": "Route every invoice to the right approver, match payments as they land, and keep a clean record of each run for the auditors.",
+        "ctaKey": "example_finance_hero",
+        "primaryLabel": "Start building",
+        "secondaryLabel": "Talk to sales",
+        "stageArt": "generic",
+        "visual": "solution-mock"
+      },
+      "motion": {
+        "entries": [
+          {
+            "pattern": "hero-line-template",
+            "trigger": "load",
+            "durationMs": 640,
+            "easing": "ease-smooth",
+            "staggerMs": 70
+          },
+          {
+            "pattern": "logo-rotate-set",
+            "trigger": "interval",
+            "durationMs": 300,
+            "easing": "ease",
+            "staggerMs": 40,
+            "intervalMs": 3500
+          }
+        ],
+        "reducedMotionFallback": "static-end-state"
+      },
+      "media": [
+        {
+          "slot": "stageArt",
+          "assetRole": "art.generic",
+          "ref": "generated:soft-gradient-stage",
+          "alt": ""
+        },
+        {
+          "slot": "rotatingLogos",
+          "assetRole": "customer.logo",
+          "ref": "placeholder:customer-logo",
+          "alt": "Customer logo placeholder 1"
+        },
+        {
+          "slot": "rotatingLogos",
+          "assetRole": "customer.logo",
+          "ref": "placeholder:customer-logo",
+          "alt": "Customer logo placeholder 2"
+        },
+        {
+          "slot": "rotatingLogos",
+          "assetRole": "customer.logo",
+          "ref": "placeholder:customer-logo",
+          "alt": "Customer logo placeholder 3"
+        },
+        {
+          "slot": "rotatingLogos",
+          "assetRole": "customer.logo",
+          "ref": "placeholder:customer-logo",
+          "alt": "Customer logo placeholder 4"
+        },
+        {
+          "slot": "rotatingLogos",
+          "assetRole": "customer.logo",
+          "ref": "placeholder:customer-logo",
+          "alt": "Customer logo placeholder 5"
+        },
+        {
+          "slot": "rotatingLogos",
+          "assetRole": "customer.logo",
+          "ref": "placeholder:customer-logo",
+          "alt": "Customer logo placeholder 6"
+        }
+      ]
+    },
+    {
+      "id": "grid",
+      "section": "bento.grid",
+      "variant": "solution",
+      "content": {
+        "h2": "Everything finance needs between the invoice and the ledger.",
+        "cards": [
+          {
+            "title": "Refund Requests",
+            "desc": "Requests arrive as a form and wait for a person.",
+            "span": 12,
+            "art": "generic",
+            "bgPosition": "50% 62%",
+            "mock": "refundForm"
+          },
+          {
+            "title": "Ask In Chat",
+            "desc": "Ask how last week went and get the numbers back.",
+            "span": 12,
+            "art": "generic",
+            "bgPosition": "50% 26%",
+            "mock": "chatThreadBerlin"
+          },
+          {
+            "title": "Approvals",
+            "desc": "Large payouts stop until someone signs off.",
+            "span": 9,
+            "art": "generic",
+            "bgPosition": "50% 30%",
+            "mock": "approvalRefund"
+          },
+          {
+            "title": "Routing Rules",
+            "desc": "Send each invoice down the path that fits its amount.",
+            "span": 15,
+            "art": "generic",
+            "bgPosition": "50% 58%",
+            "mock": "routerTable"
+          },
+          {
+            "title": "Resume On Failure",
+            "desc": "A failed run picks up from its last good step.",
+            "span": 15,
+            "art": "generic",
+            "bgPosition": "50% 16%",
+            "mock": "runResume"
+          },
+          {
+            "title": "Any Assistant",
+            "desc": "Your assistant can run the same flows on request.",
+            "span": 9,
+            "art": "generic",
+            "bgPosition": "50% 100%",
+            "mock": "mcpServer"
+          }
+        ]
+      },
+      "motion": {
+        "entries": [],
+        "reducedMotionFallback": "not-applicable"
+      }
+    },
+    {
+      "id": "case",
+      "section": "proof.case-study",
+      "variant": "case-b",
+      "content": {
+        "quoteLead": "Our finance team",
+        "quoteEmphasis": "stopped chasing approvals across five different inboxes",
+        "quoteTail": "and now closes the month two days sooner.",
+        "name": "Jordan Vale",
+        "role": "Head of Finance Operations, Northwind Ledger (fictional)",
+        "meta": "Fictional company, 300 employees",
+        "stats": [
+          {
+            "value": "40+",
+            "label": "Approval flows live"
+          },
+          {
+            "value": "2 days",
+            "label": "Faster month-end close"
+          },
+          {
+            "value": "12",
+            "label": "Teams onboarded"
+          }
+        ]
+      },
+      "motion": {
+        "entries": [],
+        "reducedMotionFallback": "not-applicable"
+      },
+      "media": [
+        {
+          "slot": "logo",
+          "assetRole": "case-study.logo",
+          "ref": "placeholder:case-study-logo",
+          "alt": "Fictional company logo placeholder"
+        }
+      ]
+    },
+    {
+      "id": "reviews",
+      "section": "proof.testimonials",
+      "variant": "default",
+      "content": {
+        "h2": "Finance teams that run their close on it.",
+        "stats": [
+          {
+            "value": "9.9k",
+            "label": "Example stars"
+          },
+          {
+            "value": "120",
+            "label": "Example contributors"
+          }
+        ],
+        "cards": [
+          {
+            "quote": "We moved invoice approvals out of email in a week, and nobody misses the old thread.",
+            "name": "Sam Rivera",
+            "source": "Example review"
+          },
+          {
+            "quote": "The approval step is the part our controller trusts most. Nothing pays out without a name on it.",
+            "name": "Priya N.",
+            "source": "Example review"
+          },
+          {
+            "quote": "Reconciliation used to take a full day. Now it is a short check on Monday morning.",
+            "name": "Alex T.",
+            "source": "Example review"
+          }
+        ]
+      },
+      "motion": {
+        "entries": [],
+        "reducedMotionFallback": "not-applicable"
+      },
+      "media": [
+        {
+          "slot": "avatars",
+          "assetRole": "testimonial.avatar",
+          "ref": "placeholder:avatar-initials",
+          "alt": "Initials avatar placeholder"
+        }
+      ]
+    },
+    {
+      "id": "faq",
+      "section": "faq.accordion",
+      "variant": "default",
+      "content": {
+        "h2": "Questions from finance leads.",
+        "items": [
+          {
+            "question": "Can a payment wait for a person before it goes out?",
+            "answer": "Yes. Add an approval step and the run pauses until an approver accepts or declines the exact amount."
+          },
+          {
+            "question": "Do we need engineers to set this up?",
+            "answer": "No. Most flows are built in the visual builder, with code available for the one step that needs it."
+          },
+          {
+            "question": "Where does the data live?",
+            "answer": "On the hosted cloud or on servers you run yourself; the flows are the same either way."
+          },
+          {
+            "question": "Can we see what every run did?",
+            "answer": "Every run keeps its inputs and outputs, so a reviewer can read what happened step by step."
+          }
+        ]
+      },
+      "motion": {
+        "entries": [
+          {
+            "pattern": "faq-accordion",
+            "trigger": "click",
+            "durationMs": 200,
+            "easing": "ease-out"
+          }
+        ],
+        "reducedMotionFallback": "static-end-state"
+      }
+    },
+    {
+      "id": "footer",
+      "section": "shell.footer-closing",
+      "variant": "default",
+      "content": {
+        "h2": "Hand the month-end grind to your flows.",
+        "lede": "Start with one approval flow this week, then add the rest of the close when it earns its place."
+      },
+      "motion": {
+        "entries": [],
+        "reducedMotionFallback": "not-applicable"
+      },
+      "media": [
+        {
+          "slot": "closingArt",
+          "assetRole": "art.generic",
+          "ref": "generated:soft-gradient-closing",
+          "alt": ""
+        }
+      ]
+    },
+    {
+      "id": "floating",
+      "section": "shell.floating-card",
+      "variant": "default",
+      "content": {},
+      "motion": {
+        "entries": [
+          {
+            "pattern": "floating-card-enter",
+            "trigger": "scroll-threshold",
+            "durationMs": 300,
+            "easing": "ease-smooth"
+          }
+        ],
+        "reducedMotionFallback": "static-end-state"
+      },
+      "media": [
+        {
+          "slot": "mark",
+          "assetRole": "brand.user-supplied",
+          "ref": "data:user-brand#logo",
+          "alt": "Quillbright logo supplied by the user"
+        }
+      ]
+    }
+  ]
+}

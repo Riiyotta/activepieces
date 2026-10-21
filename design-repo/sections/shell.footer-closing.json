@@ -117,7 +117,29 @@
     }
   },
   "media": {
-    "slots": {}
+    "slots": {
+      "closingArt": {
+        "roles": [
+          "art.closing",
+          "art.generic"
+        ],
+        "maxItems": 1,
+        "required": false
+      },
+      "backerBadge": {
+        "roles": [
+          "badge.backer"
+        ],
+        "maxItems": 1,
+        "required": false
+      }
+    }
+  },
+  "generatedMode": {
+    "requiredSlots": [
+      "closingArt"
+    ],
+    "note": "In mode 'generated' the real clone renders reference-only brand/art here by default; the listed slots must be bound to a generation-safe role and the listed content values are rejected. Reference mode is unchanged."
   },
   "constraints": {
     "onePerPage": true,

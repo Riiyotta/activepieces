@@ -3,6 +3,9 @@
 
 Runs (1) JSON Schema draft-07 validation against schema/pagespec.schema.json and
 (2) every rule in compatibility/graph.json, each implemented below in RULES.
+A PageSpec declares `mode`: "reference" (real Activepieces brand allowed, for clone
+fidelity) or "generated" (another brand: the GENERATED_MODE_* rules reject the
+Activepieces wordmark/logomark/artwork and every reference-only/blocked asset role).
 The PageSpec's declared `template` is cross-referenced against that template's
 REAL node list in templates/templates.json (not nodes[] in isolation).
 
@@ -27,6 +30,8 @@ HIDDEN_FLOATING = re.compile(r"^/(sales|pricing|admin|customers|blog)(/|$)")
 LOOP_TRIGGERS = {"continuous", "interval", "intersection-loop"}
 MOTION_BUDGET = 5
 FORBIDDEN_BODY_KEYS = {"markdown", "html", "bodyText", "articleBody", "fullText", "prose", "bodyMarkdown"}
+BRAND_TERM = re.compile(r"active[\s_.-]*pieces?", re.I)  # the source company's name, in any spelling
+UNSAFE_AVAILABILITY = ("reference-only", "blocked-in-generated")  # assets/asset-roles.json `availabilities` that generated mode rejects
 PIN_KEYS = ("trigger", "durationMs", "easing", "delayMs", "staggerMs", "intervalMs")
 
 
@@ -50,6 +55,7 @@ def load_context(repo=REPO):
         "graph": {r["id"]: r for r in _load(repo, "compatibility/graph.json")["rules"]},
         "motion": _load(repo, "tokens/00-foundation/motion.json"),
         "roles": _load(repo, "assets/asset-roles.json")["roles"],
+        "modes": sorted(_load(repo, "assets/asset-roles.json")["modes"]),
         "policy": _load(repo, "rules/content-policy.json"),
     }
     ctx["validator"] = Draft7Validator(ctx["schema"])
@@ -402,6 +408,7 @@ def r_media_ref(spec, ctx, out):
                 "reuse-exact-path": ref in role.get("paths", []),
                 "reuse-closed-set": ref in role.get("paths", []),
                 "may-generate-synthetic": ref in role.get("paths", []) or ref.startswith("generated:") or ref.startswith("placeholder:"),
+                "user-supplied-only": re.match(r"^data:user-brand#[A-Za-z0-9._/-]+$", ref) is not None,
             }.get(pol, False)
             if not ok:
                 out("MEDIA_REF_POLICY", "node %d %s: %s is %s; ref %r violates it (%s)" % (k, n.get("section"), item["assetRole"], pol, ref, role["refRule"]))
@@ -416,6 +423,109 @@ def r_required_media(spec, ctx, out):
         for name, slot in s["media"]["slots"].items():
             if slot.get("required") and name not in have:
                 out("REQUIRED_MEDIA_SLOT", "node %d %s: required media slot %r missing" % (k, n["section"], name))
+
+
+# ------------------------------------------------------------------ generated mode (brand safety)
+# `mode: "reference"` reproduces the study clone and may use the real Activepieces brand.
+# `mode: "generated"` is a page for another brand: no Activepieces wordmark / logomark / artwork.
+# Availability per role lives in assets/asset-roles.json (single source); per-section surfaces in
+# sections/*.json `generatedMode`. Nothing below hard-codes a role name.
+def _generated(spec):
+    return spec.get("mode") == "generated"
+
+
+def _gen_items(spec):
+    for k, n in enumerate(_nodes(spec)):
+        for i, item in enumerate(n.get("media") or []):
+            if isinstance(item, dict):
+                yield k, n, i, item
+
+
+def _walk_path(value, path):
+    """Values at a dotted path where a trailing [] iterates a list, e.g. 'cards[].art'."""
+    cur = [value]
+    for tok in path.split("."):
+        arr = tok.endswith("[]")
+        key = tok[:-2] if arr else tok
+        nxt = []
+        for v in cur:
+            if isinstance(v, dict) and key in v:
+                x = v[key]
+                if arr:
+                    nxt.extend(x if isinstance(x, list) else [])
+                else:
+                    nxt.append(x)
+        cur = nxt
+    return cur
+
+
+def r_mode(spec, ctx, out):
+    if spec.get("mode") not in ctx["modes"]:
+        out("PAGESPEC_MODE", "mode must be one of %s, got %r" % (ctx["modes"], spec.get("mode")))
+
+
+def r_gen_roles(spec, ctx, out):
+    if not _generated(spec):
+        return
+    for k, n, i, item in _gen_items(spec):
+        role = ctx["roles"].get(item.get("assetRole"))
+        if role and role.get("availability") in UNSAFE_AVAILABILITY:
+            alts = role.get("generatedModeAlternatives") or []
+            out("GENERATED_MODE_ASSET_ROLES", "node %d %s: assetRole %s is %s and may not be used in generated mode (%s)" % (
+                k, n.get("section"), item["assetRole"], role["availability"],
+                "use " + " or ".join(alts) if alts else "omit the slot; no substitute"))
+
+
+def r_gen_artwork(spec, ctx, out):
+    if not _generated(spec):
+        return
+    for k, n, i, item in _gen_items(spec):
+        ref = str(item.get("ref", ""))
+        if ref.startswith("/"):
+            out("GENERATED_MODE_SOURCE_ARTWORK", "node %d %s: media ref %r is a file of the source clone; generated pages may only use placeholder:/generated:/data:user-brand# refs" % (k, n.get("section"), ref))
+    for k, n in enumerate(_nodes(spec)):
+        s, c = _sec(ctx, n), n.get("content")
+        if not s or not isinstance(c, dict):
+            continue
+        for path, bad in (s.get("generatedMode", {}).get("forbiddenContentValues") or {}).items():
+            for v in _walk_path(c, path):
+                if v in bad:
+                    out("GENERATED_MODE_SOURCE_ARTWORK", "node %d %s: content.%s=%r names commissioned source artwork; use 'generic'" % (k, n.get("section"), path, v))
+
+
+def r_gen_brand(spec, ctx, out):
+    if not _generated(spec):
+        return
+    for path, s in _strings({k: v for k, v in spec.items() if k not in ("pageSpecVersion", "mode")}):
+        m = BRAND_TERM.search(s)
+        if m:
+            out("GENERATED_MODE_BRAND_TERMS", "%s contains the source brand name %r; generated pages must not use it (text, ref, alt, id, route or href)" % (path, m.group(0)))
+    for key in _keys(spec):
+        if BRAND_TERM.search(str(key)):
+            out("GENERATED_MODE_BRAND_TERMS", "field name %r contains the source brand name" % key)
+
+
+def r_gen_blocked(spec, ctx, out):
+    if not _generated(spec):
+        return
+    for k, n in enumerate(_nodes(spec)):
+        s = _sec(ctx, n)
+        if s and s.get("generatedMode", {}).get("blocked"):
+            out("GENERATED_MODE_BLOCKED_SECTIONS", "node %d %s is blocked in generated mode: %s" % (k, n.get("section"), s["generatedMode"].get("reason", "")))
+
+
+def r_gen_required(spec, ctx, out):
+    if not _generated(spec):
+        return
+    for k, n in enumerate(_nodes(spec)):
+        s = _sec(ctx, n)
+        if not s:
+            continue
+        for slot in s.get("generatedMode", {}).get("requiredSlots", []):
+            safe = [i for i in (n.get("media") or []) if isinstance(i, dict) and i.get("slot") == slot
+                    and ctx["roles"].get(i.get("assetRole"), {}).get("availability") == "generation-safe"]
+            if not safe:
+                out("GENERATED_MODE_REQUIRED_SLOTS", "node %d %s: generated mode needs media slot %r bound to a generation-safe role (the clone would otherwise draw its own brand/art here)" % (k, n.get("section"), slot))
 
 
 def r_max_words(spec, ctx, out):
@@ -605,6 +715,12 @@ RULES = {
     "MOTION_BUDGET": r_motion_budget,
     "MEDIA_ROLE_ALLOWED": r_media_roles,
     "MEDIA_REF_POLICY": r_media_ref,
+    "PAGESPEC_MODE": r_mode,
+    "GENERATED_MODE_ASSET_ROLES": r_gen_roles,
+    "GENERATED_MODE_SOURCE_ARTWORK": r_gen_artwork,
+    "GENERATED_MODE_BRAND_TERMS": r_gen_brand,
+    "GENERATED_MODE_BLOCKED_SECTIONS": r_gen_blocked,
+    "GENERATED_MODE_REQUIRED_SLOTS": r_gen_required,
     "REQUIRED_MEDIA_SLOT": r_required_media,
     "MAX_WORDS": r_max_words,
     "VARIANT_RULES": r_variant_rules,

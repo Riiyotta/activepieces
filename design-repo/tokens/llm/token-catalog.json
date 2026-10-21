@@ -1,6 +1,6 @@
 {
   "$description": "Curated view of every referenceable token path, keyed by namespace (= the top-level keys of the real token files). Generators reference these paths, never raw values.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "namespaces": {
     "breakpoint": {
       "layer": "00-foundation",

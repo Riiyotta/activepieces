@@ -74,6 +74,17 @@
       }
     }
   },
+  "generatedMode": {
+    "blocked": true,
+    "reason": "This section's contract renders a placeholder body plus a 'Read the full ... on activepieces.com' hand-off to the real site (rules/content-policy.json storedBodies), so it cannot exist on a page for another brand.",
+    "evidence": [
+      {
+        "file": "src/pages/blog/BlogArticle.jsx",
+        "lines": "195",
+        "quote": "Read the full article on activepieces.com"
+      }
+    ]
+  },
   "constraints": {
     "onePerPage": true,
     "mustFollow": "shell.header"

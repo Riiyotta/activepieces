@@ -1,6 +1,6 @@
 {
   "$description": "Closed list of what a generator may instantiate. Parity with the contract files and the schema is machine-checked by extraction/verify_all.py (ALLOWLIST_PARITY).",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "primitives": [
     "primitive.avatar",
     "primitive.button",
@@ -345,6 +345,7 @@
         "lede"
       ],
       "mediaSlots": [
+        "brandMark",
         "heroArt",
         "projectAvatars",
         "rotatingLogos"
@@ -363,6 +364,7 @@
         "statement"
       ],
       "mediaSlots": [
+        "brandMark",
         "modelLogos"
       ],
       "motionPatterns": [
@@ -497,6 +499,7 @@
       "contentFields": [],
       "mediaSlots": [
         "agentAvatars",
+        "sidebarLogo",
         "toolLogos"
       ],
       "motionPatterns": [
@@ -661,7 +664,10 @@
         "reassurance",
         "secondary"
       ],
-      "mediaSlots": [],
+      "mediaSlots": [
+        "backerBadge",
+        "closingArt"
+      ],
       "motionPatterns": [
         "none"
       ]
@@ -672,7 +678,9 @@
         "on-art"
       ],
       "contentFields": [],
-      "mediaSlots": [],
+      "mediaSlots": [
+        "brand"
+      ],
       "motionPatterns": [
         "header-dropdown",
         "header-hide-show",
@@ -752,9 +760,22 @@
     "media",
     "motion"
   ],
+  "pageSpecProperties": [
+    "pageSpecVersion",
+    "mode",
+    "template",
+    "route",
+    "meta",
+    "nodes"
+  ],
+  "modes": [
+    "generated",
+    "reference"
+  ],
   "assetRoles": [
     "ai-client.logo",
     "art.closing",
+    "art.generic",
     "art.gov-hero",
     "art.panel",
     "art.plate",
@@ -764,6 +785,8 @@
     "brand.logo-full",
     "brand.logomark",
     "brand.mark",
+    "brand.placeholder",
+    "brand.user-supplied",
     "brand.wordmark",
     "case-study.logo",
     "customer.logo",

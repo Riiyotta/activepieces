@@ -1,5 +1,5 @@
 {
-  "$description": "Content/licensing policy for generated PageSpecs. Enforced by schema/semantic_validate.py rules REAL_ENTITY_DENYLIST, REAL_COPY_VERBATIM, NO_STORED_BODIES and OUTBOUND_LINK_HOSTS.",
+  "$description": "Content/licensing policy for generated PageSpecs. Enforced by schema/semantic_validate.py rules REAL_ENTITY_DENYLIST, REAL_COPY_VERBATIM, NO_STORED_BODIES, OUTBOUND_LINK_HOSTS and (generated mode) GENERATED_MODE_BRAND_TERMS / GENERATED_MODE_ASSET_ROLES / GENERATED_MODE_SOURCE_ARTWORK / GENERATED_MODE_REQUIRED_SLOTS.",
   "realCompany": {
     "statement": "activepieces.com is a real, live commercial site. This design-repo and the clone it describes are a private study artefact. Do not publish either, do not make the repository public, and do not deploy generated pages publicly.",
     "evidence": [
@@ -14,7 +14,8 @@
     "Use synthetic copy shaped to each field's maxWords budget; never reproduce Activepieces' proprietary marketing copy verbatim (fingerprints below).",
     "Never name real customers, real reviewers, real case-study people or real blog authors; never attribute quotes, metrics or claims to them.",
     "Never reproduce real logos or photos of real people: media slots for those roles take placeholder: refs (assets/asset-roles.json pinnedPolicies).",
-    "Short UI labels (button and link labels such as 'Start building', 'Talk to sales') are interface strings and may be reused."
+    "Short UI labels (button and link labels such as 'Start building', 'Talk to sales') are interface strings and may be reused.",
+    "Brand: PageSpec.mode 'generated' (a page for another brand) must not carry the Activepieces name, wordmark, logomark, commissioned art, editorial covers, investor badge or any clone file path (GENERATED_MODE_* rules, assets/asset-roles.json availability); bind brand to brand.placeholder / brand.user-supplied and art to art.generic. Mode 'reference' (clone fidelity) may use the real brand."
   ],
   "storedBodies": {
     "rule": "Blog, resource and legal BODIES are deliberately not stored (metadata only). Each page renders a placeholder body that exercises the prose styles plus a 'Read the full ... on activepieces.com' link. PageSpecs for these templates have no body field (bodyMode const 'placeholder'); generators must not fabricate bodies, least of all attributed to real authors.",
