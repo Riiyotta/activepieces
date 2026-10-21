@@ -87,6 +87,28 @@ def schema_hand_edit(d):
     d["definitions"]["node"]["allOf"].pop()
 
 
+def edit_text(rel, old, new, every=False):
+    def go(root):
+        path = os.path.join(root, rel)
+        text = open(path, encoding="utf-8").read()
+        assert old in text, "drift injection target not found in %s: %r" % (rel, old)
+        open(path, "w", encoding="utf-8").write(text.replace(old, new) if every else text.replace(old, new, 1))
+    return go
+
+
+def role(rid, **kw):
+    return edit_json("assets/asset-roles.json", lambda d: d["roles"][rid].update(kw))
+
+
+def gen_node(section):
+    def get(d):
+        return next(n for n in d["nodes"] if n["section"] == section)
+    return get
+
+
+GEN_EX = "schema/example.generated.pagespec.json"
+
+
 def readme_count(root):
     p = os.path.join(root, "README.md")
     s = open(p, encoding="utf-8").read()
@@ -111,6 +133,35 @@ CASES = [
     ("route removed from routes.json", edit_json("templates/routes.json", lambda d: d["routes"].pop(1)), "SOURCE_DRIFT", True),
     ("semantic token broken", edit_json("tokens/10-semantic/semantic.json", lambda d: d["tokens"]["text"]["heading"].update({"$value": "{color.ink.999}"})), "TOKEN_REFERENCES", False),
     ("junk file", write_text(".DS_Store", "x", append=False), "NO_JUNK_FILES", False),
+    # ---- generated mode / asset availability (each must fail the NAMED check, and the message must be the intended one)
+    ("availability outside the closed enum", role("brand.mark", availability="reference_only"), "ASSET_AVAILABILITY", False, "not in"),
+    ("role left unclassified", edit_json("assets/asset-roles.json", lambda d: d["roles"]["art.plate"].pop("availability")), "ASSET_AVAILABILITY", False, "not classified"),
+    ("pinned wordmark -> different but VALID availability", role("brand.wordmark", availability="blocked-in-generated", generatedModeAlternatives=[]), "ASSET_AVAILABILITY", False, "pinned availability: brand.wordmark"),
+    ("pinned logomark declared generation-safe", role("brand.logomark", availability="generation-safe", generatedModeAlternatives=[]), "ASSET_AVAILABILITY", False, "pinned availability: brand.logomark"),
+    ("pinned art.panel declared generation-safe", role("art.panel", availability="generation-safe", generatedModeAlternatives=[], policy="may-generate-synthetic"), "ASSET_AVAILABILITY", False, "pinned availability: art.panel"),
+    ("pinned-availability map edited to match a tampered role", edit_json("assets/asset-roles.json", lambda d: (d["roles"]["badge.backer"].update(availability="reference-only", generatedModeAlternatives=["art.generic"]), d["pinnedAvailability"].update({"badge.backer": "reference-only"}))), "ASSET_AVAILABILITY", False, "pinned availability: badge.backer"),
+    ("generation-safe role that reuses clone files", role("mock.avatar", policy="reuse-closed-set"), "ASSET_AVAILABILITY", False, "reuses clone files"),
+    ("reference-only role without an alternative", role("art.closing", generatedModeAlternatives=[]), "ASSET_AVAILABILITY", False, "names no generation-safe alternative"),
+    ("blocked section unblocked (content.legal)", edit_json("sections/content.legal.json", lambda d: d["generatedMode"].update(blocked=False)), "ASSET_AVAILABILITY", False, "sections blocked in generated mode"),
+    ("generatedMode.requiredSlots names a slot that does not exist", edit_json("sections/shell.header.json", lambda d: d["generatedMode"]["requiredSlots"].append("nope")), "ASSET_AVAILABILITY", False, "unknown slot"),
+    ("generatedMode forbidden art values no longer an enum subset", edit_json("sections/bento.grid.json", lambda d: d["generatedMode"]["forbiddenContentValues"]["cards[].art"].append("sunset")), "ASSET_AVAILABILITY", False, "proper subset"),
+    ("generatedMode slot loses its generation-safe role", edit_json("sections/shell.header.json", lambda d: d["media"]["slots"]["brand"].update(roles=["brand.wordmark", "brand.logomark"])), "ASSET_AVAILABILITY", False, "no generation-safe role"),
+    ("schema mode enum drifted from the contracts", edit_json("schema/pagespec.schema.json", lambda d: d["properties"]["mode"].update(enum=["generated", "hybrid", "reference"])), "GENERATION_MODES", False, "schema mode enum"),
+    ("schema no longer requires mode", edit_json("schema/pagespec.schema.json", lambda d: d["required"].remove("mode")), "GENERATION_MODES", False, "does not require"),
+    ("allowlist modes drifted", edit_json("tokens/llm/component-allowlist.json", lambda d: d.update(modes=["reference"])), "GENERATION_MODES", False, "allowlist modes"),
+    ("allowlist pageSpecProperties lacks mode", edit_json("tokens/llm/component-allowlist.json", lambda d: d["pageSpecProperties"].remove("mode")), "GENERATION_MODES", False, "pageSpecProperties"),
+    ("registry declares an extra mode", edit_json("assets/asset-roles.json", lambda d: d["modes"].update(hybrid="x")), "GENERATION_MODES", False, "asset-roles.json modes"),
+    ("example without mode", edit_json("schema/example.pagespec.json", lambda d: d.pop("mode")), "GENERATION_MODES", False, "not in"),
+    ("generated example uses a reference-only role", edit_json(GEN_EX, lambda d: gen_node("shell.header")(d).update(media=[{"slot": "brand", "assetRole": "brand.wordmark", "ref": "/brand/activepieces-wordmark.svg", "alt": ""}])), "GENERATION_MODES", False, "in a generated example"),
+    ("generated example leaks the brand name", edit_json(GEN_EX, lambda d: d["meta"].update(title="Activepieces billing")), "GENERATION_MODES", False, "source brand name"),
+    ("generated example uses source art name", edit_json(GEN_EX, lambda d: gen_node("bento.grid")(d)["content"]["cards"][0].update(art="clouds")), "GENERATION_MODES", False, "names source artwork"),
+    ("generated example turned into a reference example", edit_json(GEN_EX, lambda d: d.update(mode="reference")), "GENERATION_MODES", False, "no example PageSpec declares mode 'generated'"),
+    ("README stops documenting blocked-in-generated", edit_text("README.md", "blocked-in-generated", "blocked", every=True), "GENERATION_MODES", False, "README does not document"),
+    ("validator rule dropped from graph.json", edit_json("compatibility/graph.json", lambda d: d.update(rules=[r for r in d["rules"] if r["id"] != "GENERATED_MODE_BRAND_TERMS"])), "GRAPH_VALIDATOR_AGREEMENT", False, "GENERATED_MODE_BRAND_TERMS"),
+    ("validator rule gutted (brand-term check does nothing)", edit_text("schema/semantic_validate.py", "def r_gen_brand(spec, ctx, out):\n    if not _generated(spec):\n        return\n", "def r_gen_brand(spec, ctx, out):\n    return\n"), "GENERATED_MODE_ENFORCEMENT", False, "GENERATED_MODE_BRAND_TERMS"),
+    ("validator rule gutted (role availability ignored)", edit_text("schema/semantic_validate.py", 'if role and role.get("availability") in UNSAFE_AVAILABILITY:', "if False:"), "GENERATED_MODE_ENFORCEMENT", False, "GENERATED_MODE_ASSET_ROLES"),
+    ("validator unsafe set emptied", edit_text("schema/semantic_validate.py", 'UNSAFE_AVAILABILITY = ("reference-only", "blocked-in-generated")', "UNSAFE_AVAILABILITY = ()"), "GENERATED_MODE_ENFORCEMENT", False, "GENERATED_MODE_ASSET_ROLES"),
+    ("asset-role count hand-bumped", edit_json("registry.manifest.json", lambda d: d["counts"].update(assetRolesReferenceOnly=d["counts"]["assetRolesReferenceOnly"] + 1)), "COUNTS_RECOMPUTE", False, "assetRolesReferenceOnly"),
 ]
 
 
@@ -141,12 +192,14 @@ def main():
         ok = code == 0
         fails += 0 if ok else 1
         print("%s  %s -> %s" % ("PASS    " if ok else "FAIL    ", label, out.strip().splitlines()[-1]))
-    for name, mutate, check, needs_src in CASES:
+    for case in CASES:
+        name, mutate, check, needs_src = case[:4]
+        needle = case[4] if len(case) > 4 else None
         if needs_src and not SRC:
             print("SKIPPED  %s (needs source tree)" % name)
             continue
         code, out = run_copy(mutate, needs_src)
-        caught = code != 0 and ("FAIL  %s" % check) in out
+        caught = code != 0 and ("FAIL  %s" % check) in out and (needle is None or needle in out)
         fails += 0 if caught else 1
         print("%s  %-52s -> %s" % ("CAUGHT  " if caught else "MISSED! ", name, check if caught else out[-400:]))
     print("prove_drift: %d case(s) + 2 controls, %d failure(s)" % (len(CASES), fails))

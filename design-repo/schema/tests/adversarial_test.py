@@ -4,7 +4,9 @@ every real template / route / example produces ZERO errors.
 
 Controls are synthesized generically from templates/templates.json +
 templates/routes.json + the section contracts, so a new template or route is
-covered with no new control code.
+covered with no new control code. Every template/route is synthesized TWICE:
+mode "reference" and mode "generated" (the latter binds every brand/art surface to a
+generation-safe role), so a new section that forgot its generatedMode contract fails here.
 
 Usage: python3 schema/tests/adversarial_test.py
 Exit 0 = every mutation rejected with the expected rule AND every control passes.
@@ -18,7 +20,9 @@ import sys
 sys.dont_write_bytecode = True
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, os.path.join(REPO, "schema"))
+sys.path.insert(0, os.path.join(REPO, "extraction"))
 import semantic_validate as SV  # noqa: E402
+import verify_all as VA  # noqa: E402  (registry-level checks are exercised below)
 
 CTX = SV.load_context(REPO)
 
@@ -59,15 +63,37 @@ def motion_for(sec, variant):
     return {"entries": entries, "reducedMotionFallback": m["reducedMotionFallback"]}
 
 
-def media_for(sec):
+SAFE_REF = {"placeholder-only": "placeholder:x", "user-supplied-only": "data:user-brand#x", "may-generate-synthetic": "generated:x"}
+
+
+def media_for(sec, mode="reference"):
     out = []
+    forced = set(sec.get("generatedMode", {}).get("requiredSlots", [])) if mode == "generated" else set()
     for name, slot in sec["media"]["slots"].items():
-        if not slot.get("required"):
+        if not slot.get("required") and name not in forced:
             continue
-        role = CTX["roles"][slot["roles"][0]]
-        ref = {"placeholder-only": "placeholder:x", "data-bound-only": "data:x#y"}.get(role["policy"]) or (role["paths"][0] if role.get("paths") else "generated:x")
-        out.append({"slot": name, "assetRole": slot["roles"][0], "ref": ref})
+        if mode == "generated":  # first generation-safe role of the slot, with a ref its policy allows
+            role_id = next(r for r in slot["roles"] if CTX["roles"][r]["availability"] == "generation-safe")
+            ref = SAFE_REF[CTX["roles"][role_id]["policy"]]
+        else:
+            role_id = slot["roles"][0]
+            role = CTX["roles"][role_id]
+            ref = {"placeholder-only": "placeholder:x", "data-bound-only": "data:x#y"}.get(role["policy"]) or (role["paths"][0] if role.get("paths") else "generated:x")
+        out.append({"slot": name, "assetRole": role_id, "ref": ref})
     return out
+
+
+def _set_path(value, path, new):
+    """Overwrite every value at a dotted path ('cards[].art') with `new`."""
+    toks = path.split(".")
+    cur = [value]
+    for tok in toks[:-1]:
+        arr = tok.endswith("[]")
+        key = tok[:-2] if arr else tok
+        cur = [y for v in cur if isinstance(v, dict) and key in v for y in (v[key] if arr else [v[key]])]
+    for v in cur:
+        if isinstance(v, dict) and toks[-1] in v:
+            v[toks[-1]] = new
 
 
 def pick_variant(slot, route):
@@ -91,7 +117,7 @@ def pick_variant(slot, route):
     return v[0]
 
 
-def synthesize(template_id, route):
+def synthesize(template_id, route, mode="reference"):
     t = CTX["templates"][template_id]
     r, params = SV.match_route(CTX, template_id, route)
     nodes = []
@@ -127,11 +153,14 @@ def synthesize(template_id, route):
         if sid == "shell.header":
             variant = "on-art" if route == "/" else "default"
         node = {"id": "n%d" % i, "section": sid, "variant": variant, "content": content, "motion": motion_for(sec, variant)}
-        med = media_for(sec)
+        if mode == "generated":
+            for path in sec.get("generatedMode", {}).get("forbiddenContentValues", {}):
+                _set_path(content, path, "generic")
+        med = media_for(sec, mode)
         if med:
             node["media"] = med
         nodes.append(node)
-    spec = {"pageSpecVersion": "1.0.0", "template": template_id, "route": route, "meta": {"title": "Synthetic control"}, "nodes": nodes}
+    spec = {"pageSpecVersion": CTX["schema"]["properties"]["pageSpecVersion"]["const"], "mode": mode, "template": template_id, "route": route, "meta": {"title": "Synthetic control"}, "nodes": nodes}
     bind_route(spec, params or {})
     return spec
 
@@ -170,6 +199,7 @@ def node_of(spec, section, nth=0):
 # ------------------------------------------------------------------ mutations
 EX = load_ex("example.pagespec.json")
 EX2 = load_ex("example.catalog-detail.pagespec.json")
+GEN = load_ex("example.generated.pagespec.json")
 
 
 def m(base, fn):
@@ -181,10 +211,6 @@ def m(base, fn):
 def C(t, route=None):
     route = route or next(r["sampleRoute"] for r in CTX["routes"] if r["template"] == t)
     return synthesize(t, route)
-
-
-def _set(path_fn):
-    return path_fn
 
 
 MUTATIONS = [
@@ -250,6 +276,74 @@ MUTATIONS = [
     ("footer default variant with custom buttons", m(EX, lambda s: node_of(s, "shell.footer-closing")["content"].update(primary={"label": "Go", "href": "/sales"})), {"VARIANT_RULES"}),
 ]
 
+
+def _put(spec, section, slot, role, ref, alt="x"):
+    node_of(spec, section).setdefault("media", []).append({"slot": slot, "assetRole": role, "ref": ref, "alt": alt})
+
+
+def _replace_brand(spec, section, slot, role, ref):
+    node_of(spec, section)["media"] = [{"slot": slot, "assetRole": role, "ref": ref, "alt": ""}]
+
+
+def _drop_mode(s):
+    s.pop("mode")
+
+
+WORDMARK = "/brand/activepieces-wordmark.svg"
+LOGOMARK = "/brand/activepieces-logomark.svg"
+
+# --- generated mode (brand safety): each is the generation-safe example with ONE leak injected
+GEN_MUTATIONS = [
+    # mode field
+    ("missing mode", m(EX, _drop_mode), {"SCHEMA", "PAGESPEC_MODE"}),
+    ("mode 'hybrid' (not in the closed enum)", m(GEN, lambda s: s.update(mode="hybrid")), {"SCHEMA", "PAGESPEC_MODE"}),
+    ("mode in the wrong case", m(GEN, lambda s: s.update(mode="Generated")), {"SCHEMA", "PAGESPEC_MODE"}),
+    ("mode null", m(GEN, lambda s: s.update(mode=None)), {"SCHEMA", "PAGESPEC_MODE"}),
+    ("brandContext invented next to mode", m(GEN, lambda s: s.update(brandContext="other-brand")), {"SCHEMA"}),
+    # wordmark leakage
+    ("wordmark leakage: brand.wordmark in the header", m(GEN, lambda s: _replace_brand(s, "shell.header", "brand", "brand.wordmark", WORDMARK)), {"GENERATED_MODE_ASSET_ROLES"}),
+    ("wordmark leakage next to the placeholder", m(GEN, lambda s: _put(s, "shell.header", "brand", "brand.wordmark", WORDMARK)), {"GENERATED_MODE_ASSET_ROLES"}),
+    ("wordmark leakage: brand.logo-full on the app mock", m(C("template.home", "/"), lambda s: (s.update(mode="generated"), _put(s, "media.app-shot", "sidebarLogo", "brand.logo-full", "/brand/activepieces-logo.svg"))), {"GENERATED_MODE_ASSET_ROLES"}),
+    ("wordmark path smuggled through brand.placeholder", m(GEN, lambda s: _replace_brand(s, "shell.header", "brand", "brand.placeholder", WORDMARK)), {"GENERATED_MODE_SOURCE_ARTWORK", "GENERATED_MODE_BRAND_TERMS", "MEDIA_REF_POLICY"}),
+    ("wordmark path smuggled through brand.user-supplied", m(GEN, lambda s: _replace_brand(s, "shell.header", "brand", "brand.user-supplied", WORDMARK)), {"GENERATED_MODE_SOURCE_ARTWORK", "GENERATED_MODE_BRAND_TERMS", "MEDIA_REF_POLICY"}),
+    ("wordmark path smuggled through mock.brand-fictional", m(GEN, lambda s: _replace_brand(s, "shell.header", "brand", "mock.brand-fictional", WORDMARK)), {"GENERATED_MODE_SOURCE_ARTWORK", "GENERATED_MODE_BRAND_TERMS", "MEDIA_ROLE_ALLOWED"}),
+    ("wordmark name smuggled through a placeholder ref", m(GEN, lambda s: _replace_brand(s, "shell.header", "brand", "brand.placeholder", "placeholder:activepieces-wordmark")), {"GENERATED_MODE_BRAND_TERMS"}),
+    ("wordmark name smuggled through a generated: ref", m(GEN, lambda s: _replace_brand(s, "shell.header", "brand", "brand.placeholder", "generated:activepieces-wordmark")), {"GENERATED_MODE_BRAND_TERMS"}),
+    ("wordmark name smuggled through alt text", m(GEN, lambda s: node_of(s, "shell.header")["media"][0].update(alt="Activepieces wordmark")), {"GENERATED_MODE_BRAND_TERMS"}),
+    ("wordmark name spelled 'Active Pieces' in copy", m(GEN, lambda s: node_of(s, "shell.footer-closing")["content"].update(h2="Join Active Pieces today.")), {"GENERATED_MODE_BRAND_TERMS"}),
+    ("wordmark name in upper case in copy", m(GEN, lambda s: node_of(s, "shell.footer-closing")["content"].update(lede="ACTIVEPIECES approves every run.")), {"GENERATED_MODE_BRAND_TERMS"}),
+    ("wordmark name in the page title", m(GEN, lambda s: s["meta"].update(title="Activepieces for finance")), {"GENERATED_MODE_BRAND_TERMS"}),
+    ("wordmark name in a node id", m(GEN, lambda s: node_of(s, "shell.header").update(id="activepieces-header")), {"GENERATED_MODE_BRAND_TERMS"}),
+    ("wordmark name in a cta href host", m(GEN, lambda s: node_of(s, "shell.footer-closing")["content"].update(primary={"label": "Go", "href": "https://cloud.activepieces.com/sign-up"}, secondary={"label": "Talk", "href": "/sales"})), {"GENERATED_MODE_BRAND_TERMS", "VARIANT_RULES"}),
+    # logomark leakage
+    ("logomark leakage: brand.logomark in the header", m(GEN, lambda s: _replace_brand(s, "shell.header", "brand", "brand.logomark", LOGOMARK)), {"GENERATED_MODE_ASSET_ROLES"}),
+    ("logomark leakage: brand.mark on the floating card", m(GEN, lambda s: _replace_brand(s, "shell.floating-card", "mark", "brand.mark", "/brand/activepieces-mark.svg")), {"GENERATED_MODE_ASSET_ROLES"}),
+    ("logomark leakage: wordmark AND logomark together", m(GEN, lambda s: node_of(s, "shell.header").update(media=[{"slot": "brand", "assetRole": "brand.wordmark", "ref": WORDMARK}, {"slot": "brand", "assetRole": "brand.logomark", "ref": LOGOMARK}])), {"GENERATED_MODE_ASSET_ROLES"}),
+    ("logomark path smuggled through brand.placeholder", m(GEN, lambda s: _replace_brand(s, "shell.floating-card", "mark", "brand.placeholder", "/brand/activepieces-mark.svg")), {"GENERATED_MODE_SOURCE_ARTWORK", "MEDIA_REF_POLICY", "GENERATED_MODE_BRAND_TERMS"}),
+    ("logomark in the header slot removed (clone would draw its own)", m(GEN, lambda s: node_of(s, "shell.header").pop("media")), {"GENERATED_MODE_REQUIRED_SLOTS"}),
+    ("floating-card mark removed (clone would draw its own)", m(GEN, lambda s: node_of(s, "shell.floating-card").pop("media")), {"GENERATED_MODE_REQUIRED_SLOTS"}),
+    ("brand.user-supplied bound to a file path", m(GEN, lambda s: _replace_brand(s, "shell.floating-card", "mark", "brand.user-supplied", "/logos/own.svg")), {"GENERATED_MODE_SOURCE_ARTWORK", "MEDIA_REF_POLICY"}),
+    ("brand.user-supplied bound to a third-party dataset ref", m(GEN, lambda s: _replace_brand(s, "shell.floating-card", "mark", "brand.user-supplied", "data:pieces#slack")), {"MEDIA_REF_POLICY"}),
+    ("brand.placeholder bound to a data ref", m(GEN, lambda s: _replace_brand(s, "shell.header", "brand", "brand.placeholder", "data:user-brand#logo")), {"MEDIA_REF_POLICY"}),
+    # source artwork reuse
+    ("source artwork: art.panel stage art", m(GEN, lambda s: _replace_brand(s, "hero.product-stage", "stageArt", "art.panel", "/panel/clouds.webp")), {"GENERATED_MODE_ASSET_ROLES", "GENERATED_MODE_SOURCE_ARTWORK"}),
+    ("source artwork: art.closing footer band", m(GEN, lambda s: _replace_brand(s, "shell.footer-closing", "closingArt", "art.closing", "/closing/meadow-1376.webp")), {"GENERATED_MODE_ASSET_ROLES", "GENERATED_MODE_SOURCE_ARTWORK"}),
+    ("source artwork: art.plate hero plates", m(C("template.home", "/"), lambda s: (s.update(mode="generated"), _put(s, "hero.home-stage", "plates", "art.plate", "/hero/hero-base-1376.webp"))), {"GENERATED_MODE_ASSET_ROLES", "GENERATED_MODE_SOURCE_ARTWORK"}),
+    ("source artwork: art.gov-hero", m(C("template.ai-governance"), lambda s: (s.update(mode="generated"), _put(s, "governance.hero", "heroArt", "art.gov-hero", "/gov-hero/green-1600.webp"))), {"GENERATED_MODE_ASSET_ROLES", "GENERATED_MODE_SOURCE_ARTWORK"}),
+    ("source artwork: blog.cover editorial cover", m(C("template.blog-article"), lambda s: (s.update(mode="generated"), _put(s, "content.article", "cover", "blog.cover", "data:blog#some-post"))), {"GENERATED_MODE_ASSET_ROLES"}),
+    ("source artwork path smuggled through art.generic", m(GEN, lambda s: _replace_brand(s, "hero.product-stage", "stageArt", "art.generic", "/panel/clouds.webp")), {"GENERATED_MODE_SOURCE_ARTWORK", "MEDIA_REF_POLICY"}),
+    ("source artwork path through mock.avatar (policy alone would accept it)", m(C("template.blog-article"), lambda s: (s.update(mode="generated"), _put(s, "content.article", "bots", "mock.avatar", "/avatars/bots/atlas.svg"))), {"GENERATED_MODE_SOURCE_ARTWORK"}),
+    ("source artwork path through mock.brand-fictional (the clone's Calder logo)", m(C("template.home", "/"), lambda s: (s.update(mode="generated"), _put(s, "media.app-shot", "agentAvatars", "mock.brand-fictional", "/logos/calder.svg"))), {"GENERATED_MODE_SOURCE_ARTWORK", "MEDIA_ROLE_ALLOWED"}),
+    ("source art name in hero content (stageArt: clouds)", m(GEN, lambda s: node_of(s, "hero.product-stage")["content"].update(stageArt="clouds")), {"GENERATED_MODE_SOURCE_ARTWORK"}),
+    ("source art name in hero content (stageArt: coast)", m(GEN, lambda s: node_of(s, "hero.product-stage")["content"].update(stageArt="coast")), {"GENERATED_MODE_SOURCE_ARTWORK"}),
+    ("source art name on one bento card (art: iris)", m(GEN, lambda s: node_of(s, "bento.grid")["content"]["cards"][3].update(art="iris")), {"GENERATED_MODE_SOURCE_ARTWORK"}),
+    ("source art name on every bento card (art: meadow)", m(GEN, lambda s: [c.update(art="meadow") for c in node_of(s, "bento.grid")["content"]["cards"]]), {"GENERATED_MODE_SOURCE_ARTWORK"}),
+    ("generic stage art removed (clone would draw its own)", m(GEN, lambda s: node_of(s, "hero.product-stage").pop("media")), {"REQUIRED_MEDIA_SLOT", "GENERATED_MODE_REQUIRED_SLOTS"}),
+    ("closing art removed (clone would draw its own meadow)", m(GEN, lambda s: node_of(s, "shell.footer-closing").pop("media")), {"GENERATED_MODE_REQUIRED_SLOTS"}),
+    ("investor badge in the footer (badge.backer)", m(GEN, lambda s: _put(s, "shell.footer-closing", "backerBadge", "badge.backer", "/logos/ycombinator.svg")), {"GENERATED_MODE_ASSET_ROLES", "GENERATED_MODE_SOURCE_ARTWORK"}),
+    ("third-party dataset logo (piece.logo) in generated mode", m(EX2, lambda s: s.update(mode="generated")), {"GENERATED_MODE_ASSET_ROLES"}),
+]
+
 # Rule-level tests: rules whose violation is normally masked by the template sequence check.
 HOME = C("template.home", "/")
 UNIT = [
@@ -259,8 +353,85 @@ UNIT = [
     ("NO_CONSECUTIVE_SCROLL_STAGES", m(C("template.ai-governance"), lambda s: s["nodes"].insert(3, copy.deepcopy(node_of(s, "governance.rollout-deck")))), {"NO_CONSECUTIVE_SCROLL_STAGES"}),
     ("ONE_PER_PAGE: two testimonials", m(EX, lambda s: s["nodes"].insert(5, copy.deepcopy(node_of(s, "proof.testimonials")))), {"ONE_PER_PAGE"}),
     ("NO_ADJACENT_SAME_SECTION_VARIANT", m(EX, lambda s: s["nodes"].insert(3, dict(copy.deepcopy(s["nodes"][2]), id="grid2"))), {"NO_ADJACENT_SAME_SECTION_VARIANT"}),
+    ("PAGESPEC_MODE: missing", m(GEN, _drop_mode), {"PAGESPEC_MODE"}),
+    ("GENERATED_MODE_ASSET_ROLES: wordmark", m(GEN, lambda s: _replace_brand(s, "shell.header", "brand", "brand.wordmark", WORDMARK)), {"GENERATED_MODE_ASSET_ROLES"}),
+    ("GENERATED_MODE_SOURCE_ARTWORK: plate path via art.generic", m(GEN, lambda s: _replace_brand(s, "hero.product-stage", "stageArt", "art.generic", "/panel/clouds.webp")), {"GENERATED_MODE_SOURCE_ARTWORK"}),
+    ("GENERATED_MODE_BRAND_TERMS: name in alt", m(GEN, lambda s: node_of(s, "shell.header")["media"][0].update(alt="Activepieces")), {"GENERATED_MODE_BRAND_TERMS"}),
+    ("GENERATED_MODE_REQUIRED_SLOTS: header brand missing", m(GEN, lambda s: node_of(s, "shell.header").pop("media")), {"GENERATED_MODE_REQUIRED_SLOTS"}),
     ("MOTION_BUDGET (warn): 7 looping motions", m(HOME, lambda s: node_of(s, "faq.accordion")["motion"]["entries"].extend([{"pattern": "marquee-drift", "trigger": "continuous", "durationMs": 82800, "easing": "linear"}] * 3)), set()),
 ]
+
+
+def _real_brand_reference():
+    s = copy.deepcopy(EX)
+    s["meta"] = {"title": "Reference clone page", "description": "Reference-mode control that keeps the real Activepieces brand for clone fidelity."}
+    node_of(s, "shell.header")["media"] = [{"slot": "brand", "assetRole": "brand.wordmark", "ref": WORDMARK, "alt": ""}, {"slot": "brand", "assetRole": "brand.logomark", "ref": LOGOMARK, "alt": ""}]
+    node_of(s, "shell.footer-closing")["media"] = [{"slot": "closingArt", "assetRole": "art.closing", "ref": "/closing/meadow-1376.webp", "alt": ""}, {"slot": "backerBadge", "assetRole": "badge.backer", "ref": "/logos/ycombinator.svg", "alt": ""}]
+    node_of(s, "shell.floating-card")["media"] = [{"slot": "mark", "assetRole": "brand.mark", "ref": "/brand/activepieces-mark.svg", "alt": ""}]
+    return s
+
+
+REAL_BRAND_REF = _real_brand_reference()
+
+
+def registry_checks():
+    """Tamper with the registry in memory and require verify_all's pure check to reject it. The semantic validator is
+    data-driven (it reads `availability`), so a tampered registry would otherwise silently legalise the leak."""
+    roles_doc = json.load(open(os.path.join(REPO, "assets", "asset-roles.json"), encoding="utf-8"))
+    sections = CTX["sections"]
+
+    def tampered(fn):
+        d = copy.deepcopy(roles_doc)
+        fn(d["roles"])
+        return d
+
+    def flip(rid, av, alts=None):
+        def go(roles):
+            roles[rid]["availability"] = av
+            if alts is not None:
+                roles[rid]["generatedModeAlternatives"] = alts
+        return go
+
+    def drop(rid):
+        return lambda roles: roles[rid].pop("availability")
+
+    cases = [
+        ("pinned: brand.wordmark reference-only -> generation-safe", tampered(flip("brand.wordmark", "generation-safe", []))),
+        ("pinned: brand.wordmark -> blocked-in-generated (different but VALID, consistent alternatives)", tampered(flip("brand.wordmark", "blocked-in-generated", []))),
+        ("pinned: brand.logomark -> blocked-in-generated (different but VALID)", tampered(flip("brand.logomark", "blocked-in-generated", []))),
+        ("pinned: art.panel -> generation-safe (source artwork declared safe)", tampered(lambda r: (r["art.panel"].update(availability="generation-safe", generatedModeAlternatives=[]), r["art.panel"].update(policy="may-generate-synthetic")))),
+        ("pinned: badge.backer blocked -> reference-only", tampered(flip("badge.backer", "reference-only", ["art.generic"]))),
+        ("pinned: testimonial.avatar generation-safe -> reference-only", tampered(flip("testimonial.avatar", "reference-only", ["art.generic"]))),
+        ("pinned: brand.placeholder generation-safe -> reference-only", tampered(flip("brand.placeholder", "reference-only", ["brand.user-supplied"]))),
+        ("unclassified role (availability removed)", tampered(drop("brand.mark"))),
+        ("availability outside the closed enum", tampered(flip("brand.mark", "reference_only"))),
+        ("generation-safe role that reuses clone files (reuse-closed-set + paths)", tampered(lambda r: r["mock.avatar"].update(policy="reuse-closed-set"))),
+        ("reference-only role without a generation-safe alternative", tampered(flip("art.closing", "reference-only", []))),
+        ("reference-only alternative that is itself not generation-safe", tampered(flip("art.closing", "reference-only", ["art.plate"]))),
+        ("blocked-in-generated role that claims an alternative", tampered(flip("piece.logo", "blocked-in-generated", ["art.generic"]))),
+    ]
+    fails = 0
+    n = 0
+    for name, doc in cases:
+        probs = VA.asset_availability_problems(doc, sections)
+        ok = bool(probs)
+        fails += 0 if ok else 1
+        n += 1
+        print("  %s  %-86s -> %s" % ("REJECTED" if ok else "ACCEPTED!", name, probs[0][:70] if ok else "no problem reported"))
+    # the gap the pinned check closes: with the wordmark flipped to generation-safe the validator alone accepts the leak
+    leak = m(GEN, lambda s: _replace_brand(s, "shell.header", "brand", "brand.wordmark", WORDMARK))
+    ctx2 = dict(CTX, roles=tampered(flip("brand.wordmark", "generation-safe", []))["roles"])
+    only_validator = not any(e["rule"] == "GENERATED_MODE_ASSET_ROLES" for e in SV.errors(SV.validate(leak, ctx2)))
+    caught = bool(VA.asset_availability_problems(tampered(flip("brand.wordmark", "generation-safe", [])), sections))
+    ok = only_validator and caught
+    fails += 0 if ok else 1
+    n += 1
+    print("  %s  %-86s -> validator alone %s; pinned check %s" % ("REJECTED" if ok else "FAIL", "tampered registry would legalise the wordmark leak; pinned check must catch it", "accepts it" if only_validator else "rejects it", "rejects" if caught else "MISSES"))
+    # controls
+    base = VA.asset_availability_problems(roles_doc, sections)
+    fails += 1 if base else 0
+    print("  %s  real registry + section contracts have 0 availability problems%s" % ("PASS" if not base else "FAIL", "" if not base else " -> " + "; ".join(base[:3])))
+    return fails, n
 
 
 def run():
@@ -275,6 +446,22 @@ def run():
     for extra in ("/mcp", "/mcp/slack", "/mcp/category/productivity", "/blog/page/5", "/blog/author/example-author", "/terms", "/docs/getting-started", "/pieces/zoom/zuora"):
         tid = next(r["template"] for r in CTX["routes"] if SV._route_regex(r["pattern"])[0].match(extra) and r["pattern"] != "*")
         controls.append(("route %s" % extra, synthesize(tid, extra)))
+    controls.append(("example.generated.pagespec.json (mode generated)", GEN))
+    controls.append(("reference-mode spec with the real brand (wordmark, logomark, mark, closing art, YC badge, real art names)", REAL_BRAND_REF))
+    controls.append(("generated example with the placeholder brand swapped for brand.user-supplied", m(GEN, lambda s: _replace_brand(s, "shell.header", "brand", "brand.user-supplied", "data:user-brand#logo"))))
+    controls.append(("generated example's fictional brand name in copy (Quillbright)", m(GEN, lambda s: node_of(s, "shell.footer-closing")["content"].update(h2="Quillbright closes your month."))))
+    blocked_t = {tid for tid, t in CTX["templates"].items() if any(CTX["sections"][n["section"]].get("generatedMode", {}).get("blocked") for n in t["nodes"])}
+    for tid in sorted(set(CTX["templates"]) - blocked_t):
+        r = next(x for x in CTX["routes"] if x["template"] == tid)
+        controls.append(("GENERATED template %s (%s)" % (tid, r["sampleRoute"]), synthesize(tid, r["sampleRoute"], "generated")))
+    for r in CTX["routes"]:
+        if r["template"] not in blocked_t:
+            controls.append(("GENERATED route %s -> %s" % (r["pattern"], r["sampleRoute"]), synthesize(r["template"], r["sampleRoute"], "generated")))
+    # templates built on a blocked section are reference-only: the same synthesis must be REJECTED in generated mode
+    for tid in sorted(blocked_t):
+        r = next(x for x in CTX["routes"] if x["template"] == tid)
+        GEN_MUTATIONS.append(("template %s (%s) is reference-only: contains a section blocked in generated mode" % (tid, r["sampleRoute"]), synthesize(tid, r["sampleRoute"], "generated"), {"GENERATED_MODE_BLOCKED_SECTIONS"}))
+        controls.append(("REFERENCE template %s (%s) keeps working" % (tid, r["sampleRoute"]), synthesize(tid, r["sampleRoute"], "reference")))
     for name, spec in controls:
         errs = SV.errors(SV.validate(spec, CTX))
         ok = not errs
@@ -287,6 +474,16 @@ def run():
         ok = bool(hit)
         fails += 0 if ok else 1
         print("  %s  %-48s -> %s" % ("REJECTED" if ok else "ACCEPTED!", name, ",".join(sorted(hit)) if ok else "got %s" % sorted(rules)))
+    print("== GENERATED MODE (leak injected into the generation-safe example; expect rejection by the named rule)")
+    for name, spec, expect in GEN_MUTATIONS:
+        rules = {e["rule"] for e in SV.errors(SV.validate(spec, CTX))}
+        hit = rules & expect
+        ok = bool(hit)
+        fails += 0 if ok else 1
+        print("  %s  %-62s -> %s" % ("REJECTED" if ok else "ACCEPTED!", name, ",".join(sorted(hit)) if ok else "got %s" % sorted(rules)))
+    print("== REGISTRY (asset-roles.json tampering; verify_all.asset_availability_problems must reject, the real registry must pass)")
+    reg_fails, reg_n = registry_checks()
+    fails += reg_fails
     print("== RULE-LEVEL (only the named rule evaluated)")
     for name, spec, expect in UNIT:
         rid = name.split(":")[0].split(" ")[0]
@@ -299,8 +496,9 @@ def run():
             ok = any(f["rule"] == rid and f["severity"] == "error" for f in found)
         fails += 0 if ok else 1
         print("  %s  %s" % (("WARNED" if rid == "MOTION_BUDGET" else "REJECTED") if ok else "FAIL", name))
-    total = len(controls) + len(MUTATIONS) + len(UNIT)
-    print("adversarial: %d checks, %d controls, %d mutations, %d rule-level, %d failure(s)" % (total, len(controls), len(MUTATIONS), len(UNIT), fails))
+    total = len(controls) + 1 + len(MUTATIONS) + len(GEN_MUTATIONS) + reg_n + len(UNIT)  # +1: the registry control
+    print("adversarial: %d checks, %d controls, %d mutations (%d schema/structural/content + %d generated-mode + %d registry), %d rule-level, %d failure(s)" % (
+        total, len(controls) + 1, len(MUTATIONS) + len(GEN_MUTATIONS) + reg_n, len(MUTATIONS), len(GEN_MUTATIONS), reg_n, len(UNIT), fails))
     return 1 if fails else 0
 
 

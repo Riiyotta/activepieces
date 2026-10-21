@@ -10,6 +10,7 @@ so a standalone copy / unzipped delivery still passes.
 Usage: python3 extraction/verify_all.py [--quiet]
 Exit 0 = all checks pass (warnings allowed), 1 = at least one failure.
 """
+import copy
 import json
 import os
 import re
@@ -25,6 +26,22 @@ from jsonschema import Draft7Validator  # noqa: E402
 
 EXPECTED_PINNED = {"customer.logo": "placeholder-only", "case-study.logo": "placeholder-only", "testimonial.avatar": "placeholder-only",
                    "review-platform.mark": "placeholder-only", "author.photo": "placeholder-only"}
+# Pinned availability (assets/asset-roles.json `availability`), held HERE independently of the registry so that
+# flipping a protected role to a different-but-valid value is caught (membership in the enum is not enough).
+EXPECTED_AVAILABILITY = {
+    "brand.wordmark": "reference-only", "brand.logomark": "reference-only", "brand.mark": "reference-only", "brand.logo-full": "reference-only",
+    "art.plate": "reference-only", "art.panel": "reference-only", "art.closing": "reference-only", "art.gov-hero": "reference-only",
+    "blog.cover": "reference-only",
+    "badge.backer": "blocked-in-generated", "piece.logo": "blocked-in-generated", "ai-client.logo": "blocked-in-generated", "oss-friend.logo": "blocked-in-generated",
+    "customer.logo": "generation-safe", "case-study.logo": "generation-safe", "testimonial.avatar": "generation-safe",
+    "review-platform.mark": "generation-safe", "author.photo": "generation-safe",
+    "brand.placeholder": "generation-safe", "brand.user-supplied": "generation-safe", "art.generic": "generation-safe",
+}
+AVAILABILITIES = ("reference-only", "generation-safe", "blocked-in-generated")
+EXPECTED_MODES = ["generated", "reference"]
+# Sections whose contract hard-wires a hand-off to activepieces.com: pinned as blocked in generated mode (sections/*.json generatedMode.blocked).
+EXPECTED_BLOCKED_SECTIONS = {"content.article", "content.resource-detail", "content.legal", "system.external-redirect"}
+BRAND_TERM = re.compile(r"active[\s_.-]*pieces?", re.I)
 TEXT_EXT = (".json", ".py", ".md", ".txt", ".sh")
 # literals are split so this file does not match its own check (or a repo-wide grep)
 ABS_PATTERNS = [re.compile(p) for p in ("/" + "Users/", "/" + "private/tmp", "/" + "private/var", r"(?<![A-Za-z0-9.])/" + "tmp/", r"/home/[a-z]", r"[A-Z]:\\\\Users")]
@@ -67,6 +84,212 @@ def source_root():
         except ValueError:
             ok = False
     return root if ok else None
+
+
+def _schema_at(schema, path):
+    """Schema node at a dotted path where 'x[]' means properties.x.items (e.g. 'cards[].art')."""
+    cur = schema
+    for tok in path.split("."):
+        arr = tok.endswith("[]")
+        cur = cur.get("properties", {}).get(tok[:-2] if arr else tok)
+        if cur is None:
+            return None
+        if arr:
+            cur = cur.get("items")
+            if cur is None:
+                return None
+    return cur
+
+
+def asset_availability_problems(roles_doc, sections):
+    """Closed availability enum, every role classified, protected roles PINNED, and the structural invariants that
+    make generated mode satisfiable. Pure function of the registry + section contracts (used by the adversarial suite)."""
+    probs = []
+    roles = roles_doc["roles"]
+    if set(roles_doc.get("availabilities", {})) != set(AVAILABILITIES):
+        probs.append("availabilities doc %s != closed set %s" % (sorted(roles_doc.get("availabilities", {})), sorted(AVAILABILITIES)))
+    for rid, r in roles.items():
+        av = r.get("availability")
+        if av is None:
+            probs.append("%s is not classified (no availability)" % rid)
+        elif av not in AVAILABILITIES:
+            probs.append("%s availability %r not in %s" % (rid, av, list(AVAILABILITIES)))
+    for rid, want in EXPECTED_AVAILABILITY.items():
+        if roles.get(rid, {}).get("availability") != want:
+            probs.append("pinned availability: %s must be %r, found %r" % (rid, want, roles.get(rid, {}).get("availability")))
+        if roles_doc.get("pinnedAvailability", {}).get(rid) != want:
+            probs.append("pinnedAvailability.%s must be %r" % (rid, want))
+    for rid, r in roles.items():
+        av, pol, alts = r.get("availability"), r.get("policy"), r.get("generatedModeAlternatives")
+        if not isinstance(alts, list):
+            probs.append("%s lacks generatedModeAlternatives (list)" % rid)
+            continue
+        if av == "generation-safe":
+            if pol in ("reuse-exact-path", "data-bound-only") or (pol == "reuse-closed-set" and r.get("paths")):
+                probs.append("%s is generation-safe but its policy %s reuses clone files/dataset" % (rid, pol))
+            if alts:
+                probs.append("%s is generation-safe and must not list alternatives" % rid)
+        if av == "reference-only":
+            if not alts:
+                probs.append("%s is reference-only but names no generation-safe alternative" % rid)
+            for a in alts:
+                if roles.get(a, {}).get("availability") != "generation-safe":
+                    probs.append("%s alternative %s is not a generation-safe role" % (rid, a))
+        if av == "blocked-in-generated" and alts:
+            probs.append("%s is blocked-in-generated (no substitute) but lists alternatives %s" % (rid, alts))
+    blocked = {sid for sid, s in sections.items() if s.get("generatedMode", {}).get("blocked")}
+    if blocked != EXPECTED_BLOCKED_SECTIONS:
+        probs.append("pinned: sections blocked in generated mode %s != %s" % (sorted(blocked), sorted(EXPECTED_BLOCKED_SECTIONS)))
+    for sid in blocked:
+        g = sections[sid]["generatedMode"]
+        if not g.get("reason") or not g.get("evidence"):
+            probs.append("%s generatedMode.blocked needs a reason and cited evidence" % sid)
+        if g.get("requiredSlots"):
+            probs.append("%s is blocked in generated mode and must not declare requiredSlots" % sid)
+    for sid, s in sections.items():
+        if sid in blocked:
+            continue  # the whole section is rejected in generated mode, so its slots never need a generated-mode filler
+        slots = s["media"]["slots"]
+        for name, d in slots.items():
+            safe = [r for r in d["roles"] if roles.get(r, {}).get("availability") == "generation-safe"]
+            if d.get("required") and not safe:
+                probs.append("%s slot %s is required but has no generation-safe role" % (sid, name))
+            for r in d["roles"]:
+                alts = roles.get(r, {}).get("generatedModeAlternatives") or []
+                if roles.get(r, {}).get("availability") == "reference-only" and not set(alts) & set(d["roles"]):
+                    probs.append("%s slot %s takes reference-only %s but none of its alternatives %s" % (sid, name, r, alts))
+        g = s.get("generatedMode", {})
+        for name in g.get("requiredSlots", []):
+            if name not in slots:
+                probs.append("%s generatedMode.requiredSlots names unknown slot %s" % (sid, name))
+            elif not any(roles.get(r, {}).get("availability") == "generation-safe" for r in slots[name]["roles"]):
+                probs.append("%s generatedMode slot %s has no generation-safe role" % (sid, name))
+        for path, bad in g.get("forbiddenContentValues", {}).items():
+            node = _schema_at(s["content"], path)
+            enum = node.get("enum") if isinstance(node, dict) else None
+            if not enum:
+                probs.append("%s generatedMode.forbiddenContentValues %s does not resolve to an enum in the content contract" % (sid, path))
+            elif not set(bad) <= set(enum) or not set(enum) - set(bad):
+                probs.append("%s generatedMode.forbiddenContentValues %s %s must be a proper subset of enum %s" % (sid, path, bad, enum))
+    return probs
+
+
+def _values_at(value, path):
+    cur = [value]
+    for tok in path.split("."):
+        arr = tok.endswith("[]")
+        key = tok[:-2] if arr else tok
+        cur = [y for v in cur if isinstance(v, dict) and key in v for y in (v[key] if arr and isinstance(v[key], list) else [v[key]])]
+    return cur
+
+
+def _all_strings(v):
+    if isinstance(v, str):
+        yield v
+    elif isinstance(v, dict):
+        for k, x in v.items():
+            yield k
+            yield from _all_strings(x)
+    elif isinstance(v, list):
+        for x in v:
+            yield from _all_strings(x)
+
+
+def generation_mode_problems(schema, allow, roles_doc, sections, examples, readme):
+    """`mode` is closed and identical in schema, allowlist, registry and examples; generated examples are brand-safe.
+    Deliberately re-derives the generated-example rule WITHOUT semantic_validate so the two cannot drift together."""
+    probs = []
+    roles = roles_doc["roles"]
+    if sorted(roles_doc.get("modes", {})) != EXPECTED_MODES:
+        probs.append("asset-roles.json modes %s != %s" % (sorted(roles_doc.get("modes", {})), EXPECTED_MODES))
+    sm = schema["properties"].get("mode", {}).get("enum")
+    if sm != EXPECTED_MODES:
+        probs.append("schema mode enum %s != contracts %s" % (sm, EXPECTED_MODES))
+    if "mode" not in schema.get("required", []):
+        probs.append("schema does not require `mode`")
+    if allow.get("modes") != EXPECTED_MODES:
+        probs.append("allowlist modes %s != contracts %s" % (allow.get("modes"), EXPECTED_MODES))
+    if set(allow.get("pageSpecProperties", [])) != set(schema["properties"]):
+        probs.append("allowlist pageSpecProperties %s != schema properties %s" % (sorted(allow.get("pageSpecProperties", [])), sorted(schema["properties"])))
+    for tok in list(AVAILABILITIES) + ['mode: "reference"', 'mode: "generated"']:
+        if tok not in readme:
+            probs.append("README does not document %r" % tok)
+    kinds = {}
+    for name, spec in examples.items():
+        m = spec.get("mode")
+        if m not in EXPECTED_MODES:
+            probs.append("%s: mode %r not in %s" % (name, m, EXPECTED_MODES))
+            continue
+        kinds.setdefault(m, []).append(name)
+        if m != "generated":
+            continue
+        for n in spec.get("nodes", []):
+            if sections.get(n.get("section"), {}).get("generatedMode", {}).get("blocked"):
+                probs.append("%s: node %s uses %s, which is blocked in generated mode" % (name, n.get("id"), n.get("section")))
+            for item in n.get("media", []) or []:
+                av = roles.get(item.get("assetRole"), {}).get("availability")
+                if av != "generation-safe":
+                    probs.append("%s: node %s uses %s role %s in a generated example" % (name, n.get("id"), av, item.get("assetRole")))
+                if str(item.get("ref", "")).startswith("/"):
+                    probs.append("%s: node %s media ref %r is a clone file" % (name, n.get("id"), item.get("ref")))
+            for path, bad in sections.get(n.get("section"), {}).get("generatedMode", {}).get("forbiddenContentValues", {}).items():
+                for v in _values_at(n.get("content", {}), path):
+                    if v in bad:
+                        probs.append("%s: node %s content.%s=%r names source artwork in a generated example" % (name, n.get("id"), path, v))
+        for t in _all_strings({k: v for k, v in spec.items() if k not in ("mode", "pageSpecVersion")}):
+            if BRAND_TERM.search(t):
+                probs.append("%s: generated example contains the source brand name in %r" % (name, t[:60]))
+    for m in EXPECTED_MODES:
+        if not kinds.get(m):
+            probs.append("no example PageSpec declares mode %r" % m)
+    return probs
+
+
+def generated_enforcement_problems(ctx, gen):
+    """Behavioural smoke test of the validator itself: inject one leak into a generated example and require the named
+    GENERATED_MODE_* rule to reject it; the unmodified example must pass them all. (The full matrix lives in
+    schema/tests/adversarial_test.py; this keeps a sabotaged validator from passing verify_all.)"""
+    probs = []
+    rules = {"PAGESPEC_MODE", "GENERATED_MODE_ASSET_ROLES", "GENERATED_MODE_SOURCE_ARTWORK", "GENERATED_MODE_BRAND_TERMS",
+             "GENERATED_MODE_BLOCKED_SECTIONS", "GENERATED_MODE_REQUIRED_SLOTS"}
+    base = [f for f in SV.validate(gen, ctx, only=rules) if f["severity"] == "error"]
+    if base:
+        probs.append("unmodified generated example is rejected by %s" % sorted({f["rule"] for f in base}))
+
+    def node(spec, section):
+        return next(n for n in spec["nodes"] if n["section"] == section)
+
+    def wordmark(sp):
+        node(sp, "shell.header")["media"] = [{"slot": "brand", "assetRole": "brand.wordmark", "ref": "/brand/" + "activepieces-wordmark.svg"}]
+
+    def art(sp):
+        node(sp, "bento.grid")["content"]["cards"][0]["art"] = "meadow"
+
+    def clonefile(sp):
+        node(sp, "hero.product-stage")["media"][0]["ref"] = "/panel/clouds.webp"
+
+    def name(sp):
+        sp["meta"]["title"] = "Active" + "pieces for finance"
+
+    def blocked(sp):
+        sp["nodes"].append({"id": "x", "section": "system.external-redirect", "variant": "default", "content": {}, "motion": {}})
+
+    def unbound(sp):
+        node(sp, "shell.header").pop("media")
+
+    def nomode(sp):
+        sp.pop("mode")
+    for rule, fn in (("GENERATED_MODE_ASSET_ROLES", wordmark), ("GENERATED_MODE_SOURCE_ARTWORK", art), ("GENERATED_MODE_SOURCE_ARTWORK", clonefile),
+                     ("GENERATED_MODE_BRAND_TERMS", name), ("GENERATED_MODE_BLOCKED_SECTIONS", blocked), ("GENERATED_MODE_REQUIRED_SLOTS", unbound), ("PAGESPEC_MODE", nomode)):
+        sp = copy.deepcopy(gen)
+        try:
+            fn(sp)
+        except (KeyError, IndexError, StopIteration) as e:  # the example no longer has the node this probe needs
+            probs.append("cannot probe %s with %s: %s" % (rule, fn.__name__, e))
+            continue
+        if not any(f["rule"] == rule and f["severity"] == "error" for f in SV.validate(sp, ctx, only={rule})):
+            probs.append("validator does NOT reject %s (%s leak injected into the generated example)" % (rule, fn.__name__))
+    return probs
 
 
 def leaves(node, prefix=""):
@@ -114,6 +337,9 @@ def compute_counts():
         "routePatterns": len(routes["routes"]),
         "concreteUrlsEnumerable": routes["facts"]["concreteUrlsEnumerable"],
         "assetRoles": len(load("assets/asset-roles.json")["roles"]),
+        "assetRolesReferenceOnly": sum(1 for r in load("assets/asset-roles.json")["roles"].values() if r.get("availability") == "reference-only"),
+        "assetRolesGenerationSafe": sum(1 for r in load("assets/asset-roles.json")["roles"].values() if r.get("availability") == "generation-safe"),
+        "assetRolesBlockedInGenerated": sum(1 for r in load("assets/asset-roles.json")["roles"].values() if r.get("availability") == "blocked-in-generated"),
         "motionPatterns": len(load("tokens/00-foundation/motion.json")["patterns"]),
         "graphRules": len(graph),
         "tailwindV3V4Rules": len(load("rules/tailwind-v3-v4.json")["rules"]),
@@ -187,8 +413,10 @@ def main():
     # 5 examples validate with 0 errors
     ctx = SV.load_context(REPO)
     probs = []
+    examples = {}
     for f in sorted(x for x in os.listdir(os.path.join(REPO, "schema")) if x.startswith("example") and x.endswith(".pagespec.json")):
-        errs = SV.errors(SV.validate(load("schema/" + f), ctx))
+        examples[f] = load("schema/" + f)
+        errs = SV.errors(SV.validate(examples[f], ctx))
         probs += ["%s: %s %s" % (f, e["rule"], e["message"]) for e in errs]
     R.check("EXAMPLES_VALID", probs)
 
@@ -294,8 +522,13 @@ def main():
     for rid, r in roles.items():
         if r.get("policy") not in pols:
             probs.append("%s policy %r not in generationPolicies" % (rid, r.get("policy")))
-        if not r.get("guidance") or not r.get("evidence"):
-            probs.append("%s lacks guidance/evidence" % rid)
+        if not r.get("guidance"):
+            probs.append("%s lacks guidance" % rid)
+        if r.get("definedByDesignRepo"):
+            if r.get("evidence") or not r.get("evidenceNote"):
+                probs.append("%s is definedByDesignRepo: needs an evidenceNote and no fabricated source evidence" % rid)
+        elif not r.get("evidence"):
+            probs.append("%s lacks evidence" % rid)
     for rid, want in EXPECTED_PINNED.items():
         if roles.get(rid, {}).get("policy") != want:
             probs.append("pinned role %s must be %r, found %r" % (rid, want, roles.get(rid, {}).get("policy")))
@@ -307,6 +540,10 @@ def main():
                 if role not in roles:
                     probs.append("%s slot %s uses unknown role %s" % (sid, slot, role))
     R.check("ASSET_ROLE_POLICIES", probs)
+    R.check("ASSET_AVAILABILITY", asset_availability_problems(roles_doc, sections))
+    gen_examples = [e for e in examples.values() if e.get("mode") == "generated"]
+    R.check("GENERATED_MODE_ENFORCEMENT", generated_enforcement_problems(ctx, gen_examples[0]) if gen_examples else ["no generated example to probe"])
+    R.check("GENERATION_MODES", generation_mode_problems(schema, allow, roles_doc, sections, examples, open(os.path.join(REPO, "README.md"), encoding="utf-8").read()))
 
     # 12 section contracts complete and internally consistent
     probs = []
